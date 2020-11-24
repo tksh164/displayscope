@@ -19,6 +19,7 @@
   },
   "main": "background.js",
   "dependencies": {
+    "bl": "1.2.3",
     "element-ui": "^2.4.5",
     "node-forge": "0.10.0",
     "vue": "^2.6.11",
