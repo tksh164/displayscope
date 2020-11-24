@@ -119,7 +119,7 @@ export default class ScreenView extends Vue {
   }
 
   playScreenStream() {
-    (this.$refs.screenVideoRef as HTMLVideoElement).play();
+    (this.$refs.screenVideoRef as HTMLVideoElement).play(); // TODO: play() does not exist if mouse leave quickly after click return select screen button
     //this.isScreenVideoPlaying = true;
   }
 
