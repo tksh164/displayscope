@@ -70,11 +70,11 @@ import { getScreenMetadataList } from "@/screen-capturer";
 export default class ScreenSelect extends Vue {
   screenMetadataList: object[] = [];
 
-  mounted() {
+  mounted(): void {
     setTimeout(this.refreshScreenMetadataList, 30);
   }
 
-  refreshScreenMetadataList() {
+  refreshScreenMetadataList(): void {
     this.screenMetadataList = getScreenMetadataList(1000, 1000);
   }
 }
