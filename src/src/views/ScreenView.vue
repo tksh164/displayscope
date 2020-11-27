@@ -87,10 +87,21 @@ export default class ScreenView extends Vue {
 
   setScreenStream(): void {
     getScreenMediaStream(this.$route.params.screenId).then(
-      (stream: MediaStream) => {
-        this.screenStream = stream;
+      (stream: void | MediaStream) => {
+        if (this.isMediaStream(stream)) {
+          this.screenStream = stream;
+        }
       }
     );
+  }
+
+  isMediaStream(arg: any): arg is MediaStream {
+    return arg !== null && arg !== undefined &&
+      typeof arg === 'object' &&
+      typeof arg.active === 'boolean' &&
+      typeof arg.id === 'string' &&
+      typeof arg.addTrack === 'function' &&
+      typeof arg.removeTrack === 'function';
   }
 
   screenStreamPlaying(): void {
