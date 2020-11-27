@@ -81,23 +81,34 @@ export default class ScreenView extends Vue {
     };
   }
 
-  mounted() {
+  mounted(): void {
     this.setScreenStream();
   }
 
-  setScreenStream() {
+  setScreenStream(): void {
     getScreenMediaStream(this.$route.params.screenId).then(
-      (stream: MediaStream) => {
-        this.screenStream = stream;
+      (stream: void | MediaStream) => {
+        if (this.isMediaStream(stream)) {
+          this.screenStream = stream;
+        }
       }
     );
   }
 
-  screenStreamPlaying() {
+  isMediaStream(arg: any): arg is MediaStream {
+    return arg !== null && arg !== undefined &&
+      typeof arg === 'object' &&
+      typeof arg.active === 'boolean' &&
+      typeof arg.id === 'string' &&
+      typeof arg.addTrack === 'function' &&
+      typeof arg.removeTrack === 'function';
+  }
+
+  screenStreamPlaying(): void {
     this.isScreenVideoPlaying = true;
   }
 
-  pauseScreenStream() {
+  pauseScreenStream(): void {
     // if (this.isScreenVideoPlaying) {
     //   this.isScreenVideoPlaying = false;
     //   (this.$refs.screenVideoRef as HTMLVideoElement).pause();
@@ -118,12 +129,12 @@ export default class ScreenView extends Vue {
     }
   }
 
-  playScreenStream() {
+  playScreenStream(): void {
     (this.$refs.screenVideoRef as HTMLVideoElement).play(); // TODO: play() does not exist if mouse leave quickly after click return select screen button
     //this.isScreenVideoPlaying = true;
   }
 
-  moveToScreenSelectView() {
+  moveToScreenSelectView(): void {
     this.$router.push({ name: "ScreenSelect" });
   }
 }
