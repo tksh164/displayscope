@@ -1,23 +1,17 @@
 <template>
-  <div
-    class="screen-view-wrapper"
-    @mousemove="pauseScreenStream"
-    @mouseleave="playScreenStream"
-  >
-    <video
-      autoplay
-      class="screen-video"
-      :class="screenVideoClass"
-      ref="screenVideoRef"
-      @play="screenStreamPlaying"
-      :src-object.prop.camel="screenStream"
-    ></video>
+  <div class="screen-view-wrapper"
+       @mousemove="pauseScreenStream"
+       @mouseleave="playScreenStream">
+    <video class="screen-video"
+           :class="screenVideoClass"
+           ref="screenVideoRef"
+           autoplay
+           @play="screenStreamPlaying"
+           :src-object.prop.camel="screenStream"></video>
     <el-card class="return-button" :class="returnButtonClass">
       <div>
         <div>Your cursor is now on this window.</div>
-        <el-button type="primary" round @click="moveToScreenSelectView"
-          >Return to screen select</el-button
-        >
+        <el-button type="primary" round @click="moveToScreenSelectView">Return to screen select</el-button>
       </div>
     </el-card>
   </div>

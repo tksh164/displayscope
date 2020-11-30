@@ -1,26 +1,20 @@
 <template>
   <div class="screen-select-wrapper">
     <div class="functions-container">
-      <el-button
-        type="primary"
-        icon="el-icon-refresh"
-        circle
-        @click="refreshScreenMetadataList"
-      ></el-button>
+      <el-button type="primary"
+                 icon="el-icon-refresh"
+                 circle
+                 @click="refreshScreenMetadataList"></el-button>
     </div>
-    <transition-group
-      class="screen-list"
-      name="list-item-transition"
-      tag="div"
-      appear
-    >
-      <screen-item
-        v-for="screen in screenMetadataList"
-        :key="screen.id"
-        :screenId="screen.id"
-        :screenName="screen.name"
-        :thumbnailUrl="screen.thumbnailDataUrl"
-      ></screen-item>
+    <transition-group class="screen-list"
+                      name="list-item-transition"
+                      tag="div"
+                      appear>
+      <screen-item v-for="screen in screenMetadataList"
+                   :key="screen.id"
+                   :screenId="screen.id"
+                   :screenName="screen.name"
+                   :thumbnailUrl="screen.thumbnailDataUrl"></screen-item>
     </transition-group>
   </div>
 </template>

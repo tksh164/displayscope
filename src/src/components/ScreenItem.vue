@@ -1,11 +1,9 @@
 <template>
   <div class="screen-list-item" @click="moveToScreenView">
     <div class="screen-name">{{ screenName }}</div>
-    <el-image
-      class="screen-thumbnail"
-      :src="thumbnailUrl"
-      fit="contain"
-    ></el-image>
+    <el-image class="screen-thumbnail"
+              :src="thumbnailUrl"
+              fit="contain"></el-image>
   </div>
 </template>
 
