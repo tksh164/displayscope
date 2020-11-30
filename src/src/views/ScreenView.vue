@@ -5,8 +5,9 @@
     <video class="screen-video"
            :class="screenVideoClass"
            ref="screenVideoRef"
-           autoplay
-           @play="screenStreamPlaying"
+           @canplaythrough="onCanPlayThrough"
+           @play="onPlay"
+           @pause="onPause"
            :src-object.prop.camel="screenStream"></video>
     <el-card class="return-button" :class="returnButtonClass">
       <div>
@@ -57,20 +58,14 @@ import { getScreenMediaStream } from "@/screen-capturer";
 @Component
 export default class ScreenView extends Vue {
   screenStream: MediaStream = new MediaStream();
-  isScreenVideoPlaying = true;
+  isScreenVideoPlaying = false;
 
   get screenVideoClass(): object {
-    return {
-      // TODO: Paly video if load was completed and it was paused.
-      "screen-video-pause": !this.isScreenVideoPlaying
-    };
+    return { 'screen-video-pause': !this.isScreenVideoPlaying };
   }
 
   get returnButtonClass(): object {
-    return {
-      // TODO: Paly video if load was completed and it was paused.
-      "return-button-pause": !this.isScreenVideoPlaying
-    };
+    return { 'return-button-pause': !this.isScreenVideoPlaying };
   }
 
   mounted(): void {
@@ -80,9 +75,7 @@ export default class ScreenView extends Vue {
   setScreenStream(): void {
     getScreenMediaStream(this.$route.params.screenId).then(
       (stream: void | MediaStream) => {
-        if (this.isMediaStream(stream)) {
-          this.screenStream = stream;
-        }
+        if (this.isMediaStream(stream)) this.screenStream = stream;
       }
     );
   }
@@ -96,33 +89,29 @@ export default class ScreenView extends Vue {
       typeof arg.removeTrack === 'function';
   }
 
-  screenStreamPlaying(): void {
+  onCanPlayThrough(): void {
+    this.getVideoElement()?.play();
+  }
+
+  onPause(): void {
+    this.isScreenVideoPlaying = false;
+  }
+
+  onPlay(): void {
     this.isScreenVideoPlaying = true;
   }
 
   pauseScreenStream(): void {
-    //
-    // TODO: Check the video's event fire order.
-    //
-    // Check the "playing event".
-    // https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/playing_event
-    //
-    // canplaythrough
-    //
-    if (this.isScreenVideoPlaying) {
-      const videoElement = this.$refs.screenVideoRef as HTMLVideoElement;
-      if (typeof videoElement === 'object') {
-        videoElement.pause();
-        this.isScreenVideoPlaying = false;
-      }
-    }
+    if (this.isScreenVideoPlaying) this.getVideoElement()?.pause();
   }
 
   playScreenStream(): void {
+    this.getVideoElement()?.play();
+  }
+
+  getVideoElement(): null | HTMLVideoElement {
     const videoElement = this.$refs.screenVideoRef as HTMLVideoElement;
-    if (typeof videoElement === 'object') {
-      videoElement.play();      
-    }
+    return typeof videoElement === 'object' ? videoElement : null;
   }
 
   moveToScreenSelectView(): void {
