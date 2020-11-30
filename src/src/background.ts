@@ -23,7 +23,8 @@ function createWindow() {
     height: 1000,
     webPreferences: {
       nodeIntegration: true
-    }
+    },
+    autoHideMenuBar: true
   });
 
   if (process.env.WEBPACK_DEV_SERVER_URL) {
