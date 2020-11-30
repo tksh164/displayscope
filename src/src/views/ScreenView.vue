@@ -61,15 +61,11 @@ export default class ScreenView extends Vue {
   isScreenVideoPlaying = false;
 
   get screenVideoClass(): object {
-    return {
-      "screen-video-pause": !this.isScreenVideoPlaying
-    };
+    return { 'screen-video-pause': !this.isScreenVideoPlaying };
   }
 
   get returnButtonClass(): object {
-    return {
-      "return-button-pause": !this.isScreenVideoPlaying
-    };
+    return { 'return-button-pause': !this.isScreenVideoPlaying };
   }
 
   mounted(): void {
