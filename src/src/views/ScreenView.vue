@@ -5,7 +5,7 @@
     <video class="screen-video"
            :class="screenVideoClass"
            ref="screenVideoRef"
-           autoplay
+           @canplaythrough="onCanPlayThrough"
            @play="screenStreamPlaying"
            :src-object.prop.camel="screenStream"></video>
     <el-card class="return-button" :class="returnButtonClass">
@@ -94,6 +94,13 @@ export default class ScreenView extends Vue {
       typeof arg.id === 'string' &&
       typeof arg.addTrack === 'function' &&
       typeof arg.removeTrack === 'function';
+  }
+
+  onCanPlayThrough(): void {
+    const videoElement = this.$refs.screenVideoRef as HTMLVideoElement;
+    if (typeof videoElement === 'object') {
+      videoElement.play();      
+    }
   }
 
   screenStreamPlaying(): void {
