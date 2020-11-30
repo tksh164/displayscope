@@ -69,7 +69,6 @@ export default class ScreenView extends Vue {
     return {
       // TODO: Paly video if load was completed and it was paused.
       "screen-video-pause": !this.isScreenVideoPlaying
-      //"screen-video-pause": (this.$refs.screenVideoRef as HTMLVideoElement).paused
     };
   }
 
@@ -77,7 +76,6 @@ export default class ScreenView extends Vue {
     return {
       // TODO: Paly video if load was completed and it was paused.
       "return-button-pause": !this.isScreenVideoPlaying
-      //"return-button-pause": (this.$refs.screenVideoRef as HTMLVideoElement).paused
     };
   }
 
@@ -109,29 +107,28 @@ export default class ScreenView extends Vue {
   }
 
   pauseScreenStream(): void {
-    // if (this.isScreenVideoPlaying) {
-    //   this.isScreenVideoPlaying = false;
-    //   (this.$refs.screenVideoRef as HTMLVideoElement).pause();
-    // }
-
+    //
     // TODO: Check the video's event fire order.
-
+    //
     // Check the "playing event".
     // https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/playing_event
     //
     // canplaythrough
     //
-
     if (this.isScreenVideoPlaying) {
-      //this.isScreenVideoPlaying = false;
-      (this.$refs.screenVideoRef as HTMLVideoElement).pause();
-      this.isScreenVideoPlaying = false; //!(this.$refs.screenVideoRef as HTMLVideoElement).paused;
+      const videoElement = this.$refs.screenVideoRef as HTMLVideoElement;
+      if (typeof videoElement === 'object') {
+        videoElement.pause();
+        this.isScreenVideoPlaying = false;
+      }
     }
   }
 
   playScreenStream(): void {
-    (this.$refs.screenVideoRef as HTMLVideoElement).play(); // TODO: play() does not exist if mouse leave quickly after click return select screen button
-    //this.isScreenVideoPlaying = true;
+    const videoElement = this.$refs.screenVideoRef as HTMLVideoElement;
+    if (typeof videoElement === 'object') {
+      videoElement.play();      
+    }
   }
 
   moveToScreenSelectView(): void {
