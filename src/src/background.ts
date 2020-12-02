@@ -22,6 +22,7 @@ function createWindow() {
     width: 1600,
     height: 1000,
     webPreferences: {
+      worldSafeExecuteJavaScript: true,
       nodeIntegration: true,
       enableRemoteModule: true
     },
