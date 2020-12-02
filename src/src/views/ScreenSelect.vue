@@ -75,9 +75,9 @@ export default class ScreenSelect extends Vue {
         for (const sm of screenMetadataArray) {
           screens.push({
             id: sm.id,
-            name: sm.name + ' (' + (sm.display.isPrimary ? 'Primary, ' : '') +
-                  Math.floor(sm.display.size.width * sm.display.scaleFactor) + ' x ' +
-                  Math.floor(sm.display.size.height * sm.display.scaleFactor) + ')',
+            name: sm.name + " (" + (sm.display.isPrimary ? "Primary, " : "") +
+                  Math.floor(sm.display.size.width * sm.display.scaleFactor) + " x " +
+                  Math.floor(sm.display.size.height * sm.display.scaleFactor) + ")",
             thumbnailDataUrl: sm.thumbnailDataUrl
           });
         }

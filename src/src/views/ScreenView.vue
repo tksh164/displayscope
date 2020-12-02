@@ -61,11 +61,11 @@ export default class ScreenView extends Vue {
   isScreenVideoPlaying = false;
 
   get screenVideoClass(): object {
-    return { 'screen-video-pause': !this.isScreenVideoPlaying };
+    return { "screen-video-pause": !this.isScreenVideoPlaying };
   }
 
   get returnButtonClass(): object {
-    return { 'return-button-pause': !this.isScreenVideoPlaying };
+    return { "return-button-pause": !this.isScreenVideoPlaying };
   }
 
   mounted(): void {
@@ -81,11 +81,11 @@ export default class ScreenView extends Vue {
 
   isMediaStream(arg: any): arg is MediaStream {
     return arg !== null && arg !== undefined &&
-      typeof arg === 'object' &&
-      typeof arg.active === 'boolean' &&
-      typeof arg.id === 'string' &&
-      typeof arg.addTrack === 'function' &&
-      typeof arg.removeTrack === 'function';
+      typeof arg === "object" &&
+      typeof arg.active === "boolean" &&
+      typeof arg.id === "string" &&
+      typeof arg.addTrack === "function" &&
+      typeof arg.removeTrack === "function";
   }
 
   onCanPlayThrough(): void {
@@ -110,7 +110,7 @@ export default class ScreenView extends Vue {
 
   getVideoElement(): null | HTMLVideoElement {
     const videoElement = this.$refs.screenVideoRef as HTMLVideoElement;
-    return typeof videoElement === 'object' ? videoElement : null;
+    return typeof videoElement === "object" ? videoElement : null;
   }
 
   moveToScreenSelectView(): void {
