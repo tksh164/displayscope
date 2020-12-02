@@ -38,19 +38,20 @@ export async function getScreenMetadataList(thumbnailWidth: number, thumbnailHei
 }
 
 export function getScreenMediaStream(sourceId: string): Promise<void | MediaStream> {
-  return navigator.mediaDevices.getUserMedia({
-    audio: false,
-    video: {
-      mandatory: {
-        chromeMediaSource: "desktop",
-        chromeMediaSourceId: sourceId
-      }
-    } as unknown as undefined
-  })
-  .then((stream: MediaStream) => {
-    return stream;
-  })
-  .catch((err: DOMException) => {
-    //console.log(err);
-  });
+  return navigator.mediaDevices
+    .getUserMedia({
+      audio: false,
+      video: {
+        mandatory: {
+          chromeMediaSource: "desktop",
+          chromeMediaSourceId: sourceId
+        }
+      } as unknown as undefined
+    })
+    .then((stream: MediaStream) => {
+      return stream;
+    })
+    .catch((err: DOMException) => {
+      //console.log(err);
+    });
 }
