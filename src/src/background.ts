@@ -22,7 +22,8 @@ function createWindow() {
     width: 1600,
     height: 1000,
     webPreferences: {
-      nodeIntegration: true
+      nodeIntegration: true,
+      enableRemoteModule: true
     },
     autoHideMenuBar: true
   });
