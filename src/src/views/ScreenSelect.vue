@@ -10,7 +10,7 @@
                       name="list-item-transition"
                       tag="div"
                       appear>
-      <screen-item v-for="screen in screenMetadataList"
+      <screen-item v-for="screen in screens"
                    :key="screen.id"
                    :screenId="screen.id"
                    :screenName="screen.name"
@@ -62,14 +62,26 @@ import { getScreenMetadataList } from "@/screen-capturer";
   }
 })
 export default class ScreenSelect extends Vue {
-  screenMetadataList: object[] = [];
+  screens: { id: string, name: string, thumbnailDataUrl: string }[] = [];
 
   mounted(): void {
     setTimeout(this.refreshScreenMetadataList, 30);
   }
 
   refreshScreenMetadataList(): void {
-    this.screenMetadataList = getScreenMetadataList(1000, 1000);
+    getScreenMetadataList(1000, 1000)
+      .then((screenMetadataArray) => {
+        const screens: { id: string, name: string, thumbnailDataUrl: string }[] = [];
+        for (const sm of screenMetadataArray) {
+          screens.push({
+            id: sm.id,
+            name: sm.name + ' (' + Math.floor(sm.display.size.width * sm.display.scaleFactor) + ' x ' +
+                  Math.floor(sm.display.size.height * sm.display.scaleFactor) + ')',
+            thumbnailDataUrl: sm.thumbnailDataUrl
+          });
+        }
+        this.screens = screens;
+      });
   }
 }
 </script>
