@@ -62,7 +62,7 @@ import { getScreenMetadataList } from "@/screen-capturer";
   }
 })
 export default class ScreenSelect extends Vue {
-  screens: { id: string, name: string, thumbnailDataUrl: string }[] = [];
+  screens: { id: string; name: string; thumbnailDataUrl: string; }[] = [];
 
   mounted(): void {
     setTimeout(this.refreshScreenMetadataList, 30);
@@ -71,7 +71,7 @@ export default class ScreenSelect extends Vue {
   refreshScreenMetadataList(): void {
     getScreenMetadataList(1000, 1000)
       .then((screenMetadataArray) => {
-        const screens: { id: string, name: string, thumbnailDataUrl: string }[] = [];
+        const screens: { id: string; name: string; thumbnailDataUrl: string; }[] = [];
         for (const sm of screenMetadataArray) {
           screens.push({
             id: sm.id,
