@@ -37,21 +37,14 @@ export async function getScreenMetadataList(thumbnailWidth: number, thumbnailHei
   return screenMetadataArray;
 }
 
-export function getScreenMediaStream(sourceId: string): Promise<void | MediaStream> {
-  return navigator.mediaDevices
-    .getUserMedia({
-      audio: false,
-      video: {
-        mandatory: {
-          chromeMediaSource: "desktop",
-          chromeMediaSourceId: sourceId
-        }
-      } as unknown as undefined
-    })
-    .then((stream: MediaStream) => {
-      return stream;
-    })
-    .catch((err: DOMException) => {
-      //console.log(err);
-    });
+export async function getScreenMediaStream(sourceId: string): Promise<void | MediaStream> {
+  return navigator.mediaDevices.getUserMedia({
+    audio: false,
+    video: ({
+      mandatory: {
+        chromeMediaSource: "desktop",
+        chromeMediaSourceId: sourceId
+      }
+    } as unknown as undefined)
+  });
 }
