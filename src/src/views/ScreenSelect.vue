@@ -55,6 +55,7 @@
 import { Component, Vue } from "vue-property-decorator";
 import ScreenItem from "@/components/ScreenItem.vue";
 import { getScreenMetadataList } from "@/screen-capturer";
+import { ScreenItemData } from "@/@types/pipapp/ScreenSelect";
 
 @Component({
   components: {
@@ -62,7 +63,7 @@ import { getScreenMetadataList } from "@/screen-capturer";
   }
 })
 export default class ScreenSelect extends Vue {
-  screens: { id: string; name: string; thumbnailDataUrl: string; }[] = [];
+  screens: ScreenItemData[] = [];
 
   mounted(): void {
     setTimeout(this.refreshScreenMetadataList, 30);
@@ -71,7 +72,7 @@ export default class ScreenSelect extends Vue {
   refreshScreenMetadataList(): void {
     getScreenMetadataList(1000, 1000)
       .then((screenMetadataArray) => {
-        const screens: { id: string; name: string; thumbnailDataUrl: string; }[] = [];
+        const screens: ScreenItemData[] = [];
         for (const sm of screenMetadataArray) {
           screens.push({
             id: sm.id,

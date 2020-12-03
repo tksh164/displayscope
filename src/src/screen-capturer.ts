@@ -1,11 +1,13 @@
 import { desktopCapturer, remote } from "electron";
+import { DisplayMetadataValue, ScreenMetadata } from "@/@types/pipapp/screen-capturer";
 
-export async function getScreenMetadataList(thumbnailWidth: number, thumbnailHeight: number): Promise<{ id: string; name: string; thumbnailDataUrl: string; display: { size: Electron.Size; scaleFactor: number; isPrimary: boolean; }; }[]> {
+export async function getScreenMetadataList(thumbnailWidth: number, thumbnailHeight: number): Promise<ScreenMetadata[]> {
 
   // Retrieve display metadata.
   const primaryDisplayId = remote.screen.getPrimaryDisplay().id;
   const displays = remote.screen.getAllDisplays();
-  const displayMetadata: { [key: string]: { size: Electron.Size; scaleFactor: number; isPrimary: boolean; }; } = {};
+  const displayMetadata: { [key: string]: DisplayMetadataValue; } = {};
+    
   for (const display of displays) {
     displayMetadata[display.id.toString()] = {
       size: display.size,
@@ -15,7 +17,7 @@ export async function getScreenMetadataList(thumbnailWidth: number, thumbnailHei
   }
 
   // Retrieve screen metadata.
-  const screenMetadataArray: { id: string; name: string; thumbnailDataUrl: string; display: { size: Electron.Size; scaleFactor: number; isPrimary: boolean; }; }[] = [];
+  const screenMetadataArray: ScreenMetadata[] = [];
   const sources = await desktopCapturer.getSources({
     types: ["screen"],
     thumbnailSize: { width: thumbnailWidth, height: thumbnailHeight },
