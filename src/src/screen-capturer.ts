@@ -1,11 +1,10 @@
-import { desktopCapturer } from "electron";
+import { desktopCapturer, remote } from "electron";
 
 export async function getScreenMetadataList(thumbnailWidth: number, thumbnailHeight: number): Promise<{ id: string; name: string; thumbnailDataUrl: string; display: { size: Electron.Size; scaleFactor: number; isPrimary: boolean; }; }[]> {
 
   // Retrieve display metadata.
-  const { screen } = require("electron").remote;
-  const primaryDisplayId = screen.getPrimaryDisplay().id;
-  const displays = screen.getAllDisplays();
+  const primaryDisplayId = remote.screen.getPrimaryDisplay().id;
+  const displays = remote.screen.getAllDisplays();
   const displayMetadata: { [key: string]: { size: Electron.Size; scaleFactor: number; isPrimary: boolean; }; } = {};
   for (const display of displays) {
     displayMetadata[display.id.toString()] = {
