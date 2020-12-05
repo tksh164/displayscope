@@ -1,6 +1,6 @@
 "use strict";
 
-import { app, protocol, BrowserWindow } from "electron";
+import { app, protocol, BrowserWindow, screen } from "electron";
 import {
   createProtocol,
   installVueDevtools
@@ -17,10 +17,12 @@ protocol.registerSchemesAsPrivileged([
 ]);
 
 function createWindow() {
+  const workAreaSize = screen.getPrimaryDisplay().workAreaSize;
+
   // Create the browser window.
   win = new BrowserWindow({
-    width: 1600,
-    height: 1000,
+    width: Math.floor(workAreaSize.width * 0.8),
+    height: Math.floor(workAreaSize.height * 0.8),
     webPreferences: {
       worldSafeExecuteJavaScript: true,
       nodeIntegration: true,
