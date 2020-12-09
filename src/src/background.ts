@@ -17,9 +17,8 @@ protocol.registerSchemesAsPrivileged([
 ]);
 
 function createWindow() {
-  const workAreaSize = screen.getPrimaryDisplay().workAreaSize;
-
   // Create the browser window.
+  const workAreaSize = screen.getPrimaryDisplay().workAreaSize;
   win = new BrowserWindow({
     width: Math.floor(workAreaSize.width * 0.8),
     height: Math.floor(workAreaSize.height * 0.8),
