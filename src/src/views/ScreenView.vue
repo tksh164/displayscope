@@ -120,14 +120,18 @@ export default class ScreenView extends Vue {
     this.$router.push({ name: "ScreenSelect" });
   }
 
-  moveMouseCursorIntoScreen(): void {
+  getMoveMouseCursorPosExternalCommandPath(): string {
     const setMouseCursorPosExeFileName = "setmousecursorpos.exe";
-    const exeFilePath = process.env.NODE_ENV !== "production" ?
+    return process.env.NODE_ENV !== "production" ?
       path.join(process.cwd(), "build", setMouseCursorPosExeFileName) :
       path.join(process.resourcesPath, setMouseCursorPosExeFileName);
+  }
+
+  moveMouseCursorIntoScreen(): void {
+    const commandPath = this.getMoveMouseCursorPosExternalCommandPath();
     const posX = typeof this.$route.query.centerX === "string" ? parseInt(this.$route.query.centerX) : 0;
     const posY = typeof this.$route.query.centerY === "string" ? parseInt(this.$route.query.centerY) : 0;
-    const cmdline = '"' + exeFilePath + '" ' + posX + ' ' + posY;
+    const cmdline = '"' + commandPath + '" ' + posX + ' ' + posY;
     exec(cmdline, (error, stdout, stderr) => {
       // console.log(stdout);
       // console.log(stderr);
