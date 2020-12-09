@@ -55,8 +55,7 @@
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 import { getScreenMediaStream } from "@/screen-capturer";
-import * as path from "path";
-import { exec } from "child_process";
+import { setMouseCursorPosition } from "@/mouse-cursor-setter";
 
 @Component
 export default class ScreenView extends Vue {
@@ -120,23 +119,10 @@ export default class ScreenView extends Vue {
     this.$router.push({ name: "ScreenSelect" });
   }
 
-  getMoveMouseCursorPosExternalCommandPath(): string {
-    const setMouseCursorPosExeFileName = "setmousecursorpos.exe";
-    return process.env.NODE_ENV !== "production" ?
-      path.join(process.cwd(), "build", setMouseCursorPosExeFileName) :
-      path.join(process.resourcesPath, setMouseCursorPosExeFileName);
-  }
-
   moveMouseCursorIntoScreen(): void {
-    const commandPath = this.getMoveMouseCursorPosExternalCommandPath();
     const posX = typeof this.$route.query.centerX === "string" ? parseInt(this.$route.query.centerX) : 0;
     const posY = typeof this.$route.query.centerY === "string" ? parseInt(this.$route.query.centerY) : 0;
-    const cmdline = '"' + commandPath + '" ' + posX + ' ' + posY;
-    exec(cmdline, (error, stdout, stderr) => {
-      // console.log(stdout);
-      // console.log(stderr);
-      // console.log(error);
-    });
+    setMouseCursorPosition(posX, posY);
   }
 }
 </script>

@@ -1,10 +1,11 @@
 "use strict";
 
-import { app, protocol, BrowserWindow, screen } from "electron";
+import { app, protocol, BrowserWindow, screen, globalShortcut } from "electron";
 import {
   createProtocol,
   installVueDevtools
 } from "vue-cli-plugin-electron-builder/lib";
+import { setMouseCursorPosition } from "@/mouse-cursor-setter";
 const isDevelopment = process.env.NODE_ENV !== "production";
 
 // Keep a global reference of the window object, if you don't, the window will
@@ -45,6 +46,19 @@ function createWindow() {
   });
 }
 
+const HOTKEY_MOVE_MOUSE_CURSOR_TO_APP_WINDOW = "CommandOrControl+Shift+Backspace";
+function moveMouseCursorToAppWindowArea(): void {
+  const winScreenRect = screen.dipToScreenRect(win, win!.getBounds());
+  const posX = Math.floor(winScreenRect.width / 2) + winScreenRect.x;
+  const posY = Math.floor(winScreenRect.height / 2) + winScreenRect.y;
+  setMouseCursorPosition(posX, posY);
+}
+
+app.on("will-quit", () => {
+  // Unregister a hot-key to move the mouse cursor to on app window from the screen.
+  globalShortcut.unregister(HOTKEY_MOVE_MOUSE_CURSOR_TO_APP_WINDOW);
+});
+
 // Quit when all windows are closed.
 app.on("window-all-closed", () => {
   // On macOS it is common for applications and their menu bar
@@ -79,7 +93,14 @@ app.on("ready", async () => {
       console.error("Vue Devtools failed to install:", e.toString())
     }
   }
+
   createWindow();
+
+  // Register a hot-key to move the mouse cursor to on app window from the screen.
+  const ret = globalShortcut.register(HOTKEY_MOVE_MOUSE_CURSOR_TO_APP_WINDOW, moveMouseCursorToAppWindowArea);
+  if (!ret) {
+    console.log(`Failed the hot-key registration: ${HOTKEY_MOVE_MOUSE_CURSOR_TO_APP_WINDOW}`);
+  }
 });
 
 // Exit cleanly on request from parent process in development mode.
