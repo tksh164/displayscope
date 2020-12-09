@@ -75,10 +75,7 @@ export default class ScreenSelect extends Vue {
   getScreenDsiplayName(sm: ScreenMetadata): string {
     const scaledDisplayWidth = Math.floor(sm.display.bounds.width * sm.display.scaleFactor);
     const scaledDisplayHeight = Math.floor(sm.display.bounds.height * sm.display.scaleFactor);
-    return sm.name +
-      " (" + (sm.display.isPrimary ? "Primary, " : "") +
-      scaledDisplayWidth + " x " + scaledDisplayHeight + ", " +
-      (sm.display.scaleFactor * 100) + "%)";
+    return `${sm.name} (${sm.display.isPrimary ? "Primary, " : ""}${scaledDisplayWidth} x ${scaledDisplayHeight}, ${sm.display.scaleFactor * 100}%)`;
   }
 
   getScreenCenterPoint(displayBounds: Electron.Rectangle, scaleFactor: number): { x: number; y: number } {
