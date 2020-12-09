@@ -58,6 +58,7 @@ import { Component, Vue } from "vue-property-decorator";
 import ScreenItem from "@/components/ScreenItem.vue";
 import { getScreenMetadataList } from "@/screen-capturer";
 import { ScreenItemProperty } from "@/@types/pipapp/ScreenSelect";
+import { ScreenMetadata } from "@/@types/pipapp/screen-capturer";
 
 @Component({
   components: {
@@ -71,23 +72,34 @@ export default class ScreenSelect extends Vue {
     setTimeout(this.refreshScreenMetadataList, 30);
   }
 
+  getScreenDsiplayName(sm: ScreenMetadata): string {
+    const scaledDisplayWidth = Math.floor(sm.display.bounds.width * sm.display.scaleFactor);
+    const scaledDisplayHeight = Math.floor(sm.display.bounds.height * sm.display.scaleFactor);
+    return sm.name +
+      " (" + (sm.display.isPrimary ? "Primary, " : "") +
+      scaledDisplayWidth + " x " + scaledDisplayHeight + ", " +
+      (sm.display.scaleFactor * 100) + "%)";
+  }
+
+  getScreenCenterPoint(displayBounds: Electron.Rectangle, scaleFactor: number): { x: number; y: number } {
+    const scaledScreenOriginPoint = remote.screen.dipToScreenPoint({ x: displayBounds.x, y: displayBounds.y });
+    const scaledDisplayWidth = displayBounds.width * scaleFactor;
+    const scaledDisplayHeight = displayBounds.height * scaleFactor;
+    return {
+      x: Math.floor((scaledDisplayWidth / 2) + scaledScreenOriginPoint.x),
+      y: Math.floor((scaledDisplayHeight / 2) + scaledScreenOriginPoint.y)
+    }
+  }
+
   refreshScreenMetadataList(): void {
     getScreenMetadataList(1000, 1000)
       .then((screenMetadataArray) => {
         const screenItems: ScreenItemProperty[] = [];
         for (const sm of screenMetadataArray) {
-          const scaledDisplayWidth = Math.floor(sm.display.bounds.width * sm.display.scaleFactor);
-          const scaledDisplayHeight = Math.floor(sm.display.bounds.height * sm.display.scaleFactor);
-          const scaledScreenOriginPoint = remote.screen.dipToScreenPoint({ x: sm.display.bounds.x, y: sm.display.bounds.y })
-          const centerPosX = Math.floor(((scaledDisplayWidth) / 2) + scaledScreenOriginPoint.x);
-          const centerPosY = Math.floor(((scaledDisplayHeight) / 2) + scaledScreenOriginPoint.y);
           screenItems.push({
             id: sm.id,
-            name: sm.name + " (" + (sm.display.isPrimary ? "Primary, " : "") + scaledDisplayWidth + " x " + scaledDisplayHeight + ", " + (sm.display.scaleFactor * 100) + "%)",
-            centerPoint: {
-              x: centerPosX,
-              y: centerPosY
-            },
+            name: this.getScreenDsiplayName(sm),
+            centerPoint: this.getScreenCenterPoint(sm.display.bounds, sm.display.scaleFactor),
             thumbnailDataUri: sm.thumbnailDataUri
           });
         }
