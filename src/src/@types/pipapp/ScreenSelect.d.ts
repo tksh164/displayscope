@@ -1,4 +1,4 @@
-export interface ScreenItemData {
+export interface ScreenItemProperty {
   id: string;
   name: string;
   centerPoint: {

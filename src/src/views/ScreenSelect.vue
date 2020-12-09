@@ -57,7 +57,7 @@ import { remote } from "electron";
 import { Component, Vue } from "vue-property-decorator";
 import ScreenItem from "@/components/ScreenItem.vue";
 import { getScreenMetadataList } from "@/screen-capturer";
-import { ScreenItemData } from "@/@types/pipapp/ScreenSelect";
+import { ScreenItemProperty } from "@/@types/pipapp/ScreenSelect";
 
 @Component({
   components: {
@@ -65,7 +65,7 @@ import { ScreenItemData } from "@/@types/pipapp/ScreenSelect";
   }
 })
 export default class ScreenSelect extends Vue {
-  screens: ScreenItemData[] = [];
+  screens: ScreenItemProperty[] = [];
 
   mounted(): void {
     setTimeout(this.refreshScreenMetadataList, 30);
@@ -74,7 +74,7 @@ export default class ScreenSelect extends Vue {
   refreshScreenMetadataList(): void {
     getScreenMetadataList(1000, 1000)
       .then((screenMetadataArray) => {
-        const screens: ScreenItemData[] = [];
+        const screens: ScreenItemProperty[] = [];
         for (const sm of screenMetadataArray) {
           const scaledDisplayWidth = Math.floor(sm.display.bounds.width * sm.display.scaleFactor);
           const scaledDisplayHeight = Math.floor(sm.display.bounds.height * sm.display.scaleFactor);
