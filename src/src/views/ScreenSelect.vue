@@ -10,12 +10,12 @@
                       name="list-item-transition"
                       tag="div"
                       appear>
-      <screen-item v-for="screen in screens"
-                   :key="screen.id"
-                   :screenId="screen.id"
-                   :centerPoint="screen.centerPoint"
-                   :screenName="screen.name"
-                   :thumbnailUrl="screen.thumbnailDataUri"></screen-item>
+      <screen-item v-for="screenItem in screenItems"
+                   :key="screenItem.id"
+                   :screenId="screenItem.id"
+                   :centerPoint="screenItem.centerPoint"
+                   :screenName="screenItem.name"
+                   :thumbnailUrl="screenItem.thumbnailDataUri"></screen-item>
     </transition-group>
   </div>
 </template>
@@ -65,7 +65,7 @@ import { ScreenItemProperty } from "@/@types/pipapp/ScreenSelect";
   }
 })
 export default class ScreenSelect extends Vue {
-  screens: ScreenItemProperty[] = [];
+  screenItems: ScreenItemProperty[] = [];
 
   mounted(): void {
     setTimeout(this.refreshScreenMetadataList, 30);
@@ -74,14 +74,14 @@ export default class ScreenSelect extends Vue {
   refreshScreenMetadataList(): void {
     getScreenMetadataList(1000, 1000)
       .then((screenMetadataArray) => {
-        const screens: ScreenItemProperty[] = [];
+        const screenItems: ScreenItemProperty[] = [];
         for (const sm of screenMetadataArray) {
           const scaledDisplayWidth = Math.floor(sm.display.bounds.width * sm.display.scaleFactor);
           const scaledDisplayHeight = Math.floor(sm.display.bounds.height * sm.display.scaleFactor);
           const scaledScreenOriginPoint = remote.screen.dipToScreenPoint({ x: sm.display.bounds.x, y: sm.display.bounds.y })
           const centerPosX = Math.floor(((scaledDisplayWidth) / 2) + scaledScreenOriginPoint.x);
           const centerPosY = Math.floor(((scaledDisplayHeight) / 2) + scaledScreenOriginPoint.y);
-          screens.push({
+          screenItems.push({
             id: sm.id,
             name: sm.name + " (" + (sm.display.isPrimary ? "Primary, " : "") + scaledDisplayWidth + " x " + scaledDisplayHeight + ", " + (sm.display.scaleFactor * 100) + "%)",
             centerPoint: {
@@ -91,7 +91,7 @@ export default class ScreenSelect extends Vue {
             thumbnailDataUri: sm.thumbnailDataUri
           });
         }
-        this.screens = screens;
+        this.screenItems = screenItems;
       });
   }
 }
