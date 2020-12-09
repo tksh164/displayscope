@@ -2,10 +2,10 @@ import * as path from "path";
 import { exec } from "child_process";
 
 function getExternalCommandPath(): string {
-    const setMouseCursorPosExeFileName = "setmousecursorpos.exe";
+    const EXECUTABLE_FILE_NAME = "setmousecursorpos.exe";
     return process.env.NODE_ENV !== "production" ?
-      path.join(process.cwd(), "build", setMouseCursorPosExeFileName) :
-      path.join(process.resourcesPath, setMouseCursorPosExeFileName);
+      path.join(process.cwd(), "build", EXECUTABLE_FILE_NAME) :
+      path.join(process.resourcesPath, EXECUTABLE_FILE_NAME);
 }
 
 export async function setMouseCursorPosition(posX: number, posY: number): Promise<void> {
