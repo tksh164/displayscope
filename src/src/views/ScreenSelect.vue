@@ -13,6 +13,7 @@
       <screen-item v-for="screen in screens"
                    :key="screen.id"
                    :screenId="screen.id"
+                   :centerPoint="screen.centerPoint"
                    :screenName="screen.name"
                    :thumbnailUrl="screen.thumbnailDataUrl"></screen-item>
     </transition-group>
@@ -52,6 +53,7 @@
 </style>
 
 <script lang="ts">
+import { remote } from "electron";
 import { Component, Vue } from "vue-property-decorator";
 import ScreenItem from "@/components/ScreenItem.vue";
 import { getScreenMetadataList } from "@/screen-capturer";
@@ -74,11 +76,18 @@ export default class ScreenSelect extends Vue {
       .then((screenMetadataArray) => {
         const screens: ScreenItemData[] = [];
         for (const sm of screenMetadataArray) {
+          const scaledDisplayWidth = Math.floor(sm.display.bounds.width * sm.display.scaleFactor);
+          const scaledDisplayHeight = Math.floor(sm.display.bounds.height * sm.display.scaleFactor);
+          const scaledScreenOriginPoint = remote.screen.dipToScreenPoint({ x: sm.display.bounds.x, y: sm.display.bounds.y })
+          const centerPosX = Math.floor(((scaledDisplayWidth) / 2) + scaledScreenOriginPoint.x);
+          const centerPosY = Math.floor(((scaledDisplayHeight) / 2) + scaledScreenOriginPoint.y);
           screens.push({
             id: sm.id,
-            name: sm.name + " (" + (sm.display.isPrimary ? "Primary, " : "") +
-                  Math.floor(sm.display.size.width * sm.display.scaleFactor) + " x " +
-                  Math.floor(sm.display.size.height * sm.display.scaleFactor) + ")",
+            name: sm.name + " (" + (sm.display.isPrimary ? "Primary, " : "") + scaledDisplayWidth + " x " + scaledDisplayHeight + ", " + (sm.display.scaleFactor * 100) + "%)",
+            centerPoint: {
+              x: centerPosX,
+              y: centerPosY
+            },
             thumbnailDataUrl: sm.thumbnailDataUrl
           });
         }

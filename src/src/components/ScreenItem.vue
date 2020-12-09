@@ -43,13 +43,22 @@ export default class ScreenItem extends Vue {
   @Prop({ default: "-" })
   screenName!: string;
 
+  @Prop({ default: () => { return { x: 0, y: 0 }; } })
+  centerPoint!: { x: number; y: number; };
+
   @Prop({ default: "" })
   thumbnailUrl!: string;
 
   moveToScreenView() {
     this.$router.push({
       name: "ScreenView",
-      params: { screenId: this.screenId }
+      params: {
+        screenId: this.screenId
+      },
+      query: {
+        centerX: this.centerPoint.x.toString(),
+        centerY: this.centerPoint.y.toString()
+      }
     });
   }
 }
