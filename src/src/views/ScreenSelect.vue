@@ -10,11 +10,12 @@
                       name="list-item-transition"
                       tag="div"
                       appear>
-      <screen-item v-for="screen in screens"
-                   :key="screen.id"
-                   :screenId="screen.id"
-                   :screenName="screen.name"
-                   :thumbnailUrl="screen.thumbnailDataUrl"></screen-item>
+      <screen-item v-for="screenItem in screenItems"
+                   :key="screenItem.id"
+                   :screenId="screenItem.id"
+                   :centerPoint="screenItem.centerPoint"
+                   :screenName="screenItem.name"
+                   :thumbnailUrl="screenItem.thumbnailDataUri"></screen-item>
     </transition-group>
   </div>
 </template>
@@ -52,10 +53,12 @@
 </style>
 
 <script lang="ts">
+import { remote } from "electron";
 import { Component, Vue } from "vue-property-decorator";
 import ScreenItem from "@/components/ScreenItem.vue";
 import { getScreenMetadataList } from "@/screen-capturer";
-import { ScreenItemData } from "@/@types/pipapp/ScreenSelect";
+import { ScreenItemProperty } from "@/@types/pipapp/ScreenSelect";
+import { ScreenMetadata } from "@/@types/pipapp/screen-capturer";
 
 @Component({
   components: {
@@ -63,26 +66,44 @@ import { ScreenItemData } from "@/@types/pipapp/ScreenSelect";
   }
 })
 export default class ScreenSelect extends Vue {
-  screens: ScreenItemData[] = [];
+  screenItems: ScreenItemProperty[] = [];
 
   mounted(): void {
     setTimeout(this.refreshScreenMetadataList, 30);
   }
 
+  getScreenDsiplayName(sm: ScreenMetadata): string {
+    const scaledDisplayWidth = Math.floor(sm.display.bounds.width * sm.display.scaleFactor);
+    const scaledDisplayHeight = Math.floor(sm.display.bounds.height * sm.display.scaleFactor);
+    return sm.name +
+      " (" + (sm.display.isPrimary ? "Primary, " : "") +
+      scaledDisplayWidth + " x " + scaledDisplayHeight + ", " +
+      (sm.display.scaleFactor * 100) + "%)";
+  }
+
+  getScreenCenterPoint(displayBounds: Electron.Rectangle, scaleFactor: number): { x: number; y: number } {
+    const scaledScreenOriginPoint = remote.screen.dipToScreenPoint({ x: displayBounds.x, y: displayBounds.y });
+    const scaledDisplayWidth = displayBounds.width * scaleFactor;
+    const scaledDisplayHeight = displayBounds.height * scaleFactor;
+    return {
+      x: Math.floor((scaledDisplayWidth / 2) + scaledScreenOriginPoint.x),
+      y: Math.floor((scaledDisplayHeight / 2) + scaledScreenOriginPoint.y)
+    }
+  }
+
   refreshScreenMetadataList(): void {
     getScreenMetadataList(1000, 1000)
       .then((screenMetadataArray) => {
-        const screens: ScreenItemData[] = [];
+        const screenItems: ScreenItemProperty[] = [];
         for (const sm of screenMetadataArray) {
-          screens.push({
+          screenItems.push({
             id: sm.id,
-            name: sm.name + " (" + (sm.display.isPrimary ? "Primary, " : "") +
-                  Math.floor(sm.display.size.width * sm.display.scaleFactor) + " x " +
-                  Math.floor(sm.display.size.height * sm.display.scaleFactor) + ")",
-            thumbnailDataUrl: sm.thumbnailDataUrl
+            name: this.getScreenDsiplayName(sm),
+            centerPoint: this.getScreenCenterPoint(sm.display.bounds, sm.display.scaleFactor),
+            thumbnailDataUri: sm.thumbnailDataUri
           });
         }
-        this.screens = screens;
+        this.screenItems = screenItems;
       });
   }
 }

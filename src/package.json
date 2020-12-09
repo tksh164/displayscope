@@ -12,8 +12,9 @@
     "build": "vue-cli-service build",
     "test:unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint",
-    "electron:build": "vue-cli-service electron:build",
-    "electron:serve": "vue-cli-service electron:serve",
+    "electron:pretask": "copyfiles -f ../setmousecursorpos/setmousecursorpos.exe build",
+    "electron:build": "yarn run electron:pretask && vue-cli-service electron:build",
+    "electron:serve": "yarn run electron:pretask && vue-cli-service electron:serve",
     "postinstall": "electron-builder install-app-deps",
     "postuninstall": "electron-builder install-app-deps"
   },
@@ -50,6 +51,7 @@
     "typescript": "~3.7.5",
     "vue-cli-plugin-electron-builder": "~1.4.5",
     "vue-cli-plugin-element": "~1.0.1",
-    "vue-template-compiler": "^2.6.11"
+    "vue-template-compiler": "^2.6.11",
+    "copyfiles": "^2.4.1"
   }
 }

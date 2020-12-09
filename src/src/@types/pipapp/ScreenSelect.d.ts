@@ -1,5 +1,9 @@
-export interface ScreenItemData {
+export interface ScreenItemProperty {
   id: string;
   name: string;
-  thumbnailDataUrl: string;
+  centerPoint: {
+    x: number;
+    y: number;
+  };
+  thumbnailDataUri: string;
 }

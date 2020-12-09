@@ -13,6 +13,7 @@
       <div>
         <div>Your cursor is now on this window.</div>
         <el-button type="primary" round @click="moveToScreenSelectView">Return to screen select</el-button>
+        <el-button type="primary" round @click="moveMouseCursorIntoScreen">Move the mouse cursor into this screen</el-button>
       </div>
     </el-card>
   </div>
@@ -54,6 +55,8 @@
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 import { getScreenMediaStream } from "@/screen-capturer";
+import * as path from "path";
+import { exec } from "child_process";
 
 @Component
 export default class ScreenView extends Vue {
@@ -115,6 +118,25 @@ export default class ScreenView extends Vue {
 
   moveToScreenSelectView(): void {
     this.$router.push({ name: "ScreenSelect" });
+  }
+
+  getMoveMouseCursorPosExternalCommandPath(): string {
+    const setMouseCursorPosExeFileName = "setmousecursorpos.exe";
+    return process.env.NODE_ENV !== "production" ?
+      path.join(process.cwd(), "build", setMouseCursorPosExeFileName) :
+      path.join(process.resourcesPath, setMouseCursorPosExeFileName);
+  }
+
+  moveMouseCursorIntoScreen(): void {
+    const commandPath = this.getMoveMouseCursorPosExternalCommandPath();
+    const posX = typeof this.$route.query.centerX === "string" ? parseInt(this.$route.query.centerX) : 0;
+    const posY = typeof this.$route.query.centerY === "string" ? parseInt(this.$route.query.centerY) : 0;
+    const cmdline = '"' + commandPath + '" ' + posX + ' ' + posY;
+    exec(cmdline, (error, stdout, stderr) => {
+      // console.log(stdout);
+      // console.log(stderr);
+      // console.log(error);
+    });
   }
 }
 </script>

@@ -1,0 +1,4 @@
+#include <winuser.h>
+#include "resource.h"
+
+IDR_RT_MANIFEST     RT_MANIFEST     "setmousecursorpos.exe.manifest"

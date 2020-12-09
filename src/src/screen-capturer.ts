@@ -5,12 +5,11 @@ export async function getScreenMetadataList(thumbnailWidth: number, thumbnailHei
 
   // Retrieve display metadata.
   const primaryDisplayId = remote.screen.getPrimaryDisplay().id;
-  const displays = remote.screen.getAllDisplays();
+  const allDisplays = remote.screen.getAllDisplays();
   const displayMetadata: { [key: string]: DisplayMetadataValue; } = {};
-    
-  for (const display of displays) {
+  for (const display of allDisplays) {
     displayMetadata[display.id.toString()] = {
-      size: display.size,
+      bounds: display.bounds,
       scaleFactor: display.scaleFactor,
       isPrimary: display.id === primaryDisplayId
     };
@@ -20,16 +19,19 @@ export async function getScreenMetadataList(thumbnailWidth: number, thumbnailHei
   const screenMetadataArray: ScreenMetadata[] = [];
   const sources = await desktopCapturer.getSources({
     types: ["screen"],
-    thumbnailSize: { width: thumbnailWidth, height: thumbnailHeight },
+    thumbnailSize: {
+      width: thumbnailWidth,
+      height: thumbnailHeight
+    },
     fetchWindowIcons: false
   });
   for (const source of sources) {
     screenMetadataArray.push({
       id: source.id,
       name: source.name,
-      thumbnailDataUrl: source.thumbnail.toDataURL(),
+      thumbnailDataUri: source.thumbnail.toDataURL(),
       display: {
-        size: displayMetadata[source.display_id].size,
+        bounds: displayMetadata[source.display_id].bounds,
         scaleFactor: displayMetadata[source.display_id].scaleFactor,
         isPrimary: displayMetadata[source.display_id].isPrimary
       }

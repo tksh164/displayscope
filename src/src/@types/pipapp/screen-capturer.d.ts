@@ -1,5 +1,5 @@
 export interface DisplayMetadataValue {
-  size: Electron.Size;
+  bounds: Electron.Rectangle;
   scaleFactor: number;
   isPrimary: boolean;
 }
@@ -7,9 +7,9 @@ export interface DisplayMetadataValue {
 export interface ScreenMetadata {
   id: string;
   name: string;
-  thumbnailDataUrl: string;
+  thumbnailDataUri: string;
   display: {
-    size: Electron.Size;
+    bounds: Electron.Rectangle;
     scaleFactor: number;
     isPrimary: boolean;
   }
