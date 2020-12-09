@@ -19,7 +19,10 @@ export async function getScreenMetadataList(thumbnailWidth: number, thumbnailHei
   const screenMetadataArray: ScreenMetadata[] = [];
   const sources = await desktopCapturer.getSources({
     types: ["screen"],
-    thumbnailSize: { width: thumbnailWidth, height: thumbnailHeight },
+    thumbnailSize: {
+      width: thumbnailWidth,
+      height: thumbnailHeight
+    },
     fetchWindowIcons: false
   });
   for (const source of sources) {
