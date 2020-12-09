@@ -7,7 +7,7 @@ export interface DisplayMetadataValue {
 export interface ScreenMetadata {
   id: string;
   name: string;
-  thumbnailDataUrl: string;
+  thumbnailDataUri: string;
   display: {
     bounds: Electron.Rectangle;
     scaleFactor: number;

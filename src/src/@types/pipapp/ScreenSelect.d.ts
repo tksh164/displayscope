@@ -5,5 +5,5 @@ export interface ScreenItemData {
     x: number;
     y: number;
   };
-  thumbnailDataUrl: string;
+  thumbnailDataUri: string;
 }

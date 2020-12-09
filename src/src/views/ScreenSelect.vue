@@ -15,7 +15,7 @@
                    :screenId="screen.id"
                    :centerPoint="screen.centerPoint"
                    :screenName="screen.name"
-                   :thumbnailUrl="screen.thumbnailDataUrl"></screen-item>
+                   :thumbnailUrl="screen.thumbnailDataUri"></screen-item>
     </transition-group>
   </div>
 </template>
@@ -88,7 +88,7 @@ export default class ScreenSelect extends Vue {
               x: centerPosX,
               y: centerPosY
             },
-            thumbnailDataUrl: sm.thumbnailDataUrl
+            thumbnailDataUri: sm.thumbnailDataUri
           });
         }
         this.screens = screens;

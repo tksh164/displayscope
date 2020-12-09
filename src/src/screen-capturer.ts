@@ -26,7 +26,7 @@ export async function getScreenMetadataList(thumbnailWidth: number, thumbnailHei
     screenMetadataArray.push({
       id: source.id,
       name: source.name,
-      thumbnailDataUrl: source.thumbnail.toDataURL(),
+      thumbnailDataUri: source.thumbnail.toDataURL(),
       display: {
         bounds: displayMetadata[source.display_id].bounds,
         scaleFactor: displayMetadata[source.display_id].scaleFactor,
