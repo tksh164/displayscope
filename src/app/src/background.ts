@@ -12,6 +12,10 @@ const isDevelopment = process.env.NODE_ENV !== "production";
 // be closed automatically when the JavaScript object is garbage collected.
 let win: BrowserWindow | null;
 
+// Allow only one app instance.
+const gotSingleInstanceLock = app.requestSingleInstanceLock();
+if (!gotSingleInstanceLock) app.quit();
+
 // Scheme must be registered before the app is ready
 protocol.registerSchemesAsPrivileged([
   { scheme: "app", privileges: { secure: true, standard: true } }
@@ -100,6 +104,14 @@ app.on("ready", async () => {
   const ret = globalShortcut.register(HOTKEY_MOVE_MOUSE_CURSOR_TO_APP_WINDOW, moveMouseCursorToAppWindowArea);
   if (!ret) {
     console.log(`Failed the hot-key registration: ${HOTKEY_MOVE_MOUSE_CURSOR_TO_APP_WINDOW}`);
+  }
+});
+
+// This method will be call when the second app instance launched.
+app.on("second-instance", (event, argv, workingDirectory) => {
+  if (win) {
+    if (win.isMinimized()) win.restore();
+    win.focus();
   }
 });
 
