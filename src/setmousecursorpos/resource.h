@@ -1,5 +1,5 @@
-#define VER_FILEVERSION             1,1,2020,1209
-#define VER_FILEVERSION_STR         "1.1.2020.1209"
+#define VER_FILEVERSION             1,0,2020,1209
+#define VER_FILEVERSION_STR         "1.0.2020.1209"
 #define VER_PRODUCTVERSION          VER_FILEVERSION
 #define VER_PRODUCTVERSION_STR      VER_FILEVERSION_STR
 #define VER_COMPANYNAME_STR         "Takeshi Katano"
