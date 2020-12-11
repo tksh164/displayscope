@@ -46,7 +46,7 @@ function createWindow() {
   });
 }
 
-const HOTKEY_MOVE_MOUSE_CURSOR_TO_APP_WINDOW = "CommandOrControl+Shift+Backspace";
+const HOTKEY_MOVE_MOUSE_CURSOR_TO_APP_WINDOW = "Shift+Escape";
 function moveMouseCursorToAppWindowArea(): void {
   const winScreenRect = screen.dipToScreenRect(win, win!.getBounds());
   const posX = Math.floor(winScreenRect.width / 2) + winScreenRect.x;
