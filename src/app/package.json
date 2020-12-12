@@ -1,7 +1,7 @@
 {
   "name": "displayscope",
   "version": "0.1.0",
-  "description": "Show the external display screen in a window.",
+  "description": "This app shows the external display screen within the window.",
   "license": "MIT",
   "author": {
     "name": "Takeshi Katano"
