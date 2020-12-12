@@ -2,6 +2,7 @@ module.exports = {
   pluginOptions: {
     electronBuilder: {
       builderOptions: {
+        productName: "Displayscope",
         extraFiles: [
           {
             from: "build/setmousecursorpos.exe",
