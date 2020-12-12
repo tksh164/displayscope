@@ -6,6 +6,7 @@
     "url": "https://github.com/tksh164/pipapp/"
   },
   "description": "Show an extended screen as a picture-in-picture window.",
+  "productName": "Displayscope",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
