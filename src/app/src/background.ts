@@ -35,6 +35,70 @@ function createWindow() {
     autoHideMenuBar: true
   });
 
+  // Setup menu
+  const menuTemplate: Electron.MenuItemConstructorOptions[] = [
+    {
+      label: "File",
+      submenu: [
+        { role: "quit" }
+      ]
+    },
+    {
+      label: "View",
+      submenu: [
+        { role: "reload" },
+        { role: "forceReload" },
+        { role: "toggleDevTools" },
+        { type: "separator" },
+        { role: "resetZoom" },
+        { role: "zoomIn" },
+        { role: "zoomOut" },
+        { type: "separator" },
+        { role: "togglefullscreen" }
+      ]
+    },
+    {
+      label: "Window",
+      submenu: [
+        { role: "minimize" },
+        { role: "close" }
+      ]
+    },
+    {
+      label: "Help",
+      submenu: [
+        {
+          label: "Learn more",
+          click: async () => {
+            const { shell } = require("electron");
+            await shell.openExternal("https://github.com/tksh164/pipapp");
+          }
+        },
+        {
+          label: `About ${app.getName()}`,
+          click: async () => {
+            const appName = app.getName();
+            const { dialog } = require("electron");
+            const { getAppIconResourceFilePath } = require("@/app-icon-resource");
+            dialog.showMessageBoxSync(win!, {
+              icon: getAppIconResourceFilePath(),
+              title: `About ${appName}`,
+              message: appName,
+              detail: `${appName}: ${app.getVersion()} \n` +
+                      `Electron: ${process.versions.electron}\n` +
+                      `node.js: ${process.version}\n` +
+                      `Chrome: ${process.versions.chrome}\n` +
+                      `System: ${process.getSystemVersion()}`
+            });
+          }
+        }
+      ]
+    }
+  ];
+  const { Menu } = require("electron");
+  const menu = Menu.buildFromTemplate(menuTemplate);
+  Menu.setApplicationMenu(menu);
+
   if (process.env.WEBPACK_DEV_SERVER_URL) {
     // Load the url of the dev server if in development mode
     win.loadURL(process.env.WEBPACK_DEV_SERVER_URL as string);
