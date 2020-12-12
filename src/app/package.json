@@ -1,11 +1,15 @@
 {
-  "name": "pipapp",
+  "name": "displayscope",
   "version": "0.1.0",
+  "description": "Show the external display screen in a window.",
+  "license": "MIT",
   "author": {
-    "name": "Takeshi Katano",
-    "url": "https://github.com/tksh164/pipapp/"
+    "name": "Takeshi Katano"
   },
-  "description": "Show an extended screen as a picture-in-picture window.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tksh164/pipapp.git"
+  },
   "productName": "Displayscope",
   "private": true,
   "scripts": {
