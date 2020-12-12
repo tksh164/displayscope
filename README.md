@@ -13,15 +13,15 @@ Displayscope shows the external display screen within the window.
 
 1. Building the C++ codes using Visual Studio's Developer PowerShell or Developer Command Prompt.
 
-```
-cd src/setmousecursorpos
-nmake build
-```
+    ```
+    cd src/setmousecursorpos
+    nmake build
+    ```
 
 2. Building the Displayscope installer package.
 
-```
-cd src/setmousecursorpos
-yarn install
-yarn electron:build
-```
+    ```
+    cd src/setmousecursorpos
+    yarn install
+    yarn electron:build
+    ```
