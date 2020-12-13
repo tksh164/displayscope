@@ -71,7 +71,7 @@ function createWindow() {
           label: "Learn more",
           click: async () => {
             const { shell } = require("electron");
-            await shell.openExternal("https://github.com/tksh164/pipapp");
+            await shell.openExternal("https://github.com/tksh164/displayscope");
           }
         },
         {
