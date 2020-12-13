@@ -9,12 +9,17 @@
            @play="onPlay"
            @pause="onPause"
            :src-object.prop.camel="screenStream"></video>
-    <el-card class="return-button" :class="returnButtonClass">
-      <div>
-        <div>Your cursor is now on this window.</div>
-        <el-button type="primary" round @click="moveToScreenSelectView">Return to screen select</el-button>
-        <el-button type="primary" round @click="moveMouseCursorIntoScreen">Move the mouse cursor into this screen</el-button>
-      </div>
+    <el-card class="pause-card" :class="pauseCardClass">
+      <div slot="header" class="card-header">Your mouse cursor is now on this window</div>
+      <el-row>
+        <el-col class="card-body-column mouse-cursor-button"><el-button type="primary" round icon="el-icon-position" @click="moveMouseCursorIntoScreen">Move your mouse cursor to the screen</el-button></el-col>
+      </el-row>
+      <el-row>
+        <div class="card-body-column mouse-cursor-text">You can return to this window by Shift + Esc</div>
+      </el-row>
+      <el-row>
+        <el-col class="card-body-column return-button"><el-button round icon="el-icon-back" @click="moveToScreenSelectView">Select another screen</el-button></el-col>
+      </el-row>
     </el-card>
   </div>
 </template>
@@ -38,16 +43,42 @@
   filter: brightness(50%) grayscale(100%) blur(3px);
 }
 
-.return-button {
+.pause-card {
   display: none;
   position: absolute;
   left: 50%;
   top: 50%;
-  transform: translate(-50%);
-  width: 300px;
+  transform: translate(-50%, -50%);
+  width: 350px;
 }
 
-.return-button-pause {
+.pause-card .card-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
+}
+
+.pause-card .card-body-column {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.pause-card .mouse-cursor-button {
+  margin-bottom: 1vh;
+}
+
+.pause-card .mouse-cursor-text {
+  font-size: small;
+  font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
+}
+
+.pause-card .return-button {
+  margin-top: 3vh;
+}
+
+.pause-card-show {
   display: block;
 }
 </style>
@@ -66,8 +97,8 @@ export default class ScreenView extends Vue {
     return { "screen-video-pause": !this.isScreenVideoPlaying };
   }
 
-  get returnButtonClass(): object {
-    return { "return-button-pause": !this.isScreenVideoPlaying };
+  get pauseCardClass(): object {
+    return { "pause-card-show": !this.isScreenVideoPlaying };
   }
 
   mounted(): void {
