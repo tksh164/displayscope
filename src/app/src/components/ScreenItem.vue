@@ -23,7 +23,7 @@
 .screen-name {
   padding: 0 0 0.5vw 0;
   color: #fff;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
 }
 
 .screen-thumbnail {
