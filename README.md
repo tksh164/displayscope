@@ -4,12 +4,11 @@ Displayscope shows the external display screen within the window.
 
 ## Install
 
-1. Download [the setup package](https://github.com/tksh164/displayscope/releases/latest).
-    - Currently suppoeted only Windows.
+1. Download [the setup package](https://github.com/tksh164/displayscope/releases/latest). Currently suppoeted only Windows.
     - Select "Keep" if you get warning when the download is completed.
-2. Unblock the download setup package file from the file's property or using Unblock-File cmdlet.
-3. Run the setup package to install.
-4. You can find Displayscope in the Start menu.
+    - After the download, unblock the download setup package file from the file's property or using Unblock-File cmdlet.
+2. Run the setup package to install.
+3. You can find Displayscope in the Start menu.
 
 If you don't need Displayscope anymore, you can uninstall it from "Apps & features" in the Settings or "Uninstall a program" in the Control Panel.
 
