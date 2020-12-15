@@ -32,7 +32,7 @@ If you don't need Displayscope anymore, you can uninstall it from "Apps & featur
 2. Building the Displayscope installer package.
 
     ```
-    cd src/setmousecursorpos
+    cd src/app
     yarn install
     yarn electron:build
     ```
