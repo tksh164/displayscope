@@ -147,6 +147,9 @@ export default class ScreenView extends Vue {
   }
 
   moveToScreenSelectView(): void {
+    this.screenStream.getTracks().map((track, index, array) => {
+      track.stop();
+    });
     this.$router.push({ name: "ScreenSelect" });
   }
 
