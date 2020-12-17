@@ -12,6 +12,10 @@ Displayscope shows the external display screen within the window.
 
 If you don't need Displayscope anymore, you can uninstall it from "Apps & features" in the Settings or "Uninstall a program" in the Control Panel.
 
+## Notes
+
+- Displayscope prevents the screen from going to sleep during the external display showing. If you want to go to sleep on your PC, move back to the selection screen of the screen.
+
 ## Building from source
 
 ### Build environment requirements
