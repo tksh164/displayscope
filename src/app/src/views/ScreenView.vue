@@ -12,10 +12,10 @@
     <el-card class="pause-card" :class="pauseCardClass">
       <div slot="header" class="card-header">Your mouse cursor is now on this window</div>
       <el-row>
-        <el-col class="card-body-column mouse-cursor-button"><el-button type="primary" round icon="el-icon-position" @click="moveMouseCursorIntoScreen">Move your mouse cursor to the screen</el-button></el-col>
+        <el-col class="card-body-column mouse-cursor-button"><el-button type="primary" round icon="el-icon-position" @click="moveMouseCursorIntoScreen">Move your mouse cursor into the screen</el-button></el-col>
       </el-row>
       <el-row>
-        <div class="card-body-column mouse-cursor-text">You can return to this window by Shift + Esc</div>
+        <div class="card-body-column mouse-cursor-text">You can return to this window from in the screen using Shift + Esc.</div>
       </el-row>
       <el-row>
         <el-col class="card-body-column return-button"><el-button round icon="el-icon-back" @click="moveToScreenSelectView">Select another screen</el-button></el-col>
