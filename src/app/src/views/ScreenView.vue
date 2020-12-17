@@ -49,7 +49,7 @@
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  width: 350px;
+  width: 400px;
 }
 
 .pause-card .card-header {
