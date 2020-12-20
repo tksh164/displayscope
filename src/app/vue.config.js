@@ -12,7 +12,10 @@ module.exports = {
             from: "build/icon.png",
             to: "./resources"
           }
-        ]
+        ],
+        "nsis": {
+          artifactName: "${name}-setup-${version}.${ext}"
+        }
       }
     }
   }
