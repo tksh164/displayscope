@@ -1,12 +1,12 @@
 "use strict";
 
-import { app, protocol, BrowserWindow, screen, globalShortcut } from "electron";
+import { app, protocol, BrowserWindow, screen } from "electron";
 import {
   createProtocol,
   installVueDevtools
 } from "vue-cli-plugin-electron-builder/lib";
-import { setMouseCursorPosition } from "@/mouse-cursor-setter";
 import { setAppMenu } from "@/app-menu";
+import { registerHotkeys, unregisterHotkeys, HOTKEY_MOVE_MOUSE_CURSOR_TO_APP_WINDOW } from "@/hotkey";
 const isDevelopment = process.env.NODE_ENV !== "production";
 
 // Keep a global reference of the window object, if you don't, the window will
@@ -22,7 +22,7 @@ protocol.registerSchemesAsPrivileged([
   { scheme: "app", privileges: { secure: true, standard: true } }
 ]);
 
-function createWindow() {
+function createWindow(): BrowserWindow {
   // Create the browser window.
   const workAreaSize = screen.getPrimaryDisplay().workAreaSize;
   win = new BrowserWindow({
@@ -52,19 +52,13 @@ function createWindow() {
   win.on("closed", () => {
     win = null;
   });
-}
 
-const HOTKEY_MOVE_MOUSE_CURSOR_TO_APP_WINDOW = "Shift+Escape";
-function moveMouseCursorToAppWindowArea(): void {
-  const winScreenRect = screen.dipToScreenRect(win, win!.getBounds());
-  const posX = Math.floor(winScreenRect.width / 2) + winScreenRect.x;
-  const posY = Math.floor(winScreenRect.height / 2) + winScreenRect.y;
-  setMouseCursorPosition(posX, posY);
+  return win;
 }
 
 app.on("will-quit", () => {
-  // Unregister a hot-key to move the mouse cursor to on app window from the screen.
-  globalShortcut.unregister(HOTKEY_MOVE_MOUSE_CURSOR_TO_APP_WINDOW);
+  // Unregister hotkeys.
+  unregisterHotkeys();
 });
 
 // Quit when all windows are closed.
@@ -102,11 +96,10 @@ app.on("ready", async () => {
     }
   }
 
-  createWindow();
+  const mainWin = createWindow();
 
-  // Register a hot-key to move the mouse cursor to on app window from the screen.
-  const ret = globalShortcut.register(HOTKEY_MOVE_MOUSE_CURSOR_TO_APP_WINDOW, moveMouseCursorToAppWindowArea);
-  if (!ret) {
+  // Register hotkeys.
+  if (!registerHotkeys(mainWin)) {
     console.log(`Failed the hot-key registration: ${HOTKEY_MOVE_MOUSE_CURSOR_TO_APP_WINDOW}`);
   }
 });
