@@ -6,7 +6,7 @@ import {
   installVueDevtools
 } from "vue-cli-plugin-electron-builder/lib";
 import { setMouseCursorPosition } from "@/mouse-cursor-setter";
-import { setAppMenu } from "@/app-icon-resource";
+import { setAppMenu } from "@/app-menu";
 const isDevelopment = process.env.NODE_ENV !== "production";
 
 // Keep a global reference of the window object, if you don't, the window will
