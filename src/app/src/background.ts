@@ -5,8 +5,9 @@ import {
   createProtocol,
   installVueDevtools
 } from "vue-cli-plugin-electron-builder/lib";
-import { setAppMenu } from "@/app-menu";
-import { registerHotkeys, unregisterHotkeys, HOTKEY_MOVE_MOUSE_CURSOR_TO_APP_WINDOW } from "@/hotkey";
+import * as appMenu from "@/app-menu";
+import * as appHotkey from "@/hotkey";
+
 const isDevelopment = process.env.NODE_ENV !== "production";
 
 // Keep a global reference of the window object, if you don't, the window will
@@ -37,7 +38,7 @@ function createWindow(): BrowserWindow {
   });
 
   // Set application menu.
-  setAppMenu(win, app.getName(), app.getVersion());
+  appMenu.setAppMenu(win, app.getName(), app.getVersion());
 
   if (process.env.WEBPACK_DEV_SERVER_URL) {
     // Load the url of the dev server if in development mode
@@ -58,7 +59,7 @@ function createWindow(): BrowserWindow {
 
 app.on("will-quit", () => {
   // Unregister hotkeys.
-  unregisterHotkeys();
+  appHotkey.unregisterHotkeys();
 });
 
 // Quit when all windows are closed.
@@ -99,8 +100,8 @@ app.on("ready", async () => {
   const mainWin = createWindow();
 
   // Register hotkeys.
-  if (!registerHotkeys(mainWin)) {
-    console.log(`Failed the hot-key registration: ${HOTKEY_MOVE_MOUSE_CURSOR_TO_APP_WINDOW}`);
+  if (!appHotkey.registerHotkeys(mainWin)) {
+    console.log(`Failed the hot-key registration: ${appHotkey.HOTKEY_MOVE_MOUSE_CURSOR_TO_APP_WINDOW}`);
   }
 });
 

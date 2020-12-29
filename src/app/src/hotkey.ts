@@ -1,5 +1,5 @@
 import { globalShortcut, BrowserWindow, screen } from "electron";
-import { setMouseCursorPosition } from "@/mouse-cursor-setter";
+import * as mouseCursorSetter from "@/mouse-cursor-setter";
 
 export const HOTKEY_MOVE_MOUSE_CURSOR_TO_APP_WINDOW = "Shift+Escape";
 
@@ -7,7 +7,7 @@ function moveMouseCursorToAppWindowArea(): void {
   const winScreenRect = screen.dipToScreenRect(win, win!.getBounds());
   const posX = Math.floor(winScreenRect.width / 2) + winScreenRect.x;
   const posY = Math.floor(winScreenRect.height / 2) + winScreenRect.y;
-  setMouseCursorPosition(posX, posY);
+  mouseCursorSetter.setMouseCursorPosition(posX, posY);
 }
 
 let win: BrowserWindow;

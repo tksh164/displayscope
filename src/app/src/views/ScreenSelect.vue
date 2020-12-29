@@ -56,7 +56,7 @@
 import { remote } from "electron";
 import { Component, Vue } from "vue-property-decorator";
 import ScreenItem from "@/components/ScreenItem.vue";
-import { getScreenMetadataList } from "@/screen-capturer";
+import * as screenCapturer from "@/screen-capturer";
 import { ScreenItemProperty } from "@/@types/pipapp/ScreenSelect";
 import { ScreenMetadata } from "@/@types/pipapp/screen-capturer";
 
@@ -89,7 +89,7 @@ export default class ScreenSelect extends Vue {
   }
 
   refreshScreenMetadataList(): void {
-    getScreenMetadataList(1000, 1000)
+    screenCapturer.getScreenMetadataList(1000, 1000)
       .then((screenMetadataArray) => {
         const screenItems: ScreenItemProperty[] = [];
         for (const sm of screenMetadataArray) {
