@@ -50,6 +50,7 @@ export function setAppMenu(browserWindow: BrowserWindow, appName: string, appVer
         {
           label: `About ${appName}`,
           click: async () => {
+            const os = require("os");
             const { dialog } = require("electron");
             dialog.showMessageBoxSync(browserWindow, {
               icon: getAppIconResourceFilePath(),
@@ -57,9 +58,10 @@ export function setAppMenu(browserWindow: BrowserWindow, appName: string, appVer
               message: appName,
               detail: `${appName}: ${appVersion} \n` +
                       `Electron: ${process.versions.electron}\n` +
-                      `node.js: ${process.version}\n` +
                       `Chrome: ${process.versions.chrome}\n` +
-                      `System: ${process.getSystemVersion()}`
+                      `Node.js: ${process.version}\n` +
+                      `V8: ${process.versions.v8}\n` +
+                      `OS: ${os.type()} ${os.arch()} ${process.getSystemVersion()}`
             });
           }
         }
