@@ -85,8 +85,8 @@
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
-import { getScreenMediaStream } from "@/screen-capturer";
-import { setMouseCursorPosition } from "@/mouse-cursor-setter";
+import * as screenCapturer from "@/screen-capturer";
+import * as mouseCursorSetter from "@/mouse-cursor-setter";
 
 @Component
 export default class ScreenView extends Vue {
@@ -106,7 +106,7 @@ export default class ScreenView extends Vue {
   }
 
   setScreenStream(): void {
-    getScreenMediaStream(this.$route.params.screenId)
+    screenCapturer.getScreenMediaStream(this.$route.params.screenId)
       .then((stream: void | MediaStream) => {
         if (this.isMediaStream(stream)) this.screenStream = stream;
       });
@@ -156,7 +156,7 @@ export default class ScreenView extends Vue {
   moveMouseCursorIntoScreen(): void {
     const posX = typeof this.$route.query.centerX === "string" ? parseInt(this.$route.query.centerX) : 0;
     const posY = typeof this.$route.query.centerY === "string" ? parseInt(this.$route.query.centerY) : 0;
-    setMouseCursorPosition(posX, posY);
+    mouseCursorSetter.setMouseCursorPosition(posX, posY);
   }
 }
 </script>
