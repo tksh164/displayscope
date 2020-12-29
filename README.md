@@ -16,6 +16,10 @@ If you don't need Displayscope anymore, you can uninstall it from "Apps & featur
 
 - Displayscope prevents the screen from going to sleep during the external display showing. If you want to go to sleep on your PC, move back to the selection screen of the screen.
 
+## Known issues
+
+- Displayscope doesn't work correctly if you selected the *High-performance NVIDIA processor* as the **Preferred graphics processor** in the NVIDIA Control Panel. *Auto-select* and *Integrated graphics* are works well.
+
 ## Building from source
 
 ### Build environment requirements
