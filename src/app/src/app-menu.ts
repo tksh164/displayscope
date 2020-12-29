@@ -58,8 +58,8 @@ export function setAppMenu(browserWindow: BrowserWindow, appName: string, appVer
               detail: `${appName}: ${appVersion} \n` +
                       `Electron: ${process.versions.electron}\n` +
                       `Chrome: ${process.versions.chrome}\n` +
-                      `node.js: ${process.version}\n` +
-                      `System: ${process.getSystemVersion()}`
+                      `Node.js: ${process.version}\n` +
+                      `OS: ${process.getSystemVersion()}`
             });
           }
         }
