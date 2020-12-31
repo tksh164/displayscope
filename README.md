@@ -2,6 +2,22 @@
 
 Displayscope shows the external display screen within the window.
 
+## Use cases
+
+Displayscope has two use cases.
+
+1. The dedicated display for screen sharing in remote meetings
+
+    The screen sharing in remote meetings is consume one display for just the screen sharing (e.g. slide show, demo using entire screen, etc). In that case, you can get an emulated display by [the display dummy plugs](https://www.amazon.com/s?k=Display+Emulator), but it's can't see and can't control.
+
+    Displayscope provides view and control through the window to the emulated display. You can save a physical display for other purpose by using the emulated display for the screen sharing.
+
+2. Demo screen control in onsite presentations
+
+    Some time there are no preview screen in onsite presentation.
+
+    Displayscope provides view and control through the window to the screen. You can demo naturally through Displayscope even if the screen is at behind you.
+
 ## Install
 
 1. Download [the setup package](https://github.com/tksh164/displayscope/releases/latest). Currently suppoeted only Windows.
