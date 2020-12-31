@@ -6,7 +6,7 @@ Displayscope shows the external display screen within the window.
 
 Displayscope has two use cases.
 
-1. The dedicated display for screen sharing in remote meetings
+1. Dedicated display for screen sharing in remote meetings
 
     The screen sharing in remote meetings is consume one display for just the screen sharing (e.g. slide show, demo using entire screen, etc). In that case, you can get an emulated display by [the display dummy plugs](https://www.amazon.com/s?k=Display+Emulator), but it's can't see and can't control.
 
