@@ -90,6 +90,11 @@ export default class ScreenSelect extends Vue {
   screenItems: ScreenItemProperty[] = [];
   alwaysOnTop = false;
 
+  beforeMount(): void {
+    const browserWindowId = remote.getCurrentWindow().id;
+    this.alwaysOnTop = remote.BrowserWindow.fromId(browserWindowId).isAlwaysOnTop();
+  }
+
   mounted(): void {
     setTimeout(this.refreshScreenMetadataList, 30);
   }
