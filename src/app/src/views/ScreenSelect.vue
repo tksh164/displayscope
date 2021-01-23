@@ -91,8 +91,7 @@ export default class ScreenSelect extends Vue {
   alwaysOnTop = false;
 
   beforeMount(): void {
-    const browserWindowId = remote.getCurrentWindow().id;
-    this.alwaysOnTop = remote.BrowserWindow.fromId(browserWindowId).isAlwaysOnTop();
+    this.alwaysOnTop = remote.getCurrentWindow().isAlwaysOnTop();
   }
 
   mounted(): void {
@@ -132,8 +131,7 @@ export default class ScreenSelect extends Vue {
   }
 
   changeAlwasyOnTop(): void {
-    const browserWindowId = remote.getCurrentWindow().id;
-    remote.BrowserWindow.fromId(browserWindowId).setAlwaysOnTop(this.alwaysOnTop);
+    remote.getCurrentWindow().setAlwaysOnTop(this.alwaysOnTop);
   }
 }
 </script>
