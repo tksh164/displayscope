@@ -1,24 +1,32 @@
 <template>
   <div class="screen-view-wrapper"
-       @mousemove="pauseScreenStream"
-       @mouseleave="playScreenStream">
+    @mousemove="pauseScreenStream"
+    @mouseleave="playScreenStream">
     <video class="screen-video"
-           :class="screenVideoClass"
-           ref="screenVideoRef"
-           @canplaythrough="onCanPlayThrough"
-           @play="onPlay"
-           @pause="onPause"
-           :src-object.prop.camel="screenStream"></video>
+      :class="screenVideoClass"
+      ref="screenVideoRef"
+      @canplaythrough="onCanPlayThrough"
+      @play="onPlay"
+      @pause="onPause"
+      :src-object.prop.camel="screenStream"></video>
     <el-card class="pause-card" :class="pauseCardClass">
       <div slot="header" class="card-header">Your mouse cursor is now on this window</div>
       <el-row>
-        <el-col class="card-body-column mouse-cursor-button"><el-button type="primary" round icon="el-icon-position" @click="moveMouseCursorIntoScreen">Move your mouse cursor into the screen</el-button></el-col>
+        <el-col class="card-body-column mouse-cursor-button">
+          <el-button type="primary"
+            round icon="el-icon-position"
+            @click="moveMouseCursorIntoScreen">Move your mouse cursor into the screen</el-button>
+        </el-col>
       </el-row>
       <el-row>
         <div class="card-body-column mouse-cursor-text">Press Shift + Esc to return your mouse cursor to this window.</div>
       </el-row>
       <el-row>
-        <el-col class="card-body-column return-button"><el-button round icon="el-icon-back" @click="moveToScreenSelectView">Select another screen</el-button></el-col>
+        <el-col class="card-body-column return-button">
+          <el-button round
+            icon="el-icon-back"
+            @click="moveToScreenSelectView">Select another screen</el-button>
+        </el-col>
       </el-row>
     </el-card>
   </div>
