@@ -1,10 +1,18 @@
 <template>
   <div class="screen-select-wrapper">
     <div class="functions-container">
-      <el-button type="primary"
-                 icon="el-icon-refresh"
-                 circle
-                 @click="refreshScreenMetadataList"></el-button>
+      <div class="function-item">
+        <el-switch v-model="alwaysOnTop"
+          active-text="Always on top"
+          @change="changeAlwasyOnTop"></el-switch>
+      </div>
+      <div class="function-item">
+        <el-button type="primary"
+          icon="el-icon-refresh"
+          circle
+          @click="refreshScreenMetadataList"
+          class="function-item"></el-button>
+      </div>
     </div>
     <transition-group class="screen-list"
                       name="list-item-transition"
@@ -30,6 +38,19 @@
   position: absolute;
   right: 0;
   padding: 1vw;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.function-item {
+  font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
+  margin-left: 2vw;
+}
+
+.function-item .el-switch__label {
+  color: #cccccc;
 }
 
 .screen-list {
@@ -67,6 +88,7 @@ import { ScreenMetadata } from "@/@types/pipapp/screen-capturer";
 })
 export default class ScreenSelect extends Vue {
   screenItems: ScreenItemProperty[] = [];
+  alwaysOnTop = false;
 
   mounted(): void {
     setTimeout(this.refreshScreenMetadataList, 30);
@@ -102,6 +124,11 @@ export default class ScreenSelect extends Vue {
         }
         this.screenItems = screenItems;
       });
+  }
+
+  changeAlwasyOnTop(): void {
+    const browserWindowId = remote.getCurrentWindow().id;
+    remote.BrowserWindow.fromId(browserWindowId).setAlwaysOnTop(this.alwaysOnTop);
   }
 }
 </script>
