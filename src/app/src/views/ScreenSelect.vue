@@ -15,15 +15,15 @@
       </div>
     </div>
     <transition-group class="screen-list"
-                      name="list-item-transition"
-                      tag="div"
-                      appear>
+      name="list-item-transition"
+      tag="div"
+      appear>
       <screen-item v-for="screenItem in screenItems"
-                   :key="screenItem.id"
-                   :screenId="screenItem.id"
-                   :centerPoint="screenItem.centerPoint"
-                   :screenName="screenItem.name"
-                   :thumbnailUrl="screenItem.thumbnailDataUri"></screen-item>
+        :key="screenItem.id"
+        :screenId="screenItem.id"
+        :centerPoint="screenItem.centerPoint"
+        :screenName="screenItem.name"
+        :thumbnailUrl="screenItem.thumbnailDataUri"></screen-item>
     </transition-group>
   </div>
 </template>
