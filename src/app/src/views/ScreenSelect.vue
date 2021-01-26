@@ -1,23 +1,25 @@
 <template>
-  <div class="screen-select-wrapper">
-    <div class="functions-container">
-      <div class="function-item">
-        <el-switch v-model="alwaysOnTop"
-          active-text="Always on top"
-          @change="changeAlwasyOnTop"></el-switch>
+  <el-container class="container">
+    <el-header style="padding: 1rem; height: auto;">
+      <div class="function-area">
+        <div class="function-area-item">
+          <el-switch v-model="alwaysOnTop"
+            active-text="Always on top"
+            @change="changeAlwasyOnTop"></el-switch>
+        </div>
+        <div class="function-area-item">
+          <el-button type="primary"
+            circle
+            icon="el-icon-refresh"
+            @click="refreshScreenMetadataList"></el-button>
+        </div>
       </div>
-      <div class="function-item">
-        <el-button type="primary"
-          icon="el-icon-refresh"
-          circle
-          @click="refreshScreenMetadataList"
-          class="function-item"></el-button>
-      </div>
-    </div>
-    <transition-group class="screen-list"
-      name="list-item-transition"
+    </el-header>
+    <el-main style="padding: 1rem;">
+    <transition-group name="list-item-transition"
+      appear
       tag="div"
-      appear>
+      class="screen-list">
       <screen-item v-for="screenItem in screenItems"
         :key="screenItem.id"
         :screenId="screenItem.id"
@@ -25,31 +27,27 @@
         :screenName="screenItem.name"
         :thumbnailUrl="screenItem.thumbnailDataUri"></screen-item>
     </transition-group>
-  </div>
+    </el-main>
+  </el-container>
 </template>
 
 <style>
-.screen-select-wrapper {
-  width: 100%;
+.container {
   height: 100%;
 }
 
-.functions-container {
-  position: absolute;
-  right: 0;
-  padding: 1vw;
-  width: 100%;
+.function-area {
   display: flex;
   justify-content: flex-end;
   align-items: center;
 }
 
-.function-item {
+.function-area-item {
+  margin-left: 2rem;
   font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
-  margin-left: 2vw;
 }
 
-.function-item .el-switch__label {
+.function-area-item .el-switch__label {
   color: #cccccc;
 }
 
