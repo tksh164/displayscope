@@ -1,6 +1,6 @@
 # Displayscope
 
-Displayscope shows the external display screen within the window.
+Displayscope enables to use the apps on the out of sight screen such as the display emulator, display dummy plugs or behind screens.
 
 ## Use cases
 
