@@ -25,6 +25,7 @@
         :screenId="screenItem.id"
         :centerPoint="screenItem.centerPoint"
         :screenName="screenItem.name"
+        :screenDescription="screenItem.description"
         :thumbnailUrl="screenItem.thumbnailDataUri"></screen-item>
     </transition-group>
     </el-main>
