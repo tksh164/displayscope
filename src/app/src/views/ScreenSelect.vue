@@ -97,12 +97,6 @@ export default class ScreenSelect extends Vue {
     setTimeout(this.refreshScreenMetadataList, 30);
   }
 
-  getScreenDsiplayName(sm: ScreenMetadata): string {
-    const scaledDisplayWidth = Math.floor(sm.display.bounds.width * sm.display.scaleFactor);
-    const scaledDisplayHeight = Math.floor(sm.display.bounds.height * sm.display.scaleFactor);
-    return `${sm.name} (${sm.display.isPrimary ? "Primary, " : ""}${scaledDisplayWidth} x ${scaledDisplayHeight}, ${sm.display.scaleFactor * 100}%)`;
-  }
-
   getScreenDescription(sm: ScreenMetadata): string {
     const scaledDisplayWidth = Math.floor(sm.display.bounds.width * sm.display.scaleFactor);
     const scaledDisplayHeight = Math.floor(sm.display.bounds.height * sm.display.scaleFactor);
@@ -129,7 +123,7 @@ export default class ScreenSelect extends Vue {
         for (const sm of screenMetadataArray) {
           screenItems.push({
             id: sm.id,
-            name: this.getScreenDsiplayName(sm),
+            name: sm.name,
             description: this.getScreenDescription(sm),
             centerPoint: this.getScreenCenterPoint(sm.display.bounds, sm.display.scaleFactor),
             thumbnailDataUri: sm.thumbnailDataUri
