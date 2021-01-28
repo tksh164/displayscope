@@ -1,6 +1,7 @@
 <template>
   <div class="screen-list-item" @click="moveToScreenView">
     <div class="screen-name">{{ screenName }}</div>
+    <div class="screen-description">{{ screenDescription }}</div>
     <el-image class="screen-thumbnail"
               :src="thumbnailUrl"
               fit="contain"></el-image>
@@ -23,6 +24,13 @@
 .screen-name {
   padding: 0 0 0.5vw 0;
   color: #fff;
+  font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
+}
+
+.screen-description {
+  padding-bottom: 0.5rem;
+  color: #cccccc;
+  font-size: 0.9rem;
   font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
 }
 
