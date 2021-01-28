@@ -2,9 +2,7 @@
   <div class="screen-list-item" @click="moveToScreenView">
     <div class="screen-name screen-label">{{ screenName }}</div>
     <div class="screen-description screen-label">{{ screenDescription }}</div>
-    <el-image class="screen-thumbnail"
-              :src="thumbnailUrl"
-              fit="contain"></el-image>
+    <el-image class="screen-thumbnail" :src="thumbnailUrl" fit="contain"></el-image>
   </div>
 </template>
 
