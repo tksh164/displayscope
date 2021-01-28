@@ -102,6 +102,15 @@ export default class ScreenSelect extends Vue {
     return `${sm.name} (${sm.display.isPrimary ? "Primary, " : ""}${scaledDisplayWidth} x ${scaledDisplayHeight}, ${sm.display.scaleFactor * 100}%)`;
   }
 
+  getScreenDescription(sm: ScreenMetadata): string {
+    const scaledDisplayWidth = Math.floor(sm.display.bounds.width * sm.display.scaleFactor);
+    const scaledDisplayHeight = Math.floor(sm.display.bounds.height * sm.display.scaleFactor);
+    const primary = sm.display.isPrimary ? "Primary, " : "";
+    const resolution = `${scaledDisplayWidth} x ${scaledDisplayHeight}`; 
+    const scale = `${sm.display.scaleFactor * 100}%`;
+    return `${primary}${resolution}, ${scale}`;
+  }
+
   getScreenCenterPoint(displayBounds: Electron.Rectangle, scaleFactor: number): { x: number; y: number } {
     const scaledScreenOriginPoint = remote.screen.dipToScreenPoint({ x: displayBounds.x, y: displayBounds.y });
     const scaledDisplayWidth = displayBounds.width * scaleFactor;
@@ -120,6 +129,7 @@ export default class ScreenSelect extends Vue {
           screenItems.push({
             id: sm.id,
             name: this.getScreenDsiplayName(sm),
+            description: this.getScreenDescription(sm),
             centerPoint: this.getScreenCenterPoint(sm.display.bounds, sm.display.scaleFactor),
             thumbnailDataUri: sm.thumbnailDataUri
           });

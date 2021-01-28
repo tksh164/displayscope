@@ -43,6 +43,9 @@ export default class ScreenItem extends Vue {
   @Prop({ default: "-" })
   screenName!: string;
 
+  @Prop({ default: "" })
+  screenDescription!: string;
+
   @Prop({ default: () => { return { x: 0, y: 0 }; } })
   centerPoint!: { x: number; y: number; };
 
