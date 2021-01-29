@@ -19,7 +19,7 @@
         </el-col>
       </el-row>
       <el-row>
-        <div class="card-body-column mouse-cursor-text">Press Shift + Esc to return your mouse cursor to this window.</div>
+        <div class="card-body-column mouse-cursor-text">Press <strong class="hotkey-stroke">Shift + Esc</strong> to return your mouse cursor to this window.</div>
       </el-row>
       <el-row>
         <el-col class="card-body-column return-button">
@@ -80,6 +80,12 @@
 .pause-card .mouse-cursor-text {
   font-size: small;
   font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
+}
+
+.mouse-cursor-text .hotkey-stroke {
+  margin-left: 0.5ch;
+  margin-right: 0.5ch;
+  font-weight: bold;
 }
 
 .pause-card .return-button {
