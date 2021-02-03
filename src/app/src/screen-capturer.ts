@@ -40,7 +40,7 @@ export async function getScreenMetadataList(thumbnailWidth: number, thumbnailHei
   return screenMetadataArray;
 }
 
-export async function getScreenMediaStream(sourceId: string): Promise<void | MediaStream> {
+export async function getScreenMediaStream(sourceId: string): Promise<MediaStream | void> {
   return navigator.mediaDevices.getUserMedia({
     audio: false,
     video: ({
