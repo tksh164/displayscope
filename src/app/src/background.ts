@@ -1,38 +1,45 @@
 "use strict";
 
 import { app, protocol, BrowserWindow, screen } from "electron";
-import {
-  createProtocol,
-  installVueDevtools
-} from "vue-cli-plugin-electron-builder/lib";
+import { createProtocol } from "vue-cli-plugin-electron-builder/lib";
+import installExtension, { VUEJS_DEVTOOLS } from "electron-devtools-installer";
 import * as appMenu from "@/app-menu";
 import * as appHotkey from "@/hotkey";
-
 const isDevelopment = process.env.NODE_ENV !== "production";
 
-// Keep a global reference of the window object, if you don't, the window will
-// be closed automatically when the JavaScript object is garbage collected.
-let win: BrowserWindow | null;
+// Keep a global reference of the window object.
+let mainWindow: BrowserWindow | null = null;
 
-// Allow only one app instance.
+// Get single instance lock to allow only one app instance.
 const gotSingleInstanceLock = app.requestSingleInstanceLock();
 if (!gotSingleInstanceLock) app.quit();
+
+// This evnet will be call when the second app instance launched.
+app.on("second-instance", (event, argv, workingDirectory) => {
+  if (mainWindow?.isMinimized()) mainWindow.restore();
+  mainWindow?.focus();
+});
 
 // Scheme must be registered before the app is ready
 protocol.registerSchemesAsPrivileged([
   { scheme: "app", privileges: { secure: true, standard: true } }
 ]);
 
-function createWindow(): BrowserWindow {
+async function createWindow(): Promise<BrowserWindow> {
   // Create the browser window.
   const workAreaSize = screen.getPrimaryDisplay().workAreaSize;
-  win = new BrowserWindow({
+  const win = new BrowserWindow({
     width: Math.floor(workAreaSize.width * 0.8),
     height: Math.floor(workAreaSize.height * 0.8),
     webPreferences: {
       worldSafeExecuteJavaScript: true,
-      nodeIntegration: true,
-      enableRemoteModule: true
+
+      // Required for Spectron testing
+      enableRemoteModule: true,
+
+      // Use pluginOptions.nodeIntegration, leave this alone
+      // See nklayman.github.io/vue-cli-plugin-electron-builder/guide/security.html#node-integration for more info
+      nodeIntegration: (process.env.ELECTRON_NODE_INTEGRATION as unknown) as boolean
     },
     autoHideMenuBar: true
   });
@@ -42,7 +49,7 @@ function createWindow(): BrowserWindow {
 
   if (process.env.WEBPACK_DEV_SERVER_URL) {
     // Load the url of the dev server if in development mode
-    win.loadURL(process.env.WEBPACK_DEV_SERVER_URL as string);
+    await win.loadURL(process.env.WEBPACK_DEV_SERVER_URL as string);
     if (!process.env.IS_TEST) win.webContents.openDevTools();
   } else {
     createProtocol("app");
@@ -50,9 +57,8 @@ function createWindow(): BrowserWindow {
     win.loadURL("app://./index.html");
   }
 
-  win.on("closed", () => {
-    win = null;
-  });
+  // Set a global reference to the main window object.
+  mainWindow = win;
 
   return win;
 }
@@ -74,9 +80,7 @@ app.on("window-all-closed", () => {
 app.on("activate", () => {
   // On macOS it's common to re-create a window in the app when the
   // dock icon is clicked and there are no other windows open.
-  if (win === null) {
-    createWindow();
-  }
+  if (BrowserWindow.getAllWindows().length === 0) createWindow();
 });
 
 // This method will be called when Electron has finished
@@ -85,32 +89,18 @@ app.on("activate", () => {
 app.on("ready", async () => {
   if (isDevelopment && !process.env.IS_TEST) {
     // Install Vue Devtools
-    // Devtools extensions are broken in Electron 6.0.0 and greater
-    // See https://github.com/nklayman/vue-cli-plugin-electron-builder/issues/378 for more info
-    // Electron will not launch with Devtools extensions installed on Windows 10 with dark mode
-    // If you are not using Windows 10 dark mode, you may uncomment these lines
-    // In addition, if the linked issue is closed, you can upgrade electron and uncomment these lines
     try {
-      await installVueDevtools()
+      await installExtension(VUEJS_DEVTOOLS);
     } catch (e) {
-      console.error("Vue Devtools failed to install:", e.toString())
+      console.error("Vue Devtools failed to install:", e.toString());
     }
   }
-
-  const mainWin = createWindow();
-
-  // Register hotkeys.
-  if (!appHotkey.registerHotkeys(mainWin)) {
-    console.log(`Failed the hot-key registration: ${appHotkey.HOTKEY_MOVE_MOUSE_CURSOR_TO_APP_WINDOW}`);
-  }
-});
-
-// This method will be call when the second app instance launched.
-app.on("second-instance", (event, argv, workingDirectory) => {
-  if (win) {
-    if (win.isMinimized()) win.restore();
-    win.focus();
-  }
+  createWindow().then((win) => {
+    // Register hotkeys.
+    if (!appHotkey.registerHotkeys(win)) {
+      console.log(`Failed the hot-key registration: ${appHotkey.HOTKEY_MOVE_MOUSE_CURSOR_TO_APP_WINDOW}`);
+    }
+  });
 });
 
 // Exit cleanly on request from parent process in development mode.
