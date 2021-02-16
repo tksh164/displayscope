@@ -1,7 +1,7 @@
 {
   "name": "displayscope",
   "version": "0.2.0",
-  "description": "This app shows the external display screen within the window.",
+  "description": "Displayscope enables to use the apps on the out of sight screen such as the display emulator, display dummy plugs or behind screens.",
   "license": "MIT",
   "author": {
     "name": "Takeshi Katano"
