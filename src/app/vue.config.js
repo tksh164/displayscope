@@ -1,7 +1,7 @@
 module.exports = {
   pluginOptions: {
     electronBuilder: {
-      nodeIntegration: true,
+      nodeIntegration: false,
       builderOptions: {
         productName: "Displayscope",
         extraFiles: [
