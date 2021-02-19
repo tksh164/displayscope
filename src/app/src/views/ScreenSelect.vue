@@ -105,18 +105,8 @@ export default class ScreenSelect extends Vue {
     return `${primary}${resolution}, ${scale}`;
   }
 
-  getScreenCenterPoint(displayBounds: Electron.Rectangle, scaleFactor: number): { x: number; y: number } {
-    const scaledScreenOriginPoint = remote.screen.dipToScreenPoint({ x: displayBounds.x, y: displayBounds.y });
-    const scaledDisplayWidth = displayBounds.width * scaleFactor;
-    const scaledDisplayHeight = displayBounds.height * scaleFactor;
-    return {
-      x: Math.floor((scaledDisplayWidth / 2) + scaledScreenOriginPoint.x),
-      y: Math.floor((scaledDisplayHeight / 2) + scaledScreenOriginPoint.y)
-    }
-  }
-
   refreshScreenMetadataList(): void {
-    screenCapturer.getScreenMetadataList(1000, 1000)
+    window.exposedApi.getAllScreenMetadata(1000, 1000)
       .then((screenMetadataArray) => {
         const screenItems: ScreenItemProperty[] = [];
         for (const sm of screenMetadataArray) {
@@ -124,7 +114,7 @@ export default class ScreenSelect extends Vue {
             id: sm.id,
             name: sm.name,
             description: this.getScreenDescription(sm),
-            centerPoint: this.getScreenCenterPoint(sm.display.bounds, sm.display.scaleFactor),
+            centerPoint: sm.centerPoint,
             thumbnailDataUri: sm.thumbnailDataUri
           });
         }

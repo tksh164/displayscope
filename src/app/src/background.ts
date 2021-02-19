@@ -1,8 +1,10 @@
 "use strict";
 
-import { app, protocol, BrowserWindow, screen } from "electron";
+import { app, protocol, BrowserWindow, screen, ipcMain } from "electron";
 import { createProtocol } from "vue-cli-plugin-electron-builder/lib";
 import installExtension, { VUEJS_DEVTOOLS } from "electron-devtools-installer";
+import { ScreenMetadata } from "@/@type/pipapp/screen-capturer";
+import { getAllScreenMetadata } from "@/screen-metadata";
 import * as path from "path";
 import * as appMenu from "@/app-menu";
 import * as appHotkey from "@/hotkey";
@@ -123,4 +125,8 @@ if (!gotSingleInstanceLock) {
       });
     }
   }
+
+  ipcMain.handle("get-all-screen-metadata", async (event, thumbnailWidth: number, thumbnailHeight: number): Promise<ScreenMetadata[]> => {
+    return getAllScreenMetadata(thumbnailWidth, thumbnailHeight);
+  });
 }
