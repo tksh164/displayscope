@@ -1,5 +1,5 @@
 import { desktopCapturer, remote } from "electron";
-import { DisplayMetadataValue, ScreenMetadata } from "@/@types/pipapp/screen-capturer";
+import { DisplayMetadataValue, ScreenMetadata } from "@/@type/pipapp/screen-capturer";
 
 export async function getScreenMetadataList(thumbnailWidth: number, thumbnailHeight: number): Promise<ScreenMetadata[]> {
 
