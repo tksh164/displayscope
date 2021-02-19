@@ -129,4 +129,12 @@ if (!gotSingleInstanceLock) {
   ipcMain.handle("get-all-screen-metadata", async (event, thumbnailWidth: number, thumbnailHeight: number): Promise<ScreenMetadata[]> => {
     return getAllScreenMetadata(thumbnailWidth, thumbnailHeight);
   });
+
+  ipcMain.handle("get-current-always-on-top-setting", async (event): Promise<boolean | undefined> => {
+    return mainWindow?.isAlwaysOnTop();
+  });
+
+  ipcMain.on("set-always-on-top-setting", async (event, newAlwaysOnTopSetting: boolean): Promise<void> => {
+    mainWindow?.setAlwaysOnTop(newAlwaysOnTopSetting);
+  });
 }

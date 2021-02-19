@@ -72,7 +72,6 @@
 </style>
 
 <script lang="ts">
-import { remote } from "electron";
 import { Component, Vue } from "vue-property-decorator";
 import ScreenItem from "@/components/ScreenItem.vue";
 import * as screenCapturer from "@/screen-capturer";
@@ -88,8 +87,8 @@ export default class ScreenSelect extends Vue {
   screenItems: ScreenItemProperty[] = [];
   alwaysOnTop = false;
 
-  beforeMount(): void {
-    this.alwaysOnTop = remote.getCurrentWindow().isAlwaysOnTop();
+  async beforeMount(): Promise<void> {
+    this.alwaysOnTop = await window.exposedApi.getCurrentAlwaysOnTopSetting() as boolean;
   }
 
   mounted(): void {
@@ -123,7 +122,7 @@ export default class ScreenSelect extends Vue {
   }
 
   changeAlwasyOnTop(): void {
-    remote.getCurrentWindow().setAlwaysOnTop(this.alwaysOnTop);
+    window.exposedApi.setAlwaysOnTopSetting(this.alwaysOnTop);
   }
 }
 </script>
