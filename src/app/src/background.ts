@@ -1,8 +1,12 @@
 "use strict";
 
-import { app, protocol, BrowserWindow, screen } from "electron";
+import { app, protocol, BrowserWindow, screen, ipcMain } from "electron";
 import { createProtocol } from "vue-cli-plugin-electron-builder/lib";
 import installExtension, { VUEJS_DEVTOOLS } from "electron-devtools-installer";
+import { ScreenMetadata } from "@/@type/pipapp/screen-capturer";
+import { getAllScreenMetadata } from "@/screen-metadata";
+import { setMouseCursorPosition } from "@/mouse-cursor-setter";
+import * as path from "path";
 import * as appMenu from "@/app-menu";
 import * as appHotkey from "@/hotkey";
 const isDevelopment = process.env.NODE_ENV !== "production";
@@ -24,7 +28,9 @@ async function createWindow(): Promise<BrowserWindow> {
 
       // Use pluginOptions.nodeIntegration, leave this alone
       // See nklayman.github.io/vue-cli-plugin-electron-builder/guide/security.html#node-integration for more info
-      nodeIntegration: (process.env.ELECTRON_NODE_INTEGRATION as unknown) as boolean
+      nodeIntegration: (process.env.ELECTRON_NODE_INTEGRATION as unknown) as boolean,
+      contextIsolation: true,
+      preload: path.join(__dirname, "preload.js")
     },
     autoHideMenuBar: true
   });
@@ -120,4 +126,20 @@ if (!gotSingleInstanceLock) {
       });
     }
   }
+
+  ipcMain.handle("get-all-screen-metadata", async (event, thumbnailWidth: number, thumbnailHeight: number): Promise<ScreenMetadata[]> => {
+    return getAllScreenMetadata(thumbnailWidth, thumbnailHeight);
+  });
+
+  ipcMain.on("set-mouse-cursor-position", async (event, posX: number, posY: number) => {
+    setMouseCursorPosition(posX, posY);
+  });
+
+  ipcMain.handle("get-current-always-on-top-setting", async (event): Promise<boolean | undefined> => {
+    return mainWindow?.isAlwaysOnTop();
+  });
+
+  ipcMain.on("set-always-on-top-setting", async (event, newAlwaysOnTopSetting: boolean): Promise<void> => {
+    mainWindow?.setAlwaysOnTop(newAlwaysOnTopSetting);
+  });
 }
