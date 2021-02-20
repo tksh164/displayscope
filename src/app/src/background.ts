@@ -5,6 +5,7 @@ import { createProtocol } from "vue-cli-plugin-electron-builder/lib";
 import installExtension, { VUEJS_DEVTOOLS } from "electron-devtools-installer";
 import { ScreenMetadata } from "@/@type/pipapp/screen-capturer";
 import { getAllScreenMetadata } from "@/screen-metadata";
+import { setMouseCursorPosition } from "@/mouse-cursor-setter";
 import * as path from "path";
 import * as appMenu from "@/app-menu";
 import * as appHotkey from "@/hotkey";
@@ -128,6 +129,10 @@ if (!gotSingleInstanceLock) {
 
   ipcMain.handle("get-all-screen-metadata", async (event, thumbnailWidth: number, thumbnailHeight: number): Promise<ScreenMetadata[]> => {
     return getAllScreenMetadata(thumbnailWidth, thumbnailHeight);
+  });
+
+  ipcMain.on("set-mouse-cursor-position", async (event, posX: number, posY: number) => {
+    setMouseCursorPosition(posX, posY);
   });
 
   ipcMain.handle("get-current-always-on-top-setting", async (event): Promise<boolean | undefined> => {

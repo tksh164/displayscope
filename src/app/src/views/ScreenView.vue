@@ -98,7 +98,6 @@
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 import * as screenCapturer from "@/screen-capturer";
-import * as mouseCursorSetter from "@/mouse-cursor-setter";
 
 @Component
 export default class ScreenView extends Vue {
@@ -168,7 +167,7 @@ export default class ScreenView extends Vue {
   moveMouseCursorIntoScreen(): void {
     const posX = typeof this.$route.query.centerX === "string" ? parseInt(this.$route.query.centerX) : 0;
     const posY = typeof this.$route.query.centerY === "string" ? parseInt(this.$route.query.centerY) : 0;
-    mouseCursorSetter.setMouseCursorPosition(posX, posY);
+    window.exposedApi.setMouseCursorPosition(posX, posY);
   }
 }
 </script>
