@@ -1,6 +1,6 @@
 
 import { screen, desktopCapturer } from "electron";
-import { DisplayMetadataValue, ScreenPoint, ScreenMetadata } from "@/@type/pipapp/screen-capturer";
+import { DisplayMetadataValue, DisplayRectangle, ScreenPoint, ScreenMetadata } from "@/types/app";
 
 export async function getAllScreenMetadata(thumbnailWidth: number, thumbnailHeight: number): Promise<ScreenMetadata[]> {
   return getDisplayMetadataDictionary()
@@ -23,7 +23,7 @@ async function getDisplayMetadataDictionary(): Promise<{ [key: string]: DisplayM
   return displayMetadata;
 }
   
-async function getScreenCenterPoint(displayBounds: Electron.Rectangle, scaleFactor: number): Promise<ScreenPoint> {
+async function getScreenCenterPoint(displayBounds: DisplayRectangle, scaleFactor: number): Promise<ScreenPoint> {
   const scaledScreenOriginPoint = screen.dipToScreenPoint({ x: displayBounds.x, y: displayBounds.y });
   const scaledScreenWidth = displayBounds.width * scaleFactor;
   const scaledScreenHeight = displayBounds.height * scaleFactor;

@@ -1,4 +1,4 @@
-import { ExposedApi } from "@/@type/exposedApi";
+import { ExposedApi } from "@/types/app";
 
 declare global {
   interface Window {

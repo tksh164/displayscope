@@ -3,7 +3,7 @@
 import { app, protocol, BrowserWindow, screen, ipcMain } from "electron";
 import { createProtocol } from "vue-cli-plugin-electron-builder/lib";
 import installExtension, { VUEJS_DEVTOOLS } from "electron-devtools-installer";
-import { ScreenMetadata } from "@/@type/pipapp/screen-capturer";
+import { ScreenMetadata } from "@/types/app";
 import { getAllScreenMetadata } from "@/screen-metadata";
 import { setMouseCursorPosition } from "@/mouse-cursor-setter";
 import * as path from "path";
