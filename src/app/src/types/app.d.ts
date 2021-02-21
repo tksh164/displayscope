@@ -5,13 +5,20 @@ export interface ExposedApi {
   setAlwaysOnTopSetting: (newAlwaysOnTopSetting: boolean) => Promise<void>;
 }
 
+export interface DisplayRectangle {
+  x: number;       // The x coordinate of the origin of the rectangle (must be an integer).
+  y: number;       // The y coordinate of the origin of the rectangle (must be an integer).
+  width: number;   // The width of the rectangle (must be an integer).
+  height: number;  // The height of the rectangle (must be an integer).
+}
+
 export interface ScreenPoint {
-    x: number,
-    y: number
-  }
+  x: number,
+  y: number
+}
 
 export interface DisplayMetadataValue {
-  bounds: Electron.Rectangle;
+  bounds: DisplayRectangle;
   scaleFactor: number;
   isPrimary: boolean;
 }
@@ -22,7 +29,7 @@ export interface ScreenMetadata {
   thumbnailDataUri: string;
   centerPoint: ScreenPoint,
   display: {
-    bounds: Electron.Rectangle;
+    bounds: DisplayRectangle;
     scaleFactor: number;
     isPrimary: boolean;
   }
