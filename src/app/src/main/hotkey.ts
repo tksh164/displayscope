@@ -1,5 +1,5 @@
 import { globalShortcut, BrowserWindow, screen } from "electron";
-import * as mouseCursorSetter from "@/mouse-cursor-setter";
+import * as mouseCursorSetter from "@/main/mouse-cursor-setter";
 
 export const HOTKEY_MOVE_MOUSE_CURSOR_TO_APP_WINDOW = "Shift+Escape";
 

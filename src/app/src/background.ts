@@ -4,11 +4,11 @@ import { app, protocol, BrowserWindow, screen, ipcMain } from "electron";
 import { createProtocol } from "vue-cli-plugin-electron-builder/lib";
 import installExtension, { VUEJS_DEVTOOLS } from "electron-devtools-installer";
 import { ScreenMetadata } from "@/types/app";
-import { getAllScreenMetadata } from "@/screen-metadata";
-import { setMouseCursorPosition } from "@/mouse-cursor-setter";
+import { getAllScreenMetadata } from "@/main/screen-metadata";
+import { setMouseCursorPosition } from "@/main/mouse-cursor-setter";
 import * as path from "path";
-import * as appMenu from "@/app-menu";
-import * as appHotkey from "@/hotkey";
+import * as appMenu from "@/main/app-menu";
+import * as appHotkey from "@/main/hotkey";
 const isDevelopment = process.env.NODE_ENV !== "production";
 
 // Keep a global reference of the window object.
