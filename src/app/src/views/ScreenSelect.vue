@@ -74,7 +74,6 @@
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 import ScreenItem from "@/components/ScreenItem.vue";
-import * as screenCapturer from "@/renderer/screen-capturer";
 import { ScreenItemProperty } from "@/types/app";
 import { ScreenMetadata } from "@/types/app";
 
@@ -88,7 +87,7 @@ export default class ScreenSelect extends Vue {
   alwaysOnTop = false;
 
   async beforeMount(): Promise<void> {
-    this.alwaysOnTop = await window.exposedApi.getCurrentAlwaysOnTopSetting() as boolean;
+    this.alwaysOnTop = (await window.exposedApi.getCurrentAlwaysOnTopSetting()) as boolean;
   }
 
   mounted(): void {
@@ -106,7 +105,7 @@ export default class ScreenSelect extends Vue {
 
   refreshScreenMetadataList(): void {
     window.exposedApi.getAllScreenMetadata(1000, 1000)
-      .then((screenMetadataArray) => {
+      .then((screenMetadataArray: ScreenMetadata[]) => {
         const screenItems: ScreenItemProperty[] = [];
         for (const sm of screenMetadataArray) {
           screenItems.push({

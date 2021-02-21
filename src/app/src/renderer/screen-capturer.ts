@@ -6,6 +6,6 @@ export async function getScreenMediaStream(sourceId: string): Promise<MediaStrea
         chromeMediaSource: "desktop",
         chromeMediaSourceId: sourceId
       }
-    } as unknown as undefined)
+    } as unknown) as undefined
   });
 }

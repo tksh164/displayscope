@@ -124,12 +124,12 @@ export default class ScreenView extends Vue {
   }
 
   isMediaStream(arg: any): arg is MediaStream {
-    return arg !== null && arg !== undefined &&
+    return (arg !== null && arg !== undefined &&
       typeof arg === "object" &&
       typeof arg.active === "boolean" &&
       typeof arg.id === "string" &&
       typeof arg.addTrack === "function" &&
-      typeof arg.removeTrack === "function";
+      typeof arg.removeTrack === "function");
   }
 
   onCanPlayThrough(): void {

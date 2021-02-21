@@ -3,7 +3,8 @@ import { exec } from "child_process";
 
 function getExternalCommandPath(): string {
     const EXECUTABLE_FILE_NAME = "setmousecursorpos.exe";
-    return process.env.NODE_ENV !== "production" ?
+    const isDevelopment = process.env.NODE_ENV !== "production";
+    return isDevelopment ?
       path.join(process.cwd(), "build", EXECUTABLE_FILE_NAME) :
       path.join(process.resourcesPath, EXECUTABLE_FILE_NAME);
 }
