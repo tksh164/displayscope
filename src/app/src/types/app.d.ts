@@ -4,18 +4,18 @@ export interface ExposedApi {
   getCurrentAlwaysOnTopSetting: () => Promise<boolean | undefined>;
   setAlwaysOnTopSetting: (newAlwaysOnTopSetting: boolean) => Promise<void>;
 }
-  
+
+export interface ScreenPoint {
+    x: number,
+    y: number
+  }
+
 export interface DisplayMetadataValue {
   bounds: Electron.Rectangle;
   scaleFactor: number;
   isPrimary: boolean;
 }
-  
-export interface ScreenPoint {
-  x: number,
-  y: number
-}
-  
+
 export interface ScreenMetadata {
   id: string;
   name: string;
@@ -27,14 +27,11 @@ export interface ScreenMetadata {
     isPrimary: boolean;
   }
 }
-  
+
 export interface ScreenItemProperty {
   id: string;
   name: string;
   description: string;
-  centerPoint: {
-    x: number;
-    y: number;
-  };
+  centerPoint: ScreenPoint;
   thumbnailDataUri: string;
 }
