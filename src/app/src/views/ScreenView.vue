@@ -97,7 +97,7 @@
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
-import * as screenCapturer from "@/screen-capturer";
+import * as screenCapturer from "@/renderer/screen-capturer";
 
 @Component
 export default class ScreenView extends Vue {
