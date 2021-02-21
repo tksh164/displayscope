@@ -75,8 +75,8 @@
 import { Component, Vue } from "vue-property-decorator";
 import ScreenItem from "@/components/ScreenItem.vue";
 import * as screenCapturer from "@/screen-capturer";
-import { ScreenItemProperty } from "@/types/pipapp/ScreenSelect";
-import { ScreenMetadata } from "@/types/pipapp/screen-capturer";
+import { ScreenItemProperty } from "@/types/app";
+import { ScreenMetadata } from "@/types/app";
 
 @Component({
   components: {
