@@ -1,5 +1,5 @@
 import { contextBridge, ipcRenderer } from "electron";
-import { ScreenMetadata } from "@/@types/pipapp/screen-capturer";
+import { ScreenMetadata } from "@/types/pipapp/screen-capturer";
 
 contextBridge.exposeInMainWorld("exposedApi", {
   getAllScreenMetadata: async (thumbnailWidth: number, thumbnailHeight: number): Promise<ScreenMetadata[]> => {

@@ -1,4 +1,4 @@
-import { ScreenMetadata } from "@/@types/pipapp/screen-capturer";
+import { ScreenMetadata } from "@/types/pipapp/screen-capturer";
 
 export interface ExposedApi {
   getAllScreenMetadata: (thumbnailWidth: number, thumbnailHeight: number) => Promise<ScreenMetadata[]>;
