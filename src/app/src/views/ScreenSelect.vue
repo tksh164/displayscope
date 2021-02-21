@@ -105,7 +105,7 @@ export default class ScreenSelect extends Vue {
 
   refreshScreenMetadataList(): void {
     window.exposedApi.getAllScreenMetadata(1000, 1000)
-      .then((screenMetadataArray) => {
+      .then((screenMetadataArray: ScreenMetadata[]) => {
         const screenItems: ScreenItemProperty[] = [];
         for (const sm of screenMetadataArray) {
           screenItems.push({
