@@ -2,8 +2,9 @@ import { app, BrowserWindow, Menu, MenuItemConstructorOptions } from "electron";
 
 async function getAppIconResourceFilePath(): Promise<string> {
   const APP_ICON_FILE_NAME = "icon.png";
+  const isDevelopment = process.env.NODE_ENV !== "production";
   const path = await import("path").then((path) => path);
-  return process.env.NODE_ENV !== "production" ?
+  return isDevelopment ?
     path.join(process.cwd(), "build", APP_ICON_FILE_NAME) :
     path.join(process.resourcesPath, APP_ICON_FILE_NAME);
 }
