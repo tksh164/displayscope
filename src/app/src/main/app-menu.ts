@@ -9,7 +9,7 @@ async function getAppIconResourceFilePath(): Promise<string> {
     path.join(process.resourcesPath, APP_ICON_FILE_NAME);
 }
 
-export async function setAppMenu(browserWindow: BrowserWindow): Promise<void> {
+export async function setAppMenu(win: BrowserWindow): Promise<void> {
   const appName = app.getName();
   const appVersion = app.getVersion();
   const menuTemplate: MenuItemConstructorOptions[] = [
@@ -55,7 +55,7 @@ export async function setAppMenu(browserWindow: BrowserWindow): Promise<void> {
           click: async () => {
             const os = await import("os").then((os) => os);
             const dialog = await import("electron").then(({ dialog }) => dialog);
-            dialog.showMessageBoxSync(browserWindow, {
+            dialog.showMessageBoxSync(win, {
               icon: await getAppIconResourceFilePath(),
               title: `About ${appName}`,
               message: appName,
