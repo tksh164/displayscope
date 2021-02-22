@@ -1,4 +1,4 @@
-import { app, BrowserWindow, Menu } from "electron";
+import { app, BrowserWindow, Menu, MenuItemConstructorOptions } from "electron";
 
 async function getAppIconResourceFilePath(): Promise<string> {
   const APP_ICON_FILE_NAME = "icon.png";
@@ -11,7 +11,7 @@ async function getAppIconResourceFilePath(): Promise<string> {
 export async function setAppMenu(browserWindow: BrowserWindow): Promise<void> {
   const appName = app.getName();
   const appVersion = app.getVersion();
-  const menuTemplate: Electron.MenuItemConstructorOptions[] = [
+  const menuTemplate: MenuItemConstructorOptions[] = [
     {
       label: "&File",
       submenu: [
