@@ -70,9 +70,9 @@ function getAppMenuTemplate(win: BrowserWindow): MenuItemConstructorOptions[] {
 }
 
 async function getAppIconResourceFilePath(): Promise<string> {
+  const path = await import("path").then((path) => path);
   const APP_ICON_FILE_NAME = "icon.png";
   const isDevelopment = process.env.NODE_ENV !== "production";
-  const path = await import("path").then((path) => path);
   return isDevelopment ?
     path.join(process.cwd(), "build", APP_ICON_FILE_NAME) :
     path.join(process.resourcesPath, APP_ICON_FILE_NAME);
