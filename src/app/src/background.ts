@@ -3,12 +3,12 @@
 import { app, protocol, BrowserWindow, screen, ipcMain } from "electron";
 import { createProtocol } from "vue-cli-plugin-electron-builder/lib";
 import installExtension, { VUEJS_DEVTOOLS } from "electron-devtools-installer";
+import * as path from "path";
 import { ScreenMetadata } from "@/types/app";
+import { setAppMenu } from "@/main/app-menu";
+import * as appHotkey from "@/main/hotkey";
 import { getAllScreenMetadata } from "@/main/screen-metadata";
 import { setMouseCursorPosition } from "@/main/mouse-cursor-setter";
-import * as path from "path";
-import * as appMenu from "@/main/app-menu";
-import * as appHotkey from "@/main/hotkey";
 const isDevelopment = process.env.NODE_ENV !== "production";
 
 // Keep a global reference of the window object.
@@ -36,7 +36,7 @@ async function createWindow(): Promise<BrowserWindow> {
   });
 
   // Set application menu.
-  appMenu.setAppMenu(win, app.getName(), app.getVersion());
+  setAppMenu(win, app.getName(), app.getVersion());
 
   if (process.env.WEBPACK_DEV_SERVER_URL) {
     // Load the url of the dev server if in development mode

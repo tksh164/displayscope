@@ -43,15 +43,15 @@ export function setAppMenu(browserWindow: BrowserWindow, appName: string, appVer
         {
           label: "Learn more",
           click: async () => {
-            const { shell } = require("electron");
+            const shell = await import("electron").then(({ shell }) => shell);
             await shell.openExternal("https://github.com/tksh164/displayscope");
           }
         },
         {
           label: `About ${appName}`,
           click: async () => {
-            const os = require("os");
-            const { dialog } = require("electron");
+            const os = await import("os").then((os) => os);
+            const dialog = await import("electron").then(({ dialog }) => dialog);
             dialog.showMessageBoxSync(browserWindow, {
               icon: getAppIconResourceFilePath(),
               title: `About ${appName}`,
