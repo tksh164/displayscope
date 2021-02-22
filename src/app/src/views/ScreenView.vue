@@ -97,7 +97,7 @@
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
-import * as screenCapturer from "@/renderer/screen-capturer";
+import { getScreenMediaStream } from "@/renderer/screen-capturer";
 
 @Component
 export default class ScreenView extends Vue {
@@ -117,7 +117,7 @@ export default class ScreenView extends Vue {
   }
 
   setScreenStream(): void {
-    screenCapturer.getScreenMediaStream(this.$route.params.screenId)
+    getScreenMediaStream(this.$route.params.screenId)
       .then((stream: void | MediaStream) => {
         if (this.isMediaStream(stream)) this.screenStream = stream;
       });
