@@ -74,8 +74,7 @@
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 import ScreenItem from "@/components/ScreenItem.vue";
-import { ScreenItemProperty } from "@/types/app";
-import { ScreenMetadata } from "@/types/app";
+import { ScreenItemProperty, ScreenMetadata } from "@/types/app";
 
 @Component({
   components: {
