@@ -5,10 +5,10 @@ import { createProtocol } from "vue-cli-plugin-electron-builder/lib";
 import installExtension, { VUEJS_DEVTOOLS } from "electron-devtools-installer";
 import * as path from "path";
 import { ScreenMetadata } from "@/types/app";
-import { getAllScreenMetadata } from "@/main/screen-metadata";
-import { setMouseCursorPosition } from "@/main/mouse-cursor-setter";
 import * as appMenu from "@/main/app-menu";
 import * as appHotkey from "@/main/hotkey";
+import { getAllScreenMetadata } from "@/main/screen-metadata";
+import { setMouseCursorPosition } from "@/main/mouse-cursor-setter";
 const isDevelopment = process.env.NODE_ENV !== "production";
 
 // Keep a global reference of the window object.
