@@ -1,18 +1,14 @@
 import { app, BrowserWindow, Menu, MenuItemConstructorOptions } from "electron";
 
-async function getAppIconResourceFilePath(): Promise<string> {
-  const APP_ICON_FILE_NAME = "icon.png";
-  const isDevelopment = process.env.NODE_ENV !== "production";
-  const path = await import("path").then((path) => path);
-  return isDevelopment ?
-    path.join(process.cwd(), "build", APP_ICON_FILE_NAME) :
-    path.join(process.resourcesPath, APP_ICON_FILE_NAME);
+export async function setAppMenu(win: BrowserWindow): Promise<void> {
+  const menu = Menu.buildFromTemplate(getAppMenuTemplate(win));
+  Menu.setApplicationMenu(menu);
 }
 
-export async function setAppMenu(win: BrowserWindow): Promise<void> {
+function getAppMenuTemplate(win: BrowserWindow): MenuItemConstructorOptions[] {
   const appName = app.getName();
   const appVersion = app.getVersion();
-  const menuTemplate: MenuItemConstructorOptions[] = [
+  return [
     {
       label: "&File",
       submenu: [
@@ -71,6 +67,13 @@ export async function setAppMenu(win: BrowserWindow): Promise<void> {
       ]
     }
   ];
-  const menu = Menu.buildFromTemplate(menuTemplate);
-  Menu.setApplicationMenu(menu);
+}
+
+async function getAppIconResourceFilePath(): Promise<string> {
+  const APP_ICON_FILE_NAME = "icon.png";
+  const isDevelopment = process.env.NODE_ENV !== "production";
+  const path = await import("path").then((path) => path);
+  return isDevelopment ?
+    path.join(process.cwd(), "build", APP_ICON_FILE_NAME) :
+    path.join(process.resourcesPath, APP_ICON_FILE_NAME);
 }
