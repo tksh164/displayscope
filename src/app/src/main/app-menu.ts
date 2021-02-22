@@ -1,4 +1,4 @@
-import { BrowserWindow, Menu } from "electron";
+import { app, BrowserWindow, Menu } from "electron";
 import * as path from "path";
 
 function getAppIconResourceFilePath(): string {
@@ -8,7 +8,9 @@ function getAppIconResourceFilePath(): string {
       path.join(process.resourcesPath, APP_ICON_FILE_NAME);
 }
 
-export function setAppMenu(browserWindow: BrowserWindow, appName: string, appVersion: string): void {
+export async function setAppMenu(browserWindow: BrowserWindow): Promise<void> {
+  const appName = app.getName();
+  const appVersion = app.getVersion();
   const menuTemplate: Electron.MenuItemConstructorOptions[] = [
     {
       label: "File",
