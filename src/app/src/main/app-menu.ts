@@ -13,13 +13,13 @@ export async function setAppMenu(browserWindow: BrowserWindow): Promise<void> {
   const appVersion = app.getVersion();
   const menuTemplate: Electron.MenuItemConstructorOptions[] = [
     {
-      label: "File",
+      label: "&File",
       submenu: [
         { role: "quit" }
       ]
     },
     {
-      label: "View",
+      label: "&View",
       submenu: [
         { role: "reload" },
         { role: "forceReload" },
@@ -33,14 +33,14 @@ export async function setAppMenu(browserWindow: BrowserWindow): Promise<void> {
       ]
     },
     {
-      label: "Window",
+      label: "&Window",
       submenu: [
         { role: "minimize" },
         { role: "close" }
       ]
     },
     {
-      label: "Help",
+      label: "&Help",
       submenu: [
         {
           label: "Learn more",
