@@ -36,7 +36,7 @@ async function createWindow(): Promise<BrowserWindow> {
   });
 
   // Set application menu.
-  setAppMenu(win, app.getName(), app.getVersion());
+  await setAppMenu(win);
 
   if (process.env.WEBPACK_DEV_SERVER_URL) {
     // Load the url of the dev server if in development mode
