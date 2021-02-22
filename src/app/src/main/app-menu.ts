@@ -1,11 +1,11 @@
 import { app, BrowserWindow, Menu } from "electron";
-import * as path from "path";
 
-function getAppIconResourceFilePath(): string {
-    const APP_ICON_FILE_NAME = "icon.png";
-    return process.env.NODE_ENV !== "production" ?
-      path.join(process.cwd(), "build", APP_ICON_FILE_NAME) :
-      path.join(process.resourcesPath, APP_ICON_FILE_NAME);
+async function getAppIconResourceFilePath(): Promise<string> {
+  const APP_ICON_FILE_NAME = "icon.png";
+  const path = await import("path").then((path) => path);
+  return process.env.NODE_ENV !== "production" ?
+    path.join(process.cwd(), "build", APP_ICON_FILE_NAME) :
+    path.join(process.resourcesPath, APP_ICON_FILE_NAME);
 }
 
 export async function setAppMenu(browserWindow: BrowserWindow): Promise<void> {
@@ -55,7 +55,7 @@ export async function setAppMenu(browserWindow: BrowserWindow): Promise<void> {
             const os = await import("os").then((os) => os);
             const dialog = await import("electron").then(({ dialog }) => dialog);
             dialog.showMessageBoxSync(browserWindow, {
-              icon: getAppIconResourceFilePath(),
+              icon: await getAppIconResourceFilePath(),
               title: `About ${appName}`,
               message: appName,
               detail: `${appName}: ${appVersion} \n` +
