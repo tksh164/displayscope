@@ -7,6 +7,14 @@ module.exports = {
         productName: "Displayscope",
         extraFiles: [
           {
+            from: "../../LICENSE",
+            to: "./LICENSE.txt"
+          },
+          {
+            from: "../../ThirdPartyNotices.txt",
+            to: "."
+          },
+          {
             from: "build/setmousecursorpos.exe",
             to: "./resources"
           },
