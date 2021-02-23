@@ -1,4 +1,4 @@
-export async function getScreenMediaStream(sourceId: string): Promise<MediaStream | void> {
+export async function getScreenMediaStream(sourceId: string): Promise<MediaStream> {
   return navigator.mediaDevices.getUserMedia({
     audio: false,
     video: ({
