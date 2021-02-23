@@ -97,7 +97,7 @@
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
-import { getScreenMediaStream } from "@/renderer/screen-capturer";
+import { getScreenMediaStream } from "@/renderer/screen-media-stream";
 
 @Component
 export default class ScreenView extends Vue {
