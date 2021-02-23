@@ -49,8 +49,10 @@ function getAppMenuTemplate(win: BrowserWindow): MenuItemConstructorOptions[] {
         {
           label: `About ${appName}`,
           click: async () => {
-            const os = await import("os").then((os) => os);
-            const dialog = await import("electron").then(({ dialog }) => dialog);
+            const [os, dialog] = await Promise.all([
+              import("os").then((os) => os),
+              import("electron").then(({ dialog }) => dialog)
+            ]);
             dialog.showMessageBoxSync(win, {
               icon: await getAppIconResourceFilePath(),
               title: `About ${appName}`,
