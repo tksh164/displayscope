@@ -4,14 +4,14 @@ import { setMouseCursorPosition } from "@/main/mouse-cursor-setter";
 export const HOTKEY_MOVE_MOUSE_CURSOR_TO_APP_WINDOW = "Shift+Escape";
 
 let win: BrowserWindow;
-export function registerHotkeys(browserWindow: BrowserWindow): boolean {
+export function registerMoveMouseCursorToAppWindowHotkey(browserWindow: BrowserWindow): boolean {
   win = browserWindow;
 
   // Register a hotkey to move the mouse cursor to on app window from the screen.
   return globalShortcut.register(HOTKEY_MOVE_MOUSE_CURSOR_TO_APP_WINDOW, moveMouseCursorToAppWindowArea);
 }
 
-export function unregisterHotkeys(): void {
+export function unregisterMoveMouseCursorToAppWindowHotkey(): void {
   // Unregister a hotkey to move the mouse cursor to on app window from the screen.
   globalShortcut.unregister(HOTKEY_MOVE_MOUSE_CURSOR_TO_APP_WINDOW);
 }

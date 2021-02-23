@@ -67,7 +67,7 @@ if (!gotSingleInstanceLock) {
 
   app.on("will-quit", () => {
     // Unregister hotkeys.
-    appHotkey.unregisterHotkeys();
+    appHotkey.unregisterMoveMouseCursorToAppWindowHotkey();
   });
 
   // Quit when all windows are closed.
@@ -107,7 +107,7 @@ if (!gotSingleInstanceLock) {
     // Create the browser window.
     createWindow().then((win) => {
       // Register hotkeys.
-      if (!appHotkey.registerHotkeys(win)) {
+      if (!appHotkey.registerMoveMouseCursorToAppWindowHotkey(win)) {
         console.log(`Failed the hot-key registration: ${appHotkey.HOTKEY_MOVE_MOUSE_CURSOR_TO_APP_WINDOW}`);
       }
     });
