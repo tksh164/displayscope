@@ -1,6 +1,7 @@
 import Vue from "vue";
 import VueRouter, { RouteConfig } from "vue-router";
 import ScreenSelect from "@/views/ScreenSelect.vue";
+import ScreenView from "@/views/ScreenView.vue";
 
 Vue.use(VueRouter);
 
@@ -13,8 +14,9 @@ const routes: Array<RouteConfig> = [
   {
     path: "/screenview",
     name: "ScreenView",
-    component: () =>
-      import(/* webpackChunkName: "screenview" */ "@/views/ScreenView.vue")
+    component: ScreenView
+    // component: () =>
+    //   import(/* webpackChunkName: "screenview" */ "@/views/ScreenView.vue")
   }
 ];
 
