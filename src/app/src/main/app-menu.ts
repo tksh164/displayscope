@@ -47,6 +47,13 @@ function getAppMenuTemplate(win: BrowserWindow): MenuItemConstructorOptions[] {
           }
         },
         {
+          label: "Third party notices",
+          click: async () => {
+            const shell = await import("electron").then(({ shell }) => shell);
+            await shell.openExternal("https://github.com/tksh164/displayscope/blob/master/ThirdPartyNotices.txt");
+          }
+        },
+        {
           label: `About ${appName}`,
           click: async () => {
             const [os, dialog] = await Promise.all([
