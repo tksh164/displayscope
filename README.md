@@ -61,4 +61,4 @@ If you don't need Displayscope anymore, you can uninstall it from "Apps & featur
 
 ## License
 
-Copyright (c) Takeshi Katano. All rights reserved. This software is released under the [MIT License](https://github.com/tksh164/displayscope/blob/master/LICENSE).
+Copyright (c) 2020 Takeshi Katano. All rights reserved. This software is released under the [MIT License](https://github.com/tksh164/displayscope/blob/master/LICENSE).
