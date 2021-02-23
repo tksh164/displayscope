@@ -6,7 +6,7 @@ import installExtension, { VUEJS_DEVTOOLS } from "electron-devtools-installer";
 import * as path from "path";
 import { ScreenMetadata } from "@/types/app";
 import { setAppMenu } from "@/main/app-menu";
-import { registerMoveMouseCursorToAppWindowHotkey, unregisterMoveMouseCursorToAppWindowHotkey, HOTKEY_MOVE_MOUSE_CURSOR_TO_APP_WINDOW } from "@/main/hotkey-registerer";
+import { registerHotkeyReturnCursorToAppWindow, unregisterHotkeyReturnCursorToAppWindow, HOTKEY_RETURN_CURSOR_TO_APP_WINDOW } from "@/main/hotkey-registerer";
 import { getAllScreenMetadata } from "@/main/screen-metadata";
 import { setMouseCursorPosition } from "@/main/mouse-cursor-setter";
 
@@ -67,7 +67,7 @@ if (!gotSingleInstanceLock) {
 
   app.on("will-quit", () => {
     // Unregister hotkey.
-    unregisterMoveMouseCursorToAppWindowHotkey();
+    unregisterHotkeyReturnCursorToAppWindow();
   });
 
   // Quit when all windows are closed.
@@ -107,8 +107,8 @@ if (!gotSingleInstanceLock) {
     // Create the browser window.
     createWindow().then((win) => {
       // Register hotkey.
-      if (!registerMoveMouseCursorToAppWindowHotkey(win)) {
-        console.log(`Failed the hot-key registration: ${HOTKEY_MOVE_MOUSE_CURSOR_TO_APP_WINDOW}`);
+      if (!registerHotkeyReturnCursorToAppWindow(win)) {
+        console.log(`Failed the hot-key registration: ${HOTKEY_RETURN_CURSOR_TO_APP_WINDOW}`);
       }
     });
   });

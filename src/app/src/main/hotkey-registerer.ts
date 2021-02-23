@@ -1,20 +1,20 @@
 import { globalShortcut, BrowserWindow, screen } from "electron";
 import { setMouseCursorPosition } from "@/main/mouse-cursor-setter";
 
-export const HOTKEY_MOVE_MOUSE_CURSOR_TO_APP_WINDOW = "Shift+Escape";
+export const HOTKEY_RETURN_CURSOR_TO_APP_WINDOW = "Shift+Escape";
 
 // Retain the app window reference.
 let appWindow: BrowserWindow;
 
-export function registerMoveMouseCursorToAppWindowHotkey(win: BrowserWindow): boolean {
+export function registerHotkeyReturnCursorToAppWindow(win: BrowserWindow): boolean {
   appWindow = win;
   // Register a hotkey to move the mouse cursor to on app window from the screen.
-  return globalShortcut.register(HOTKEY_MOVE_MOUSE_CURSOR_TO_APP_WINDOW, moveMouseCursorToAppWindowArea);
+  return globalShortcut.register(HOTKEY_RETURN_CURSOR_TO_APP_WINDOW, moveMouseCursorToAppWindowArea);
 }
 
-export function unregisterMoveMouseCursorToAppWindowHotkey(): void {
+export function unregisterHotkeyReturnCursorToAppWindow(): void {
   // Unregister a hotkey to move the mouse cursor to on app window from the screen.
-  globalShortcut.unregister(HOTKEY_MOVE_MOUSE_CURSOR_TO_APP_WINDOW);
+  globalShortcut.unregister(HOTKEY_RETURN_CURSOR_TO_APP_WINDOW);
 }
 
 function moveMouseCursorToAppWindowArea(): void {
