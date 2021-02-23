@@ -9,6 +9,7 @@ import { setAppMenu } from "@/main/app-menu";
 import * as appHotkey from "@/main/hotkey";
 import { getAllScreenMetadata } from "@/main/screen-metadata";
 import { setMouseCursorPosition } from "@/main/mouse-cursor-setter";
+
 const isDevelopment = process.env.NODE_ENV !== "production";
 
 // Keep a global reference of the window object.
