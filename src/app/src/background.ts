@@ -104,8 +104,6 @@ if (!gotSingleInstanceLock) {
       }
     }
 
-    
-
     // Create the browser window.
     createWindow().then((win) => {
       // Register hotkey.
