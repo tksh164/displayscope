@@ -15,11 +15,11 @@ module.exports = {
             to: "."
           },
           {
-            from: "build/setmousecursorpos.exe",
+            from: "build/icon.png",
             to: "./resources"
           },
           {
-            from: "build/icon.png",
+            from: "build/setmousecursorpos.exe",
             to: "./resources"
           }
         ],
