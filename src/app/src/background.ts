@@ -6,7 +6,7 @@ import installExtension, { VUEJS_DEVTOOLS } from "electron-devtools-installer";
 import * as path from "path";
 import { ScreenMetadata } from "@/types/app";
 import { setAppMenu } from "@/main/app-menu";
-import * as appHotkey from "@/main/hotkey";
+import * as appHotkey from "@/main/hotkey-registerer";
 import { getAllScreenMetadata } from "@/main/screen-metadata";
 import { setMouseCursorPosition } from "@/main/mouse-cursor-setter";
 
