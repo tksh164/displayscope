@@ -22,16 +22,17 @@ async function createWindow(): Promise<BrowserWindow> {
     width: winWidth,
     height: winHeight,
     webPreferences: {
-      worldSafeExecuteJavaScript: true,
-
-      // Required for Spectron testing
-      enableRemoteModule: isDevelopment ? true : false,
+      contextIsolation: true,
+      preload: path.join(__dirname, "preload.js"),
 
       // Use pluginOptions.nodeIntegration, leave this alone
       // See nklayman.github.io/vue-cli-plugin-electron-builder/guide/security.html#node-integration for more info
       nodeIntegration: (process.env.ELECTRON_NODE_INTEGRATION as unknown) as boolean,
-      contextIsolation: true,
-      preload: path.join(__dirname, "preload.js")
+
+      worldSafeExecuteJavaScript: true,
+
+      // Required for Spectron testing
+      enableRemoteModule: isDevelopment ? true : false
     },
     autoHideMenuBar: true
   });
