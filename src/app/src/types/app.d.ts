@@ -3,6 +3,7 @@ export interface ExposedApi {
   setMouseCursorPosition: (posX: number, posY: number) => Promise<void>;
   getCurrentAlwaysOnTopSetting: () => Promise<boolean>;
   setAlwaysOnTopSetting: (newAlwaysOnTopSetting: boolean) => Promise<void>;
+  addAlwaysOnTopChangedByMenuItemListener: (listener: Function) => Promise<void>;
 }
 
 export interface DisplayRectangle {

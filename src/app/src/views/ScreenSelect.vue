@@ -90,6 +90,9 @@ export default class ScreenSelect extends Vue {
   }
 
   mounted(): void {
+    window.exposedApi.addAlwaysOnTopChangedByMenuItemListener((newAlwaysOnTopSetting: boolean) => {
+      this.alwaysOnTop = newAlwaysOnTopSetting;
+    });
     setTimeout(this.refreshScreenMetadataList, 30);
   }
 

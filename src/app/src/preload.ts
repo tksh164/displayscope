@@ -13,5 +13,9 @@ contextBridge.exposeInMainWorld("exposedApi", {
   },
   setAlwaysOnTopSetting: async (newAlwaysOnTopSetting: boolean): Promise<void> => {
     return ipcRenderer.send("set-always-on-top-setting", newAlwaysOnTopSetting);
+  },
+  addAlwaysOnTopChangedByMenuItemListener: async (listener: Function): Promise<void> => {
+    ipcRenderer.removeAllListeners("changed-always-on-top-setting");
+    ipcRenderer.on("changed-always-on-top-setting", (event, newAlwaysOnTopSetting) => listener(newAlwaysOnTopSetting));
   }
 });

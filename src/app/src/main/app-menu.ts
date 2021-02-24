@@ -1,4 +1,5 @@
 import { app, BrowserWindow, Menu, MenuItemConstructorOptions } from "electron";
+import { setAlwaysOnTop, getCurrentAlwaysOnTopSetting, notifyAlwaysOnTopSettingChanged } from "@/main/always-on-top";
 
 export async function setAppMenu(win: BrowserWindow): Promise<void> {
   const menu = Menu.buildFromTemplate(getAppMenuTemplate(win));
@@ -32,6 +33,18 @@ function getAppMenuTemplate(win: BrowserWindow): MenuItemConstructorOptions[] {
     {
       label: "&Window",
       submenu: [
+        {
+          id: "window-always-on-top",
+          label: "Always on top",
+          type: "checkbox",
+          checked: false,
+          click: async () => {
+            const newAlwaysOnTopSetting = !getCurrentAlwaysOnTopSetting(win);
+            setAlwaysOnTop(win, newAlwaysOnTopSetting);
+            notifyAlwaysOnTopSettingChanged(win, newAlwaysOnTopSetting);
+          }
+        },
+        { type: "separator" },
         { role: "minimize" },
         { role: "close" }
       ]

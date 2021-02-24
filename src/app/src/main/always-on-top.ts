@@ -12,3 +12,7 @@ export function setAlwaysOnTopMenuItemCheck(menuItemId: string, newChecked: bool
 export function getCurrentAlwaysOnTopSetting(win: BrowserWindow): boolean {
   return win.isAlwaysOnTop();
 }
+
+export function notifyAlwaysOnTopSettingChanged(win: BrowserWindow, newAlwaysOnTopSetting: boolean): void {
+  win.webContents.send("changed-always-on-top-setting", newAlwaysOnTopSetting);
+}
