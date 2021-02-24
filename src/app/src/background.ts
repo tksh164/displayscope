@@ -17,10 +17,10 @@ let mainWindow: BrowserWindow | null = null;
 
 async function createWindow(): Promise<BrowserWindow> {
   // Create the browser window.
-  const workAreaSize = screen.getPrimaryDisplay().workAreaSize;
+  const [winWidth, winHeight] = getInitialAppWindowSize();
   const win = new BrowserWindow({
-    width: Math.floor(workAreaSize.width * 0.8),
-    height: Math.floor(workAreaSize.height * 0.8),
+    width: winWidth,
+    height: winHeight,
     webPreferences: {
       worldSafeExecuteJavaScript: true,
 
@@ -53,6 +53,14 @@ async function createWindow(): Promise<BrowserWindow> {
   mainWindow = win;
 
   return win;
+}
+
+function getInitialAppWindowSize(): [number, number] {
+  const workAreaSize = screen.getPrimaryDisplay().workAreaSize;
+  return [
+    Math.floor(workAreaSize.width * 0.8),
+    Math.floor(workAreaSize.height * 0.8)
+  ];
 }
 
 // Get single instance lock to allow only one app instance.
