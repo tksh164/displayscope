@@ -1,5 +1,5 @@
 import { app, BrowserWindow, Menu, MenuItemConstructorOptions } from "electron";
-import { setAlwaysOnTop, getCurrentAlwaysOnTopSetting, notifyAlwaysOnTopSettingChanged } from "@/main/always-on-top";
+import { getCurrentAlwaysOnTopSetting, setAlwaysOnTop, notifyAlwaysOnTopSettingChanged } from "@/main/always-on-top";
 
 export async function setAppMenu(win: BrowserWindow): Promise<void> {
   const menu = Menu.buildFromTemplate(getAppMenuTemplate(win));
