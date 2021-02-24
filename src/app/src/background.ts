@@ -9,7 +9,7 @@ import { setAppMenu } from "@/main/app-menu";
 import { registerHotkeyReturnCursorToAppWindow, unregisterHotkeyReturnCursorToAppWindow, HOTKEY_RETURN_CURSOR_TO_APP_WINDOW } from "@/main/hotkey-registerer";
 import { getAllScreenMetadata } from "@/main/screen-metadata";
 import { setMouseCursorPosition } from "@/main/mouse-cursor-setter";
-import { setAlwaysOnTop, setAlwaysOnTopMenuItemCheck, getCurrentAlwaysOnTopSetting } from "@/main/always-on-top";
+import { getCurrentAlwaysOnTopSetting, setAlwaysOnTop, setAlwaysOnTopMenuItemCheck } from "@/main/always-on-top";
 
 const isDevelopment = process.env.NODE_ENV !== "production";
 
