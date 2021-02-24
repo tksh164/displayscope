@@ -8,7 +8,7 @@ contextBridge.exposeInMainWorld("exposedApi", {
   setMouseCursorPosition: async (posX: number, posY: number): Promise<void> => {
     return ipcRenderer.send("set-mouse-cursor-position", posX, posY);
   },
-  getCurrentAlwaysOnTopSetting: async (): Promise<boolean | undefined> => {
+  getCurrentAlwaysOnTopSetting: async (): Promise<boolean> => {
     return ipcRenderer.invoke("get-current-always-on-top-setting");
   },
   setAlwaysOnTopSetting: async (newAlwaysOnTopSetting: boolean): Promise<void> => {

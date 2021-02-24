@@ -9,6 +9,7 @@ import { setAppMenu } from "@/main/app-menu";
 import { registerHotkeyReturnCursorToAppWindow, unregisterHotkeyReturnCursorToAppWindow, HOTKEY_RETURN_CURSOR_TO_APP_WINDOW } from "@/main/hotkey-registerer";
 import { getAllScreenMetadata } from "@/main/screen-metadata";
 import { setMouseCursorPosition } from "@/main/mouse-cursor-setter";
+import { setAlwaysOnTop, setAlwaysOnTopMenuItemCheck, getCurrentAlwaysOnTopSetting } from "@/main/always-on-top";
 
 const isDevelopment = process.env.NODE_ENV !== "production";
 
@@ -145,11 +146,14 @@ if (!gotSingleInstanceLock) {
     setMouseCursorPosition(posX, posY);
   });
 
-  ipcMain.handle("get-current-always-on-top-setting", async (event): Promise<boolean | undefined> => {
-    return mainWindow?.isAlwaysOnTop();
+  ipcMain.handle("get-current-always-on-top-setting", async (event): Promise<boolean> => {
+    return mainWindow ? getCurrentAlwaysOnTopSetting(mainWindow) : false;
   });
 
   ipcMain.on("set-always-on-top-setting", async (event, newAlwaysOnTopSetting: boolean): Promise<void> => {
-    mainWindow?.setAlwaysOnTop(newAlwaysOnTopSetting);
+    if (mainWindow) {
+      setAlwaysOnTop(mainWindow, newAlwaysOnTopSetting);
+      setAlwaysOnTopMenuItemCheck("window-always-on-top", newAlwaysOnTopSetting);
+    }
   });
 }

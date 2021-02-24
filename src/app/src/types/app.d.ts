@@ -1,7 +1,7 @@
 export interface ExposedApi {
   getAllScreenMetadata: (thumbnailWidth: number, thumbnailHeight: number) => Promise<ScreenMetadata[]>;
   setMouseCursorPosition: (posX: number, posY: number) => Promise<void>;
-  getCurrentAlwaysOnTopSetting: () => Promise<boolean | undefined>;
+  getCurrentAlwaysOnTopSetting: () => Promise<boolean>;
   setAlwaysOnTopSetting: (newAlwaysOnTopSetting: boolean) => Promise<void>;
 }
 

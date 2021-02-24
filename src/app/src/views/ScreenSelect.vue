@@ -86,7 +86,7 @@ export default class ScreenSelect extends Vue {
   alwaysOnTop = false;
 
   async beforeMount(): Promise<void> {
-    this.alwaysOnTop = (await window.exposedApi.getCurrentAlwaysOnTopSetting()) as boolean;
+    this.alwaysOnTop = await window.exposedApi.getCurrentAlwaysOnTopSetting();
   }
 
   mounted(): void {
