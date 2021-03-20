@@ -19,6 +19,13 @@ export function unregisterHotkeyReturnCursorToAppWindow(): void {
 
 function moveMouseCursorToAppWindowArea(): void {
   const [posX, posY] = calcCenterPositionInWindow(appWindow);
+
+  // NOTE: Setting the mouse cursor position two times as workaround, because
+  // in specific case the mouse cursor is drift from the correct position.
+  // The first time, the mouse courser come back to the same screen with the
+  // app window, but the position is incorrect. The second time, the mouse
+  // cursor move to the correct position in the screen.
+  setMouseCursorPosition(posX, posY);
   setMouseCursorPosition(posX, posY);
 }
 
