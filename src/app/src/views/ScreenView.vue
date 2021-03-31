@@ -1,97 +1,71 @@
 <template>
-  <div class="screen-view-wrapper"
-    @mousemove="pauseScreenStream"
-    @mouseleave="playScreenStream">
-    <video class="screen-video"
-      :class="screenVideoClass"
-      ref="screenVideoRef"
-      @canplaythrough="onCanPlayThrough"
-      @play="onPlay"
-      @pause="onPause"
-      :src-object.prop.camel="screenStream"></video>
-    <el-card class="pause-card" :class="pauseCardClass">
-      <div slot="header" class="card-header">Your mouse cursor is now on this window</div>
-      <el-row>
-        <el-col class="card-body-column mouse-cursor-button">
-          <el-button type="primary"
-            round icon="el-icon-position"
-            @click="moveMouseCursorIntoScreen">Move your mouse cursor into the screen</el-button>
-        </el-col>
-      </el-row>
-      <el-row>
-        <div class="card-body-column mouse-cursor-text">Press <strong class="hotkey-stroke">Shift + Esc</strong> to return your mouse cursor to this window.</div>
-      </el-row>
-      <el-row>
-        <el-col class="card-body-column return-button">
-          <el-button round
-            icon="el-icon-back"
-            @click="moveToScreenSelectView">Select another screen</el-button>
-        </el-col>
-      </el-row>
-    </el-card>
+  <div class="screen-view-wrapper" @mousemove="showFunctionArea" @mouseleave="hideFunctionArea">
+    <video class="screen-video" ref="screenVideoRef" @canplaythrough="onCanPlayThrough" :src-object.prop.camel="screenStream"></video>
+    <div class="function-area" :class="showFunctionAreaClass">
+      <div class="function-area-item grid-column1">
+        <el-button type="primary" round icon="el-icon-back" @click="moveToScreenSelectView"></el-button>
+      </div>
+      <div class="function-area-item grid-column2">
+        <div class="notification-message">Your mouse cursor is now on this window. Click the preview screen to enter the screen.<br/>
+          Press <strong class="hotkey-stroke">Shift + Esc</strong> to return your mouse cursor to this window.</div>
+      </div>
+    </div>
   </div>
 </template>
 
 <style>
 .screen-view-wrapper {
+  position: relative;
   width: 100%;
   height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
-.screen-video {
-  height: 100%;
-  max-width: 100%;
-  max-height: 100vh;
-}
-
-.screen-video-pause {
-  filter: brightness(50%) grayscale(100%) blur(3px);
-}
-
-.pause-card {
-  display: none;
+.screen-view-wrapper .screen-video {
   position: absolute;
-  left: 50%;
+  max-width: 100%;
+  max-height: 100%;
   top: 50%;
-  transform: translate(-50%, -50%);
-  width: 400px;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
 }
 
-.pause-card .card-header {
-  display: flex;
+.screen-view-wrapper .function-area {
+  display: none;
+}
+
+.screen-view-wrapper .show-function-area {
+  position: absolute;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 15% 70% 15%;
   justify-content: center;
   align-items: center;
+  background: rgba(0, 0, 0, 40%);
+  backdrop-filter: blur(8px);
 }
 
-.pause-card .card-body-column {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.screen-view-wrapper .function-area-item {
+  margin: 1rem;
 }
 
-.pause-card .mouse-cursor-button {
-  margin-bottom: 1vh;
+.screen-view-wrapper .grid-column1 {
+  grid-column: 1;
 }
 
-.pause-card .mouse-cursor-text {
-  font-size: small;
+.screen-view-wrapper .grid-column2 {
+  grid-column: 2;
 }
 
-.mouse-cursor-text .hotkey-stroke {
+.screen-view-wrapper .notification-message {
+  color: white;
+  text-align: center;
+  line-height: 1.5rem;
+}
+
+.screen-view-wrapper .hotkey-stroke {
   margin-left: 0.5ch;
   margin-right: 0.5ch;
   font-weight: bold;
-}
-
-.pause-card .return-button {
-  margin-top: 3vh;
-}
-
-.pause-card-show {
-  display: block;
 }
 </style>
 
