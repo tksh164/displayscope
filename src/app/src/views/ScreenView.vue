@@ -3,7 +3,7 @@
     <video class="screen-video" ref="screenVideoRef" @canplaythrough="onCanPlayThrough" :src-object.prop.camel="screenStream"></video>
     <div class="function-area" :class="showFunctionAreaClass">
       <div class="function-area-item grid-column1">
-        <el-button type="primary" round icon="el-icon-back" @click="moveToScreenSelectView"></el-button>
+        <el-button type="primary" circle icon="el-icon-back" @click="moveToScreenSelectView"></el-button>
       </div>
       <div class="function-area-item grid-column2">
         <div class="notification-message">Your mouse cursor is now on this window. Click the preview screen to enter the screen.<br/>
