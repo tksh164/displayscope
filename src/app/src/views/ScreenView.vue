@@ -76,14 +76,10 @@ import { getScreenMediaStream } from "@/renderer/screen-media-stream";
 @Component
 export default class ScreenView extends Vue {
   screenStream: MediaStream = new MediaStream();
-  isScreenVideoPlaying = false;
-
-  get screenVideoClass(): object {
-    return { "screen-video-pause": !this.isScreenVideoPlaying };
-  }
-
-  get pauseCardClass(): object {
-    return { "pause-card-show": !this.isScreenVideoPlaying };
+  isShowFunctionArea = false;
+  
+  get showFunctionAreaClass(): object {
+    return { "show-function-area": this.isShowFunctionArea };
   }
 
   mounted(): void {
@@ -98,25 +94,17 @@ export default class ScreenView extends Vue {
     this.getVideoElement()?.play();
   }
 
-  onPause(): void {
-    this.isScreenVideoPlaying = false;
-  }
-
-  onPlay(): void {
-    this.isScreenVideoPlaying = true;
-  }
-
-  pauseScreenStream(): void {
-    if (this.isScreenVideoPlaying) this.getVideoElement()?.pause();
-  }
-
-  playScreenStream(): void {
-    this.getVideoElement()?.play();
-  }
-
   getVideoElement(): null | HTMLVideoElement {
     const videoElement = this.$refs.screenVideoRef as HTMLVideoElement;
     return typeof videoElement === "object" ? videoElement : null;
+  }
+
+  showFunctionArea(): void {
+    this.isShowFunctionArea = true;
+  }
+
+  hideFunctionArea(): void {
+    this.isShowFunctionArea = false;
   }
 
   moveToScreenSelectView(): void {
