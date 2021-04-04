@@ -1,6 +1,6 @@
 <template>
   <div class="screen-view-wrapper" @mousemove="showFunctionArea" @mouseleave="hideFunctionArea">
-    <video class="screen-video" ref="screenVideoRef" @canplaythrough="onCanPlayThrough" :src-object.prop.camel="screenStream"></video>
+    <video class="screen-video" @canplaythrough="onCanPlayThrough" :src-object.prop.camel="screenStream"></video>
     <div class="function-area" :class="showFunctionAreaClass">
       <div class="function-area-item grid-column1">
         <el-button type="primary" circle icon="el-icon-back" @click="moveToScreenSelectView"></el-button>
@@ -90,13 +90,9 @@ export default class ScreenView extends Vue {
     this.screenStream = await getScreenMediaStream(this.$route.params.screenId).then((stream: MediaStream) => stream);
   }
 
-  onCanPlayThrough(): void {
-    this.getVideoElement()?.play();
-  }
-
-  getVideoElement(): null | HTMLVideoElement {
-    const videoElement = this.$refs.screenVideoRef as HTMLVideoElement;
-    return typeof videoElement === "object" ? videoElement : null;
+  onCanPlayThrough(event: Event): void {
+    const videoElement = event.target as HTMLVideoElement;
+    videoElement.play();
   }
 
   showFunctionArea(): void {
