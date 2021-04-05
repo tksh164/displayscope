@@ -18,8 +18,10 @@
             :screenId="screenItem.id"
             :centerPoint="screenItem.centerPoint"
             :screenName="screenItem.name"
-            :screenDescription="screenItem.description"
-            :thumbnailUrl="screenItem.thumbnailDataUri"></screen-item>
+            :thumbnailUrl="screenItem.thumbnailDataUri"
+            :screenBounds="screenItem.bounds"
+            :screenScaleFactor="screenItem.scaleFactor"
+            :isPrimaryScreen="screenItem.isPrimary"></screen-item>
         </transition-group>
       </el-main>
     </el-container>
@@ -94,15 +96,6 @@ export default class ScreenSelect extends Vue {
     setTimeout(this.refreshScreenMetadataList, 30);
   }
 
-  getScreenDescription(sm: ScreenMetadata): string {
-    const scaledDisplayWidth = Math.floor(sm.display.bounds.width * sm.display.scaleFactor);
-    const scaledDisplayHeight = Math.floor(sm.display.bounds.height * sm.display.scaleFactor);
-    const primary = sm.display.isPrimary ? "Primary, " : "";
-    const resolution = `${scaledDisplayWidth} x ${scaledDisplayHeight}`; 
-    const scale = `${sm.display.scaleFactor * 100}%`;
-    return `${primary}${resolution}, ${scale}`;
-  }
-
   refreshScreenMetadataList(): void {
     window.exposedApi.getAllScreenMetadata(1000, 1000)
       .then((screenMetadataArray: ScreenMetadata[]) => {
@@ -111,9 +104,11 @@ export default class ScreenSelect extends Vue {
           screenItems.push({
             id: sm.id,
             name: sm.name,
-            description: this.getScreenDescription(sm),
             centerPoint: sm.centerPoint,
-            thumbnailDataUri: sm.thumbnailDataUri
+            thumbnailDataUri: sm.thumbnailDataUri,
+            bounds: sm.display.bounds,
+            scaleFactor: sm.display.scaleFactor,
+            isPrimary: sm.display.isPrimary,
           });
         }
         this.screenItems = screenItems;

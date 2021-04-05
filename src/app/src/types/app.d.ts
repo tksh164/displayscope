@@ -39,7 +39,9 @@ export interface ScreenMetadata {
 export interface ScreenItemProperty {
   id: string;
   name: string;
-  description: string;
   centerPoint: ScreenPoint;
   thumbnailDataUri: string;
+  bounds: DisplayRectangle;
+  scaleFactor: number;
+  isPrimary: boolean;
 }

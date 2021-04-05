@@ -1,7 +1,7 @@
 <template>
   <div class="screen-list-item" @click="moveToScreenView">
     <div class="screen-name">{{ screenName }}</div>
-    <div class="screen-description">{{ screenDescription }}</div>
+    <div class="screen-description">{{ getScreenDescription() }}</div>
     <el-image class="screen-thumbnail" :src="thumbnailUrl" fit="contain"></el-image>
   </div>
 </template>
@@ -38,6 +38,7 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
+import { DisplayRectangle } from "@/types/app";
 
 @Component
 export default class ScreenItem extends Vue {
@@ -47,14 +48,29 @@ export default class ScreenItem extends Vue {
   @Prop({ default: "-" })
   screenName!: string;
 
-  @Prop({ default: "" })
-  screenDescription!: string;
-
   @Prop({ default: () => { return { x: 0, y: 0 }; } })
   centerPoint!: { x: number; y: number; };
 
   @Prop({ default: "" })
   thumbnailUrl!: string;
+
+  @Prop({ default: () => { return { x: 0, y: 0, width: 0, height: 0 }; } })
+  screenBounds!: DisplayRectangle;
+
+  @Prop({ default: 0 })
+  screenScaleFactor!: number;
+
+  @Prop({ default: false })
+  isPrimaryScreen!: boolean;
+
+  getScreenDescription(): string {
+    const scaledDisplayWidth = Math.floor(this.screenBounds.width * this.screenScaleFactor);
+    const scaledDisplayHeight = Math.floor(this.screenBounds.height * this.screenScaleFactor);
+    const primary = this.isPrimaryScreen ? "Primary, " : "";
+    const resolution = `${scaledDisplayWidth} x ${scaledDisplayHeight}`; 
+    const scale = `${this.screenScaleFactor * 100}%`;
+    return `${primary}${resolution}, ${scale}`;
+  }
 
   moveToScreenView() {
     this.$router.push({
