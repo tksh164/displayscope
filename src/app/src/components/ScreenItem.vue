@@ -38,7 +38,7 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
-import { DisplayRectangle } from "@/types/app";
+import { DisplayRectangle, ScreenPoint } from "@/types/app";
 
 @Component
 export default class ScreenItem extends Vue {
@@ -47,9 +47,6 @@ export default class ScreenItem extends Vue {
 
   @Prop({ default: "-" })
   screenName!: string;
-
-  @Prop({ default: () => { return { x: 0, y: 0 }; } })
-  centerPoint!: { x: number; y: number; };
 
   @Prop({ default: "" })
   thumbnailUrl!: string;
@@ -62,6 +59,9 @@ export default class ScreenItem extends Vue {
 
   @Prop({ default: false })
   isPrimaryScreen!: boolean;
+
+  @Prop({ default: () => { return { x: 0, y: 0 }; } })
+  scaledScreenOriginPoint!: ScreenPoint;
 
   getScreenDescription(): string {
     const scaledDisplayWidth = Math.floor(this.screenBounds.width * this.screenScaleFactor);
@@ -79,8 +79,11 @@ export default class ScreenItem extends Vue {
         screenId: this.screenId
       },
       query: {
-        centerX: this.centerPoint.x.toString(),
-        centerY: this.centerPoint.y.toString()
+        screenWidth: this.screenBounds.width.toString(),
+        screenHeight: this.screenBounds.height.toString(),
+        scaleFactor: this.screenScaleFactor.toString(),
+        scaledOriginX: this.scaledScreenOriginPoint.x.toString(),
+        scaledOriginY: this.scaledScreenOriginPoint.y.toString(),
       }
     });
   }

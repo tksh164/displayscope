@@ -16,12 +16,12 @@
           <screen-item v-for="screenItem in screenItems"
             :key="screenItem.id"
             :screenId="screenItem.id"
-            :centerPoint="screenItem.centerPoint"
             :screenName="screenItem.name"
             :thumbnailUrl="screenItem.thumbnailDataUri"
             :screenBounds="screenItem.bounds"
             :screenScaleFactor="screenItem.scaleFactor"
-            :isPrimaryScreen="screenItem.isPrimary"></screen-item>
+            :isPrimaryScreen="screenItem.isPrimary"
+            :scaledScreenOriginPoint="screenItem.scaledScreenOriginPoint"></screen-item>
         </transition-group>
       </el-main>
     </el-container>
@@ -104,11 +104,11 @@ export default class ScreenSelect extends Vue {
           screenItems.push({
             id: sm.id,
             name: sm.name,
-            centerPoint: sm.centerPoint,
             thumbnailDataUri: sm.thumbnailDataUri,
             bounds: sm.display.bounds,
             scaleFactor: sm.display.scaleFactor,
             isPrimary: sm.display.isPrimary,
+            scaledScreenOriginPoint: sm.display.scaledScreenOriginPoint,
           });
         }
         this.screenItems = screenItems;

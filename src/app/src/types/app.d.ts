@@ -14,8 +14,8 @@ export interface DisplayRectangle {
 }
 
 export interface ScreenPoint {
-  x: number,
-  y: number
+  x: number;
+  y: number;
 }
 
 export interface DisplayMetadataValue {
@@ -28,20 +28,20 @@ export interface ScreenMetadata {
   id: string;
   name: string;
   thumbnailDataUri: string;
-  centerPoint: ScreenPoint,
   display: {
     bounds: DisplayRectangle;
     scaleFactor: number;
     isPrimary: boolean;
+    scaledScreenOriginPoint: ScreenPoint;
   }
 }
 
 export interface ScreenItemProperty {
   id: string;
   name: string;
-  centerPoint: ScreenPoint;
   thumbnailDataUri: string;
   bounds: DisplayRectangle;
   scaleFactor: number;
   isPrimary: boolean;
+  scaledScreenOriginPoint: ScreenPoint;
 }

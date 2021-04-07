@@ -51,11 +51,11 @@ async function getScreenMetadata(displayMetadataDictionary: { [key: string]: Dis
           id: source.id,
           name: source.name,
           thumbnailDataUri: source.thumbnail.toDataURL(),
-          centerPoint: await getScreenCenterPoint(dm.bounds, dm.scaleFactor),
           display: {
             bounds: dm.bounds,
             scaleFactor: dm.scaleFactor,
-            isPrimary: dm.isPrimary
+            isPrimary: dm.isPrimary,
+            scaledScreenOriginPoint: screen.dipToScreenPoint({ x: dm.bounds.x, y: dm.bounds.y }),
           }
         });
       }

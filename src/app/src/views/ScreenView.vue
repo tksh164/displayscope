@@ -1,6 +1,6 @@
 <template>
   <div class="screen-view-wrapper" @mousemove="showFunctionArea" @mouseleave="hideFunctionArea">
-    <video class="screen-video" :src-object.prop.camel="screenStream" @canplaythrough="onCanPlayThrough"></video>
+    <video class="screen-video" :src-object.prop.camel="screenStream" @canplaythrough="onCanPlayThrough" @click="moveMouseCursorIntoScreen"></video>
     <div class="function-area" :class="showFunctionAreaClass">
       <div class="function-area-item grid-column1">
         <el-button type="primary" circle icon="el-icon-back" @click="moveToScreenSelectView"></el-button>
@@ -110,10 +110,59 @@ export default class ScreenView extends Vue {
     this.$router.push({ name: "ScreenSelect" });
   }
 
-  moveMouseCursorIntoScreen(): void {
-    const posX = typeof this.$route.query.centerX === "string" ? parseInt(this.$route.query.centerX) : 0;
-    const posY = typeof this.$route.query.centerY === "string" ? parseInt(this.$route.query.centerY) : 0;
-    window.exposedApi.setMouseCursorPosition(posX, posY);
+  moveMouseCursorIntoScreen(event: MouseEvent): void {
+    // Retrieve the video element's computed bounds.
+    const videoElement = event.target as HTMLVideoElement;
+    const computedVideoElementStyles = window.getComputedStyle(videoElement);
+    const computedVideoElementBounds = {
+      left: parseFloat(computedVideoElementStyles.getPropertyValue("left")),
+      top: parseFloat(computedVideoElementStyles.getPropertyValue("top")),
+      width: parseFloat(computedVideoElementStyles.getPropertyValue("width")),
+      height: parseFloat(computedVideoElementStyles.getPropertyValue("height")),
+    };
+
+    // Correct the clicked position in the video element.
+    // NOTE: Shift the clicked position by the half width and half height of the video element from the event's
+    // clicked position because the video element centering by CSS transform.
+    const correctedPosX = event.clientX - (computedVideoElementBounds.left - (computedVideoElementBounds.width / 2));
+    const correctedPosY = event.clientY - (computedVideoElementBounds.top - (computedVideoElementBounds.height / 2));
+    const clickedPositionInVideoElement = {
+      x: correctedPosX < 0 ? 0 : correctedPosX,
+      y: correctedPosY < 0 ? 0 : correctedPosY,
+    };
+
+    // Calculate the zoom ratio that the actual screen resolution and the video element.
+    const screenDimension = {
+      width: typeof this.$route.query.screenWidth === "string" ? parseInt(this.$route.query.screenWidth) : 1,
+      height: typeof this.$route.query.screenHeight === "string" ? parseInt(this.$route.query.screenHeight) : 1,
+      scaleFactor: typeof this.$route.query.scaleFactor === "string" ? parseFloat(this.$route.query.scaleFactor) : 1.0,
+    };
+    const zoomRatio = {
+      width: (screenDimension.width * screenDimension.scaleFactor) / computedVideoElementBounds.width,
+      height: (screenDimension.height * screenDimension.scaleFactor) / computedVideoElementBounds.height,
+    };
+
+    // Calculate the mouse cursor position in the actual screen for setting the mouse cursor.
+    const clickedPositionInScreen = {
+      x: clickedPositionInVideoElement.x * zoomRatio.width,
+      y: clickedPositionInVideoElement.y * zoomRatio.height,
+    };
+    const screenOrigin = {
+      x: typeof this.$route.query.scaledOriginX === "string" ? parseInt(this.$route.query.scaledOriginX) : 0,
+      y: typeof this.$route.query.scaledOriginY === "string" ? parseInt(this.$route.query.scaledOriginY) : 0,
+    };
+    const mouseCursorPosition = {
+      x: Math.floor(screenOrigin.x + clickedPositionInScreen.x),
+      y: Math.floor(screenOrigin.y + clickedPositionInScreen.y),
+    }
+
+    // NOTE: Setting the mouse cursor position two times as workaround, because
+    // in specific case the mouse cursor is drift from the correct position.
+    // The first time, the mouse courser come back to the same screen with the
+    // app window, but the position is incorrect. The second time, the mouse
+    // cursor move to the correct position in the screen.
+    window.exposedApi.setMouseCursorPosition(mouseCursorPosition.x, mouseCursorPosition.y);
+    window.exposedApi.setMouseCursorPosition(mouseCursorPosition.x, mouseCursorPosition.y);
   }
 }
 </script>
