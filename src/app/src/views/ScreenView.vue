@@ -154,7 +154,7 @@ export default class ScreenView extends Vue {
     const mouseCursorPosition = {
       x: Math.floor(screenOrigin.x + clickedPositionInScreen.x),
       y: Math.floor(screenOrigin.y + clickedPositionInScreen.y),
-    }
+    };
 
     // NOTE: Setting the mouse cursor position two times as workaround, because
     // in specific case the mouse cursor is drift from the correct position.
