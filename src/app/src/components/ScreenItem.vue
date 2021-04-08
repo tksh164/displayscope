@@ -1,7 +1,7 @@
 <template>
   <div class="screen-list-item" @click="moveToScreenView">
     <div class="screen-name">{{ screenName }}</div>
-    <div class="screen-description">{{ screenDescription }}</div>
+    <div class="screen-description">{{ getScreenDescription() }}</div>
     <el-image class="screen-thumbnail" :src="thumbnailUrl" fit="contain"></el-image>
   </div>
 </template>
@@ -38,6 +38,7 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
+import { DisplayRectangle, ScreenPoint } from "@/types/app";
 
 @Component
 export default class ScreenItem extends Vue {
@@ -48,13 +49,28 @@ export default class ScreenItem extends Vue {
   screenName!: string;
 
   @Prop({ default: "" })
-  screenDescription!: string;
+  thumbnailUrl!: string;
+
+  @Prop({ default: () => { return { x: 0, y: 0, width: 0, height: 0 }; } })
+  screenBounds!: DisplayRectangle;
+
+  @Prop({ default: 0 })
+  screenScaleFactor!: number;
+
+  @Prop({ default: false })
+  isPrimaryScreen!: boolean;
 
   @Prop({ default: () => { return { x: 0, y: 0 }; } })
-  centerPoint!: { x: number; y: number; };
+  scaledScreenOriginPoint!: ScreenPoint;
 
-  @Prop({ default: "" })
-  thumbnailUrl!: string;
+  getScreenDescription(): string {
+    const scaledDisplayWidth = Math.floor(this.screenBounds.width * this.screenScaleFactor);
+    const scaledDisplayHeight = Math.floor(this.screenBounds.height * this.screenScaleFactor);
+    const primary = this.isPrimaryScreen ? "Primary, " : "";
+    const resolution = `${scaledDisplayWidth} x ${scaledDisplayHeight}`; 
+    const scale = `${this.screenScaleFactor * 100}%`;
+    return `${primary}${resolution}, ${scale}`;
+  }
 
   moveToScreenView() {
     this.$router.push({
@@ -63,8 +79,11 @@ export default class ScreenItem extends Vue {
         screenId: this.screenId
       },
       query: {
-        centerX: this.centerPoint.x.toString(),
-        centerY: this.centerPoint.y.toString()
+        screenWidth: this.screenBounds.width.toString(),
+        screenHeight: this.screenBounds.height.toString(),
+        scaleFactor: this.screenScaleFactor.toString(),
+        scaledOriginX: this.scaledScreenOriginPoint.x.toString(),
+        scaledOriginY: this.scaledScreenOriginPoint.y.toString(),
       }
     });
   }
