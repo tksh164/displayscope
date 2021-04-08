@@ -156,12 +156,6 @@ export default class ScreenView extends Vue {
       y: Math.floor(screenOrigin.y + clickedPositionInScreen.y),
     };
 
-    // NOTE: Setting the mouse cursor position two times as workaround, because
-    // in specific case the mouse cursor is drift from the correct position.
-    // The first time, the mouse courser come back to the same screen with the
-    // app window, but the position is incorrect. The second time, the mouse
-    // cursor move to the correct position in the screen.
-    window.exposedApi.setMouseCursorPosition(mouseCursorPosition.x, mouseCursorPosition.y);
     window.exposedApi.setMouseCursorPosition(mouseCursorPosition.x, mouseCursorPosition.y);
   }
 }
