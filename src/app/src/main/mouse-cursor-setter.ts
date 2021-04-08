@@ -15,14 +15,10 @@ export async function setMouseCursorPosition(posX: number, posY: number): Promis
   // with the screen that contains the window that executed the mouse position setting Windows API.
   // Also, the high DPI settings are affected of each screen.
   exec(cmdline, (error, stdout, stderr) => {
-    // console.log(stdout);
-    // console.log(stderr);
-    // console.log(error);
+    //console.log("setMouseCursorPosition1", { error: error, stdout: stdout, stderr: stderr });
   });
   exec(cmdline, (error, stdout, stderr) => {
-    // console.log(stdout);
-    // console.log(stderr);
-    // console.log(error);
+    //console.log("setMouseCursorPosition2", { error: error, stdout: stdout, stderr: stderr });
   });
 }
 
