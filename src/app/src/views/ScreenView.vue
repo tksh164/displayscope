@@ -75,7 +75,7 @@ import { getScreenMediaStream } from "@/renderer/screen-media-stream";
 
 @Component
 export default class ScreenView extends Vue {
-  screenStream: MediaStream = new MediaStream();
+  screenStream: MediaStream | null = null;
   isShowFunctionArea = false;
   
   get showFunctionAreaClass(): object {
@@ -104,7 +104,7 @@ export default class ScreenView extends Vue {
   }
 
   moveToScreenSelectView(): void {
-    this.screenStream.getTracks().map((track, index, array) => {
+    this.screenStream?.getTracks().map((track, index, array) => {
       track.stop();
     });
     this.$router.push({ name: "ScreenSelect" });
