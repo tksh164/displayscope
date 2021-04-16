@@ -14,7 +14,7 @@ Displayscope provides view and control through the window to the emulated displa
 
 ### 2. Demo screen control in onsite presentations
 
-Some time there are no preview screen in onsite presentation.
+Some time there are no preview screen in onsite presentations.
 
 Displayscope provides view and control through the window to the screen. You can demo naturally through Displayscope even if the screen is at behind you.
 
