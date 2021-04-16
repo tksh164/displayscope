@@ -1,6 +1,6 @@
 # Displayscope
 
-Displayscope enables to use the apps on the out of sight screen such as the display emulator, display dummy plugs or behind screens.
+Displayscope enables to use the apps on **the out of sight screen** such as the display emulator, display dummy plugs and behind screens.
 
 ## Use cases
 
