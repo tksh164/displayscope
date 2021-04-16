@@ -6,17 +6,17 @@ Displayscope enables to use the apps on **the out of sight screen** such as the 
 
 Displayscope has two use cases.
 
-1. Dedicated display for screen sharing in remote meetings
+### 1. Dedicated display for screen sharing in remote meetings
 
-    The screen sharing in remote meetings is consume one display for just the screen sharing (e.g. slide show, demo using entire screen, etc). In that case, you can get an emulated display by [the display emulator/display dummy plug](https://www.amazon.com/s?k=Display+Emulator), but it's can't see and can't control.
+The screen sharing in remote meetings is consume one display for just the screen sharing (e.g. slide show, demo using entire screen, etc). In that case, you can get an emulated display by [the display emulator/display dummy plug](https://www.amazon.com/s?k=Display+Emulator), but it's can't see and can't control.
 
-    Displayscope provides view and control through the window to the emulated display. You can save a physical display for other purpose by using the emulated display for the screen sharing.
+Displayscope provides view and control through the window to the emulated display. You can save a physical display for other purpose by using the emulated display for the screen sharing.
 
-2. Demo screen control in onsite presentations
+### 2. Demo screen control in onsite presentations
 
-    Some time there are no preview screen in onsite presentation.
+Some time there are no preview screen in onsite presentation.
 
-    Displayscope provides view and control through the window to the screen. You can demo naturally through Displayscope even if the screen is at behind you.
+Displayscope provides view and control through the window to the screen. You can demo naturally through Displayscope even if the screen is at behind you.
 
 ## Install
 
