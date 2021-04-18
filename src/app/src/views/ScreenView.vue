@@ -59,6 +59,7 @@
 .screen-view-wrapper .notification-message {
   color: white;
   text-align: center;
+  text-shadow: 0 0 5px rgb(0, 0, 0);
   line-height: 1.5rem;
 }
 
