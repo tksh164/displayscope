@@ -40,8 +40,8 @@
   grid-template-columns: 15% 70% 15%;
   justify-content: center;
   align-items: center;
-  background: rgba(0, 0, 0, 50%);
-  backdrop-filter: blur(10px);
+  background: rgba(0, 0, 0, 25%);
+  backdrop-filter: blur(100px);
 }
 
 .screen-view-wrapper .function-area-item {
