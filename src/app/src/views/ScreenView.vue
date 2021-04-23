@@ -45,7 +45,7 @@
 }
 
 .screen-view-wrapper .function-area-item {
-  margin: 1rem;
+  margin: 0.8rem;
 }
 
 .screen-view-wrapper .grid-column1 {
