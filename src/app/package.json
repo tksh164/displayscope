@@ -17,8 +17,8 @@
     "build": "vue-cli-service build",
     "test:unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint",
-    "electron:build": "yarn run electron:pretask && vue-cli-service electron:build",
     "electron:pretask": "copyfiles -f ../setmousecursorpos/setmousecursorpos.exe build",
+    "electron:build": "yarn run electron:pretask && vue-cli-service electron:build",
     "electron:serve": "yarn run electron:pretask && vue-cli-service electron:serve",
     "postinstall": "electron-builder install-app-deps",
     "postuninstall": "electron-builder install-app-deps"
