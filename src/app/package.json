@@ -1,24 +1,18 @@
 {
   "name": "displayscope",
   "version": "0.4.0",
+  "private": true,
   "description": "Displayscope enables to use the apps on the out of sight screen such as the display emulator, display dummy plugs or behind screens.",
-  "license": "MIT",
   "author": {
     "name": "Takeshi Katano"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/tksh164/displayscope.git"
-  },
-  "productName": "Displayscope",
-  "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "test:unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint",
-    "electron:pretask": "copyfiles -f ../setmousecursorpos/setmousecursorpos.exe build",
     "electron:build": "yarn run electron:pretask && vue-cli-service electron:build",
+    "electron:pretask": "copyfiles -f ../setmousecursorpos/setmousecursorpos.exe build",
     "electron:serve": "yarn run electron:pretask && vue-cli-service electron:serve",
     "postinstall": "electron-builder install-app-deps",
     "postuninstall": "electron-builder install-app-deps"
@@ -37,12 +31,12 @@
     "@types/jest": "^24.0.19",
     "@typescript-eslint/eslint-plugin": "^2.33.0",
     "@typescript-eslint/parser": "^2.33.0",
-    "@vue/cli-plugin-eslint": "~4.5.0",
-    "@vue/cli-plugin-router": "~4.5.0",
-    "@vue/cli-plugin-typescript": "~4.5.0",
-    "@vue/cli-plugin-unit-jest": "~4.5.0",
-    "@vue/cli-plugin-vuex": "~4.5.0",
-    "@vue/cli-service": "~4.5.0",
+    "@vue/cli-plugin-eslint": "~4.5.12",
+    "@vue/cli-plugin-router": "~4.5.12",
+    "@vue/cli-plugin-typescript": "~4.5.12",
+    "@vue/cli-plugin-unit-jest": "~4.5.12",
+    "@vue/cli-plugin-vuex": "~4.5.12",
+    "@vue/cli-service": "~4.5.12",
     "@vue/eslint-config-prettier": "^6.0.0",
     "@vue/eslint-config-typescript": "^5.0.2",
     "@vue/test-utils": "^1.0.3",
@@ -58,5 +52,11 @@
     "vue-cli-plugin-electron-builder": "~2.0.0-rc.6",
     "vue-cli-plugin-element": "~1.0.1",
     "vue-template-compiler": "^2.6.11"
+  },
+  "license": "MIT",
+  "productName": "Displayscope",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tksh164/displayscope.git"
   }
 }
