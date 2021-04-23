@@ -6,8 +6,8 @@
         <el-button type="primary" circle icon="el-icon-back" @click="moveToScreenSelectView"></el-button>
       </div>
       <div class="function-area-item grid-column2">
-        <div class="notification-message">Your mouse cursor is now on this window. Click the preview screen to enter the screen.<br/>
-          Press <strong class="hotkey-stroke">Shift + Esc</strong> to return your mouse cursor to this window.</div>
+        <div class="notification-message">Your mouse cursor is now on this window. Click anywhere on the viewing screen to enter the screen.<br/>
+          Press <strong class="hotkey-stroke">Shift + Esc</strong> key combination to return your mouse cursor on this window.</div>
       </div>
     </div>
   </div>
@@ -40,12 +40,12 @@
   grid-template-columns: 15% 70% 15%;
   justify-content: center;
   align-items: center;
-  background: rgba(0, 0, 0, 40%);
-  backdrop-filter: blur(8px);
+  background: rgba(0, 0, 0, 50%);
+  backdrop-filter: blur(10px);
 }
 
 .screen-view-wrapper .function-area-item {
-  margin: 1rem;
+  margin: 0.8rem;
 }
 
 .screen-view-wrapper .grid-column1 {
@@ -59,6 +59,7 @@
 .screen-view-wrapper .notification-message {
   color: white;
   text-align: center;
+  text-shadow: 0 0 5px rgb(0, 0, 0);
   line-height: 1.5rem;
 }
 
