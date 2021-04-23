@@ -1,17 +1,17 @@
 {
   "name": "displayscope",
   "version": "0.4.0",
+  "private": true,
+  "productName": "Displayscope",
   "description": "Displayscope enables to use the apps on the out of sight screen such as the display emulator, display dummy plugs or behind screens.",
-  "license": "MIT",
   "author": {
     "name": "Takeshi Katano"
   },
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/tksh164/displayscope.git"
   },
-  "productName": "Displayscope",
-  "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
