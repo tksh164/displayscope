@@ -6,8 +6,8 @@
         <el-button type="primary" circle icon="el-icon-back" @click="moveToScreenSelectView"></el-button>
       </div>
       <div class="function-area-item grid-column2">
-        <div class="notification-message">Your mouse cursor is now on this window. Click anywhere on the screen view to enter the actual screen.<br/>
-          Press <strong class="hotkey-stroke">Shift + Esc</strong> key combination to return your mouse cursor to this window.</div>
+        <div class="notification-message">Your mouse cursor is now on this window. Click anywhere on the viewing screen to enter the screen.<br/>
+          Press <strong class="hotkey-stroke">Shift + Esc</strong> key combination to return your mouse cursor on this window.</div>
       </div>
     </div>
   </div>
