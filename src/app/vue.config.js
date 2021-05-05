@@ -21,6 +21,10 @@ module.exports = {
           {
             from: "build/setmousecursorpos.exe",
             to: "./resources"
+          },
+          {
+            from: "build/default-settings.json",
+            to: "./resources"
           }
         ],
         "nsis": {
