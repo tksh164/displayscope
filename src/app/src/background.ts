@@ -68,6 +68,7 @@ function getInitialAppWindowSize(): [number, number] {
 // Get single instance lock to allow only one app instance.
 const gotSingleInstanceLock = app.requestSingleInstanceLock();
 if (!gotSingleInstanceLock) {
+  console.log("This app instance is will quit because the app instance is already running.");
   app.quit();
 } else {
   // Scheme must be registered before the app is ready
