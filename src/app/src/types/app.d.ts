@@ -45,3 +45,8 @@ export interface ScreenItemProperty {
   isPrimary: boolean;
   scaledScreenOriginPoint: ScreenPoint;
 }
+
+export interface AppSettings {
+  readonly schemaVersion: number;
+  readonly ShortcutKeyToMoveCursorBackToAppWindow: string;
+}

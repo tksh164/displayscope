@@ -5,6 +5,7 @@ import { createProtocol } from "vue-cli-plugin-electron-builder/lib";
 import installExtension, { VUEJS_DEVTOOLS } from "electron-devtools-installer";
 import * as path from "path";
 import { ScreenMetadata } from "@/types/app";
+import { getAppSettings } from "@/main/app-settings";
 import { setAppMenu } from "@/main/app-menu";
 import { registerHotkeyReturnCursorToAppWindow, unregisterHotkeyReturnCursorToAppWindow, HOTKEY_RETURN_CURSOR_TO_APP_WINDOW } from "@/main/hotkey-registerer";
 import { getAllScreenMetadata } from "@/main/screen-metadata";
@@ -115,6 +116,12 @@ if (!gotSingleInstanceLock) {
       }
     }
 
+    // Load the app settings from the file.
+    try {
+      await getAppSettings();
+    } catch {
+      app.exit(-1);
+    }
     // Create the browser window.
     createWindow().then((win) => {
       // Register hotkey.
