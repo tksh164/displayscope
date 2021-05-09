@@ -7,7 +7,7 @@ import * as path from "path";
 import { ScreenMetadata } from "@/types/app";
 import { getAppSettings } from "@/main/app-settings";
 import { setAppMenu } from "@/main/app-menu";
-import { registerHotkeyReturnCursorToAppWindow, unregisterHotkeyReturnCursorToAppWindow, HOTKEY_RETURN_CURSOR_TO_APP_WINDOW } from "@/main/hotkey-registerer";
+import { registerHotkeyReturnCursorToAppWindow, unregisterHotkeyReturnCursorToAppWindow } from "@/main/hotkey-registerer";
 import { getAllScreenMetadata } from "@/main/screen-metadata";
 import { setMouseCursorPosition } from "@/main/mouse-cursor-setter";
 import { getCurrentAlwaysOnTopSetting, setAlwaysOnTop, setAlwaysOnTopMenuItemCheck } from "@/main/always-on-top";
@@ -77,9 +77,9 @@ if (!gotSingleInstanceLock) {
     { scheme: "app", privileges: { secure: true, standard: true } }
   ]);
 
-  app.on("will-quit", () => {
+  app.on("will-quit", async () => {
     // Unregister hotkey.
-    unregisterHotkeyReturnCursorToAppWindow();
+    await unregisterHotkeyReturnCursorToAppWindow();
   });
 
   // Quit when all windows are closed.
@@ -122,13 +122,16 @@ if (!gotSingleInstanceLock) {
     } catch {
       app.exit(-1);
     }
+
     // Create the browser window.
-    createWindow().then((win) => {
-      // Register hotkey.
-      if (!registerHotkeyReturnCursorToAppWindow(win)) {
-        console.log(`Failed the hot-key registration: ${HOTKEY_RETURN_CURSOR_TO_APP_WINDOW}`);
-      }
-    });
+    const win = await createWindow();
+
+    // Register hotkey.
+    try {
+      await registerHotkeyReturnCursorToAppWindow(win);
+    } catch {
+      app.exit(-1);
+    }
   });
 
   // Exit cleanly on request from parent process in development mode.

@@ -1,20 +1,50 @@
-import { globalShortcut, BrowserWindow, screen } from "electron";
+import { globalShortcut, BrowserWindow, screen, dialog } from "electron";
 import { setMouseCursorPosition } from "@/main/mouse-cursor-setter";
-
-export const HOTKEY_RETURN_CURSOR_TO_APP_WINDOW = "Shift+Escape";
+import { getAppSettings } from "@/main/app-settings";
 
 // Retain the app window reference.
 let appWindow: BrowserWindow;
 
-export function registerHotkeyReturnCursorToAppWindow(win: BrowserWindow): boolean {
+export async function registerHotkeyReturnCursorToAppWindow(win: BrowserWindow): Promise<void> {
   appWindow = win;
-  // Register a hotkey to move the mouse cursor to on app window from the screen.
-  return globalShortcut.register(HOTKEY_RETURN_CURSOR_TO_APP_WINDOW, moveMouseCursorToAppWindowArea);
+  const shortcutKey = (await getAppSettings()).ShortcutKeyToMoveCursorBackToAppWindow;
+  try {
+    // Register a hotkey to move the mouse cursor to on app window from the screen.
+    if (!globalShortcut.register(shortcutKey, moveMouseCursorToAppWindowArea)) {
+      const err = new Error();
+      err.name = "GlobalShortcutKeyRegistrationError";
+      err.message = `Couldn't register the global shortcut key \"${shortcutKey}\" that for move mouse cursor back to the app window. ` + 
+        `\"${shortcutKey}\" is already registered by another application.`
+      throw err;
+    }
+  } catch (e) {
+    if (e.name === "GlobalShortcutKeyRegistrationError") {
+      await showGlobalShortcutErrorMessageBox(win, "Global shortcut key registration error", e.message);
+    } else if (e.name === "TypeError" && e.message.includes("conversion failure")) {
+      await showGlobalShortcutErrorMessageBox(win, "Global shortcut key registration error",
+        `Couldn't register the global shortcut key \"${shortcutKey}\" that for move mouse cursor back to the app window. ` + 
+        `\"${shortcutKey}\" is invalid key combination.`);
+    } else {
+      await showGlobalShortcutErrorMessageBox(win, "Global shortcut key registration error",
+        `Couldn't register the global shortcut key \"${shortcutKey}\" that for move mouse cursor back to the app window.` + "\n\n" +
+        "Name: " + e.name + "\n" + "Message: " + e.message + "\n" + "Stack: " + e.stack);
+    }
+    throw e;
+  }
 }
 
-export function unregisterHotkeyReturnCursorToAppWindow(): void {
+export async function unregisterHotkeyReturnCursorToAppWindow(): Promise<void> {
   // Unregister a hotkey to move the mouse cursor to on app window from the screen.
-  globalShortcut.unregister(HOTKEY_RETURN_CURSOR_TO_APP_WINDOW);
+  const shortcutKey = (await getAppSettings()).ShortcutKeyToMoveCursorBackToAppWindow;
+  globalShortcut.unregister(shortcutKey);
+}
+
+async function showGlobalShortcutErrorMessageBox(win: BrowserWindow, title: string, message: string): Promise<void> {
+  dialog.showMessageBoxSync(win, {
+    type: "error",
+    title: title,
+    message: message,
+  });
 }
 
 function moveMouseCursorToAppWindowArea(): void {
