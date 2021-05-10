@@ -2,11 +2,11 @@ import { globalShortcut, BrowserWindow, screen, dialog } from "electron";
 import { setMouseCursorPosition } from "@/main/mouse-cursor-setter";
 import { getAppSettings } from "@/main/app-settings";
 
-// Retain the app window reference.
-let appWindow: BrowserWindow;
+// Retain the app window ID.
+let appWindowId: number;
 
-export async function registerHotkeyReturnCursorToAppWindow(win: BrowserWindow): Promise<void> {
-  appWindow = win;
+export async function registerHotkeyReturnCursorToAppWindow(windowId: number): Promise<void> {
+  appWindowId = windowId;
   const shortcutKey = (await getAppSettings()).ShortcutKeyToMoveCursorBackToAppWindow;
   try {
     // Register a hotkey to move the mouse cursor to on app window from the screen.
@@ -19,13 +19,16 @@ export async function registerHotkeyReturnCursorToAppWindow(win: BrowserWindow):
     }
   } catch (e) {
     if (e.name === "GlobalShortcutKeyRegistrationError") {
-      await showGlobalShortcutErrorMessageBox(win, "Global shortcut key registration error", e.message);
+      const win = BrowserWindow.fromId(appWindowId);
+      await showGlobalShortcutErrorMessageBox(win!, "Global shortcut key registration error", e.message);
     } else if (e.name === "TypeError" && e.message.includes("conversion failure")) {
-      await showGlobalShortcutErrorMessageBox(win, "Global shortcut key registration error",
+      const win = BrowserWindow.fromId(appWindowId);
+      await showGlobalShortcutErrorMessageBox(win!, "Global shortcut key registration error",
         `Couldn't register the global shortcut key \"${shortcutKey}\" that for move mouse cursor back to the app window. ` + 
         `\"${shortcutKey}\" is invalid key combination.`);
     } else {
-      await showGlobalShortcutErrorMessageBox(win, "Global shortcut key registration error",
+      const win = BrowserWindow.fromId(appWindowId);
+      await showGlobalShortcutErrorMessageBox(win!, "Global shortcut key registration error",
         `Couldn't register the global shortcut key \"${shortcutKey}\" that for move mouse cursor back to the app window.` + "\n\n" +
         "Name: " + e.name + "\n" + "Message: " + e.message + "\n" + "Stack: " + e.stack);
     }
@@ -48,7 +51,8 @@ async function showGlobalShortcutErrorMessageBox(win: BrowserWindow, title: stri
 }
 
 function moveMouseCursorToAppWindowArea(): void {
-  const [posX, posY] = calcCenterPositionInWindow(appWindow);
+  const win = BrowserWindow.fromId(appWindowId);
+  const [posX, posY] = calcCenterPositionInWindow(win!);
   setMouseCursorPosition(posX, posY);
 }
 

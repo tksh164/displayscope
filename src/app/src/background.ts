@@ -128,7 +128,7 @@ if (!gotSingleInstanceLock) {
 
     // Register hotkey.
     try {
-      await registerHotkeyReturnCursorToAppWindow(win);
+      await registerHotkeyReturnCursorToAppWindow(win.id);
     } catch {
       app.exit(-1);
     }
