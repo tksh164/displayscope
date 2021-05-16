@@ -1,6 +1,6 @@
 <template>
-  <div class="screen-view-wrapper" @mousemove="showFunctionArea" @mouseleave="hideFunctionArea">
-    <video class="screen-video" :src-object.prop.camel="screenStream" @canplaythrough="onCanPlayThrough" @click="moveMouseCursorIntoScreen"></video>
+  <div id="wrapper" class="screen-view-wrapper" @mousemove="showFunctionArea" @mouseleave="hideFunctionArea">
+    <video id="video" class="screen-video" :src-object.prop.camel="screenStream" @canplaythrough="onCanPlayThrough" @click="moveMouseCursorIntoScreen"></video>
     <div class="function-area" :class="showFunctionAreaClass">
       <div class="function-area-item grid-column1">
         <el-button type="primary" circle icon="el-icon-back" @click="moveToScreenSelectView"></el-button>
@@ -18,15 +18,11 @@
   position: relative;
   width: 100%;
   height: 100%;
+  overflow: hidden;
 }
 
 .screen-view-wrapper .screen-video {
   position: absolute;
-  max-width: 100%;
-  max-height: 100%;
-  top: 50%;
-  left: 50%;
-  transform: translateX(-50%) translateY(-50%);
   cursor: pointer;
 }
 
@@ -36,6 +32,8 @@
 
 .screen-view-wrapper .show-function-area {
   position: absolute;
+  left: 0;
+  top: 0;
   width: 100%;
   display: grid;
   grid-template-columns: 15% 70% 15%;
@@ -84,8 +82,43 @@ export default class ScreenView extends Vue {
     return { "show-function-area": this.isShowFunctionArea };
   }
 
+  created(): void {
+    window.addEventListener("resize", this.setVideoElementBounds);
+  }
+
   mounted(): void {
     this.setScreenStream();
+  }
+
+  destroyed(): void {
+    window.removeEventListener("resize", this.setVideoElementBounds);
+  }
+
+  setVideoElementBounds(): void {
+    const wrapperElementComputedStyles = window.getComputedStyle(document.getElementById("wrapper") as HTMLElement);
+    const wrapperElementComputedSize = {
+      width: parseFloat(wrapperElementComputedStyles.getPropertyValue("width")),
+      height: parseFloat(wrapperElementComputedStyles.getPropertyValue("height")),
+    };
+    const videoElement = document.getElementById("video") as HTMLVideoElement;
+    const newVideoElementBounds = { left: 0, top: 0, width: 0, height: 0 };
+
+    newVideoElementBounds.width = wrapperElementComputedSize.width;
+    newVideoElementBounds.height = videoElement.videoHeight * (wrapperElementComputedSize.width / videoElement.videoWidth);
+    newVideoElementBounds.left = 0;
+    newVideoElementBounds.top = (wrapperElementComputedSize.height - newVideoElementBounds.height) / 2;
+
+    if (newVideoElementBounds.height > wrapperElementComputedSize.height) {
+      newVideoElementBounds.width = videoElement.videoWidth * (wrapperElementComputedSize.height / videoElement.videoHeight);
+      newVideoElementBounds.height = wrapperElementComputedSize.height;
+      newVideoElementBounds.left = (wrapperElementComputedSize.width - newVideoElementBounds.width) / 2;
+      newVideoElementBounds.top = 0;
+    }
+
+    videoElement.style.left = newVideoElementBounds.left + "px";
+    videoElement.style.top = newVideoElementBounds.top + "px";
+    videoElement.width = newVideoElementBounds.width;
+    videoElement.height = newVideoElementBounds.height;
   }
 
   async setScreenStream(): Promise<void> {
@@ -93,6 +126,7 @@ export default class ScreenView extends Vue {
   }
 
   onCanPlayThrough(event: Event): void {
+    this.setVideoElementBounds();
     const videoElement = event.target as HTMLVideoElement;
     videoElement.play();
   }
