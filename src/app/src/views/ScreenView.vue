@@ -146,51 +146,49 @@ export default class ScreenView extends Vue {
 
   moveMouseCursorIntoScreen(event: MouseEvent): void {
     // Retrieve the video element's computed bounds.
-    const videoElement = event.target as HTMLVideoElement;
-    const computedVideoElementStyles = window.getComputedStyle(videoElement);
-    const computedVideoElementBounds = {
-      left: parseFloat(computedVideoElementStyles.getPropertyValue("left")),
-      top: parseFloat(computedVideoElementStyles.getPropertyValue("top")),
-      width: parseFloat(computedVideoElementStyles.getPropertyValue("width")),
-      height: parseFloat(computedVideoElementStyles.getPropertyValue("height")),
+    const videoElementComputedStyles = window.getComputedStyle(event.target as HTMLVideoElement);
+    const videoElementComputedBounds = {
+      left: parseFloat(videoElementComputedStyles.getPropertyValue("left")),
+      top: parseFloat(videoElementComputedStyles.getPropertyValue("top")),
+      width: parseFloat(videoElementComputedStyles.getPropertyValue("width")),
+      height: parseFloat(videoElementComputedStyles.getPropertyValue("height")),
     };
 
-    // Correct the clicked position in the video element.
-    // NOTE: Shift the clicked position by the half width and half height of the video element from the event's
-    // clicked position because the video element centering by CSS transform.
-    const correctedPosX = event.clientX - (computedVideoElementBounds.left - (computedVideoElementBounds.width / 2));
-    const correctedPosY = event.clientY - (computedVideoElementBounds.top - (computedVideoElementBounds.height / 2));
+    // Correct the clicked position to the position in the video element's bounds.
     const clickedPositionInVideoElement = {
-      x: correctedPosX < 0 ? 0 : correctedPosX,
-      y: correctedPosY < 0 ? 0 : correctedPosY,
+      x: event.clientX - videoElementComputedBounds.left,
+      y: event.clientY - videoElementComputedBounds.top,
     };
+    if (clickedPositionInVideoElement.x < 0) clickedPositionInVideoElement.x = 0;
+    if (clickedPositionInVideoElement.y < 0) clickedPositionInVideoElement.y = 0;
 
-    // Calculate the zoom ratio that the actual screen resolution and the video element.
+    // Calculate the scale ratio that is the ratio between the actual screen resolution and the video element size.
     const screenDimension = {
-      width: typeof this.$route.query.screenWidth === "string" ? parseInt(this.$route.query.screenWidth) : 1,
-      height: typeof this.$route.query.screenHeight === "string" ? parseInt(this.$route.query.screenHeight) : 1,
-      scaleFactor: typeof this.$route.query.scaleFactor === "string" ? parseFloat(this.$route.query.scaleFactor) : 1.0,
+      width: parseInt(this.$route.query.screenWidth as string),
+      height: parseInt(this.$route.query.screenHeight as string),
+      scaleFactor: parseFloat(this.$route.query.scaleFactor as string),
     };
-    const zoomRatio = {
-      width: (screenDimension.width * screenDimension.scaleFactor) / computedVideoElementBounds.width,
-      height: (screenDimension.height * screenDimension.scaleFactor) / computedVideoElementBounds.height,
+    // TODO: The scaled width and height are can pre-calculate when the screen selected.
+    const scaleRatio = {
+      width: (screenDimension.width * screenDimension.scaleFactor) / videoElementComputedBounds.width,
+      height: (screenDimension.height * screenDimension.scaleFactor) / videoElementComputedBounds.height,
     };
 
-    // Calculate the mouse cursor position in the actual screen for setting the mouse cursor.
-    const clickedPositionInScreen = {
-      x: clickedPositionInVideoElement.x * zoomRatio.width,
-      y: clickedPositionInVideoElement.y * zoomRatio.height,
-    };
+    // Calculate the mouse cursor position in the actual screen.
     const screenOrigin = {
-      x: typeof this.$route.query.scaledOriginX === "string" ? parseInt(this.$route.query.scaledOriginX) : 0,
-      y: typeof this.$route.query.scaledOriginY === "string" ? parseInt(this.$route.query.scaledOriginY) : 0,
+      x: parseInt(this.$route.query.scaledOriginX as string),
+      y: parseInt(this.$route.query.scaledOriginY as string),
     };
-    const mouseCursorPosition = {
+    const clickedPositionInScreen = {
+      x: clickedPositionInVideoElement.x * scaleRatio.width,
+      y: clickedPositionInVideoElement.y * scaleRatio.height,
+    };
+    const newMouseCursorPosition = {
       x: Math.floor(screenOrigin.x + clickedPositionInScreen.x),
       y: Math.floor(screenOrigin.y + clickedPositionInScreen.y),
     };
 
-    window.exposedApi.setMouseCursorPosition(mouseCursorPosition.x, mouseCursorPosition.y);
+    window.exposedApi.setMouseCursorPosition(newMouseCursorPosition.x, newMouseCursorPosition.y);
   }
 }
 </script>
