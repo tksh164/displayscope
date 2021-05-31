@@ -26,6 +26,10 @@
   cursor: pointer;
 }
 
+.screen-view-wrapper .hide-screen-video {
+  visibility: hidden;
+}
+
 .screen-view-wrapper .function-area {
   display: none;
 }
