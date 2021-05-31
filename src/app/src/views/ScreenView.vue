@@ -1,6 +1,6 @@
 <template>
   <div id="wrapper" class="screen-view-wrapper" @mousemove="showFunctionArea" @mouseleave="hideFunctionArea">
-    <video id="video" class="screen-video" :src-object.prop.camel="screenStream" @canplaythrough="onCanPlayThrough" @click="moveMouseCursorIntoScreen"></video>
+    <video id="video" class="screen-video" :class="showScreenVideoClass" :src-object.prop.camel="screenStream" @canplaythrough="onCanPlayThrough" @click="moveMouseCursorIntoScreen"></video>
     <div class="function-area" :class="showFunctionAreaClass">
       <div class="function-area-item grid-column1">
         <el-button type="primary" circle icon="el-icon-back" @click="moveToScreenSelectView"></el-button>
@@ -24,6 +24,10 @@
 .screen-view-wrapper .screen-video {
   position: absolute;
   cursor: pointer;
+}
+
+.screen-view-wrapper .hide-screen-video {
+  visibility: hidden;
 }
 
 .screen-view-wrapper .function-area {
@@ -76,9 +80,14 @@ import { getScreenMediaStream } from "@/renderer/screen-media-stream";
 @Component
 export default class ScreenView extends Vue {
   screenStream: MediaStream | null = null;
+  isShowScreenVideo = false;
   isShowFunctionArea = false;
   mouseCursorReturnShortcutKey = "";
   
+  get showScreenVideoClass(): object {
+    return { "hide-screen-video": !this.isShowScreenVideo };
+  }
+
   get showFunctionAreaClass(): object {
     return { "show-function-area": this.isShowFunctionArea };
   }
@@ -123,6 +132,8 @@ export default class ScreenView extends Vue {
     videoElement.style.top = newVideoElementBounds.top + "px";
     videoElement.width = newVideoElementBounds.width;
     videoElement.height = newVideoElementBounds.height;
+
+    this.isShowScreenVideo = true;
   }
 
   async setScreenStream(): Promise<void> {
