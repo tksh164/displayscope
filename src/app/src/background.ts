@@ -167,4 +167,8 @@ if (!gotSingleInstanceLock) {
       setAlwaysOnTopMenuItemCheck("window-always-on-top", newAlwaysOnTopSetting);
     }
   });
+
+  ipcMain.handle("get-mouse-cursor-return-shortcut-key", async (event): Promise<string> => {
+    return (await getAppSettings()).MouseCursorReturnShortcutKey;
+  });
 }
