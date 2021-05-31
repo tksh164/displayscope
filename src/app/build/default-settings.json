@@ -1,4 +1,4 @@
 {
     "schemaVersion": 1,
-    "ShortcutKeyToMoveCursorBackToAppWindow": "Shift+Escape"
+    "MouseCursorReturnShortcutKey": "Shift + Esc"
 }

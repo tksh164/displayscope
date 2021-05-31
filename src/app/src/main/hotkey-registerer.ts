@@ -7,7 +7,7 @@ let appWindowId: number;
 
 export async function registerHotkeyReturnCursorToAppWindow(windowId: number): Promise<void> {
   appWindowId = windowId;
-  const shortcutKey = (await getAppSettings()).ShortcutKeyToMoveCursorBackToAppWindow;
+  const shortcutKey = (await getAppSettings()).MouseCursorReturnShortcutKey;
   try {
     // Register a hotkey to move the mouse cursor to on app window from the screen.
     if (!globalShortcut.register(shortcutKey, moveMouseCursorToAppWindowArea)) {
@@ -38,7 +38,7 @@ export async function registerHotkeyReturnCursorToAppWindow(windowId: number): P
 
 export async function unregisterHotkeyReturnCursorToAppWindow(): Promise<void> {
   // Unregister a hotkey to move the mouse cursor to on app window from the screen.
-  const shortcutKey = (await getAppSettings()).ShortcutKeyToMoveCursorBackToAppWindow;
+  const shortcutKey = (await getAppSettings()).MouseCursorReturnShortcutKey;
   globalShortcut.unregister(shortcutKey);
 }
 

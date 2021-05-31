@@ -48,5 +48,5 @@ export interface ScreenItemProperty {
 
 export interface AppSettings {
   readonly schemaVersion: number;
-  readonly ShortcutKeyToMoveCursorBackToAppWindow: string;
+  readonly MouseCursorReturnShortcutKey: string;
 }
