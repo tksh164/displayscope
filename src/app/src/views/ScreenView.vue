@@ -7,7 +7,7 @@
       </div>
       <div class="function-area-item grid-column2">
         <div class="notification-message">Your mouse cursor is now on this window. Click anywhere on the viewing screen to enter the screen.<br/>
-          Press <strong class="hotkey-stroke">Shift + Esc</strong> key combination to return your mouse cursor on this window.</div>
+          Press <strong class="hotkey-stroke">{{ mouseCursorReturnShortcutKey }}</strong> key combination to return your mouse cursor on this window.</div>
       </div>
     </div>
   </div>
@@ -77,6 +77,7 @@ import { getScreenMediaStream } from "@/renderer/screen-media-stream";
 export default class ScreenView extends Vue {
   screenStream: MediaStream | null = null;
   isShowFunctionArea = false;
+  mouseCursorReturnShortcutKey = "";
   
   get showFunctionAreaClass(): object {
     return { "show-function-area": this.isShowFunctionArea };
@@ -87,6 +88,9 @@ export default class ScreenView extends Vue {
   }
 
   mounted(): void {
+    window.exposedApi.getMouseCursorReturnShortcutKey().then(shortcutKey => {
+      this.mouseCursorReturnShortcutKey = shortcutKey;
+    });
     this.setScreenStream();
   }
 

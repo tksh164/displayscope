@@ -17,5 +17,8 @@ contextBridge.exposeInMainWorld("exposedApi", {
   addAlwaysOnTopChangedByMenuItemListener: async (listener: Function): Promise<void> => {
     ipcRenderer.removeAllListeners("changed-always-on-top-setting");
     ipcRenderer.on("changed-always-on-top-setting", (event, newAlwaysOnTopSetting) => listener(newAlwaysOnTopSetting));
+  },
+  getMouseCursorReturnShortcutKey: async (): Promise<string> => {
+    return ipcRenderer.invoke("get-mouse-cursor-return-shortcut-key");     
   }
 });

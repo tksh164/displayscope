@@ -4,6 +4,7 @@ export interface ExposedApi {
   getCurrentAlwaysOnTopSetting: () => Promise<boolean>;
   setAlwaysOnTopSetting: (newAlwaysOnTopSetting: boolean) => Promise<void>;
   addAlwaysOnTopChangedByMenuItemListener: (listener: Function) => Promise<void>;
+  getMouseCursorReturnShortcutKey: () => Promise<string>;
 }
 
 export interface DisplayRectangle {
@@ -48,5 +49,5 @@ export interface ScreenItemProperty {
 
 export interface AppSettings {
   readonly schemaVersion: number;
-  readonly ShortcutKeyToMoveCursorBackToAppWindow: string;
+  readonly MouseCursorReturnShortcutKey: string;
 }
