@@ -12,7 +12,7 @@ The screen sharing in remote meetings is consume one display for just the screen
 
 Displayscope provides view and control through the window to the emulated display. You can save a physical display for other purpose by using the emulated display for the screen sharing.
 
-### 2. Demo screen control in onsite presentations
+### 2. Control the demo screen in onsite presentations
 
 Some time there are no preview screen in onsite presentations.
 
