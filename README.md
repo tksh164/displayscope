@@ -2,7 +2,7 @@
 
 Displayscope enables to use the apps on **the out of sight screen** such as the display emulators, display dummy plugs and behind screens.
 
-## Use cases
+## 🎯 Use cases
 
 Displayscope has two use cases.
 
@@ -18,7 +18,7 @@ Some time there are no preview screen in onsite presentations.
 
 Displayscope provides view and control through the window to the screen. You can demo naturally through Displayscope even if the screen is at behind you.
 
-## Install
+## 📥 Install
 
 1. Download [the setup package](https://github.com/tksh164/displayscope/releases/latest). Currently suppoeted only Windows.
     - Select "Keep" if you get warning when the download is completed.
@@ -28,7 +28,7 @@ Displayscope provides view and control through the window to the screen. You can
 
 If you don't need Displayscope anymore, you can uninstall it from "Apps & features" in the Settings or "Uninstall a program" in the Control Panel.
 
-## Building from source
+## 🔨 Build from source
 
 ### Build environment requirements
 
@@ -53,7 +53,7 @@ If you don't need Displayscope anymore, you can uninstall it from "Apps & featur
     yarn electron:build
     ```
 
-## Notes
+## 📃 Notes　
 
 - Displayscope prevents the screen from going to sleep during the external display showing. If you want to go to sleep on your PC, move back to the selection screen of the screen.
 - Displayscope doesn't work correctly if you selected the *High-performance NVIDIA processor* as the **Preferred graphics processor** in the NVIDIA Control Panel. *Auto-select* and *Integrated graphics* are works well.
@@ -63,7 +63,7 @@ If you don't need Displayscope anymore, you can uninstall it from "Apps & featur
     "MouseCursorReturnShortcutKey": "Shift + Esc"
     ```
 
-## License
+## ⚖ License
 
 Copyright (c) 2020-present Takeshi Katano. All rights reserved. This software is released under the [MIT License](https://github.com/tksh164/displayscope/blob/master/LICENSE).
 
