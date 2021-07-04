@@ -1,6 +1,9 @@
-# Displayscope 🔭
+<br /><br />
 
-Displayscope enables to use the apps on **the out of sight screen** such as the display emulators, display dummy plugs and behind screens.
+<h1 align="center">Displayscope 🔭</h1>
+<p align="center">Displayscope enables to use the apps on <strong>the out of sight screen</strong> such as the display emulators, display dummy plugs and behind screens.</p>
+
+<br /><br />
 
 ## 🎯 Use cases
 
