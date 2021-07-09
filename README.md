@@ -36,8 +36,8 @@ If you don't need Displayscope anymore, you can uninstall it from "Apps & featur
 ### Build environment requirements
 
 - Windows 10
-- yarn
-- Visual Studio
+- [yarn](https://yarnpkg.com/)
+- [Visual Studio](https://visualstudio.microsoft.com/)
 
 ### Build package
 
