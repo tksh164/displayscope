@@ -27,6 +27,12 @@ module.exports = {
             to: "./resources",
           },
         ],
+        "win": {
+          target: {
+            target: "nsis",
+            arch: [ "x64" ],
+          },
+        },
         "nsis": {
           artifactName: "${name}-setup-${version}.${ext}",
         },
