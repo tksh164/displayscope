@@ -36,6 +36,9 @@ module.exports = {
         "nsis": {
           artifactName: "${name}-setup-${version}-${arch}.${ext}",
         },
+        "msi": {
+          artifactName: "${name}-setup-${version}-${arch}.${ext}",
+        },
       },
     },
   },
