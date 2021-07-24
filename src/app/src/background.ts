@@ -23,6 +23,7 @@ async function createWindow(): Promise<BrowserWindow> {
   const win = new BrowserWindow({
     width: winWidth,
     height: winHeight,
+    autoHideMenuBar: true,
     webPreferences: {
       contextIsolation: true,
       preload: path.join(__dirname, "preload.js"),
@@ -36,7 +37,6 @@ async function createWindow(): Promise<BrowserWindow> {
       // Required for Spectron testing
       enableRemoteModule: isDevelopment ? true : false
     },
-    autoHideMenuBar: true
   });
 
   // Set application menu.
