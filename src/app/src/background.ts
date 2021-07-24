@@ -74,7 +74,7 @@ if (!gotSingleInstanceLock) {
 } else {
   // Scheme must be registered before the app is ready
   protocol.registerSchemesAsPrivileged([
-    { scheme: "app", privileges: { secure: true, standard: true } }
+    { scheme: "app", privileges: { secure: true, standard: true } },
   ]);
 
   app.on("will-quit", async () => {
