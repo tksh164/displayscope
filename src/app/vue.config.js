@@ -8,29 +8,29 @@ module.exports = {
         extraFiles: [
           {
             from: "../../LICENSE",
-            to: "./LICENSE.txt"
+            to: "./LICENSE.txt",
           },
           {
             from: "../../ThirdPartyNotices.txt",
-            to: "."
+            to: ".",
           },
           {
             from: "build/icon.png",
-            to: "./resources"
+            to: "./resources",
           },
           {
             from: "build/setmousecursorpos.exe",
-            to: "./resources"
+            to: "./resources",
           },
           {
             from: "build/default-settings.json",
-            to: "./resources"
-          }
+            to: "./resources",
+          },
         ],
         "nsis": {
-          artifactName: "${name}-setup-${version}.${ext}"
-        }
-      }
-    }
-  }
+          artifactName: "${name}-setup-${version}.${ext}",
+        },
+      },
+    },
+  },
 }

@@ -23,6 +23,7 @@ async function createWindow(): Promise<BrowserWindow> {
   const win = new BrowserWindow({
     width: winWidth,
     height: winHeight,
+    autoHideMenuBar: true,
     webPreferences: {
       contextIsolation: true,
       preload: path.join(__dirname, "preload.js"),
@@ -36,7 +37,6 @@ async function createWindow(): Promise<BrowserWindow> {
       // Required for Spectron testing
       enableRemoteModule: isDevelopment ? true : false
     },
-    autoHideMenuBar: true
   });
 
   // Set application menu.
@@ -74,7 +74,7 @@ if (!gotSingleInstanceLock) {
 } else {
   // Scheme must be registered before the app is ready
   protocol.registerSchemesAsPrivileged([
-    { scheme: "app", privileges: { secure: true, standard: true } }
+    { scheme: "app", privileges: { secure: true, standard: true } },
   ]);
 
   app.on("will-quit", async () => {
@@ -137,7 +137,7 @@ if (!gotSingleInstanceLock) {
   // Exit cleanly on request from parent process in development mode.
   if (isDevelopment) {
     if (process.platform === "win32") {
-      process.on("message", data => {
+      process.on("message", (data) => {
         if (data === "graceful-exit") {
           app.quit();
         }
