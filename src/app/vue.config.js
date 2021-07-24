@@ -34,7 +34,7 @@ module.exports = {
           },
         },
         "nsis": {
-          artifactName: "${name}-setup-${version}.${ext}",
+          artifactName: "${name}-setup-${version}-${arch}.${ext}",
         },
       },
     },
