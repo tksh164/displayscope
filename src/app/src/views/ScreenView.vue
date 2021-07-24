@@ -84,11 +84,11 @@ export default class ScreenView extends Vue {
   isShowFunctionArea = false;
   mouseCursorReturnShortcutKey = "";
   
-  get showScreenVideoClass(): object {
+  get showScreenVideoClass(): Record<string, boolean> {
     return { "hide-screen-video": !this.isShowScreenVideo };
   }
 
-  get showFunctionAreaClass(): object {
+  get showFunctionAreaClass(): Record<string, boolean> {
     return { "show-function-area": this.isShowFunctionArea };
   }
 
