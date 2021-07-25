@@ -1,12 +1,13 @@
 <br />
 
 <h1 align="center">Displayscope 🔭</h1>
-<p align="center">Displayscope enables to use the apps on <strong>the out of sight screen</strong> such as the display emulators, display dummy plugs and behind screens.</p>
+<p align="center">Displayscope enables to use apps on the out of sight screens.</p>
 
 <br /><br />
 
 [![Open in Visual Studio Code](https://open.vscode.dev/badges/open-in-vscode.svg)](https://open.vscode.dev/tksh164/displayscope)
 
+Displayscope enables to use apps on <strong>the out of sight screens</strong> such as the display emulators, display dummy plugs and behind screens.
 
 ## 🎯 Use cases
 
