@@ -37,7 +37,7 @@ module.exports = {
           artifactName: "${name}-setup-${version}-${arch}.${ext}",
         },
         "msi": {
-          artifactName: "${name}-setup-${version}-${arch}.${ext}",
+          artifactName: "${name}-setup-${version}-${arch}-experimental.${ext}",
         },
       },
     },
