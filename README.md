@@ -33,13 +33,13 @@ Displayscope provides view and control through the window to the screen. You can
 2. Run the setup package to install.
 3. You can find Displayscope in the Start menu.
 
-If you don't need Displayscope anymore, you can uninstall it from "Apps & features" in the Settings or "Uninstall a program" in the Control Panel.
+If you don't need Displayscope anymore, you can uninstall it from **Apps & features** in the Settings or **Uninstall a program** in the Control Panel.
 
 ## 🔨 Build from source
 
 ### Build environment requirements
 
-- Windows 10
+- Windows 10 x64
 - [yarn](https://yarnpkg.com/)
 - [Visual Studio](https://visualstudio.microsoft.com/)
 
