@@ -9,7 +9,7 @@
 
 [![Open in Visual Studio Code](https://open.vscode.dev/badges/open-in-vscode.svg)](https://open.vscode.dev/tksh164/displayscope)
 
-## About
+## 🗨 About
 
 Displayscope enables to use apps on <strong>the out of sight screens</strong> such as the display emulators, display dummy plugs and behind screens.
 
