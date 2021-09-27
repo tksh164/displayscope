@@ -17,7 +17,7 @@ export async function registerHotkeyReturnCursorToAppWindow(windowId: number): P
         `\"${shortcutKey}\" is already registered by another application.`
       throw err;
     }
-  } catch (e) {
+  } catch (e: any) {
     if (e.name === "GlobalShortcutKeyRegistrationError") {
       const win = BrowserWindow.fromId(appWindowId);
       await showGlobalShortcutErrorMessageBox(win!, "Global shortcut key registration error", e.message);
