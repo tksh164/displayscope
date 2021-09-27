@@ -16,7 +16,7 @@ async function loadAppSettings(): Promise<void> {
   try {
     const jsonText = fs.readFileSync(appSettingsFilePath, { encoding: "utf8", flag: "r" });
     appSettings = JSON.parse(jsonText);
-  } catch (e) {
+  } catch (e: any) {
     if (e.code === 'ENOENT') {
       // If the app settings file does not exist, retrieve the settings from the default app settings file
       // and create a new app settings file by copy the default app settings file.
@@ -45,7 +45,7 @@ async function loadDefaultAppSettings(): Promise<AppSettings> {
   try {
     const jsonText = fs.readFileSync(appSettingsFilePath, { encoding: "utf8", flag: "r" });
     return JSON.parse(jsonText);
-  } catch (e) {
+  } catch (e: any) {
     if (e.message.includes("Unexpected token")) {
       await showAppSettingErrorMessageBox("Default app settings file syntax error",
         `Couldn't load the app settings because the app settings file \"${appSettingsFilePath}\" has syntax error.` + "\n\n" +
@@ -73,7 +73,7 @@ async function createNewAppSettingsFile(): Promise<void> {
   try
   {
     fs.copyFileSync(defaultAppSettingsFilePath, appSettingsFilePath, fs.constants.COPYFILE_EXCL);
-  } catch (e) {
+  } catch (e: any) {
     await showAppSettingErrorMessageBox("App settings file creation error",
       `Source: ${defaultAppSettingsFilePath}` + "\n" +
       `Destination: ${appSettingsFilePath}` + "\n\n" +
