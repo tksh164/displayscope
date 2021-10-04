@@ -78,7 +78,7 @@ You can install Displayscope from Microsoft Store Preview if you using Windows 1
 
 - Displayscope prevents the screen from going to sleep during the external display showing. If you want to go to sleep on your PC, move back to the selection screen of the screen.
 - Displayscope doesn't work correctly if you selected the *High-performance NVIDIA processor* as the **Preferred graphics processor** in the NVIDIA Control Panel. *Auto-select* and *Integrated graphics* are works well.
-- The app settings file located at `%AppData%\Displayscope\settings.json`. You can global shortcut key through the file. See [here](https://www.electronjs.org/docs/api/accelerator#available-modifiers) for the acceptable shortcut key combination.
+- The app settings file located at `%AppData%\Displayscope\settings.json`. You can change the global shortcut key through the file. See [here](https://www.electronjs.org/docs/api/accelerator#available-modifiers) for the acceptable shortcut key combination.
 
     ```json
     "MouseCursorReturnShortcutKey": "Shift + Esc"
