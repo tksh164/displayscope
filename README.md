@@ -45,9 +45,9 @@ Displayscope provides view and control through the window to the screen. You can
 
 If you don't need Displayscope anymore, you can uninstall it from **Apps & features** in the Settings or **Uninstall a program** in the Control Panel.
 
-### Windows 11
+### Install from Microsoft Store on Windows 11
 
-You can install Displayscope from Microsoft Store Preview if you using Windows 11 (English store only). Search `Displayscope` in Microsoft Store Preview to find it.
+You can install Displayscope from Microsoft Store if you using Windows 11. Search `Displayscope` in Microsoft Store to find it.
 
 ## 🔨 Build from source
 
