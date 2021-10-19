@@ -53,7 +53,7 @@ You can install Displayscope from Microsoft Store if you using Windows 11. Searc
 
 ### Build environment requirements
 
-- Windows 10 x64
+- Windows 11 x64 or Windows 10 x64
 - [yarn](https://yarnpkg.com/)
 - [Visual Studio](https://visualstudio.microsoft.com/)
 
