@@ -8,7 +8,7 @@ import { ScreenSpec } from "@/types/app";
 import { getAppSettings } from "@/main/app-settings";
 import { setAppMenu } from "@/main/app-menu";
 import { registerHotkeyReturnCursorToAppWindow, unregisterHotkeyReturnCursorToAppWindow } from "@/main/hotkey-registerer";
-import { getAllScreenSpec } from "@/main/screen-metadata";
+import { getAllScreenSpec } from "@/main/screen-spec";
 import { setMouseCursorPosition } from "@/main/mouse-cursor-setter";
 import { getCurrentAlwaysOnTopSetting, setAlwaysOnTop, setAlwaysOnTopMenuItemCheck } from "@/main/always-on-top";
 
