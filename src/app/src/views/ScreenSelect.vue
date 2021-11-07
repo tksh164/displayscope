@@ -7,7 +7,7 @@
             <el-switch v-model="alwaysOnTop" active-text="Always on top" @change="changeAlwasyOnTop"></el-switch>
           </div>
           <div class="function-area-item">
-            <el-button type="primary" circle icon="el-icon-refresh" @click="refreshScreenMetadataList"></el-button>
+            <el-button type="primary" circle icon="el-icon-refresh" @click="refreshScreenSpecList"></el-button>
           </div>
         </div>
       </el-header>
@@ -74,7 +74,7 @@
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 import ScreenItem from "@/components/ScreenItem.vue";
-import { ScreenItemProperty, ScreenMetadata } from "@/types/app";
+import { ScreenItemProperty, ScreenSpec } from "@/types/app";
 
 @Component({
   components: {
@@ -93,22 +93,22 @@ export default class ScreenSelect extends Vue {
     window.exposedApi.addAlwaysOnTopChangedByMenuItemListener((newAlwaysOnTopSetting: boolean) => {
       this.alwaysOnTop = newAlwaysOnTopSetting;
     });
-    setTimeout(this.refreshScreenMetadataList, 30);
+    setTimeout(this.refreshScreenSpecList, 30);
   }
 
-  refreshScreenMetadataList(): void {
-    window.exposedApi.getAllScreenMetadata(1000, 1000)
-      .then((screenMetadataArray: ScreenMetadata[]) => {
+  refreshScreenSpecList(): void {
+    window.exposedApi.getAllScreenSpec(1000, 1000)
+      .then((screenSpecs: ScreenSpec[]) => {
         const screenItems: ScreenItemProperty[] = [];
-        for (const sm of screenMetadataArray) {
+        for (const screenSpec of screenSpecs) {
           screenItems.push({
-            id: sm.id,
-            name: sm.name,
-            thumbnailDataUri: sm.thumbnailDataUri,
-            bounds: sm.display.bounds,
-            scaleFactor: sm.display.scaleFactor,
-            isPrimary: sm.display.isPrimary,
-            scaledScreenOriginPoint: sm.display.scaledScreenOriginPoint,
+            id: screenSpec.id,
+            name: screenSpec.name,
+            thumbnailDataUri: screenSpec.thumbnailDataUri,
+            bounds: screenSpec.display.bounds,
+            scaleFactor: screenSpec.display.scaleFactor,
+            isPrimary: screenSpec.display.isPrimary,
+            scaledScreenOriginPoint: screenSpec.display.scaledScreenOriginPoint,
           });
         }
         this.screenItems = screenItems;

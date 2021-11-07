@@ -1,9 +1,9 @@
 import { contextBridge, ipcRenderer } from "electron";
-import { ScreenMetadata } from "@/types/app";
+import { ScreenSpec } from "@/types/app";
 
 contextBridge.exposeInMainWorld("exposedApi", {
-  getAllScreenMetadata: async (thumbnailWidth: number, thumbnailHeight: number): Promise<ScreenMetadata[]> => {
-    return ipcRenderer.invoke("get-all-screen-metadata", thumbnailWidth, thumbnailHeight);     
+  getAllScreenSpec: async (thumbnailWidth: number, thumbnailHeight: number): Promise<ScreenSpec[]> => {
+    return ipcRenderer.invoke("get-all-screen-spec", thumbnailWidth, thumbnailHeight);     
   },
   setMouseCursorPosition: async (posX: number, posY: number): Promise<void> => {
     return ipcRenderer.send("set-mouse-cursor-position", posX, posY);

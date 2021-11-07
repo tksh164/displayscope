@@ -4,11 +4,11 @@ import { app, protocol, BrowserWindow, screen, ipcMain } from "electron";
 import { createProtocol } from "vue-cli-plugin-electron-builder/lib";
 import installExtension, { VUEJS_DEVTOOLS } from "electron-devtools-installer";
 import * as path from "path";
-import { ScreenMetadata } from "@/types/app";
+import { ScreenSpec } from "@/types/app";
 import { getAppSettings } from "@/main/app-settings";
 import { setAppMenu } from "@/main/app-menu";
 import { registerHotkeyReturnCursorToAppWindow, unregisterHotkeyReturnCursorToAppWindow } from "@/main/hotkey-registerer";
-import { getAllScreenMetadata } from "@/main/screen-metadata";
+import { getAllScreenSpec } from "@/main/screen-metadata";
 import { setMouseCursorPosition } from "@/main/mouse-cursor-setter";
 import { getCurrentAlwaysOnTopSetting, setAlwaysOnTop, setAlwaysOnTopMenuItemCheck } from "@/main/always-on-top";
 
@@ -144,8 +144,8 @@ if (!gotSingleInstanceLock) {
     }
   }
 
-  ipcMain.handle("get-all-screen-metadata", async (event, thumbnailWidth: number, thumbnailHeight: number): Promise<ScreenMetadata[]> => {
-    return getAllScreenMetadata(thumbnailWidth, thumbnailHeight);
+  ipcMain.handle("get-all-screen-spec", async (event, thumbnailWidth: number, thumbnailHeight: number): Promise<ScreenSpec[]> => {
+    return getAllScreenSpec(thumbnailWidth, thumbnailHeight);
   });
 
   ipcMain.on("set-mouse-cursor-position", async (event, posX: number, posY: number) => {
