@@ -1,5 +1,5 @@
 export interface ExposedApi {
-  getAllScreenMetadata: (thumbnailWidth: number, thumbnailHeight: number) => Promise<ScreenMetadata[]>;
+  getAllScreenSpec: (thumbnailWidth: number, thumbnailHeight: number) => Promise<ScreenSpec[]>;
   setMouseCursorPosition: (posX: number, posY: number) => Promise<void>;
   getCurrentAlwaysOnTopSetting: () => Promise<boolean>;
   setAlwaysOnTopSetting: (newAlwaysOnTopSetting: boolean) => Promise<void>;
@@ -19,13 +19,13 @@ export interface ScreenPoint {
   y: number;
 }
 
-export interface DisplayMetadataValue {
+export interface DisplaySpec {
   bounds: DisplayRectangle;
   scaleFactor: number;
   isPrimary: boolean;
 }
 
-export interface ScreenMetadata {
+export interface ScreenSpec {
   id: string;
   name: string;
   thumbnailDataUri: string;

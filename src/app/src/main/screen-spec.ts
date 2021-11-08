@@ -1,26 +1,25 @@
-
 import { screen, desktopCapturer } from "electron";
-import { DisplayMetadataValue, DisplayRectangle, ScreenPoint, ScreenMetadata } from "@/types/app";
+import { DisplaySpec, DisplayRectangle, ScreenPoint, ScreenSpec } from "@/types/app";
 
-export async function getAllScreenMetadata(thumbnailWidth: number, thumbnailHeight: number): Promise<ScreenMetadata[]> {
-  return getDisplayMetadataDictionary()
-    .then(async (displayMetadataDictionary) => {
-      return getScreenMetadata(displayMetadataDictionary, thumbnailWidth, thumbnailHeight);
+export async function getAllScreenSpec(thumbnailWidth: number, thumbnailHeight: number): Promise<ScreenSpec[]> {
+  return getDisplaySpecDictionary()
+    .then(async (displaySpecDictionary) => {
+      return getScreenSpecs(displaySpecDictionary, thumbnailWidth, thumbnailHeight);
     });
 }
   
-async function getDisplayMetadataDictionary(): Promise<{ [key: string]: DisplayMetadataValue; }> {
+async function getDisplaySpecDictionary(): Promise<{ [key: string]: DisplaySpec; }> {
   const primaryDisplayId = screen.getPrimaryDisplay().id;
   const allDisplays = screen.getAllDisplays();
-  const displayMetadata: { [key: string]: DisplayMetadataValue; } = {};
+  const displaySpec: { [key: string]: DisplaySpec; } = {};
   for (const display of allDisplays) {
-    displayMetadata[display.id.toString()] = {
+    displaySpec[display.id.toString()] = {
       bounds: display.bounds,
       scaleFactor: display.scaleFactor,
       isPrimary: display.id === primaryDisplayId
     };
   }
-  return displayMetadata;
+  return displaySpec;
 }
   
 async function getScreenCenterPoint(displayBounds: DisplayRectangle, scaleFactor: number): Promise<ScreenPoint> {
@@ -33,7 +32,7 @@ async function getScreenCenterPoint(displayBounds: DisplayRectangle, scaleFactor
   }
 }
 
-async function getScreenMetadata(displayMetadataDictionary: { [key: string]: DisplayMetadataValue; }, thumbnailWidth: number, thumbnailHeight: number): Promise<ScreenMetadata[]> {
+async function getScreenSpecs(displaySpecDictionary: { [key: string]: DisplaySpec; }, thumbnailWidth: number, thumbnailHeight: number): Promise<ScreenSpec[]> {
   return desktopCapturer
     .getSources({
       types: ["screen"],
@@ -44,21 +43,21 @@ async function getScreenMetadata(displayMetadataDictionary: { [key: string]: Dis
       fetchWindowIcons: false
     })
     .then(async (sources) => {
-      const screenMetadataArray: ScreenMetadata[] = [];
+      const screenSpecs: ScreenSpec[] = [];
       for (const source of sources) {
-        const dm = displayMetadataDictionary[source.display_id];
-        screenMetadataArray.push({
+        const displaySpec = displaySpecDictionary[source.display_id];
+        screenSpecs.push({
           id: source.id,
           name: source.name,
           thumbnailDataUri: source.thumbnail.toDataURL(),
           display: {
-            bounds: dm.bounds,
-            scaleFactor: dm.scaleFactor,
-            isPrimary: dm.isPrimary,
-            scaledScreenOriginPoint: screen.dipToScreenPoint({ x: dm.bounds.x, y: dm.bounds.y }),
+            bounds: displaySpec.bounds,
+            scaleFactor: displaySpec.scaleFactor,
+            isPrimary: displaySpec.isPrimary,
+            scaledScreenOriginPoint: screen.dipToScreenPoint({ x: displaySpec.bounds.x, y: displaySpec.bounds.y }),
           }
         });
       }
-      return screenMetadataArray;
+      return screenSpecs;
     });
 }
