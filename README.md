@@ -3,7 +3,7 @@
 <p align="center"><img src="./media/displayscope.png" width="10%" alt="Displayscope app icon."></p>
 
 <h1 align="center">Displayscope</h1>
-<p align="center">Displayscope enables to use apps on the out of sight screens.</p>
+<p align="center">Displayscope enables to use apps on out of sight screens.</p>
 
 <br /><br />
 
