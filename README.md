@@ -35,11 +35,7 @@ Displayscope provides view and control through the window to the screen. You can
 
 ## 📥 Install
 
-### Install from Microsoft Store
-
-You can install [Displayscope](https://apps.microsoft.com/store/detail/displayscope/XP9LZC3BDC1CG2) from Microsoft Store.
-
-### Install from GitHub
+### Install from GitHub (Recommended)
 
 1. Download [the setup package](https://github.com/tksh164/displayscope/releases/latest). Currently suppoeted only Windows.
     - Select "Keep" if you get warning when the download is completed.
@@ -49,11 +45,16 @@ You can install [Displayscope](https://apps.microsoft.com/store/detail/displaysc
 
 If you don't need Displayscope anymore, you can uninstall it from **Apps & features** in the Settings or **Uninstall a program** in the Control Panel.
 
+### Install from Microsoft Store
+
+You can install [Displayscope](https://apps.microsoft.com/store/detail/displayscope/XP9LZC3BDC1CG2) from Microsoft Store.
+
 ## 🔨 Build from source
 
 ### Build environment requirements
 
 - Windows 11 x64 or Windows 10 x64
+- [Node.js](https://nodejs.org/)
 - [yarn](https://yarnpkg.com/)
 - [Visual Studio](https://visualstudio.microsoft.com/)
 
