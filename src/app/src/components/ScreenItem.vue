@@ -33,6 +33,7 @@
 .screen-thumbnail {
   width: 35vw;
   min-width: 300px;
+  border-radius: 8px;
 }
 </style>
 
