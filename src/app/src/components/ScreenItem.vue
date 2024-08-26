@@ -11,7 +11,7 @@
   margin: 2%;
   padding: 0.6vw 0.8vw 0.6vw 0.8vw;
   border: solid 1px transparent;
-  border-radius: 4px;
+  border-radius: 8px;
 }
 
 .screen-list-item:hover {
@@ -33,7 +33,7 @@
 .screen-thumbnail {
   width: 35vw;
   min-width: 300px;
-  border-radius: 8px;
+  border-radius: 4px;
 }
 </style>
 
