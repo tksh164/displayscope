@@ -25,16 +25,16 @@
   },
   "main": "background.js",
   "dependencies": {
-    "element-ui": "^2.15.6",
+    "element-ui": "^2.15.0",
     "vue": "^2.7.0",
-    "vue-class-component": "^7.2.6",
-    "vue-property-decorator": "^9.1.2",
-    "vue-router": "^3.5.3",
-    "vuex": "^3.6.2"
+    "vue-class-component": "^7.2.0",
+    "vue-property-decorator": "^9.1.0",
+    "vue-router": "^3.5.0",
+    "vuex": "^3.6.0"
   },
   "devDependencies": {
     "@types/electron-devtools-installer": "^2.2.0",
-    "@types/jest": "^24.0.19",
+    "@types/jest": "^24.0.0",
     "@typescript-eslint/eslint-plugin": "^4.18.0",
     "@typescript-eslint/parser": "^4.18.0",
     "@vue/cli-plugin-eslint": "~4.5.12",
@@ -45,18 +45,18 @@
     "@vue/cli-service": "~4.5.12",
     "@vue/eslint-config-prettier": "^6.0.0",
     "@vue/eslint-config-typescript": "^7.0.0",
-    "@vue/test-utils": "^1.0.3",
-    "copyfiles": "^2.4.1",
+    "@vue/test-utils": "^1.0.0",
+    "copyfiles": "^2.4.0",
     "electron": "^32.0.0",
     "electron-devtools-installer": "^3.1.0",
-    "eslint": "^6.7.2",
-    "eslint-plugin-prettier": "^3.3.1",
-    "eslint-plugin-vue": "^6.2.2",
-    "prettier": "^2.2.1",
+    "eslint": "^6.7.0",
+    "eslint-plugin-prettier": "^3.3.0",
+    "eslint-plugin-vue": "^6.2.0",
+    "prettier": "^2.2.0",
     "spectron": "15.0.0",
     "typescript": "~4.4.0",
     "vue-cli-plugin-electron-builder": "~2.1.1",
     "vue-cli-plugin-element": "~1.0.1",
-    "vue-template-compiler": "^2.6.11"
+    "vue-template-compiler": "^2.6.0"
   }
 }
