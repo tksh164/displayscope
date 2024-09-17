@@ -54,6 +54,7 @@ function moveMouseCursorToAppWindowArea(): void {
   const win = BrowserWindow.fromId(appWindowId);
   const [posX, posY] = calcCenterPositionInWindow(win!);
   setMouseCursorPosition(posX, posY);
+  win?.focus();
 }
 
 function calcCenterPositionInWindow(win: BrowserWindow): [number, number] {
