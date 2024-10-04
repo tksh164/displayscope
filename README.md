@@ -11,11 +11,7 @@
 
 Displayscope enables to use apps on <strong>out of sight screens</strong> such as display emulators, display dummy plugs and behind screens.
 
-<p align="center">
-<img width="40%" src="./media/screenshot1.png"/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<img width="40%" src="./media/screenshot2.png"/>
-</p>
+![Displayscope demo animation](https://raw.githubusercontent.com/tksh164/whatnot/main/displayscope/media/displayscope-demo.gif)
 
 ## 🎯 Use cases
 
