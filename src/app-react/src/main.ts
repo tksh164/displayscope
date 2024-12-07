@@ -1,7 +1,7 @@
 import { app, BrowserWindow } from 'electron';
 import path from 'path';
 import started from 'electron-squirrel-startup';
-import getInitialAppWindowSize from './main/appWindowSize';
+import { getInitialAppWindowSize } from './main/appWindowSize';
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (started) {

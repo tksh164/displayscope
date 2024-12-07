@@ -1,6 +1,6 @@
 import { screen } from "electron";
 
-export default function getInitialAppWindowSize(): [number, number] {
+export function getInitialAppWindowSize(): [number, number] {
     const workAreaSize = screen.getPrimaryDisplay().workAreaSize;
     return [
         Math.floor(workAreaSize.width * 0.8),
