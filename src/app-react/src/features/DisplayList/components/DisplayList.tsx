@@ -1,4 +1,3 @@
-import { Link } from "react-router";
 import { useNavigate } from "react-router";
 import { Button } from "@fluentui/react-components";
 import DisplayListHeader from "./DisplayListHeader";
