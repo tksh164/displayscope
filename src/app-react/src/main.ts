@@ -2,6 +2,7 @@ import { app, BrowserWindow } from 'electron';
 import path from 'path';
 import started from 'electron-squirrel-startup';
 import { getInitialAppWindowSize } from './main/appWindowSize';
+import { initializeIpcListeners } from './main/ipcListener';
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (started) {
@@ -19,13 +20,16 @@ const createWindow = () => {
     },
   });
 
+  // Initialize IPC listeners.
+  initializeIpcListeners(mainWindow);
+
   // and load the index.html of the app.
   if (MAIN_WINDOW_VITE_DEV_SERVER_URL) {
     mainWindow.loadURL(MAIN_WINDOW_VITE_DEV_SERVER_URL);
   } else {
     mainWindow.loadFile(path.join(__dirname, `../renderer/${MAIN_WINDOW_VITE_NAME}/index.html`));
   }
-
+ 
   // Open the DevTools.
   mainWindow.webContents.openDevTools();
 };
