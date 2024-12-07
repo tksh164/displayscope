@@ -6,9 +6,9 @@ import { router } from "./routes";
 
 const root = createRoot(document.getElementById("root"));
 root.render(
-    <StrictMode>
-        <FluentProvider theme={webDarkTheme}>
-            <RouterProvider router={router} />
-        </FluentProvider>
-    </StrictMode>
+  <StrictMode>
+    <FluentProvider theme={webDarkTheme}>
+      <RouterProvider router={router} />
+    </FluentProvider>
+  </StrictMode>
 );
