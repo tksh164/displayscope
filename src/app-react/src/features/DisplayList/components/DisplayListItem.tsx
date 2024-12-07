@@ -1,3 +1,5 @@
 export default function DisplayListItem() {
-    return <h3>DisplayListItem</h3>;
+    return (
+        <h3>DisplayListItem</h3>
+    );
 }

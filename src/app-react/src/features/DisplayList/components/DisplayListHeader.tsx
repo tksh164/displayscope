@@ -1,3 +1,12 @@
+import { Button, Switch } from "@fluentui/react-components";
+import { ArrowSyncRegular } from "@fluentui/react-icons";
+
 export default function DisplayListHeader() {
-    return <h3>DisplayListHeader</h3>;
+    return (
+        <div>
+            <h3>DisplayListHeader</h3>
+            <Switch label="Always on top" />
+            <Button shape="circular" size="large" icon={<ArrowSyncRegular />} appearance="primary" />
+        </div>
+    );
 }
