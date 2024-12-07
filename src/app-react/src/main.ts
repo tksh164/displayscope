@@ -1,6 +1,7 @@
 import { app, BrowserWindow } from 'electron';
 import path from 'path';
 import started from 'electron-squirrel-startup';
+import getInitialAppWindowSize from './main/appWindowSize';
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (started) {
@@ -9,9 +10,10 @@ if (started) {
 
 const createWindow = () => {
   // Create the browser window.
+  const [windowWidth, windowHeight] = getInitialAppWindowSize();
   const mainWindow = new BrowserWindow({
-    width: 800,
-    height: 600,
+    width: windowWidth,
+    height: windowHeight,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
     },
