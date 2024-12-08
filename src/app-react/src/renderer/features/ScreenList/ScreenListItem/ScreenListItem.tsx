@@ -1,6 +1,6 @@
 import { Text, Image } from "@fluentui/react-components";
 import { ScreenSpec } from "src/main/types/screenSpec";
-import "../styles/ScreenListItem.css";
+import "./ScreenListItem.css";
 
 export default function ScreenListItem(props: { screenSpec: ScreenSpec }) {
   return (

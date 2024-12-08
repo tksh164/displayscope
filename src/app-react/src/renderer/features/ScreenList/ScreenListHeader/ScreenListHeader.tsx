@@ -1,6 +1,6 @@
 import { Button, Switch } from "@fluentui/react-components";
 import { ArrowSyncRegular } from "@fluentui/react-icons";
-import "../styles/ScreenListHeader.css";
+import "./ScreenListHeader.css";
 
 export default function ScreenListHeader() {
   return (
