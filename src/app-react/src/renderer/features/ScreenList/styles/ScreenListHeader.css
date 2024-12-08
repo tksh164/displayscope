@@ -1,0 +1,9 @@
+.function-area {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.function-area .function-area-item {
+  margin-left: 2rem;
+}

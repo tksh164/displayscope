@@ -1,12 +1,13 @@
 import { Button, Switch } from "@fluentui/react-components";
 import { ArrowSyncRegular } from "@fluentui/react-icons";
+import "../styles/ScreenListHeader.css";
 
 export default function ScreenListHeader() {
   return (
-    <div>
+    <div className="function-area">
       <h3>ScreenListHeader</h3>
-      <Switch label="Always on top" onChange={() => window.exposedApi.setAlwaysOnTopSetting(true)}/>
-      <Button shape="circular" size="large" icon={<ArrowSyncRegular />} appearance="primary" />
+      <Switch className="function-area-item" label="Always on top" labelPosition="before" onChange={() => window.exposedApi.setAlwaysOnTopSetting(true)} />
+      <Button className="function-area-item" shape="circular" size="large" appearance="primary" icon={<ArrowSyncRegular />} />
     </div>
   );
 }

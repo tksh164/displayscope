@@ -1,0 +1,24 @@
+.screen-list-item {
+  margin: 2%;
+  padding: 0.6vw 0.8vw 0.6vw 0.8vw;
+  border: solid 1px transparent;
+  border-radius: 8px;
+}
+
+.screen-list-item:hover {
+  border: solid 1px #333333;
+  background-color: #232323;
+}
+
+.screen-name {
+  padding-bottom: 0.1rem;
+}
+
+.screen-description {
+  padding-bottom: 0.5rem;
+}
+
+.screen-thumbnail {
+  width: 35vw;
+  min-width: 300px;
+}
