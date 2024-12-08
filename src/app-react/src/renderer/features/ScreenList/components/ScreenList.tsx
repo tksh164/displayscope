@@ -2,7 +2,7 @@ import { useNavigate, useOutletContext } from "react-router";
 import { Button } from "@fluentui/react-components";
 import ScreenListHeader from "./ScreenListHeader";
 import ScreenListItem from "./ScreenListItem";
-import { ScreenSpec } from "../../../../main/types/screenSpec";
+import { ScreenSpec } from "src/main/types/screenSpec";
 
 export default function ScreenList() {
   const screenSpecs = useOutletContext<ScreenSpec[]>();
