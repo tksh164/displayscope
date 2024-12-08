@@ -1,9 +1,8 @@
 import { useState, useEffect } from "react";
 import { Outlet } from "react-router";
-import { ScreenSpec } from "../../../../main/types/screenSpec";
 
 export default function App() {
-  const [screenSpecs, setScreenSpecs] = useState([] as ScreenSpec[]);
+  const [screenSpecs, setScreenSpecs] = useState([]);
 
   useEffect(() => {
     const getAllScreenSpecs = async () => {

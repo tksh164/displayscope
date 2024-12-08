@@ -7,7 +7,7 @@ export default function InteractiveView() {
     return (
       <div style={{border: "solid 5px #0000ff"}}>
         <h2>InteractiveView</h2>
-        <Button appearance="primary" onClick={() => navigate("/")}>DisplayList</Button>
+        <Button appearance="primary" onClick={() => navigate("/")}>ScreenList</Button>
         <InteractiveViewHeader />
       </div>
     );
