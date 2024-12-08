@@ -1,5 +1,12 @@
-export default function DisplayListItem() {
+import { Text, Image } from "@fluentui/react-components";
+import { ScreenSpec } from "../../../../main/types/screenSpec";
+
+export default function DisplayListItem(props: { screenSpec: ScreenSpec }) {
   return (
-    <h3>DisplayListItem</h3>
+    <div>
+      <div><Text>{props.screenSpec.name}</Text></div>
+      <div><Text>{props.screenSpec.display.isPrimary ? "Primary, " : "" }{props.screenSpec.display.bounds.width} x {props.screenSpec.display.bounds.width}, {props.screenSpec.display.scaleFactor * 100}%</Text></div>
+      <div><Image src={props.screenSpec.thumbnailDataUri}/></div>
+    </div>
   );
 }
