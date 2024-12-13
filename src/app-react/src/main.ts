@@ -1,5 +1,6 @@
-import { app, BrowserWindow } from "electron";
+import { app, session, BrowserWindow } from "electron";
 import path from "path";
+import os from "os";
 import started from "electron-squirrel-startup";
 import { getInitialAppWindowSize } from "./main/appWindowSize";
 import { initializeIpcListeners } from "./main/ipcListener";
@@ -29,15 +30,28 @@ const createWindow = () => {
   } else {
     mainWindow.loadFile(path.join(__dirname, `../renderer/${MAIN_WINDOW_VITE_NAME}/index.html`));
   }
- 
+
   // Open the DevTools.
   mainWindow.webContents.openDevTools();
+};
+
+// Add React Developer Tools extension. Need reload to enable the extension.
+const installReactDevTools = async () => {
+  const reactDevToolsPath = path.join(
+    os.homedir(),
+    'AppData/Local/Microsoft/Edge Beta/User Data/Profile 1/Extensions/fmkadmapgofadopljbjfkapdkoienihi/6.0.1_0'
+  );
+  const result = await session.defaultSession.loadExtension(reactDevToolsPath)
+  console.log(`Added Extension: ${result.name}`);
 };
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
-app.on("ready", createWindow);
+app.on("ready", () => {
+  installReactDevTools();
+  createWindow();
+});
 
 // Quit when all windows are closed, except on macOS. There, it's common
 // for applications and their menu bar to stay active until the user quits
