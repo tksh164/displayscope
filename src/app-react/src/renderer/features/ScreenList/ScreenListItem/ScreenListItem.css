@@ -1,5 +1,6 @@
 .screen-list-item {
-  margin: 2%;
+  margin: 80px 1% 1% 1%;
+  /* padding: 0.6vw 0.8vw 0.6vw 0.8vw; */
   padding: 0.6vw 0.8vw 0.6vw 0.8vw;
   border: solid 1px transparent;
   border-radius: 8px;

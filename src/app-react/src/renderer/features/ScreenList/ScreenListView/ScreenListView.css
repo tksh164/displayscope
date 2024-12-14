@@ -1,6 +1,15 @@
+.screen-list-view-wrapper {
+  width: 100%;
+  height: 100%;
+  /* border: solid 5px #00ff00; */
+}
+
 .screen-list {
   width: 100%;
   height: 100%;
+  /* padding: 5%; */
+  /* position: absolute; */
+  margin-top: -50px;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;

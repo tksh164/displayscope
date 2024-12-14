@@ -10,10 +10,10 @@ export default function ScreenListHeader(props: ScreenListHeaderProps) {
   const updateScreenSpecs = props.refreshScreenSpecs;
 
   return (
-    <div className="function-area">
+    <div className="screen-list-header">
       <h3>ScreenListHeader</h3>
-      <Switch className="function-area-item" label="Always on top" labelPosition="before" onChange={() => window.exposedApi.setAlwaysOnTopSetting(true)} />
-      <Button className="function-area-item" shape="circular" size="large" appearance="primary" icon={<ArrowSyncRegular />} onClick={updateScreenSpecs} />
+      <Switch className="header-item" label="Always on top" labelPosition="before" onChange={() => window.exposedApi.setAlwaysOnTopSetting(true)} />
+      <Button className="header-item" shape="circular" size="large" appearance="primary" icon={<ArrowSyncRegular />} onClick={updateScreenSpecs} />
     </div>
   );
 }

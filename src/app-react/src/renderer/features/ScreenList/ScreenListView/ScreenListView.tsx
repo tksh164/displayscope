@@ -20,8 +20,7 @@ export default function ScreenListView() {
   }, []);
 
   return (
-    <div style={{border: "solid 5px #00ff00"}}>
-      <h2>ScreenList</h2>
+    <div className="screen-list-view-wrapper">
       <ScreenListHeader refreshScreenSpecs={refreshScreenSpecs} />
       <div className="screen-list">
         {

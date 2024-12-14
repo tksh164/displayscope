@@ -1,9 +1,11 @@
-.function-area {
+.screen-list-header {
+  height: 50px;
   display: flex;
   justify-content: flex-end;
   align-items: center;
+  background-color: blueviolet;
 }
 
-.function-area .function-area-item {
+.screen-list-header .header-item {
   margin-left: 2rem;
 }
