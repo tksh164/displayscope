@@ -1,6 +1,7 @@
 import { app, session, BrowserWindow } from "electron";
 import path from "path";
 import os from "os";
+import fs from "fs";
 import started from "electron-squirrel-startup";
 import { getInitialAppWindowSize } from "./main/appWindowSize";
 import { initializeIpcListeners } from "./main/ipcListener";
@@ -41,8 +42,10 @@ const installReactDevTools = async () => {
     os.homedir(),
     'AppData/Local/Microsoft/Edge Beta/User Data/Profile 1/Extensions/fmkadmapgofadopljbjfkapdkoienihi/6.0.1_0'
   );
-  const result = await session.defaultSession.loadExtension(reactDevToolsPath)
-  console.log(`Added Extension: ${result.name}`);
+  if (fs.existsSync(reactDevToolsPath)) {
+    const result = await session.defaultSession.loadExtension(reactDevToolsPath)
+    console.log(`Added Extension: ${result.name}`);
+  }
 };
 
 // This method will be called when Electron has finished
