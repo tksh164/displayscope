@@ -1,20 +1,14 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Outlet } from "react-router";
+import { ScreenSpec } from "src/main/types/screenSpec";
 
 export default function App() {
-  const [screenSpecs, setScreenSpecs] = useState([]);
-
-  useEffect(() => {
-    const getAllScreenSpecs = async () => {
-      const allScreenSpecs = await window.exposedApi.getAllScreenSpecs(1000, 1000);
-      setScreenSpecs(allScreenSpecs);
-    };
-    getAllScreenSpecs();
-  }, []);
+  const [screenSpecs, setScreenSpecs] = useState<ScreenSpec[]>([]);
+  const [currentScreenId, setCurrentScreenId] = useState<string>(null);
 
   return (
     <div style={{border: "solid 5px #ff0000"}}>
-      <Outlet context={screenSpecs} />
+      <Outlet context={{ screenSpecs, setScreenSpecs, setCurrentScreenId }} />
     </div>
   );
 }
