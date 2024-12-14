@@ -1,7 +1,10 @@
 import { Button, Switch } from "@fluentui/react-components";
 import { ArrowSyncRegular } from "@fluentui/react-icons";
-import { ScreenListHeaderProps } from "src/renderer/types/screenListHeaderProps";
 import "./ScreenListHeader.css";
+
+type ScreenListHeaderProps = {
+  refreshScreenSpecs: () => Promise<void>;
+};
 
 export default function ScreenListHeader(props: ScreenListHeaderProps) {
   const updateScreenSpecs = props.refreshScreenSpecs;
