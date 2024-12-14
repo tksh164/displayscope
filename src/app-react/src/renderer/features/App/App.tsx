@@ -8,7 +8,7 @@ export default function App() {
 
   return (
     <div style={{border: "solid 5px #ff0000"}}>
-      <Outlet context={{ screenSpecs, setScreenSpecs, setCurrentScreenId }} />
+      <Outlet context={{ screenSpecs, setScreenSpecs, currentScreenId, setCurrentScreenId }} />
     </div>
   );
 }
