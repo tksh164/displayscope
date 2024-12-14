@@ -1,4 +1,4 @@
-export interface ScreenSpec {
+export type ScreenSpec = {
   id: string;
   name: string;
   thumbnailDataUri: string;
@@ -8,26 +8,26 @@ export interface ScreenSpec {
     isPrimary: boolean;
     scaledScreenOriginPoint: ScreenPoint;
   }
-}
+};
 
-export interface DisplayBounds {
+export type DisplayBounds = {
   x: number;       // The x coordinate of the origin of the rectangle. It must be an integer.
   y: number;       // The y coordinate of the origin of the rectangle. It must be an integer.
   width: number;   // The width of the rectangle. It must be an integer.
   height: number;  // The height of the rectangle. It must be an integer.
-}
+};
 
-export interface ScreenPoint {
+export type ScreenPoint = {
   x: number;
   y: number;
-}
+};
 
-export interface DisplaySpecDictionary {
+export type DisplaySpecDictionary = {
   [key: string]: DisplaySpec;
-}
+};
 
-export interface DisplaySpec {
+export type DisplaySpec = {
   bounds: DisplayBounds;
   scaleFactor: number;
   isPrimary: boolean;
-}
+};
