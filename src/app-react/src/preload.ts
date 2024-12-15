@@ -6,7 +6,10 @@ import { ScreenSpec } from "./main/types/screenSpec";
 
 contextBridge.exposeInMainWorld("exposedApi", {
   getAllScreenSpecs: async (thumbnailWidth: number, thumbnailHeight: number): Promise<ScreenSpec[]> => {
-    return ipcRenderer.invoke("get-all-screen-specs", thumbnailWidth, thumbnailHeight);     
+    return ipcRenderer.invoke("get-all-screen-specs", thumbnailWidth, thumbnailHeight);
+  },
+  setMouseCursorPosition: async (posX: number, posY: number): Promise<void> => {
+    return ipcRenderer.send("set-mouse-cursor-position", posX, posY);
   },
   setAlwaysOnTopSetting: async (newAlwaysOnTopSetting: boolean): Promise<void> => {
     return ipcRenderer.send("set-always-on-top-setting", newAlwaysOnTopSetting);
