@@ -5,11 +5,11 @@ import "./App.css";
 
 export default function App() {
   const [screenSpecs, setScreenSpecs] = useState<ScreenSpec[]>([]);
-  const [currentScreenId, setCurrentScreenId] = useState<string>(null);
+  const [currentScreenSpec, setCurrentScreenSpec] = useState<ScreenSpec>(null);
 
   return (
     <div className="app-wrapper">
-      <Outlet context={{ screenSpecs, setScreenSpecs, currentScreenId, setCurrentScreenId }} />
+      <Outlet context={{ screenSpecs, setScreenSpecs, currentScreenSpec, setCurrentScreenSpec }} />
     </div>
   );
 }

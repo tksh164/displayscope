@@ -1,3 +1,8 @@
+import { ScreenSpec } from "src/main/types/screenSpec";
+
+//
+// Retrieve a screen media stream.
+//
 export async function getScreenMediaStream(sourceId: string): Promise<MediaStream> {
   return navigator.mediaDevices.getUserMedia({
     audio: false,
@@ -10,7 +15,9 @@ export async function getScreenMediaStream(sourceId: string): Promise<MediaStrea
   });
 }
 
+//
 // Calculate the video element's bounds.
+//
 export function updateVideoElementBounds() {
   // Retrieve the wrapper element's computed size.
   const wrapperElementId = "screen-view-wrapper";
@@ -48,7 +55,10 @@ export function updateVideoElementBounds() {
   videoElement.height = newVideoElementBounds.height;
 };
 
-export function moveMouseCursorIntoScreen(event: MouseEvent): void {
+//
+// Move the mouse cursor into the actual screen.
+//
+export function moveMouseCursorIntoScreen(event: React.MouseEvent, currentScreenSpec: ScreenSpec): void {
   // Retrieve the video element's computed bounds.
   const videoElementComputedStyles = window.getComputedStyle(event.target as HTMLVideoElement);
   const videoElementComputedBounds = {
@@ -67,31 +77,22 @@ export function moveMouseCursorIntoScreen(event: MouseEvent): void {
   if (clickedPositionInVideoElement.y < 0) clickedPositionInVideoElement.y = 0;
 
   // Calculate the scale ratio that is the ratio between the actual screen resolution and the video element size.
-  const screenDimension = {
-    width: parseInt(this.$route.query.screenWidth as string),
-    height: parseInt(this.$route.query.screenHeight as string),
-    scaleFactor: parseFloat(this.$route.query.scaleFactor as string),
-  };
-  // TODO: The scaled width and height are can pre-calculate when the screen selected.
+  const currentDisplay = currentScreenSpec.display;
   const scaleRatio = {
-    width: (screenDimension.width * screenDimension.scaleFactor) / videoElementComputedBounds.width,
-    height: (screenDimension.height * screenDimension.scaleFactor) / videoElementComputedBounds.height,
+    width: (currentDisplay.bounds.width * currentDisplay.scaleFactor) / videoElementComputedBounds.width,
+    height: (currentDisplay.bounds.height * currentDisplay.scaleFactor) / videoElementComputedBounds.height,
   };
 
   // Calculate the mouse cursor position in the actual screen.
-  const screenOrigin = {
-    x: parseInt(this.$route.query.scaledOriginX as string),
-    y: parseInt(this.$route.query.scaledOriginY as string),
-  };
   const clickedPositionInScreen = {
     x: clickedPositionInVideoElement.x * scaleRatio.width,
     y: clickedPositionInVideoElement.y * scaleRatio.height,
   };
-  const newMouseCursorPosition = {
-    x: Math.floor(screenOrigin.x + clickedPositionInScreen.x),
-    y: Math.floor(screenOrigin.y + clickedPositionInScreen.y),
+  const mouseCursorPositionInActualScreen = {
+    x: Math.floor(currentDisplay.scaledScreenOriginPoint.x + clickedPositionInScreen.x),
+    y: Math.floor(currentDisplay.scaledScreenOriginPoint.y + clickedPositionInScreen.y),
   };
 
-  //window.exposedApi.setMouseCursorPosition(newMouseCursorPosition.x, newMouseCursorPosition.y);
+  // Move the mouse cursor into the actual screen.
+  window.exposedApi.setMouseCursorPosition(mouseCursorPositionInActualScreen.x, mouseCursorPositionInActualScreen.y);
 }
-

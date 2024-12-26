@@ -3,14 +3,17 @@ import { useOutletContext } from "react-router";
 import { OutletContext } from "src/renderer/types/outletContext";
 import InteractiveScreenHeader from "../InteractiveScreenHeader/InteractiveScreenHeader";
 import ScreenVideo from "../ScreenVideo/ScreenVideo";
-import { getScreenMediaStream, updateVideoElementBounds } from "./InteractiveScreen";
+import { getScreenMediaStream, updateVideoElementBounds, moveMouseCursorIntoScreen } from "./InteractiveScreen";
 import "./InteractiveScreenView.css";
 
 export default function InteractiveScreenView() {
-  const { currentScreenId } = useOutletContext<OutletContext>();
+  const { currentScreenSpec } = useOutletContext<OutletContext>();
   const [screenStream, setScreenStream] = useState<MediaStream>(null);
 
+  //
   // Add and remove event listeners.
+  //
+
   const addEventListeners = () => {
     window.addEventListener("resize", updateVideoElementBounds);
     console.log("Set resize event listener");
@@ -24,21 +27,31 @@ export default function InteractiveScreenView() {
     return removeEventListeners;
   }, []);
 
+  //
   // Refresh screen media stream.
+  //
+
   const refreshScreenMediaStream = async (sourceId: string) => {
     const stream = await getScreenMediaStream(sourceId);
     setScreenStream(stream);
   };
   useEffect(() => {
-    refreshScreenMediaStream(currentScreenId);
+    refreshScreenMediaStream(currentScreenSpec.id);
     console.log("Refresh screen media stream");
-  }, [currentScreenId]);
+  }, [currentScreenSpec]);
 
-  // Event for the video element.
+  //
+  // Events for the video element.
+  //
+
   const onCanPlayThrough = (event: React.SyntheticEvent) => {
     // Update the video element's bounds when the video can play through because video stream's width & height are need to calculate the video element's bounds.
     updateVideoElementBounds();
   };
+
+  const onClick = (event: React.MouseEvent) => {
+    moveMouseCursorIntoScreen(event, currentScreenSpec);
+  }
 
   return (
     <div id="screen-view-wrapper" className="screen-view-wrapper">

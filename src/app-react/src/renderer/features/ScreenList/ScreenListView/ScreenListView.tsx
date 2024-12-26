@@ -6,7 +6,7 @@ import ScreenListItem from "../ScreenListItem/ScreenListItem";
 import "./ScreenListView.css";
 
 export default function ScreenListView() {
-  const { screenSpecs, setScreenSpecs, setCurrentScreenId } = useOutletContext<OutletContext>();
+  const { screenSpecs, setScreenSpecs, setCurrentScreenSpec } = useOutletContext<OutletContext>();
 
   // Refresh screen specs.
   const refreshScreenSpecs = async () => {
@@ -14,7 +14,6 @@ export default function ScreenListView() {
     setScreenSpecs(allScreenSpecs);
     console.log("ScreenSpecs refreshed.");
   };
-
   useEffect(() => {
     refreshScreenSpecs();
   }, []);
@@ -24,7 +23,7 @@ export default function ScreenListView() {
       <ScreenListHeader refreshScreenSpecs={refreshScreenSpecs} />
       <div className="screen-list">
         {
-          screenSpecs.map((screenSpec, i) => <ScreenListItem key={screenSpec.id} screenSpec={screenSpec} setCurrentScreenId={setCurrentScreenId} />)
+          screenSpecs.map((screenSpec, i) => <ScreenListItem key={screenSpec.id} screenSpec={screenSpec} setCurrentScreenSpec={setCurrentScreenSpec} />)
         }
       </div>
     </div>

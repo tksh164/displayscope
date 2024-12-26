@@ -5,7 +5,7 @@ import "./ScreenListItem.css";
 
 type ScreenListItemProps = {
   screenSpec: ScreenSpec;
-  setCurrentScreenId: React.Dispatch<React.SetStateAction<string>>;
+  setCurrentScreenSpec: React.Dispatch<React.SetStateAction<ScreenSpec>>;
 }
 
 export default function ScreenListItem(props: ScreenListItemProps) {
@@ -18,7 +18,7 @@ export default function ScreenListItem(props: ScreenListItemProps) {
   return (
     <div className="screen-list-item" onClick={() => {
       // Update the current screen ID then navigate to the interactive screen view.
-      props.setCurrentScreenId(props.screenSpec.id);
+      props.setCurrentScreenSpec(props.screenSpec);
       navigate("/interactive-screen");
     }}>
       <Text block={true} size={500} weight="semibold" className="screen-name">{screenName}</Text>
