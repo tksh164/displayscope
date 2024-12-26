@@ -3,7 +3,7 @@ import { useOutletContext } from "react-router";
 import { OutletContext } from "src/renderer/types/outletContext";
 import InteractiveScreenHeader from "../InteractiveScreenHeader/InteractiveScreenHeader";
 import ScreenVideo from "../ScreenVideo/ScreenVideo";
-import { getScreenMediaStream } from "./InteractiveScreen";
+import { getScreenMediaStream, updateVideoElementBounds } from "./InteractiveScreen";
 import "./InteractiveScreenView.css";
 
 export default function InteractiveScreenView() {
@@ -11,18 +11,18 @@ export default function InteractiveScreenView() {
   const [screenStream, setScreenStream] = useState<MediaStream>(null);
 
   // Add and remove event listeners.
-  // const addEventListeners = () => {
-  //   window.addEventListener("resize", setVideoElementBounds);
-  //   console.log("Set resize event listener");
-  // };
-  // const removeEventListeners = () => {
-  //   window.removeEventListener("resize", setVideoElementBounds);
-  //   console.log("Remove resize event listener");
-  // };
-  // useEffect(() => {
-  //   addEventListeners();
-  //   return removeEventListeners;
-  // }, []);
+  const addEventListeners = () => {
+    window.addEventListener("resize", updateVideoElementBounds);
+    console.log("Set resize event listener");
+  };
+  const removeEventListeners = () => {
+    window.removeEventListener("resize", updateVideoElementBounds);
+    console.log("Remove resize event listener");
+  };
+  useEffect(() => {
+    addEventListeners();
+    return removeEventListeners;
+  }, []);
 
   // Refresh screen media stream.
   const refreshScreenMediaStream = async (sourceId: string) => {
@@ -34,16 +34,15 @@ export default function InteractiveScreenView() {
     console.log("Refresh screen media stream");
   }, [currentScreenId]);
 
-  // Paly screen media stream.
-  const oncCanPlayThrough = () => {
-    // const videoElement = document.getElementById("screen") as HTMLVideoElement;
-    // videoElement.play();
-    // console.log("Play stream");
+  // Event for the video element.
+  const onCanPlayThrough = (event: React.SyntheticEvent) => {
+    // Update the video element's bounds when the video can play through because video stream's width & height are need to calculate the video element's bounds.
+    updateVideoElementBounds();
   };
 
   return (
-    <div className="screen-view-wrapper">
-      <ScreenVideo id="screen" className="screen-video" srcObject={screenStream} autoPlay={true} controls={false} onCanPlayThrough={oncCanPlayThrough} />
+    <div id="screen-view-wrapper" className="screen-view-wrapper">
+      <ScreenVideo id="screen-video" className="screen-video" srcObject={screenStream} autoPlay={true} controls={false} onCanPlayThrough={onCanPlayThrough} onClick={onClick} />
       <InteractiveScreenHeader />
       </div>
   );

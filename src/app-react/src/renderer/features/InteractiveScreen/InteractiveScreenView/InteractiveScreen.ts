@@ -10,36 +10,43 @@ export async function getScreenMediaStream(sourceId: string): Promise<MediaStrea
   });
 }
 
-// TODO: This function is can remove if can implement by CSS.
-export function setVideoElementBounds(): void {
-  console.log("resize");
-  // const wrapperElementComputedStyles = window.getComputedStyle(document.getElementById("wrapper") as HTMLElement);
-  // const wrapperElementComputedSize = {
-  //   width: parseFloat(wrapperElementComputedStyles.getPropertyValue("width")),
-  //   height: parseFloat(wrapperElementComputedStyles.getPropertyValue("height")),
-  // };
-  // const videoElement = document.getElementById("video") as HTMLVideoElement;
-  // const newVideoElementBounds = { left: 0, top: 0, width: 0, height: 0 };
+// Calculate the video element's bounds.
+export function updateVideoElementBounds() {
+  // Retrieve the wrapper element's computed size.
+  const wrapperElementId = "screen-view-wrapper";
+  const wrapperElement = document.getElementById(wrapperElementId) as HTMLElement;
+  const wrapperElementComputedStyles = window.getComputedStyle(wrapperElement);
+  const wrapperElementComputedSize = {
+    width: parseFloat(wrapperElementComputedStyles.getPropertyValue("width")),
+    height: parseFloat(wrapperElementComputedStyles.getPropertyValue("height")),
+  };
 
-  // newVideoElementBounds.width = wrapperElementComputedSize.width;
-  // newVideoElementBounds.height = videoElement.videoHeight * (wrapperElementComputedSize.width / videoElement.videoWidth);
-  // newVideoElementBounds.left = 0;
-  // newVideoElementBounds.top = (wrapperElementComputedSize.height - newVideoElementBounds.height) / 2;
+  // Calculate the video element's new bounds.
+  const videoElementId = "screen-video";
+  const videoElement = document.getElementById(videoElementId) as HTMLVideoElement;
+  const newVideoElementBounds = { left: 0, top: 0, width: 0, height: 0 };
 
-  // if (newVideoElementBounds.height > wrapperElementComputedSize.height) {
-  //   newVideoElementBounds.width = videoElement.videoWidth * (wrapperElementComputedSize.height / videoElement.videoHeight);
-  //   newVideoElementBounds.height = wrapperElementComputedSize.height;
-  //   newVideoElementBounds.left = (wrapperElementComputedSize.width - newVideoElementBounds.width) / 2;
-  //   newVideoElementBounds.top = 0;
-  // }
+  // First, try to fit the video element to the wrapper element based on width.
+  newVideoElementBounds.width = wrapperElementComputedSize.width;
+  newVideoElementBounds.height = videoElement.videoHeight * (wrapperElementComputedSize.width / videoElement.videoWidth);
+  newVideoElementBounds.left = 0;
+  newVideoElementBounds.top = (wrapperElementComputedSize.height - newVideoElementBounds.height) / 2;
 
-  // videoElement.style.left = newVideoElementBounds.left + "px";
-  // videoElement.style.top = newVideoElementBounds.top + "px";
-  // videoElement.width = newVideoElementBounds.width;
-  // videoElement.height = newVideoElementBounds.height;
+  // Second, if the video element's height is greater than the wrapper element's height after first fitting,
+  // fitting again the video element to the wrapper element based on height.
+  if (newVideoElementBounds.height > wrapperElementComputedSize.height) {
+    newVideoElementBounds.width = videoElement.videoWidth * (wrapperElementComputedSize.height / videoElement.videoHeight);
+    newVideoElementBounds.height = wrapperElementComputedSize.height;
+    newVideoElementBounds.left = (wrapperElementComputedSize.width - newVideoElementBounds.width) / 2;
+    newVideoElementBounds.top = 0;
+  }
 
-  // this.isShowScreenVideo = true;
-}
+  // Update the video element's bounds.
+  videoElement.style.left = newVideoElementBounds.left + "px";
+  videoElement.style.top = newVideoElementBounds.top + "px";
+  videoElement.width = newVideoElementBounds.width;
+  videoElement.height = newVideoElementBounds.height;
+};
 
 export function moveMouseCursorIntoScreen(event: MouseEvent): void {
   // Retrieve the video element's computed bounds.
