@@ -3,6 +3,7 @@ import path from "path";
 import started from "electron-squirrel-startup";
 import { getInitialAppWindowSize } from "./main/appWindowSize";
 import { initializeIpcListeners } from "./main/ipcListener";
+import { setAppMenu } from "./main/appMenu";
 import { installReactDevTools } from "./main/devTools";
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
@@ -16,6 +17,7 @@ const createWindow = () => {
   const mainWindow = new BrowserWindow({
     width: windowWidth,
     height: windowHeight,
+    autoHideMenuBar: true,
     webPreferences: {
       preload: path.join(__dirname, "preload.js"),
     },
@@ -23,6 +25,9 @@ const createWindow = () => {
 
   // Initialize IPC listeners.
   initializeIpcListeners(mainWindow);
+
+  // Set the application menu.
+  setAppMenu(mainWindow);
 
   // and load the index.html of the app.
   if (MAIN_WINDOW_VITE_DEV_SERVER_URL) {
