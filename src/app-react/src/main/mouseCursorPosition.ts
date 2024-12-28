@@ -3,7 +3,7 @@ import { exec } from "child_process";
 import { IsRunInDevelopmentEnv } from "./utils";
 
 export async function setMouseCursorPosition(posX: number, posY: number): Promise<void> {
-  const commandPath = getExternalCommandPath();
+  const commandPath = await getExternalCommandPath();
   const commandline = `"${commandPath}" ${posX} ${posY}`;
 
   // NOTE: Setting the mouse cursor position two times as workaround, because in specific case the
@@ -23,7 +23,7 @@ export async function setMouseCursorPosition(posX: number, posY: number): Promis
   });
 }
 
-function getExternalCommandPath(): string {
+async function getExternalCommandPath(): Promise<string> {
     const EXECUTABLE_FILE_NAME = "setmousecursorpos.exe";
     return IsRunInDevelopmentEnv() ?
       path.join(process.cwd(), "../setmousecursorpos", EXECUTABLE_FILE_NAME) :

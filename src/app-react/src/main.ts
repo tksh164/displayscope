@@ -5,6 +5,7 @@ import { IsRunInDevelopmentEnv } from "./main/utils";
 import { getInitialAppWindowSize } from "./main/appWindowSize";
 import { initializeIpcListeners } from "./main/ipcListeners";
 import { setAppMenu } from "./main/appMenu";
+import { registerMouseCursorBackToAppWindowShortcutKey, unregisterMouseCursorBackToAppWindowShortcutKey } from "./main/appGlobalShortcutKeys";
 import { installReactDevTools } from "./main/devTools";
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
@@ -12,7 +13,7 @@ if (started) {
   app.quit();
 }
 
-const createWindow = () => {
+const createWindow = async (): Promise<BrowserWindow> => {
   // Create the browser window.
   const [windowWidth, windowHeight] = getInitialAppWindowSize();
   const mainWindow = new BrowserWindow({
@@ -39,14 +40,19 @@ const createWindow = () => {
 
   // Open the DevTools.
   mainWindow.webContents.openDevTools();
+
+  return mainWindow;
 };
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
-app.on("ready", () => {
+app.on("ready", async () => {
   installReactDevTools();
-  createWindow();
+  const mainWindow = await createWindow();
+
+  const shortcutKey = "Shift + Esc";
+  registerMouseCursorBackToAppWindowShortcutKey(shortcutKey, mainWindow);
 });
 
 // Quit when all windows are closed, except on macOS. There, it's common
@@ -64,6 +70,11 @@ app.on("activate", () => {
   if (BrowserWindow.getAllWindows().length === 0) {
     createWindow();
   }
+});
+
+app.on("will-quit", async () => {
+    // Unregister shortcut key.
+    await unregisterMouseCursorBackToAppWindowShortcutKey();
 });
 
 // In this file you can include the rest of your app's specific main process
