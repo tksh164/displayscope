@@ -6,13 +6,21 @@ import { MakerRpm } from '@electron-forge/maker-rpm';
 import { VitePlugin } from '@electron-forge/plugin-vite';
 import { FusesPlugin } from '@electron-forge/plugin-fuses';
 import { FuseV1Options, FuseVersion } from '@electron/fuses';
+import path from 'path';
+import fs  from 'fs';
 
 const config: ForgeConfig = {
   packagerConfig: {
     asar: true,
+    icon: 'src/assets/icon',
   },
   rebuildConfig: {},
-  makers: [new MakerSquirrel({}), new MakerZIP({}, ['darwin']), new MakerRpm({}), new MakerDeb({})],
+  makers: [
+    new MakerSquirrel({}),
+    new MakerZIP({}, ['darwin']),
+    new MakerRpm({}),
+    new MakerDeb({})
+  ],
   plugins: [
     new VitePlugin({
       // `build` can specify multiple entry builds, which can be Main process, Preload scripts, Worker process, etc.
@@ -49,6 +57,38 @@ const config: ForgeConfig = {
       [FuseV1Options.OnlyLoadAppFromAsar]: true,
     }),
   ],
+  hooks: {
+    postPackage: async (forgeConfig, options) => {
+      copyResourceFiles(options.outputPaths[0]);
+    },
+  },
 };
+
+function copyResourceFiles(outputPath: string) {
+  // Copy files into the resources directory.
+  const copyFileIntoResourcesDir = (outputPath: string, sourceRelativePathFromOutputPath: string, fileName: string) => {
+    const sourceFilePath = path.join(outputPath, sourceRelativePathFromOutputPath, fileName);
+    const destinationFilePath = path.join(outputPath, 'resources', fileName);
+    console.log('Copy', fileName);
+    console.log('sourceFilePath', sourceFilePath);
+    console.log('destinationFilePath', destinationFilePath);
+    fs.copyFileSync(sourceFilePath, destinationFilePath, fs.constants.COPYFILE_EXCL);
+  }
+
+  const filesToCopy = [
+    {
+      sourceRelativePath: '../../../setmousecursorpos',
+      fileName: 'setmousecursorpos.exe',
+    },
+    {
+      sourceRelativePath: '../../src/assets',
+      fileName: 'appicon.png',
+    },
+  ];
+
+  filesToCopy.forEach((file) => {
+    copyFileIntoResourcesDir(outputPath, file.sourceRelativePath, file.fileName);
+  });
+}
 
 export default config;
