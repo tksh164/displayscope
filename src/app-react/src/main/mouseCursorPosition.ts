@@ -25,7 +25,9 @@ export async function setMouseCursorPosition(posX: number, posY: number): Promis
 
 async function getExternalCommandPath(): Promise<string> {
     const EXECUTABLE_FILE_NAME = "setmousecursorpos.exe";
-    return IsRunInDevelopmentEnv() ?
+    const externalCommandPath = IsRunInDevelopmentEnv() ?
       path.join(process.cwd(), "../setmousecursorpos", EXECUTABLE_FILE_NAME) :
       path.join(process.resourcesPath, EXECUTABLE_FILE_NAME);
+    console.log("External command path:", externalCommandPath);
+    return externalCommandPath;
 }
