@@ -40,7 +40,9 @@ const createWindow = async (): Promise<BrowserWindow> => {
   }
 
   // Open the DevTools.
-  mainWindow.webContents.openDevTools();
+  if (IsRunInDevelopmentEnv()) {
+    mainWindow.webContents.openDevTools();
+  }
 
   return mainWindow;
 };
@@ -57,7 +59,9 @@ const registerGlobalShortcutKey = async (mainWindow: BrowserWindow) => {
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.on("ready", async () => {
-  installReactDevTools();
+  if (IsRunInDevelopmentEnv()) {
+    installReactDevTools();
+  }
   const mainWindow = await createWindow();
   registerGlobalShortcutKey(mainWindow);
 });
