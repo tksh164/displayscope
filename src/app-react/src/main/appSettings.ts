@@ -77,7 +77,7 @@ async function createNewAppSettingsFile(window: BrowserWindow): Promise<void> {
 }
 
 function getAppSettingsFilePath(): string {
-  const APP_SETTINGS_FILE_NAME = "settings1.json"
+  const APP_SETTINGS_FILE_NAME = "settings.json"
   const appSettingsFilePath = path.join(app.getPath("userData"), APP_SETTINGS_FILE_NAME);
   console.log("App settings file path:", appSettingsFilePath);
   return appSettingsFilePath;
