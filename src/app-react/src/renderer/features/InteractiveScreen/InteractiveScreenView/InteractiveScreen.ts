@@ -18,9 +18,7 @@ export async function getScreenMediaStream(sourceId: string): Promise<MediaStrea
 //
 // Calculate the video element's bounds.
 //
-export function updateVideoElementBounds(this: Window, event: UIEvent | null): void {
-  const targetWindow = this;
-
+export function updateVideoElementBounds(targetWindow: Window): void {
   //
   // Retrieve the wrapper element's computed size.
   //

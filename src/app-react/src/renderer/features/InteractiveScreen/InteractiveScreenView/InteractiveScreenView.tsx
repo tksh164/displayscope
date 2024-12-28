@@ -14,14 +14,9 @@ export default function InteractiveScreenView() {
   // Add and remove event listeners.
   //
 
-  const addEventListeners = () => {
-    window.addEventListener("resize", updateVideoElementBounds);
-    console.log("Set resize event listener");
-  };
-  const removeEventListeners = () => {
-    window.removeEventListener("resize", updateVideoElementBounds);
-    console.log("Remove resize event listener");
-  };
+  const windowResizeEventListener = (event: UIEvent) => updateVideoElementBounds(window);
+  const addEventListeners = () => window.addEventListener("resize", windowResizeEventListener);
+  const removeEventListeners = () => window.removeEventListener("resize", windowResizeEventListener);
   useEffect(() => {
     addEventListeners();
     return removeEventListeners;
@@ -46,7 +41,7 @@ export default function InteractiveScreenView() {
 
   const onCanPlayThrough = (event: React.SyntheticEvent) => {
     // Update the video element's bounds when the video can play through because video stream's width & height are need to calculate the video element's bounds.
-    updateVideoElementBounds.call(window, null);
+    updateVideoElementBounds(window);
   };
 
   const onClick = (event: React.MouseEvent) => {
