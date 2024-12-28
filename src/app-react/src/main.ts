@@ -2,7 +2,7 @@ import { app, session, BrowserWindow } from "electron";
 import path from "path";
 import started from "electron-squirrel-startup";
 import { getInitialAppWindowSize } from "./main/appWindowSize";
-import { initializeIpcListeners } from "./main/ipcListener";
+import { initializeIpcListeners } from "./main/ipcListeners";
 import { setAppMenu } from "./main/appMenu";
 import { installReactDevTools } from "./main/devTools";
 
