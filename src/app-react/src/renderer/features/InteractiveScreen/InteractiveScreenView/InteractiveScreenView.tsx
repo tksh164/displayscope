@@ -3,7 +3,7 @@ import { useOutletContext } from "react-router";
 import { OutletContext } from "src/renderer/types/outletContext";
 import InteractiveScreenHeader from "../InteractiveScreenHeader/InteractiveScreenHeader";
 import ScreenVideo from "../ScreenVideo/ScreenVideo";
-import { getScreenMediaStream, updateVideoElementBounds, moveMouseCursorIntoScreen } from "./InteractiveScreen";
+import { getScreenMediaStream, updateVideoElementBounds, setMouseCursorPosition } from "./InteractiveScreen";
 import "./InteractiveScreenView.css";
 
 export default function InteractiveScreenView() {
@@ -50,7 +50,7 @@ export default function InteractiveScreenView() {
   };
 
   const onClick = (event: React.MouseEvent) => {
-    moveMouseCursorIntoScreen(event, currentScreenSpec);
+    setMouseCursorPosition(window, event, currentScreenSpec);
   }
 
   return (

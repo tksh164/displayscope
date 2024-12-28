@@ -73,11 +73,11 @@ export function updateVideoElementBounds(this: Window, event: UIEvent | null): v
 };
 
 //
-// Move the mouse cursor into the actual screen.
+// Set the mouse cursor position.
 //
-export function moveMouseCursorIntoScreen(event: React.MouseEvent, currentScreenSpec: ScreenSpec): void {
+export function setMouseCursorPosition(targetWindow: Window, event: React.MouseEvent, currentScreenSpec: ScreenSpec): void {
   // Retrieve the video element's computed bounds.
-  const videoElementComputedStyles = window.getComputedStyle(event.target as HTMLVideoElement);
+  const videoElementComputedStyles = targetWindow.getComputedStyle(event.target as HTMLVideoElement);
   const videoElementComputedBounds = {
     left: parseFloat(videoElementComputedStyles.getPropertyValue("left")),
     top: parseFloat(videoElementComputedStyles.getPropertyValue("top")),
@@ -111,5 +111,5 @@ export function moveMouseCursorIntoScreen(event: React.MouseEvent, currentScreen
   };
 
   // Move the mouse cursor into the actual screen.
-  window.exposedApi.setMouseCursorPosition(mouseCursorPositionInActualScreen.x, mouseCursorPositionInActualScreen.y);
+  targetWindow.exposedApi.setMouseCursorPosition(mouseCursorPositionInActualScreen.x, mouseCursorPositionInActualScreen.y);
 }
