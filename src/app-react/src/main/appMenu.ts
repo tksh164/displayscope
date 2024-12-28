@@ -92,8 +92,10 @@ function getAppMenuTemplate(window: BrowserWindow): MenuItemConstructorOptions[]
 
 async function getAppIconResourceFilePath(): Promise<string> {
   const path = await import("path").then((path) => path);
-  const APP_ICON_FILE_NAME = "icon.png";
-  return IsRunInDevelopmentEnv() ?
-    path.join(process.cwd(), "build", APP_ICON_FILE_NAME) :
+  const APP_ICON_FILE_NAME = "appicon.png";
+  const appIconResourceFilePath = IsRunInDevelopmentEnv() ?
+    path.join(process.cwd(), "src/assets", APP_ICON_FILE_NAME) :
     path.join(process.resourcesPath, APP_ICON_FILE_NAME);
+  console.log("App icon resource file path:", appIconResourceFilePath);
+  return appIconResourceFilePath;
 }
