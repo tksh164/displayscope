@@ -27,12 +27,12 @@ export default function InteractiveScreenView() {
   //
 
   const refreshScreenMediaStream = async (sourceId: string) => {
-    const stream = await getScreenMediaStream(sourceId);
+    const stream = await getScreenMediaStream(window, sourceId);
     setScreenStream(stream);
   };
   useEffect(() => {
     refreshScreenMediaStream(currentScreenSpec.id);
-    console.log("Refresh screen media stream");
+    //console.log("Refresh screen media stream");
   }, [currentScreenSpec]);
 
   //

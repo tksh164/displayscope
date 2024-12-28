@@ -3,8 +3,8 @@ import { ScreenSpec } from "src/main/types/screenSpec";
 //
 // Retrieve a screen media stream.
 //
-export async function getScreenMediaStream(sourceId: string): Promise<MediaStream> {
-  return navigator.mediaDevices.getUserMedia({
+export async function getScreenMediaStream(targetWindow: Window, sourceId: string): Promise<MediaStream> {
+  return targetWindow.navigator.mediaDevices.getUserMedia({
     audio: false,
     video: ({
       mandatory: {
