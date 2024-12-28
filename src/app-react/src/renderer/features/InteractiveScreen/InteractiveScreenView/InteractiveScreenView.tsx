@@ -46,7 +46,7 @@ export default function InteractiveScreenView() {
 
   const onCanPlayThrough = (event: React.SyntheticEvent) => {
     // Update the video element's bounds when the video can play through because video stream's width & height are need to calculate the video element's bounds.
-    updateVideoElementBounds();
+    updateVideoElementBounds.call(window, null);
   };
 
   const onClick = (event: React.MouseEvent) => {

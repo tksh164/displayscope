@@ -18,19 +18,33 @@ export async function getScreenMediaStream(sourceId: string): Promise<MediaStrea
 //
 // Calculate the video element's bounds.
 //
-export function updateVideoElementBounds() {
+export function updateVideoElementBounds(this: Window, event: UIEvent | null): void {
+  const targetWindow = this;
+
+  //
   // Retrieve the wrapper element's computed size.
+  //
+
   const wrapperElementId = "screen-view-wrapper";
-  const wrapperElement = document.getElementById(wrapperElementId) as HTMLElement;
-  const wrapperElementComputedStyles = window.getComputedStyle(wrapperElement);
+  const wrapperElement = targetWindow.document.getElementById(wrapperElementId) as HTMLElement;
+  if (wrapperElement === null) {
+    throw new Error(`The wrapper element with ID "${wrapperElementId}" is not found.`);
+  }
+  const wrapperElementComputedStyles = targetWindow.getComputedStyle(wrapperElement);
   const wrapperElementComputedSize = {
     width: parseFloat(wrapperElementComputedStyles.getPropertyValue("width")),
     height: parseFloat(wrapperElementComputedStyles.getPropertyValue("height")),
   };
 
+  //
   // Calculate the video element's new bounds.
+  //
+
   const videoElementId = "screen-video";
-  const videoElement = document.getElementById(videoElementId) as HTMLVideoElement;
+  const videoElement = targetWindow.document.getElementById(videoElementId) as HTMLVideoElement;
+  if (videoElement === null) {
+    throw new Error(`The video element with ID "${videoElementId}" is not found.`);
+  }
   const newVideoElementBounds = { left: 0, top: 0, width: 0, height: 0 };
 
   // First, try to fit the video element to the wrapper element based on width.
@@ -48,7 +62,10 @@ export function updateVideoElementBounds() {
     newVideoElementBounds.top = 0;
   }
 
+  //
   // Update the video element's bounds.
+  //
+
   videoElement.style.left = newVideoElementBounds.left + "px";
   videoElement.style.top = newVideoElementBounds.top + "px";
   videoElement.width = newVideoElementBounds.width;
