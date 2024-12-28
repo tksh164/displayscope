@@ -5,6 +5,7 @@ import { IsRunInDevelopmentEnv } from "./main/utils";
 import { getInitialAppWindowSize } from "./main/appWindowSize";
 import { initializeIpcListeners } from "./main/ipcListeners";
 import { setAppMenu } from "./main/appMenu";
+import { getAppSettings } from "./main/appSettings";
 import { registerMouseCursorBackToAppWindowShortcutKey, unregisterMouseCursorBackToAppWindowShortcutKey } from "./main/appGlobalShortcutKeys";
 import { installReactDevTools } from "./main/devTools";
 
@@ -13,8 +14,8 @@ if (started) {
   app.quit();
 }
 
+// Create the browser window.
 const createWindow = async (): Promise<BrowserWindow> => {
-  // Create the browser window.
   const [windowWidth, windowHeight] = getInitialAppWindowSize();
   const mainWindow = new BrowserWindow({
     width: windowWidth,
@@ -44,15 +45,21 @@ const createWindow = async (): Promise<BrowserWindow> => {
   return mainWindow;
 };
 
+// Register a global shortcut key.
+const registerGlobalShortcutKey = async (mainWindow: BrowserWindow) => {
+  const appSettings = await getAppSettings(mainWindow);
+  console.log("App settings:", appSettings);
+  const shortcutKey = appSettings.mouseCursorBackToAppWindowShortcutKey;
+  registerMouseCursorBackToAppWindowShortcutKey(shortcutKey, mainWindow);
+};
+
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.on("ready", async () => {
   installReactDevTools();
   const mainWindow = await createWindow();
-
-  const shortcutKey = "Shift + Esc";
-  registerMouseCursorBackToAppWindowShortcutKey(shortcutKey, mainWindow);
+  registerGlobalShortcutKey(mainWindow);
 });
 
 // Quit when all windows are closed, except on macOS. There, it's common
