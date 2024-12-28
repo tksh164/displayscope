@@ -75,7 +75,11 @@ export function updateVideoElementBounds(targetWindow: Window): void {
 //
 export function setMouseCursorPosition(targetWindow: Window, event: React.MouseEvent, currentScreenSpec: ScreenSpec): void {
   // Retrieve the video element's computed bounds.
-  const videoElementComputedStyles = targetWindow.getComputedStyle(event.target as HTMLVideoElement);
+  const videoElement = event.target as HTMLVideoElement;
+  if (videoElement === null) {
+    throw new Error("The target video element is not found.");
+  }
+  const videoElementComputedStyles = targetWindow.getComputedStyle(videoElement);
   const videoElementComputedBounds = {
     left: parseFloat(videoElementComputedStyles.getPropertyValue("left")),
     top: parseFloat(videoElementComputedStyles.getPropertyValue("top")),
