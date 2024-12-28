@@ -1,5 +1,6 @@
 import { app, BrowserWindow, Menu, MenuItemConstructorOptions, dialog } from "electron";
 import os from "os";
+import { IsRunInDevelopmentEnv } from "./utils";
 // import { getCurrentAlwaysOnTopSetting, setAlwaysOnTop, notifyAlwaysOnTopSettingChanged } from "@/main/always-on-top";
 
 export async function setAppMenu(window: BrowserWindow): Promise<void> {
@@ -91,8 +92,7 @@ function getAppMenuTemplate(window: BrowserWindow): MenuItemConstructorOptions[]
 async function getAppIconResourceFilePath(): Promise<string> {
   const path = await import("path").then((path) => path);
   const APP_ICON_FILE_NAME = "icon.png";
-  const isDevelopment = process.env.NODE_ENV !== "production";
-  return isDevelopment ?
+  return IsRunInDevelopmentEnv() ?
     path.join(process.cwd(), "build", APP_ICON_FILE_NAME) :
     path.join(process.resourcesPath, APP_ICON_FILE_NAME);
 }

@@ -1,5 +1,6 @@
 import path from "path";
 import { exec } from "child_process";
+import { IsRunInDevelopmentEnv } from "./utils";
 
 export async function setMouseCursorPosition(posX: number, posY: number): Promise<void> {
   const commandPath = getExternalCommandPath();
@@ -24,8 +25,7 @@ export async function setMouseCursorPosition(posX: number, posY: number): Promis
 
 function getExternalCommandPath(): string {
     const EXECUTABLE_FILE_NAME = "setmousecursorpos.exe";
-    const isDevelopment = process.env.NODE_ENV !== "production";
-    return isDevelopment ?
+    return IsRunInDevelopmentEnv() ?
       path.join(process.cwd(), "../setmousecursorpos", EXECUTABLE_FILE_NAME) :
       path.join(process.resourcesPath, EXECUTABLE_FILE_NAME);
 }
