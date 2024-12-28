@@ -1,6 +1,7 @@
-import { app, session, BrowserWindow } from "electron";
+import { app, BrowserWindow } from "electron";
 import path from "path";
 import started from "electron-squirrel-startup";
+import { IsRunInDevelopmentEnv } from "./main/utils";
 import { getInitialAppWindowSize } from "./main/appWindowSize";
 import { initializeIpcListeners } from "./main/ipcListeners";
 import { setAppMenu } from "./main/appMenu";
@@ -17,7 +18,7 @@ const createWindow = () => {
   const mainWindow = new BrowserWindow({
     width: windowWidth,
     height: windowHeight,
-    autoHideMenuBar: true,
+    autoHideMenuBar: !(IsRunInDevelopmentEnv()),
     webPreferences: {
       preload: path.join(__dirname, "preload.js"),
     },
