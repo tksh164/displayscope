@@ -13,8 +13,6 @@ export async function installReactDevTools() {
 }
 
 function getReactDevToolsPath() {
-  return path.join(
-    os.homedir(),
-    'AppData/Local/Microsoft/Edge Beta/User Data/Profile 1/Extensions/fmkadmapgofadopljbjfkapdkoienihi/6.0.1_0'
-  );
+  const childPathToExtension = 'AppData/Local/Microsoft/Edge Beta/User Data/Profile 1/Extensions/fmkadmapgofadopljbjfkapdkoienihi/6.0.1_0'
+  return path.join(os.homedir(), childPathToExtension);
 }
