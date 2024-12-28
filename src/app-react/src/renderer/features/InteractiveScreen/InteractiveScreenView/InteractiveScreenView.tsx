@@ -14,9 +14,18 @@ export default function InteractiveScreenView() {
   // Add and remove event listeners.
   //
 
-  const windowResizeEventListener = (event: UIEvent) => updateVideoElementBounds(window);
-  const addEventListeners = () => window.addEventListener("resize", windowResizeEventListener);
-  const removeEventListeners = () => window.removeEventListener("resize", windowResizeEventListener);
+  const windowResizeEventListener = (event: UIEvent) => {
+    //console.log("Window resize event listener called.");
+    updateVideoElementBounds(window);
+  };
+  const addEventListeners = () => {
+    window.addEventListener("resize", windowResizeEventListener);
+    //console.log("Set resize event listener to Window.");
+  };
+  const removeEventListeners = () => {
+    window.removeEventListener("resize", windowResizeEventListener);
+    //console.log("Remove resize event listener from Window.");
+  };
   useEffect(() => {
     addEventListeners();
     return removeEventListeners;
