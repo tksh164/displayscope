@@ -2,7 +2,7 @@
 // https://www.electronjs.org/docs/latest/tutorial/process-model#preload-scripts
 
 import { contextBridge, ipcRenderer } from "electron";
-import { IPC_CHANNELS } from "./constants";
+import { IPC_CHANNELS } from "./main/constants";
 import { ScreenSpec } from "./main/types/screenSpec";
 
 contextBridge.exposeInMainWorld("exposedApi", {

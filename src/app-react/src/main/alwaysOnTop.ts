@@ -1,5 +1,5 @@
 import { app, BrowserWindow } from "electron";
-import { IPC_CHANNELS } from "../constants";
+import { IPC_CHANNELS } from "./constants";
 
 export function getCurrentAlwaysOnTopSetting(window: BrowserWindow): boolean {
   return window.isAlwaysOnTop();

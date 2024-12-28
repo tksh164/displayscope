@@ -1,5 +1,5 @@
 import { BrowserWindow, ipcMain } from "electron";
-import { IPC_CHANNELS, MENU_ITEM_IDS } from "../constants";
+import { IPC_CHANNELS, MENU_ITEM_IDS } from "./constants";
 import { getAllScreenSpecs } from "./screenSpec";
 import { ScreenSpec } from "./types/screenSpec";
 import { setMouseCursorPosition } from "./mouseCursorPosition";

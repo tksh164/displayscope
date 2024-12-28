@@ -1,6 +1,6 @@
 import { app, BrowserWindow, Menu, MenuItemConstructorOptions, dialog } from "electron";
 import os from "os";
-import { MENU_ITEM_IDS } from "../constants";
+import { MENU_ITEM_IDS } from "./constants";
 import { getCurrentAlwaysOnTopSetting, setAlwaysOnTop, notifyAlwaysOnTopSettingChanged } from "./alwaysOnTop";
 import { IsRunInDevelopmentEnv } from "./utils";
 
