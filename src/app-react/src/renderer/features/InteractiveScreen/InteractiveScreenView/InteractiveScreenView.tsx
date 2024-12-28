@@ -20,7 +20,7 @@ export default function InteractiveScreenView() {
   };
   const addEventListeners = () => {
     window.addEventListener("resize", windowResizeEventListener);
-    //console.log("Set resize event listener to Window.");
+    //console.log("Add resize event listener to Window.");
   };
   const removeEventListeners = () => {
     window.removeEventListener("resize", windowResizeEventListener);
