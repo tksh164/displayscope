@@ -12,7 +12,7 @@ import fs  from 'fs';
 const config: ForgeConfig = {
   packagerConfig: {
     asar: true,
-    icon: 'src/assets/icon',
+    icon: './src/assets/appicon',
   },
   rebuildConfig: {},
   makers: [
