@@ -18,6 +18,7 @@ async function getDisplaySpecDictionary(): Promise<DisplaySpecDictionary> {
       bounds: display.bounds,
       scaleFactor: display.scaleFactor,
       isPrimary: display.id === primaryDisplayId,
+      label: display.label,
     };
   }
   return displaySpecDictionary;
@@ -41,15 +42,11 @@ async function getScreenSpecs(displaySpecDictionary: DisplaySpecDictionary, thum
           id: source.id,
           name: source.name,
           thumbnailDataUri: source.thumbnail.toDataURL(),
-          display: {
-            bounds: displaySpec.bounds,
-            scaleFactor: displaySpec.scaleFactor,
-            isPrimary: displaySpec.isPrimary,
-            scaledScreenOriginPoint: screen.dipToScreenPoint({
-              x: displaySpec.bounds.x,
-              y: displaySpec.bounds.y
-            }),
-          }
+          scaledScreenOriginPoint: screen.dipToScreenPoint({
+            x: displaySpec.bounds.x,
+            y: displaySpec.bounds.y
+          }),
+          displaySpec: displaySpec,
         });
       }
       return screenSpecs;

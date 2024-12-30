@@ -11,9 +11,10 @@ type ScreenListItemProps = {
 export default function ScreenListItem(props: ScreenListItemProps) {
   const navigate = useNavigate();
   const screenName = props.screenSpec.name;
-  const primaryText = props.screenSpec.display.isPrimary ? "Primary, " : "";
-  const resolutionText = props.screenSpec.display.bounds.width + " x " + props.screenSpec.display.bounds.height;
-  const scaleFactorText = props.screenSpec.display.scaleFactor * 100 + "%";
+  const displayLabel = props.screenSpec.displaySpec.label;
+  const primaryText = props.screenSpec.displaySpec.isPrimary ? "Primary, " : "";
+  const resolutionText = props.screenSpec.displaySpec.bounds.width + " x " + props.screenSpec.displaySpec.bounds.height;
+  const scaleFactorText = props.screenSpec.displaySpec.scaleFactor * 100 + "%";
 
   return (
     <div className="screen-list-item" onClick={() => {
@@ -22,7 +23,7 @@ export default function ScreenListItem(props: ScreenListItemProps) {
       navigate("/interactive-screen");
     }}>
       <Text className="screen-name" block={true} size={500} weight="semibold">{screenName}</Text>
-      <Text className="screen-description" block={true} size={300}>{primaryText}{resolutionText}, {scaleFactorText}</Text>
+      <Text className="screen-description" block={true} size={300}>{displayLabel}, {primaryText}{resolutionText}, {scaleFactorText}</Text>
       <Image className="screen-thumbnail" shape="rounded" src={props.screenSpec.thumbnailDataUri} />
     </div>
   );

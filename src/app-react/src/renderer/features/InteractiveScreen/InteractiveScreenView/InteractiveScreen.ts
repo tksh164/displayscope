@@ -96,10 +96,10 @@ export function setMouseCursorPosition(targetWindow: Window, event: React.MouseE
   if (clickedPositionInVideoElement.y < 0) clickedPositionInVideoElement.y = 0;
 
   // Calculate the scale ratio that is the ratio between the actual screen resolution and the video element size.
-  const currentDisplay = currentScreenSpec.display;
+  const currentDisplaySpec = currentScreenSpec.displaySpec;
   const scaleRatio = {
-    width: (currentDisplay.bounds.width * currentDisplay.scaleFactor) / videoElementComputedBounds.width,
-    height: (currentDisplay.bounds.height * currentDisplay.scaleFactor) / videoElementComputedBounds.height,
+    width: (currentDisplaySpec.bounds.width * currentDisplaySpec.scaleFactor) / videoElementComputedBounds.width,
+    height: (currentDisplaySpec.bounds.height * currentDisplaySpec.scaleFactor) / videoElementComputedBounds.height,
   };
 
   // Calculate the mouse cursor position in the actual screen.
@@ -108,8 +108,8 @@ export function setMouseCursorPosition(targetWindow: Window, event: React.MouseE
     y: clickedPositionInVideoElement.y * scaleRatio.height,
   };
   const mouseCursorPositionInActualScreen = {
-    x: Math.floor(currentDisplay.scaledScreenOriginPoint.x + clickedPositionInScreen.x),
-    y: Math.floor(currentDisplay.scaledScreenOriginPoint.y + clickedPositionInScreen.y),
+    x: Math.floor(currentScreenSpec.scaledScreenOriginPoint.x + clickedPositionInScreen.x),
+    y: Math.floor(currentScreenSpec.scaledScreenOriginPoint.y + clickedPositionInScreen.y),
   };
 
   // Move the mouse cursor into the actual screen.

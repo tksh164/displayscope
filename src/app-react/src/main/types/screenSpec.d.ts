@@ -2,12 +2,8 @@ export type ScreenSpec = {
   id: string;
   name: string;
   thumbnailDataUri: string;
-  display: {
-    bounds: DisplayBounds;
-    scaleFactor: number;
-    isPrimary: boolean;
-    scaledScreenOriginPoint: ScreenPoint;
-  }
+  scaledScreenOriginPoint: ScreenPoint;
+  displaySpec: DisplaySpec;
 };
 
 export type DisplayBounds = {
@@ -30,4 +26,5 @@ export type DisplaySpec = {
   bounds: DisplayBounds;
   scaleFactor: number;
   isPrimary: boolean;
+  label: string;
 };
