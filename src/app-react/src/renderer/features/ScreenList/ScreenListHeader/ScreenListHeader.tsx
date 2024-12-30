@@ -45,7 +45,6 @@ export default function ScreenListHeader(props: ScreenListHeaderProps) {
 
   return (
     <div className="screen-list-header">
-      <h3>ScreenListHeader</h3>
       <Switch className="header-item" label="Always on top" labelPosition="before" onClick={onClickAlwaysOnTopSetting} checked={isAlwaysOnTop} />
       <Button className="header-item" shape="circular" size="large" appearance="primary" icon={<ArrowSyncRegular />} onClick={updateScreenSpecs} />
     </div>

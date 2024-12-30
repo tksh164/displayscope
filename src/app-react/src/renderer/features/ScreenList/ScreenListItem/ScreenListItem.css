@@ -1,14 +1,12 @@
 .screen-list-item {
-  margin: 80px 1% 1% 1%;
-  /* padding: 0.6vw 0.8vw 0.6vw 0.8vw; */
-  padding: 0.6vw 0.8vw 0.6vw 0.8vw;
+  margin: 1vh 1vw 4vh 1vw;
+  padding: 1rem 1.4rem 1.1rem 1.4rem;
   border: solid 1px transparent;
   border-radius: 8px;
 }
 
 .screen-list-item:hover {
-  border: solid 1px #333333;
-  background-color: #232323;
+  background-color: #3d3d3d;  /* colorNeutralBackground1Hover */
 }
 
 .screen-name {

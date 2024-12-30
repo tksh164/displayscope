@@ -57,10 +57,22 @@ export default function InteractiveScreenView() {
     setMouseCursorPosition(window, event, currentScreenSpec);
   }
 
+  //
+  // Events for the header element.
+  //
+
+  const onMouseMove = (event: React.MouseEvent) => {
+    window.document.getElementById("interactive-screen-header").classList.remove("hide-header");
+  };
+
+  const onMouseLeave = (event: React.MouseEvent) => {
+    window.document.getElementById("interactive-screen-header").classList.add("hide-header");
+  };
+
   return (
-    <div id="screen-view-wrapper" className="screen-view-wrapper">
+    <div id="screen-view-wrapper" className="screen-view-wrapper" onMouseMove={onMouseMove} onMouseLeave={onMouseLeave}>
       <ScreenVideo id="screen-video" className="screen-video" srcObject={screenStream} autoPlay={true} controls={false} onCanPlayThrough={onCanPlayThrough} onClick={onClick} />
-      <InteractiveScreenHeader />
-      </div>
+      <InteractiveScreenHeader id="interactive-screen-header" />
+    </div>
   );
 }

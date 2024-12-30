@@ -6,7 +6,7 @@ import "./ScreenListItem.css";
 type ScreenListItemProps = {
   screenSpec: ScreenSpec;
   setCurrentScreenSpec: React.Dispatch<React.SetStateAction<ScreenSpec>>;
-}
+};
 
 export default function ScreenListItem(props: ScreenListItemProps) {
   const navigate = useNavigate();
@@ -21,8 +21,8 @@ export default function ScreenListItem(props: ScreenListItemProps) {
       props.setCurrentScreenSpec(props.screenSpec);
       navigate("/interactive-screen");
     }}>
-      <Text block={true} size={500} weight="semibold" className="screen-name">{screenName}</Text>
-      <Text block={true} size={300} className="screen-description">{primaryText}{resolutionText}, {scaleFactorText}</Text>
+      <Text className="screen-name" block={true} size={500} weight="semibold">{screenName}</Text>
+      <Text className="screen-description" block={true} size={300}>{primaryText}{resolutionText}, {scaleFactorText}</Text>
       <Image className="screen-thumbnail" shape="rounded" src={props.screenSpec.thumbnailDataUri} />
     </div>
   );
