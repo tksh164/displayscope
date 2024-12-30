@@ -5,6 +5,7 @@ export type ExposedApi = {
   setAlwaysOnTopSetting: (shouldAlwaysOnTop: boolean) => Promise<void>;
   addAlwaysOnTopSettingChangedEventListener: (listener: (event: Electron.IpcRendererEvent, shouldAlwaysOnTop: boolean) => void) => Promise<void>;
   removeAlwaysOnTopSettingChangedEventListener: (listener: (event: Electron.IpcRendererEvent, shouldAlwaysOnTop: boolean) => void) => Promise<void>;
+  getMouseCursorReturnShortcutKey(): Promise<string>;
 };
 
 declare global {

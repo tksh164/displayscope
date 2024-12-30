@@ -4,6 +4,7 @@ export const IPC_CHANNELS = {
   GET_CURRENT_ALWAYS_ON_TOP_SETTING: "get-current-always-on-top-setting",
   SET_ALWAYS_ON_TOP_SETTING: "set-always-on-top-setting",
   ALWAYS_ON_TOP_SETTING_CHANGED: "always-on-top-setting-changed",
+  GET_MOUSE_CURSOR_RETURN_SHORTCUT_KEY: "get-mouse-cursor-return-shortcut-key",
 };
 
 export const MENU_ITEM_IDS = {
