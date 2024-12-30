@@ -40,6 +40,6 @@
   font-weight: normal;
   text-shadow: none;
   background-color: var(--colorBrandBackground);
-  border: solid 1px var(--colorBrandBackgroundSelected);
+  border: solid 1px rgb(255, 255, 255);
   border-radius: 4px;
 }
