@@ -31,11 +31,15 @@
 .interactive-screen-header .notification-message {
   text-align: center;
   text-shadow: 0 0 5px rgb(0, 0, 0);
-  line-height: 1.5rem;
+  line-height: 1.6rem;
 }
 
 .interactive-screen-header .shortcut-key-stroke {
-  margin-left: 0.5ch;
-  margin-right: 0.5ch;
-  font-weight: bold;
+  margin: 0 0.2ch 0 0.2ch;
+  padding: 0rem 0.35rem 0.15rem 0.35rem;
+  font-weight: normal;
+  text-shadow: none;
+  background-color: var(--colorBrandBackground);
+  border: solid 1px var(--colorBrandBackgroundSelected);
+  border-radius: 4px;
 }
