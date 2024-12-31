@@ -15,16 +15,16 @@ export default function ScreenListHeader(props: ScreenListHeaderProps) {
   // The always on top setting changed event listener for if it changed from the menu item.
   //
 
-  const alwaysOnTopSettingChangedEventListener = (event: Electron.IpcRendererEvent, shouldAlwaysOnTop: boolean) => {
+  const alwaysOnTopSettingChanged = (event: Electron.IpcRendererEvent, shouldAlwaysOnTop: boolean) => {
     setIsAlwaysOnTop(shouldAlwaysOnTop);
     //console.log(`Always on top setting change to ${shouldAlwaysOnTop} from the menu item.`);
   };
   const addEventListeners = () => {
-    window.exposedApi.addAlwaysOnTopSettingChangedEventListener(alwaysOnTopSettingChangedEventListener);
+    window.exposedApi.addAlwaysOnTopSettingChangedEventListener(alwaysOnTopSettingChanged);
     //console.log("Add AlwaysOnTopSettingChanged event listener.");
   };
   const removeEventListeners = () => {
-    window.exposedApi.removeAlwaysOnTopSettingChangedEventListener(alwaysOnTopSettingChangedEventListener);
+    window.exposedApi.removeAlwaysOnTopSettingChangedEventListener(alwaysOnTopSettingChanged);
     //console.log("Remove AlwaysOnTopSettingChanged event listener.");
   };
   useEffect(() => {
