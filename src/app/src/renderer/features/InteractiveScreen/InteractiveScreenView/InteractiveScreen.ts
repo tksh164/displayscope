@@ -1,4 +1,4 @@
-import { ScreenSpec } from "src/main/types/screenSpec";
+import { ScreenSpec } from "../../../../main/types/screenSpec.d";
 
 // HTML element IDs.
 const WRAPPER_ELEMENT_ID = "screen-view-wrapper";
@@ -70,7 +70,7 @@ export function updateVideoElementBounds(targetWindow: Window): void {
   videoElement.style.top = newVideoElementBounds.top + "px";
   videoElement.width = newVideoElementBounds.width;
   videoElement.height = newVideoElementBounds.height;
-};
+}
 
 //
 // Set the mouse cursor position.

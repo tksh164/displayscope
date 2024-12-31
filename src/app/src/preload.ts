@@ -3,7 +3,7 @@
 
 import { contextBridge, ipcRenderer } from "electron";
 import { IPC_CHANNELS } from "./main/constants";
-import { ScreenSpec } from "./main/types/screenSpec";
+import { ScreenSpec } from "./main/types/screenSpec.d";
 
 contextBridge.exposeInMainWorld("exposedApi", {
   // Screen spec

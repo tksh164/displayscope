@@ -1,7 +1,7 @@
 import { app, dialog, BrowserWindow } from "electron";
 import fs  from "fs";
 import path from "path";
-import { AppSettings } from "./types/appSettings";
+import { AppSettings } from "./types/appSettings.d";
 import { APP_SETTINGS_SCHEMA_VERSION, ERROR_CODE_NAMES } from "./constants";
 import { IsRunInDevelopmentEnv } from "./utils";
 
@@ -28,7 +28,7 @@ async function loadAppSettingsFromFile(window: BrowserWindow): Promise<AppSettin
 
     // Verify the schema version.
     if (appSettingsJson.schemaVersion !== APP_SETTINGS_SCHEMA_VERSION) {
-      const err = new Error(`The app settings file \"${appSettingsFilePath}\" has an invalid schema version.\n` +
+      const err = new Error(`The app settings file "${appSettingsFilePath}" has an invalid schema version.\n` +
         `Expected: ${APP_SETTINGS_SCHEMA_VERSION}, Actual: ${appSettingsJson.schemaVersion}`);
       err.name = ERROR_CODE_NAMES.INVALID_APP_SETTINGS_SCHEMA_VERSION;
       throw err;
@@ -36,7 +36,7 @@ async function loadAppSettingsFromFile(window: BrowserWindow): Promise<AppSettin
 
     return appSettingsJson;
   }
-  catch (e: any) {
+  catch (e) {
     if (e.code === 'ENOENT') {
       // If the app settings file does not exist, create a new app settings file by copy the default app settings file.
       await createNewAppSettingsFile(window);
@@ -51,7 +51,7 @@ async function loadAppSettingsFromFile(window: BrowserWindow): Promise<AppSettin
         // Create a new app settings file with default settings.
         await createNewAppSettingsFile(window);
 
-        const message = e.message + `\n\nRenamed the current settings file to \"${renamedFileName}\" and created a new settings file with the default settings.`;
+        const message = e.message + `\n\nRenamed the current settings file to "${renamedFileName}" and created a new settings file with the default settings.`;
         await dialog.showMessageBox(window, {
           type: "warning",
           title: app.getName(),
@@ -62,7 +62,7 @@ async function loadAppSettingsFromFile(window: BrowserWindow): Promise<AppSettin
 
       // The app settings file has syntax error.
       else if (e.message.includes("Unexpected token")) {
-        const message = `Couldn't load the app settings because the app settings file \"${appSettingsFilePath}\" has syntax error.\n\n` + e.message + "\n\n" + e.stack;
+        const message = `Couldn't load the app settings because the app settings file "${appSettingsFilePath}" has syntax error.\n\n` + e.message + "\n\n" + e.stack;
         dialog.showMessageBox(window, {
           type: "error",
           title: app.getName(),
@@ -109,7 +109,7 @@ async function createNewAppSettingsFile(window: BrowserWindow): Promise<void> {
   try {
     fs.copyFileSync(defaultAppSettingsFilePath, appSettingsFilePath, fs.constants.COPYFILE_EXCL);
   }
-  catch (e: any) {
+  catch (e) {
     // Couldn't create a new app settings file.
     const message = "Couldn't create a new app settings file.\n\n" +
       `Source: ${defaultAppSettingsFilePath}\n` +

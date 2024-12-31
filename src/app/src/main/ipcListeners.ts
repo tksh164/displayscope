@@ -1,7 +1,7 @@
 import { BrowserWindow, ipcMain, IpcMainEvent, IpcMainInvokeEvent } from "electron";
 import { IPC_CHANNELS, MENU_ITEM_IDS } from "./constants";
 import { getAllScreenSpecs } from "./screenSpec";
-import { ScreenSpec } from "./types/screenSpec";
+import { ScreenSpec } from "./types/screenSpec.d";
 import { setMouseCursorPosition } from "./mouseCursorPosition";
 import { getCurrentAlwaysOnTopSetting, setAlwaysOnTop, setAlwaysOnTopMenuItemCheck } from "./alwaysOnTop";
 import { getAppSettings } from "./appSettings";

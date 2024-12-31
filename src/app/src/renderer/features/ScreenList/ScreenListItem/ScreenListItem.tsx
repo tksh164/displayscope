@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router";
 import { Text, Image } from "@fluentui/react-components";
-import { ScreenSpec } from "src/main/types/screenSpec";
+import { ScreenSpec } from "../../../../main/types/screenSpec.d";
 import "./ScreenListItem.css";
 
 type ScreenListItemProps = {

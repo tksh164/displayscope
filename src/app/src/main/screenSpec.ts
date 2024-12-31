@@ -1,5 +1,5 @@
 import { screen, desktopCapturer } from "electron";
-import { ScreenSpec, DisplaySpecDictionary } from "./types/screenSpec";
+import { ScreenSpec, DisplaySpecDictionary } from "./types/screenSpec.d";
 
 export async function getAllScreenSpecs(thumbnailWidth: number, thumbnailHeight: number): Promise<ScreenSpec[]> {
   return getDisplaySpecDictionary()
