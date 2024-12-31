@@ -1,61 +1,52 @@
 {
   "name": "displayscope",
-  "version": "0.23.0",
-  "private": true,
   "productName": "Displayscope",
+  "version": "0.24.0-react",
   "description": "Displayscope enables to use the apps on the out of sight screen such as the display emulator, display dummy plugs or behind screens.",
-  "author": {
-    "name": "Takeshi Katano"
-  },
   "license": "MIT",
+  "keywords": [],
+  "author": {
+    "name": "Takeshi Katano",
+    "email": "takatano@outlook.com"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/tksh164/displayscope.git"
   },
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "test:unit": "vue-cli-service test:unit",
-    "lint": "vue-cli-service lint",
-    "electron:pretask": "copyfiles -f ../setmousecursorpos/setmousecursorpos.exe build",
-    "electron:build": "yarn run electron:pretask && vue-cli-service electron:build",
-    "electron:serve": "yarn run electron:pretask && vue-cli-service electron:serve",
-    "postinstall": "electron-builder install-app-deps",
-    "postuninstall": "electron-builder install-app-deps"
+    "start": "electron-forge start",
+    "package": "electron-forge package",
+    "make": "electron-forge make",
+    "publish": "electron-forge publish",
+    "lint": "eslint --ext .ts,.tsx ."
   },
-  "main": "background.js",
-  "dependencies": {
-    "element-ui": "^2.15.0",
-    "vue": "^3.0.0",
-    "vue-class-component": "^7.2.0",
-    "vue-property-decorator": "^9.1.0",
-    "vue-router": "^3.5.0",
-    "vuex": "^3.6.0"
-  },
+  "main": ".vite/build/main.js",
   "devDependencies": {
-    "@types/electron-devtools-installer": "^2.2.0",
-    "@types/jest": "^24.0.0",
-    "@typescript-eslint/eslint-plugin": "^4.18.0",
-    "@typescript-eslint/parser": "^4.18.0",
-    "@vue/cli-plugin-eslint": "~4.5.12",
-    "@vue/cli-plugin-router": "~4.5.12",
-    "@vue/cli-plugin-typescript": "~4.5.12",
-    "@vue/cli-plugin-unit-jest": "~4.5.12",
-    "@vue/cli-plugin-vuex": "~4.5.12",
-    "@vue/cli-service": "~4.5.12",
-    "@vue/eslint-config-prettier": "^6.0.0",
-    "@vue/eslint-config-typescript": "^7.0.0",
-    "@vue/test-utils": "^1.0.0",
-    "copyfiles": "^2.4.0",
-    "electron": "^32.0.0",
-    "electron-devtools-installer": "^3.1.0",
-    "eslint": "^6.7.0",
-    "eslint-plugin-prettier": "^3.3.0",
-    "eslint-plugin-vue": "^6.2.0",
-    "prettier": "^2.2.0",
-    "typescript": "~4.4.0",
-    "vue-cli-plugin-electron-builder": "~2.1.1",
-    "vue-cli-plugin-element": "~1.0.1",
-    "vue-template-compiler": "^2.6.0"
+    "@electron-forge/cli": "^7.6.0",
+    "@electron-forge/maker-deb": "^7.6.0",
+    "@electron-forge/maker-rpm": "^7.6.0",
+    "@electron-forge/maker-squirrel": "^7.6.0",
+    "@electron-forge/maker-zip": "^7.6.0",
+    "@electron-forge/plugin-auto-unpack-natives": "^7.6.0",
+    "@electron-forge/plugin-fuses": "^7.6.0",
+    "@electron-forge/plugin-vite": "^7.6.0",
+    "@electron/fuses": "^1.8.0",
+    "@types/react": "^18.3.14",
+    "@types/react-dom": "^18.3.2",
+    "@typescript-eslint/eslint-plugin": "^5.0.0",
+    "@typescript-eslint/parser": "^5.0.0",
+    "electron": "33.2.1",
+    "eslint": "^8.0.1",
+    "eslint-plugin-import": "^2.25.0",
+    "ts-node": "^10.0.0",
+    "typescript": "~4.5.4",
+    "vite": "^5.0.12"
+  },
+  "dependencies": {
+    "@fluentui/react-components": "^9.56.4",
+    "electron-squirrel-startup": "^1.0.1",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router": "^7.0.2"
   }
 }

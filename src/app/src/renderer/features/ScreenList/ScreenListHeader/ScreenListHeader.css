@@ -1,0 +1,11 @@
+.screen-list-header {
+  height: 2.5rem;
+  padding: 0.8rem 1.2rem 0.8rem 0.8rem;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.screen-list-header .header-item {
+  margin-left: 1.2rem;
+}
