@@ -42,7 +42,7 @@ export function initializeIpcListeners(mainWindow: BrowserWindow): void {
   //
 
   ipcMain.handle(IPC_CHANNELS.GET_MOUSE_CURSOR_RETURN_SHORTCUT_KEY, async (event: IpcMainInvokeEvent): Promise<string> => {
-    return (await getAppSettings(mainWindow)).mouseCursorBackToAppWindowShortcutKey.replaceAll(" ", "");
+    return (await getAppSettings(mainWindow)).shortcutKeyToReturnMouseCursorToAppWindow.replaceAll(" ", "");
   });
 
   //

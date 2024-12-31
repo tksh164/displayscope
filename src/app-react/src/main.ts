@@ -6,7 +6,7 @@ import { getInitialAppWindowSize } from "./main/appWindowSize";
 import { initializeIpcListeners } from "./main/ipcListeners";
 import { setAppMenu } from "./main/appMenu";
 import { getAppSettings } from "./main/appSettings";
-import { registerMouseCursorBackToAppWindowShortcutKey, unregisterMouseCursorBackToAppWindowShortcutKey } from "./main/appGlobalShortcutKeys";
+import { registerShortcutKeyToReturnMouseCursorToAppWindow, unregisterShortcutKeyToReturnMouseCursorToAppWindow } from "./main/appGlobalShortcutKeys";
 import { installReactDevTools } from "./main/devTools";
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
@@ -51,8 +51,8 @@ const createWindow = async (): Promise<BrowserWindow> => {
 const registerGlobalShortcutKey = async (mainWindow: BrowserWindow) => {
   const appSettings = await getAppSettings(mainWindow);
   console.log("App settings:", appSettings);
-  const shortcutKey = appSettings.mouseCursorBackToAppWindowShortcutKey;
-  registerMouseCursorBackToAppWindowShortcutKey(shortcutKey, mainWindow);
+  const shortcutKey = appSettings.shortcutKeyToReturnMouseCursorToAppWindow;
+  registerShortcutKeyToReturnMouseCursorToAppWindow(shortcutKey, mainWindow);
 };
 
 // This method will be called when Electron has finished
@@ -85,7 +85,7 @@ app.on("activate", () => {
 
 app.on("will-quit", async () => {
     // Unregister shortcut key.
-    await unregisterMouseCursorBackToAppWindowShortcutKey();
+    await unregisterShortcutKeyToReturnMouseCursorToAppWindow();
 });
 
 // In this file you can include the rest of your app's specific main process

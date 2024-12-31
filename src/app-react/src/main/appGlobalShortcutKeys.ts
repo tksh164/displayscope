@@ -10,18 +10,18 @@ import { IPC_CHANNELS } from "./constants";
 //
 
 // Retain to the shortcut key for the mouse cursor back to the app window.
-let mouseCursorBackToAppWindowShortcutKey: string | undefined = undefined;
+let shortcutKeyToReturnMouseCursorToAppWindow: string | undefined = undefined;
 
 // Register a shortcut key to move the mouse cursor to on the app window from the screen.
-export async function registerMouseCursorBackToAppWindowShortcutKey(shortcutKey: string, window: BrowserWindow): Promise<void> {
-  mouseCursorBackToAppWindowShortcutKey = shortcutKey;  // Retain the shortcut key for unregister.
+export async function registerShortcutKeyToReturnMouseCursorToAppWindow(shortcutKey: string, window: BrowserWindow): Promise<void> {
+  shortcutKeyToReturnMouseCursorToAppWindow = shortcutKey;  // Retain the shortcut key for unregister.
   const messageWhenFailed = `Couldn't register a shortcut key \"${shortcutKey}\" for move mouse cursor back to the app window.`;
   registerGlobalShortcutKey(shortcutKey, () => { moveMouseCursorToAppWindow(window); }, window, messageWhenFailed);
 }
 
 // Unregister a shortcut key to move the mouse cursor to on the app window from the screen.
-export async function unregisterMouseCursorBackToAppWindowShortcutKey(): Promise<void> {
-  unregisterGlobalShortcutKey(mouseCursorBackToAppWindowShortcutKey);
+export async function unregisterShortcutKeyToReturnMouseCursorToAppWindow(): Promise<void> {
+  unregisterGlobalShortcutKey(shortcutKeyToReturnMouseCursorToAppWindow);
 }
 
 function moveMouseCursorToAppWindow(window: BrowserWindow): void {
