@@ -70,8 +70,8 @@ function copyResourceFiles(outputPath: string) {
     const sourceFilePath = path.join(outputPath, sourceRelativePathFromOutputPath, fileName);
     const destinationFilePath = path.join(outputPath, 'resources', fileName);
     console.log('Copy', fileName);
-    console.log('sourceFilePath', sourceFilePath);
-    console.log('destinationFilePath', destinationFilePath);
+    console.log('- Source file path:', sourceFilePath);
+    console.log('- Destination file path:', destinationFilePath);
     fs.copyFileSync(sourceFilePath, destinationFilePath, fs.constants.COPYFILE_EXCL);
   }
 
@@ -79,6 +79,10 @@ function copyResourceFiles(outputPath: string) {
     {
       sourceRelativePath: '../../../setmousecursorpos',
       fileName: 'setmousecursorpos.exe',
+    },
+    {
+      sourceRelativePath: '../../src/assets',
+      fileName: 'default-settings.json',
     },
     {
       sourceRelativePath: '../../src/assets',
