@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useOutletContext } from "react-router";
-import { OutletContext } from "src/renderer/types/outletContext";
+import { OutletContext } from "../../../types/outletContext.d";
 import InteractiveScreenHeader from "../InteractiveScreenHeader/InteractiveScreenHeader";
 import ScreenVideo from "../ScreenVideo/ScreenVideo";
 import { getScreenMediaStream, updateVideoElementBounds, setMouseCursorPosition, setMouseCursorPositionWhenNavigateByShortcutKey } from "./InteractiveScreen";
@@ -64,7 +64,7 @@ export default function InteractiveScreenView() {
 
   const onClick = (event: React.MouseEvent) => {
     setMouseCursorPosition(window, event, currentScreenSpec);
-  }
+  };
 
   //
   // Events for the header element.

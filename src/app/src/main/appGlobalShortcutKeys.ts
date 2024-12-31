@@ -1,5 +1,5 @@
 import { BrowserWindow, screen } from "electron";
-import { ScreenSpec } from "./types/screenSpec";
+import { ScreenSpec } from "./types/screenSpec.d";
 import { registerGlobalShortcutKey, unregisterGlobalShortcutKey } from "./globalShortcutKey";
 import { setMouseCursorPosition } from "./mouseCursorPosition";
 import { getAppSettings } from "./appSettings";
@@ -15,7 +15,7 @@ let shortcutKeyToReturnMouseCursorToAppWindow: string | undefined = undefined;
 // Register a shortcut key to move the mouse cursor to on the app window from the screen.
 export async function registerShortcutKeyToReturnMouseCursorToAppWindow(shortcutKey: string, window: BrowserWindow): Promise<void> {
   shortcutKeyToReturnMouseCursorToAppWindow = shortcutKey;  // Retain the shortcut key for unregister.
-  const messageWhenFailed = `Couldn't register a shortcut key \"${shortcutKey}\" for move mouse cursor back to the app window.`;
+  const messageWhenFailed = `Couldn't register a shortcut key "${shortcutKey}" for move mouse cursor back to the app window.`;
   registerGlobalShortcutKey(shortcutKey, () => { moveMouseCursorToAppWindow(window); }, window, messageWhenFailed);
 }
 
@@ -49,7 +49,7 @@ export async function registerNavigateToInteractiveScreenShortcutKeys(screenSpec
   const shortcutKeyPrefix = (await getAppSettings(window)).shortcutKeyPrefixToNavigateToInteractiveScreen;
   screenSpecs.map((screenSpec) => {
     const shortcutKey = shortcutKeyPrefix + (screenSpec.sequenceNumber + 1).toString();
-    const messageWhenFailed = `Couldn't register a shortcut key \"${shortcutKey}\" for navigate to specific interactive screen directly.`;
+    const messageWhenFailed = `Couldn't register a shortcut key "${shortcutKey}" for navigate to specific interactive screen directly.`;
 
     // Register a shortcut key and a callback for navigate to interactive screen directly.
     registerGlobalShortcutKey(shortcutKey, () => {

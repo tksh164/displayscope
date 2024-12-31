@@ -3,11 +3,11 @@ import { globalShortcut, BrowserWindow, app, dialog } from "electron";
 export async function registerGlobalShortcutKey(shortcutKey: string, callback: () => void, window: BrowserWindow, messageWhenFailed: string): Promise<void> {
   try {
     if (globalShortcut.register(shortcutKey, callback)) {
-      console.log(`Registered a global shortcut key \"${shortcutKey}\".`);
+      console.log(`Registered a global shortcut key "${shortcutKey}".`);
     }
     else {
       // The specified shortcut key already registered.
-      const message = messageWhenFailed + "\n\n" + `The shortcut key \"${shortcutKey}\" is already registered by another application.`;
+      const message = messageWhenFailed + "\n\n" + `The shortcut key "${shortcutKey}" is already registered by another application.`;
       dialog.showMessageBox(window, {
         type: "error",
         title: app.getName(),
@@ -15,10 +15,10 @@ export async function registerGlobalShortcutKey(shortcutKey: string, callback: (
       });
     }
   }
-  catch (e: any) {
+  catch (e) {
     if (e.name === "TypeError" && e.message.includes("conversion failure")) {
       // The specified shortcut key is invalid.
-      const message = messageWhenFailed + "\n\n" + `The shortcut key \"${shortcutKey}\" is invalid key combination.`;
+      const message = messageWhenFailed + "\n\n" + `The shortcut key "${shortcutKey}" is invalid key combination.`;
       dialog.showMessageBox(window, {
         type: "error",
         title: app.getName(),
@@ -40,5 +40,5 @@ export async function registerGlobalShortcutKey(shortcutKey: string, callback: (
 
 export async function unregisterGlobalShortcutKey(shortcutKey: string): Promise<void> {
   globalShortcut.unregister(shortcutKey);
-  console.log(`Unregistered a global shortcut key \"${shortcutKey}\".`);
+  console.log(`Unregistered a global shortcut key "${shortcutKey}".`);
 }

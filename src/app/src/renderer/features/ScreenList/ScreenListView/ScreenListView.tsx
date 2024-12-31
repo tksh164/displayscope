@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useOutletContext } from "react-router";
-import { OutletContext } from "src/renderer/types/outletContext";
+import { OutletContext } from "../../../types/outletContext.d";
 import ScreenListHeader from "../ScreenListHeader/ScreenListHeader";
 import ScreenListItem from "../ScreenListItem/ScreenListItem";
 import "./ScreenListView.css";

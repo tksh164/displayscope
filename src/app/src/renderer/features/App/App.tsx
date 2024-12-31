@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Outlet, useNavigate } from "react-router";
-import { ScreenSpec } from "src/main/types/screenSpec";
+import { ScreenSpec } from "../../../main/types/screenSpec.d";
 import "./App.css";
 
 export default function App() {
