@@ -4,7 +4,7 @@ import { ArrowSyncRegular } from "@fluentui/react-icons";
 import "./ScreenListHeader.css";
 
 type ScreenListHeaderProps = {
-  refreshScreenSpecs: () => Promise<void>;
+  readonly refreshScreenSpecs: () => Promise<void>;
 };
 
 export default function ScreenListHeader(props: ScreenListHeaderProps) {

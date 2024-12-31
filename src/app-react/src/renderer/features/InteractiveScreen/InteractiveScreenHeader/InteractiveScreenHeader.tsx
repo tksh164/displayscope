@@ -5,7 +5,7 @@ import { ArrowLeftRegular } from "@fluentui/react-icons";
 import "./InteractiveScreenHeader.css";
 
 type InteractiveScreenHeaderProps = {
-  id: string;
+  readonly id: string;
 };
 
 export default function InteractiveScreenHeader(props: InteractiveScreenHeaderProps) {

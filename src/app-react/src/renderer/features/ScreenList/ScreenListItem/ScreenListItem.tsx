@@ -4,8 +4,8 @@ import { ScreenSpec } from "src/main/types/screenSpec";
 import "./ScreenListItem.css";
 
 type ScreenListItemProps = {
-  screenSpec: ScreenSpec;
-  setCurrentScreenSpec: React.Dispatch<React.SetStateAction<ScreenSpec>>;
+  readonly screenSpec: ScreenSpec;
+  readonly setCurrentScreenSpec: React.Dispatch<React.SetStateAction<ScreenSpec>>;
 };
 
 export default function ScreenListItem(props: ScreenListItemProps) {

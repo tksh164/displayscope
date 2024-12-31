@@ -1,7 +1,7 @@
 import { VideoHTMLAttributes, useEffect, useRef } from "react"
 
 type ScreenVideoProps = VideoHTMLAttributes<HTMLVideoElement> & {
-  srcObject: MediaStream
+  readonly srcObject: MediaStream
 };
 
 export default function ScreenVideo({ srcObject, ...props }: ScreenVideoProps) {
