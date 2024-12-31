@@ -28,7 +28,7 @@ export function initializeIpcListeners(mainWindow: BrowserWindow): void {
   // Always on top setting
   //
 
-  ipcMain.handle(IPC_CHANNELS.GET_CURRENT_ALWAYS_ON_TOP_SETTING, async (event: IpcMainInvokeEvent): Promise<boolean> => {
+  ipcMain.handle(IPC_CHANNELS.GET_ALWAYS_ON_TOP_SETTING, async (event: IpcMainInvokeEvent): Promise<boolean> => {
     return getCurrentAlwaysOnTopSetting(mainWindow);
   });
 

@@ -6,7 +6,7 @@ export const IPC_CHANNELS = {
   SET_MOUSE_CURSOR_POSITION: "set-mouse-cursor-position",
 
   // Always on top setting
-  GET_CURRENT_ALWAYS_ON_TOP_SETTING: "get-current-always-on-top-setting",
+  GET_ALWAYS_ON_TOP_SETTING: "get-always-on-top-setting",
   SET_ALWAYS_ON_TOP_SETTING: "set-always-on-top-setting",
   ALWAYS_ON_TOP_SETTING_CHANGED: "always-on-top-setting-changed",
 

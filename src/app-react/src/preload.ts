@@ -23,7 +23,7 @@ contextBridge.exposeInMainWorld("exposedApi", {
   // Always on top setting
   alwaysOnTopSetting: {
     get: async (): Promise<boolean> => {
-      return ipcRenderer.invoke(IPC_CHANNELS.GET_CURRENT_ALWAYS_ON_TOP_SETTING);
+      return ipcRenderer.invoke(IPC_CHANNELS.GET_ALWAYS_ON_TOP_SETTING);
     },
 
     set: async (shouldAlwaysOnTop: boolean): Promise<void> => {
