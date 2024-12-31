@@ -5,6 +5,7 @@ import { ScreenSpec } from "./types/screenSpec";
 import { setMouseCursorPosition } from "./mouseCursorPosition";
 import { getCurrentAlwaysOnTopSetting, setAlwaysOnTop, setAlwaysOnTopMenuItemCheck } from "./alwaysOnTop";
 import { getAppSettings } from "./appSettings";
+import { registerNavigateToInteractiveScreenShortcutKeys, unregisterNavigateToInteractiveScreenShortcutKeys } from "./appGlobalShortcutKeys";
 
 export function initializeIpcListeners(mainWindow: BrowserWindow): void {
   //
@@ -37,10 +38,22 @@ export function initializeIpcListeners(mainWindow: BrowserWindow): void {
   });
 
   //
-  // Shortcut keys
+  // Mouse cursor return to the app window shortcut key
   //
 
   ipcMain.handle(IPC_CHANNELS.GET_MOUSE_CURSOR_RETURN_SHORTCUT_KEY, async (event: IpcMainInvokeEvent): Promise<string> => {
     return (await getAppSettings(mainWindow)).mouseCursorBackToAppWindowShortcutKey.replaceAll(" ", "");
+  });
+
+  //
+  // Navigate to interactive screen view shortcut keys
+  //
+
+  ipcMain.on(IPC_CHANNELS.REGISTER_NAVIGATE_TO_INTERACTIVE_SCREEN_SHORTCUT_KEYS, async (event: IpcMainEvent, screenSpecs: ScreenSpec[]) => {
+    registerNavigateToInteractiveScreenShortcutKeys(screenSpecs, mainWindow);
+  });
+
+  ipcMain.on(IPC_CHANNELS.UNREGISTER_NAVIGATE_TO_INTERACTIVE_SCREEN_SHORTCUT_KEYS, async (event: IpcMainEvent) => {
+    unregisterNavigateToInteractiveScreenShortcutKeys();
   });
 }

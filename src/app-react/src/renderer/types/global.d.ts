@@ -6,6 +6,10 @@ export type ExposedApi = {
   addAlwaysOnTopSettingChangedEventListener: (listener: (event: Electron.IpcRendererEvent, shouldAlwaysOnTop: boolean) => void) => Promise<void>;
   removeAlwaysOnTopSettingChangedEventListener: (listener: (event: Electron.IpcRendererEvent, shouldAlwaysOnTop: boolean) => void) => Promise<void>;
   getMouseCursorReturnShortcutKey(): Promise<string>;
+  addNavigateToInteractiveScreenShortcutKeyPressedEventListener(listener: (event: Electron.IpcRendererEvent, screenSpec: ScreenSpec) => void): Promise<void>;
+  removeNavigateToInteractiveScreenShortcutKeyPressedEventListener(listener: (event: Electron.IpcRendererEvent, screenSpec: ScreenSpec) => void): Promise<void>;
+  registerNavigateToInteractiveScreenShortcutKeys(screenSpecs: ScreenSpec[]): Promise<void>;
+  unregisterNavigateToInteractiveScreenShortcutKeys(): Promise<void>;
 };
 
 declare global {

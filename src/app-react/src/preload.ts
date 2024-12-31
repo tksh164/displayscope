@@ -19,7 +19,7 @@ contextBridge.exposeInMainWorld("exposedApi", {
   //
 
   setMouseCursorPosition: async (posX: number, posY: number): Promise<void> => {
-    return ipcRenderer.send(IPC_CHANNELS.SET_MOUSE_CURSOR_POSITION, posX, posY);
+    ipcRenderer.send(IPC_CHANNELS.SET_MOUSE_CURSOR_POSITION, posX, posY);
   },
 
   //
@@ -31,7 +31,7 @@ contextBridge.exposeInMainWorld("exposedApi", {
   },
 
   setAlwaysOnTopSetting: async (shouldAlwaysOnTop: boolean): Promise<void> => {
-    return ipcRenderer.send(IPC_CHANNELS.SET_ALWAYS_ON_TOP_SETTING, shouldAlwaysOnTop);
+    ipcRenderer.send(IPC_CHANNELS.SET_ALWAYS_ON_TOP_SETTING, shouldAlwaysOnTop);
   },
 
   addAlwaysOnTopSettingChangedEventListener: async (listener: (event: Electron.IpcRendererEvent, shouldAlwaysOnTop: boolean) => void): Promise<void> => {
@@ -45,10 +45,30 @@ contextBridge.exposeInMainWorld("exposedApi", {
   },
 
   //
-  // Shortcut keys
+  // Mouse cursor return to the app window shortcut key
   //
 
   getMouseCursorReturnShortcutKey: async (): Promise<string> => {
     return ipcRenderer.invoke(IPC_CHANNELS.GET_MOUSE_CURSOR_RETURN_SHORTCUT_KEY);
-  }
+  },
+
+  //
+  // Navigate to interactive screen view shortcut keys
+  //
+
+  addNavigateToInteractiveScreenShortcutKeyPressedEventListener: async (listener: (event: Electron.IpcRendererEvent, screenSpec: ScreenSpec) => void): Promise<void> => {
+    ipcRenderer.on(IPC_CHANNELS.NAVIGATE_TO_INTERACTIVE_SCREEN_SHORTCUT_KEY_PRESSED, listener);
+  },
+
+  removeNavigateToInteractiveScreenShortcutKeyPressedEventListener: async (listener: (event: Electron.IpcRendererEvent, screenSpec: ScreenSpec) => void): Promise<void> => {
+    ipcRenderer.removeListener(IPC_CHANNELS.NAVIGATE_TO_INTERACTIVE_SCREEN_SHORTCUT_KEY_PRESSED, listener);
+  },
+
+  registerNavigateToInteractiveScreenShortcutKeys: async (screenSpecs: ScreenSpec[]): Promise<void> => {
+    ipcRenderer.send(IPC_CHANNELS.REGISTER_NAVIGATE_TO_INTERACTIVE_SCREEN_SHORTCUT_KEYS, screenSpecs);
+  },
+
+  unregisterNavigateToInteractiveScreenShortcutKeys: async (): Promise<void> => {
+    ipcRenderer.send(IPC_CHANNELS.UNREGISTER_NAVIGATE_TO_INTERACTIVE_SCREEN_SHORTCUT_KEYS);
+  },
 });

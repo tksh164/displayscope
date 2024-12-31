@@ -4,6 +4,7 @@ export type ScreenSpec = {
   thumbnailDataUri: string;
   scaledScreenOriginPoint: ScreenPoint;
   displaySpec: DisplaySpec;
+  sequenceNumber: number;
 };
 
 export type DisplayBounds = {

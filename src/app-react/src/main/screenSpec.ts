@@ -36,7 +36,8 @@ async function getScreenSpecs(displaySpecDictionary: DisplaySpecDictionary, thum
     })
     .then(async (sources) => {
       const screenSpecs: ScreenSpec[] = [];
-      for (const source of sources) {
+      sources.map((source, i) => {
+        // Find the display spec that matches the source.
         const displaySpec = displaySpecDictionary[source.display_id];
         screenSpecs.push({
           id: source.id,
@@ -47,8 +48,9 @@ async function getScreenSpecs(displaySpecDictionary: DisplaySpecDictionary, thum
             y: displaySpec.bounds.y
           }),
           displaySpec: displaySpec,
+          sequenceNumber: i,
         });
-      }
+      });
       return screenSpecs;
     });
 }
