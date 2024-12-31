@@ -20,11 +20,11 @@ export default function ScreenListHeader(props: ScreenListHeaderProps) {
     //console.log(`Always on top setting change to ${shouldAlwaysOnTop} from the menu item.`);
   };
   const addEventListeners = () => {
-    window.exposedApi.addAlwaysOnTopSettingChangedEventListener(alwaysOnTopSettingChanged);
+    window.exposedApi.alwaysOnTopSetting.addChangedEventListener(alwaysOnTopSettingChanged);
     //console.log("Add AlwaysOnTopSettingChanged event listener.");
   };
   const removeEventListeners = () => {
-    window.exposedApi.removeAlwaysOnTopSettingChangedEventListener(alwaysOnTopSettingChanged);
+    window.exposedApi.alwaysOnTopSetting.removeChangedEventListener(alwaysOnTopSettingChanged);
     //console.log("Remove AlwaysOnTopSettingChanged event listener.");
   };
   useEffect(() => {
@@ -37,8 +37,8 @@ export default function ScreenListHeader(props: ScreenListHeaderProps) {
   //
 
   const onClickAlwaysOnTopSetting = async (event: React.MouseEvent) => {
-    const newAlwaysOnTopSetting = !(await window.exposedApi.getCurrentAlwaysOnTopSetting());
-    window.exposedApi.setAlwaysOnTopSetting(newAlwaysOnTopSetting);
+    const newAlwaysOnTopSetting = !(await window.exposedApi.alwaysOnTopSetting.get());
+    window.exposedApi.alwaysOnTopSetting.set(newAlwaysOnTopSetting);
     setIsAlwaysOnTop(newAlwaysOnTopSetting);
     //console.log(`Always on top setting change to ${newAlwaysOnTopSetting} from UI.`);
   }

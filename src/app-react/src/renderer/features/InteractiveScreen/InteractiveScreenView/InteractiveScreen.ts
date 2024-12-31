@@ -115,7 +115,7 @@ export function setMouseCursorPosition(targetWindow: Window, event: React.MouseE
   };
 
   // Move the mouse cursor into the actual screen.
-  targetWindow.exposedApi.setMouseCursorPosition(mouseCursorPositionInActualScreen.x, mouseCursorPositionInActualScreen.y);
+  targetWindow.exposedApi.mouseCursorPosition.set(mouseCursorPositionInActualScreen.x, mouseCursorPositionInActualScreen.y);
 }
 
 export function setMouseCursorPositionWhenNavigateByShortcutKey(targetWindow: Window, event: React.SyntheticEvent, currentScreenSpec: ScreenSpec): void {

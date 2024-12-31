@@ -13,7 +13,7 @@ export default function ScreenListView() {
   //
 
   const refreshScreenSpecs = async () => {
-    const allScreenSpecs = await window.exposedApi.getAllScreenSpecs(1000, 1000);
+    const allScreenSpecs = await window.exposedApi.screenSpec.getAll(1000, 1000);
     setScreenSpecs(allScreenSpecs);
     //console.log("ScreenSpecs refreshed.");
   };

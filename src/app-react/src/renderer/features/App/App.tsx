@@ -25,11 +25,11 @@ export default function App() {
     //console.log("Navigated to the interactive screen directly by pressing the shortcut key.");
   };
   const addEventListeners = () => {
-    window.exposedApi.addNavigateToInteractiveScreenShortcutKeyPressedEventListener(navigateToInteractiveScreenShortcutKeyPressed);
+    window.exposedApi.navigateToInteractiveScreenShortcutKey.addPressedEventListener(navigateToInteractiveScreenShortcutKeyPressed);
     //console.log("Added NavigateToInteractiveScreenShortcutKeyPressed event listener.");
   };
   const removeEventListeners = () => {
-    window.exposedApi.removeNavigateToInteractiveScreenShortcutKeyPressedEventListener(navigateToInteractiveScreenShortcutKeyPressed);
+    window.exposedApi.navigateToInteractiveScreenShortcutKey.removePressedEventListener(navigateToInteractiveScreenShortcutKeyPressed);
     //console.log("Removed NavigateToInteractiveScreenShortcutKeyPressed event listener.");
   };
   useEffect(() => {
@@ -39,10 +39,10 @@ export default function App() {
 
   // The shortcut keys for navigate to interactive screen.
   const registerShortcutKeys = () => {
-    window.exposedApi.registerNavigateToInteractiveScreenShortcutKeys(screenSpecs);
+    window.exposedApi.navigateToInteractiveScreenShortcutKey.registerShortcutKeys(screenSpecs);
   };
   const unregisterShortcutKeys = () => {
-    window.exposedApi.unregisterNavigateToInteractiveScreenShortcutKeys();
+    window.exposedApi.navigateToInteractiveScreenShortcutKey.unregisterShortcutKeys();
   };
   useEffect(() => {
     registerShortcutKeys();

@@ -13,7 +13,7 @@ export default function InteractiveScreenHeader(props: InteractiveScreenHeaderPr
   const navigate = useNavigate();
 
   useEffect(() => {
-    window.exposedApi.getMouseCursorReturnShortcutKey().then((shortcutKey) => {
+    window.exposedApi.mouseCursorReturnShortcutKey.get().then((shortcutKey) => {
       setMouseCursorReturnShortcutKey(shortcutKey);
     });
   }, []);
