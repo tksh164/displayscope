@@ -1,3 +1,5 @@
+export const APP_SETTINGS_SCHEMA_VERSION = 2;
+
 export const IPC_CHANNELS = {
   // Screen spec
   GET_ALL_SCREEN_SPECS: "get-all-screen-specs",
@@ -21,4 +23,8 @@ export const IPC_CHANNELS = {
 
 export const MENU_ITEM_IDS = {
   WINDOW_ALWAYS_ON_TOP: "window-always-on-top",
+};
+
+export const ERROR_CODE_NAMES = {
+  INVALID_APP_SETTINGS_SCHEMA_VERSION: "INVALID_APP_SETTINGS_SCHEMA_VERSION",
 };
