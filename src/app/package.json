@@ -1,7 +1,7 @@
 {
   "name": "displayscope",
   "productName": "Displayscope",
-  "version": "0.24.0-react",
+  "version": "0.24.0",
   "description": "Displayscope enables to use the apps on the out of sight screen such as the display emulator, display dummy plugs or behind screens.",
   "license": "MIT",
   "keywords": [],
