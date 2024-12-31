@@ -18,7 +18,7 @@ export default function ScreenListItem(props: ScreenListItemProps) {
 
   return (
     <div className="screen-list-item" onClick={() => {
-      // Update the current screen ID then navigate to the interactive screen view.
+      // Update the current screen spec then navigate to the interactive screen view.
       props.setCurrentScreenSpec(props.screenSpec);
       navigate("/interactive-screen");
     }}>
