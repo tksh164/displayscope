@@ -85,8 +85,8 @@ app.on("activate", () => {
 
 app.on("will-quit", async () => {
     // Unregister shortcut keys.
-    await unregisterShortcutKeyToReturnMouseCursorToAppWindow();
     await unregisterNavigateToInteractiveScreenShortcutKeys();
+    await unregisterShortcutKeyToReturnMouseCursorToAppWindow();
 });
 
 // In this file you can include the rest of your app's specific main process
