@@ -1,5 +1,9 @@
 import { ScreenSpec } from "src/main/types/screenSpec";
 
+// HTML element IDs.
+const WRAPPER_ELEMENT_ID = "screen-view-wrapper";
+const VIDEO_ELEMENT_ID = "screen-video";
+
 //
 // Retrieve a screen media stream.
 //
@@ -23,10 +27,9 @@ export function updateVideoElementBounds(targetWindow: Window): void {
   // Retrieve the wrapper element's computed size.
   //
 
-  const wrapperElementId = "screen-view-wrapper";
-  const wrapperElement = targetWindow.document.getElementById(wrapperElementId) as HTMLElement;
-  if (wrapperElement === null) {
-    throw new Error(`The wrapper element with ID "${wrapperElementId}" is not found.`);
+  const wrapperElement = targetWindow.document.getElementById(WRAPPER_ELEMENT_ID) as HTMLElement;
+  if (wrapperElement === null || wrapperElement === undefined) {
+    throw new Error(`The wrapper element with ID "${WRAPPER_ELEMENT_ID}" is not found.`);
   }
   const wrapperElementComputedStyles = targetWindow.getComputedStyle(wrapperElement);
   const wrapperElementComputedSize = {
@@ -38,10 +41,9 @@ export function updateVideoElementBounds(targetWindow: Window): void {
   // Calculate the video element's new bounds.
   //
 
-  const videoElementId = "screen-video";
-  const videoElement = targetWindow.document.getElementById(videoElementId) as HTMLVideoElement;
-  if (videoElement === null) {
-    throw new Error(`The video element with ID "${videoElementId}" is not found.`);
+  const videoElement = targetWindow.document.getElementById(VIDEO_ELEMENT_ID) as HTMLVideoElement;
+  if (videoElement === null || videoElement === undefined) {
+    throw new Error(`The video element with ID "${VIDEO_ELEMENT_ID}" is not found.`);
   }
   const newVideoElementBounds = { left: 0, top: 0, width: 0, height: 0 };
 
@@ -76,7 +78,7 @@ export function updateVideoElementBounds(targetWindow: Window): void {
 export function setMouseCursorPosition(targetWindow: Window, event: React.MouseEvent, currentScreenSpec: ScreenSpec): void {
   // Retrieve the video element's computed bounds.
   const videoElement = event.target as HTMLVideoElement;
-  if (videoElement === null) {
+  if (videoElement === null || videoElement === undefined) {
     throw new Error("The target video element is not found.");
   }
   const videoElementComputedStyles = targetWindow.getComputedStyle(videoElement);
@@ -114,4 +116,25 @@ export function setMouseCursorPosition(targetWindow: Window, event: React.MouseE
 
   // Move the mouse cursor into the actual screen.
   targetWindow.exposedApi.setMouseCursorPosition(mouseCursorPositionInActualScreen.x, mouseCursorPositionInActualScreen.y);
+}
+
+export function setMouseCursorPositionWhenNavigateByShortcutKey(targetWindow: Window, event: React.SyntheticEvent, currentScreenSpec: ScreenSpec): void {
+  // Retrieve the video element's computed left and top.
+  const videoElement = targetWindow.document.getElementById(VIDEO_ELEMENT_ID) as HTMLVideoElement;
+  if (videoElement === null || videoElement === undefined) {
+    throw new Error(`The video element with ID "${VIDEO_ELEMENT_ID}" is not found.`);
+  }
+  const videoElementComputedStyles = targetWindow.getComputedStyle(videoElement);
+  const videoElementComputedLeftTop = {
+    left: parseFloat(videoElementComputedStyles.getPropertyValue("left")),
+    top: parseFloat(videoElementComputedStyles.getPropertyValue("top")),
+  };
+
+  // Set the mouse cursor position within the actual screen.
+  const mouseEvent = {
+    target: event.target,
+    clientX: Math.floor((videoElement.width / 2) + videoElementComputedLeftTop.left),
+    clientY: Math.floor((videoElement.height / 2) + videoElementComputedLeftTop.top),
+  } as React.MouseEvent;
+  setMouseCursorPosition(targetWindow, mouseEvent, currentScreenSpec);
 }

@@ -3,4 +3,6 @@ export type OutletContext = {
   setScreenSpecs: React.Dispatch<React.SetStateAction<ScreenSpec[]>>;
   currentScreenSpec: ScreenSpec;
   setCurrentScreenSpec: React.Dispatch<React.SetStateAction<ScreenSpec>>;
+  isInteractiveScreenNavigatedByShortcutKey: boolean;
+  setIsInteractiveScreenNavigatedByShortcutKey: React.Dispatch<React.SetStateAction<boolean>>;
 };

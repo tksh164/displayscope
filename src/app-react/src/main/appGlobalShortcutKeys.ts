@@ -53,9 +53,6 @@ export async function registerNavigateToInteractiveScreenShortcutKeys(screenSpec
 
     // Register a shortcut key and a callback for navigate to interactive screen directly.
     registerGlobalShortcutKey(shortcutKey, () => {
-      //
-      moveMouseCursorToAppWindow(window);
-
       // Send the screen spec to be navigated to the renderer process.
       window.webContents.send(IPC_CHANNELS.NAVIGATE_TO_INTERACTIVE_SCREEN_SHORTCUT_KEY_PRESSED, screenSpec);
     }, window, messageWhenFailed);

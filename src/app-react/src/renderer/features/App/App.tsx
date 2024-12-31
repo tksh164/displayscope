@@ -6,6 +6,7 @@ import "./App.css";
 export default function App() {
   const [screenSpecs, setScreenSpecs] = useState<ScreenSpec[]>([]);
   const [currentScreenSpec, setCurrentScreenSpec] = useState<ScreenSpec>(null);
+  const [isInteractiveScreenNavigatedByShortcutKey, setIsInteractiveScreenNavigatedByShortcutKey] = useState<boolean>(false);
   const navigate = useNavigate();
 
   //
@@ -16,6 +17,10 @@ export default function App() {
   const navigateToInteractiveScreenShortcutKeyPressed = (event: Electron.IpcRendererEvent, screenSpec: ScreenSpec) => {
     // Update the current screen spec then navigate to the interactive screen view.
     setCurrentScreenSpec(screenSpec);
+
+    // Set the flag to indicate that the interactive screen is navigated by the shortcut key.
+    setIsInteractiveScreenNavigatedByShortcutKey(true);
+
     navigate("/interactive-screen");
     //console.log("Navigated to the interactive screen directly by pressing the shortcut key.");
   };
@@ -46,7 +51,14 @@ export default function App() {
 
   return (
     <div className="app-wrapper">
-      <Outlet context={{ screenSpecs, setScreenSpecs, currentScreenSpec, setCurrentScreenSpec }} />
+      <Outlet context={{
+        screenSpecs,
+        setScreenSpecs,
+        currentScreenSpec,
+        setCurrentScreenSpec,
+        isInteractiveScreenNavigatedByShortcutKey,
+        setIsInteractiveScreenNavigatedByShortcutKey
+      }} />
     </div>
   );
 }

@@ -3,11 +3,11 @@ import { useOutletContext } from "react-router";
 import { OutletContext } from "src/renderer/types/outletContext";
 import InteractiveScreenHeader from "../InteractiveScreenHeader/InteractiveScreenHeader";
 import ScreenVideo from "../ScreenVideo/ScreenVideo";
-import { getScreenMediaStream, updateVideoElementBounds, setMouseCursorPosition } from "./InteractiveScreen";
+import { getScreenMediaStream, updateVideoElementBounds, setMouseCursorPosition, setMouseCursorPositionWhenNavigateByShortcutKey } from "./InteractiveScreen";
 import "./InteractiveScreenView.css";
 
 export default function InteractiveScreenView() {
-  const { currentScreenSpec } = useOutletContext<OutletContext>();
+  const { currentScreenSpec, isInteractiveScreenNavigatedByShortcutKey, setIsInteractiveScreenNavigatedByShortcutKey } = useOutletContext<OutletContext>();
   const [screenStream, setScreenStream] = useState<MediaStream>(null);
 
   //
@@ -51,6 +51,15 @@ export default function InteractiveScreenView() {
   const onCanPlayThrough = (event: React.SyntheticEvent) => {
     // Update the video element's bounds when the video can play through because video stream's width & height are need to calculate the video element's bounds.
     updateVideoElementBounds(window);
+
+    // Set the mouse cursor position into the screen when the interactive screen navigated by the shortcut key.
+    if (isInteractiveScreenNavigatedByShortcutKey) {
+      // Set the mouse cursor position into the screen.
+      setMouseCursorPositionWhenNavigateByShortcutKey(window, event, currentScreenSpec);
+
+      // Reset the flag to indicate that the interactive screen is navigated by the shortcut key.
+      setIsInteractiveScreenNavigatedByShortcutKey(false);
+    }
   };
 
   const onClick = (event: React.MouseEvent) => {
