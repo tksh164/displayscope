@@ -46,7 +46,7 @@ function calcCenterPositionOfWindow(window: BrowserWindow): [number, number] {
 const navigateToInteractiveScreenShortcutKeys: string[] = [];
 
 export async function registerNavigateToInteractiveScreenShortcutKeys(screenSpecs: ScreenSpec[], window: BrowserWindow): Promise<void> {
-  const shortcutKeyPrefix = (await getAppSettings(window)).navigateToInteractiveScreenShortcutKeyPrefix;
+  const shortcutKeyPrefix = (await getAppSettings(window)).shortcutKeyPrefixToNavigateToInteractiveScreen;
   screenSpecs.map((screenSpec) => {
     const shortcutKey = shortcutKeyPrefix + (screenSpec.sequenceNumber + 1).toString();
     const messageWhenFailed = `Couldn't register a shortcut key \"${shortcutKey}\" for navigate to specific interactive screen directly.`;

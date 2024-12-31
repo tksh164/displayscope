@@ -1,5 +1,5 @@
 {
     "schemaVersion": 2,
     "shortcutKeyToReturnMouseCursorToAppWindow": "Shift + Esc",
-    "navigateToInteractiveScreenShortcutKeyPrefix": "Ctrl + Shift + F"
+    "shortcutKeyPrefixToNavigateToInteractiveScreen": "Ctrl + Shift + F"
 }
