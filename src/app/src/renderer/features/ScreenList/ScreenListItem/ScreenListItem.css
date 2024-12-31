@@ -1,7 +1,6 @@
 .screen-list-item {
-  margin: 1vh 1vw 4vh 1vw;
-  padding: 1rem 1.4rem 1.1rem 1.4rem;
-  border: solid 1px transparent;
+  margin: 0.5vh 1vw 0vh 1vw;
+  padding: 0.7rem 1.1rem 0.9rem 1.1rem;
   border-radius: 8px;
 }
 
@@ -18,6 +17,6 @@
 }
 
 .screen-thumbnail {
-  width: 35vw;
+  height: 35vh;
   min-width: 300px;
 }
