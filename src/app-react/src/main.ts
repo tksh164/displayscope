@@ -6,7 +6,7 @@ import { getInitialAppWindowSize } from "./main/appWindowSize";
 import { initializeIpcListeners } from "./main/ipcListeners";
 import { setAppMenu } from "./main/appMenu";
 import { getAppSettings } from "./main/appSettings";
-import { registerShortcutKeyToReturnMouseCursorToAppWindow, unregisterShortcutKeyToReturnMouseCursorToAppWindow } from "./main/appGlobalShortcutKeys";
+import { registerShortcutKeyToReturnMouseCursorToAppWindow, unregisterShortcutKeyToReturnMouseCursorToAppWindow, unregisterNavigateToInteractiveScreenShortcutKeys } from "./main/appGlobalShortcutKeys";
 import { installReactDevTools } from "./main/devTools";
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
@@ -84,8 +84,9 @@ app.on("activate", () => {
 });
 
 app.on("will-quit", async () => {
-    // Unregister shortcut key.
+    // Unregister shortcut keys.
     await unregisterShortcutKeyToReturnMouseCursorToAppWindow();
+    await unregisterNavigateToInteractiveScreenShortcutKeys();
 });
 
 // In this file you can include the rest of your app's specific main process
