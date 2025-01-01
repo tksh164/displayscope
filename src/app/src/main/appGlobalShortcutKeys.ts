@@ -1,9 +1,10 @@
 import { BrowserWindow, screen } from "electron";
 import { ScreenSpec } from "./types/screenSpec.d";
+import { AppShortcutKeysSettingKey } from "./types/appSetting.d";
 import { registerGlobalShortcutKey, unregisterGlobalShortcutKey } from "./globalShortcutKey";
 import { setMouseCursorPosition } from "./mouseCursorPosition";
-import { getAppSettings } from "./appSettings";
-import { IPC_CHANNELS } from "./constants";
+import { getAppSetting } from "./appSetting";
+import { IPC_CHANNELS, APP_SETTING_KEY_PREFIX_NAVIGATE_TO_INTERACTIVE_SCREEN_SHORTCUT_KEY } from "./constants";
 
 //
 // Mouse cursor return to the app window shortcut key
@@ -46,19 +47,19 @@ function calcCenterPositionOfWindow(window: BrowserWindow): [number, number] {
 const navigateToInteractiveScreenShortcutKeys: string[] = [];
 
 export async function registerNavigateToInteractiveScreenShortcutKeys(screenSpecs: ScreenSpec[], window: BrowserWindow): Promise<void> {
-  const shortcutKeyPrefix = (await getAppSettings(window)).shortcutKeyPrefixToNavigateToInteractiveScreen;
+  const appSettingShortcutKeys = (await getAppSetting(window)).shortcutKeys;
   screenSpecs.map((screenSpec) => {
-    const shortcutKey = shortcutKeyPrefix + (screenSpec.sequenceNumber + 1).toString();
-    const messageWhenFailed = `Couldn't register a shortcut key "${shortcutKey}" for navigate to specific interactive screen directly.`;
-
     // Register a shortcut key and a callback for navigate to interactive screen directly.
+    const shortcutKeySettingKey = APP_SETTING_KEY_PREFIX_NAVIGATE_TO_INTERACTIVE_SCREEN_SHORTCUT_KEY + (screenSpec.sequenceNumber + 1).toString();
+    const shortcutKey = appSettingShortcutKeys[shortcutKeySettingKey as AppShortcutKeysSettingKey];
+    const messageWhenFailed = `Couldn't register a shortcut key "${shortcutKey}" for navigate to specific interactive screen directly.`;
     registerGlobalShortcutKey(shortcutKey, () => {
       // Send the screen spec to be navigated to the renderer process.
       window.webContents.send(IPC_CHANNELS.NAVIGATE_TO_INTERACTIVE_SCREEN_SHORTCUT_KEY_PRESSED, screenSpec);
       //console.log("Send the screen spec to be navigated to the renderer process.");
     }, window, messageWhenFailed);
 
-    // Retain the shortcut key for un-registration.
+    // Retain the shortcut key for unregister.
     navigateToInteractiveScreenShortcutKeys.push(shortcutKey);
 
     //console.log('Registered a shortcut key for navigate to interactive screen:', shortcutKey);
