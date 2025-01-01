@@ -1,13 +1,9 @@
 import type { ForgeConfig } from '@electron-forge/shared-types';
-import { MakerSquirrel } from '@electron-forge/maker-squirrel';
-import { MakerZIP } from '@electron-forge/maker-zip';
-import { MakerDeb } from '@electron-forge/maker-deb';
-import { MakerRpm } from '@electron-forge/maker-rpm';
 import { VitePlugin } from '@electron-forge/plugin-vite';
 import { FusesPlugin } from '@electron-forge/plugin-fuses';
 import { FuseV1Options, FuseVersion } from '@electron/fuses';
-import path from 'path';
-import fs  from 'fs';
+import packageJson from './package.json';
+import { copyResourceFiles } from './forge/utils';
 
 const config: ForgeConfig = {
   packagerConfig: {
@@ -16,10 +12,17 @@ const config: ForgeConfig = {
   },
   rebuildConfig: {},
   makers: [
-    new MakerSquirrel({}),
-    new MakerZIP({}, ['darwin']),
-    new MakerRpm({}),
-    new MakerDeb({})
+    {
+      name: '@electron-forge/maker-squirrel',
+      platforms: ['win32'],
+      config: (arch: string) => {
+        return {
+          setupExe: `${packageJson.name}-${packageJson.version}-setup-${arch}.exe`,
+          setupIcon: './src/assets/appicon.ico',
+          iconUrl: 'https://raw.githubusercontent.com/tksh164/displayscope/master/src/app/src/assets/appicon.ico',
+        }
+      }
+    },
   ],
   plugins: [
     new VitePlugin({
@@ -58,41 +61,10 @@ const config: ForgeConfig = {
     }),
   ],
   hooks: {
-    postPackage: async (forgeConfig, options) => {
-      copyResourceFiles(options.outputPaths[0]);
+    postPackage: async (forgeConfig, packageResult) => {
+      copyResourceFiles(packageResult.outputPaths[0]);
     },
   },
 };
-
-function copyResourceFiles(outputPath: string) {
-  // Copy files into the resources directory.
-  const copyFileIntoResourcesDir = (outputPath: string, sourceRelativePathFromOutputPath: string, fileName: string) => {
-    const sourceFilePath = path.join(outputPath, sourceRelativePathFromOutputPath, fileName);
-    const destinationFilePath = path.join(outputPath, 'resources', fileName);
-    console.log('Copy', fileName);
-    console.log('- Source file path:', sourceFilePath);
-    console.log('- Destination file path:', destinationFilePath);
-    fs.copyFileSync(sourceFilePath, destinationFilePath, fs.constants.COPYFILE_EXCL);
-  }
-
-  const filesToCopy = [
-    {
-      sourceRelativePath: '../../../setmousecursorpos',
-      fileName: 'setmousecursorpos.exe',
-    },
-    {
-      sourceRelativePath: '../../src/assets',
-      fileName: 'default-settings.json',
-    },
-    {
-      sourceRelativePath: '../../src/assets',
-      fileName: 'appicon.png',
-    },
-  ];
-
-  filesToCopy.forEach((file) => {
-    copyFileIntoResourcesDir(outputPath, file.sourceRelativePath, file.fileName);
-  });
-}
 
 export default config;
