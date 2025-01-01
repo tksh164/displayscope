@@ -1,6 +1,5 @@
 export type AppSetting = {
   readonly schemaVersion: number;
-  readonly shortcutKeyToReturnMouseCursorToAppWindow: string;
   readonly shortcutKeys: AppShortcutKeysSetting;
 };
 

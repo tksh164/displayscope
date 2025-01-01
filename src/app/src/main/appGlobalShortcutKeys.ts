@@ -4,25 +4,30 @@ import { AppShortcutKeysSettingKey } from "./types/appSetting.d";
 import { registerGlobalShortcutKey, unregisterGlobalShortcutKey } from "./globalShortcutKey";
 import { setMouseCursorPosition } from "./mouseCursorPosition";
 import { getAppSetting } from "./appSetting";
-import { IPC_CHANNELS, APP_SETTING_KEY_PREFIX_NAVIGATE_TO_INTERACTIVE_SCREEN_SHORTCUT_KEY } from "./constants";
+import { IPC_CHANNELS, APP_SETTING_KEY_SHORTCUT_KEY_RETURN_MOUSE_CURSOR_TO_APP_WINDOW, APP_SETTING_KEY_PREFIX_SHORTCUT_KEY_NAVIGATE_TO_INTERACTIVE_SCREEN } from "./constants";
 
 //
 // Mouse cursor return to the app window shortcut key
 //
 
 // Retain to the shortcut key for the mouse cursor back to the app window.
-let shortcutKeyToReturnMouseCursorToAppWindow: string | undefined = undefined;
+const returnMouseCursorToAppWindowShortcutKeyHolder: string[] = [];
 
 // Register a shortcut key to move the mouse cursor to on the app window from the screen.
-export async function registerShortcutKeyToReturnMouseCursorToAppWindow(shortcutKey: string, window: BrowserWindow): Promise<void> {
-  shortcutKeyToReturnMouseCursorToAppWindow = shortcutKey;  // Retain the shortcut key for unregister.
+export async function registerShortcutKeyToReturnMouseCursorToAppWindow(window: BrowserWindow): Promise<void> {
+  const appSettingShortcutKeys = (await getAppSetting(window)).shortcutKeys;
+  const shortcutKey = appSettingShortcutKeys[APP_SETTING_KEY_SHORTCUT_KEY_RETURN_MOUSE_CURSOR_TO_APP_WINDOW as AppShortcutKeysSettingKey];
+
+  // Retain the shortcut key for unregister.
+  returnMouseCursorToAppWindowShortcutKeyHolder.push(shortcutKey);
+
   const messageWhenFailed = `Couldn't register a shortcut key "${shortcutKey}" for move mouse cursor back to the app window.`;
   registerGlobalShortcutKey(shortcutKey, () => { moveMouseCursorToAppWindow(window); }, window, messageWhenFailed);
 }
 
 // Unregister a shortcut key to move the mouse cursor to on the app window from the screen.
 export async function unregisterShortcutKeyToReturnMouseCursorToAppWindow(): Promise<void> {
-  unregisterGlobalShortcutKey(shortcutKeyToReturnMouseCursorToAppWindow);
+  unregisterShortcutKeys(returnMouseCursorToAppWindowShortcutKeyHolder);
 }
 
 function moveMouseCursorToAppWindow(window: BrowserWindow): void {
@@ -44,13 +49,13 @@ function calcCenterPositionOfWindow(window: BrowserWindow): [number, number] {
 //
 
 // Retain to the shortcut keys for navigate to interactive screen directly.
-const navigateToInteractiveScreenShortcutKeys: string[] = [];
+const navigateToInteractiveScreenShortcutKeyHolder: string[] = [];
 
 export async function registerNavigateToInteractiveScreenShortcutKeys(screenSpecs: ScreenSpec[], window: BrowserWindow): Promise<void> {
   const appSettingShortcutKeys = (await getAppSetting(window)).shortcutKeys;
   screenSpecs.map((screenSpec) => {
     // Register a shortcut key and a callback for navigate to interactive screen directly.
-    const shortcutKeySettingKey = APP_SETTING_KEY_PREFIX_NAVIGATE_TO_INTERACTIVE_SCREEN_SHORTCUT_KEY + (screenSpec.sequenceNumber + 1).toString();
+    const shortcutKeySettingKey = APP_SETTING_KEY_PREFIX_SHORTCUT_KEY_NAVIGATE_TO_INTERACTIVE_SCREEN + (screenSpec.sequenceNumber + 1).toString();
     const shortcutKey = appSettingShortcutKeys[shortcutKeySettingKey as AppShortcutKeysSettingKey];
     const messageWhenFailed = `Couldn't register a shortcut key "${shortcutKey}" for navigate to specific interactive screen directly.`;
     registerGlobalShortcutKey(shortcutKey, () => {
@@ -60,18 +65,21 @@ export async function registerNavigateToInteractiveScreenShortcutKeys(screenSpec
     }, window, messageWhenFailed);
 
     // Retain the shortcut key for unregister.
-    navigateToInteractiveScreenShortcutKeys.push(shortcutKey);
+    navigateToInteractiveScreenShortcutKeyHolder.push(shortcutKey);
 
     //console.log('Registered a shortcut key for navigate to interactive screen:', shortcutKey);
   });
 }
 
 export async function unregisterNavigateToInteractiveScreenShortcutKeys(): Promise<void> {
-  navigateToInteractiveScreenShortcutKeys.map((shortcutKey) => {
+  unregisterShortcutKeys(navigateToInteractiveScreenShortcutKeyHolder);
+}
+
+function unregisterShortcutKeys(shortcutKeyHolder: string[]): void {
+  shortcutKeyHolder.map((shortcutKey) => {
     unregisterGlobalShortcutKey(shortcutKey);
-    //console.log('Unregistered a shortcut key for navigate to interactive screen:', shortcutKey);
   });
 
   // Clear the retained shortcut keys.
-  navigateToInteractiveScreenShortcutKeys.length = 0;
+  shortcutKeyHolder.length = 0;
 }

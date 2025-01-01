@@ -38,7 +38,8 @@ export const MENU_ITEM_IDS = {
 export const APP_SETTING_FILE_NAME = "setting.json";
 export const APP_DEFAULT_SETTING_FILE_NAME = "default-setting.json";
 export const APP_SETTING_FILE_SCHEMA_VERSION = 2;
-export const APP_SETTING_KEY_PREFIX_NAVIGATE_TO_INTERACTIVE_SCREEN_SHORTCUT_KEY = "navigateToInteractiveScreen";
+export const APP_SETTING_KEY_SHORTCUT_KEY_RETURN_MOUSE_CURSOR_TO_APP_WINDOW = "returnMouseCursorToAppWindow";
+export const APP_SETTING_KEY_PREFIX_SHORTCUT_KEY_NAVIGATE_TO_INTERACTIVE_SCREEN = "navigateToInteractiveScreen";
 
 //
 // Asset resource file names.

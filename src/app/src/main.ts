@@ -47,14 +47,6 @@ const createWindow = async (): Promise<BrowserWindow> => {
   return mainWindow;
 };
 
-// Register a global shortcut key.
-const registerGlobalShortcutKey = async (mainWindow: BrowserWindow) => {
-  const appSettings = await getAppSetting(mainWindow);
-  console.log("App settings:", appSettings);
-  const shortcutKey = appSettings.shortcutKeyToReturnMouseCursorToAppWindow;
-  registerShortcutKeyToReturnMouseCursorToAppWindow(shortcutKey, mainWindow);
-};
-
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
@@ -62,8 +54,11 @@ app.on("ready", async () => {
   if (IsRunInDevelopmentEnv()) {
     installReactDevTools();
   }
+
   const mainWindow = await createWindow();
-  registerGlobalShortcutKey(mainWindow);
+
+  // Register a global shortcut key for return the mouse cursor to the app window.
+  registerShortcutKeyToReturnMouseCursorToAppWindow(mainWindow);
 });
 
 // Quit when all windows are closed, except on macOS. There, it's common
@@ -84,7 +79,7 @@ app.on("activate", () => {
 });
 
 app.on("will-quit", async () => {
-    // Unregister shortcut keys.
+    // Unregister global shortcut keys.
     await unregisterNavigateToInteractiveScreenShortcutKeys();
     await unregisterShortcutKeyToReturnMouseCursorToAppWindow();
 });
