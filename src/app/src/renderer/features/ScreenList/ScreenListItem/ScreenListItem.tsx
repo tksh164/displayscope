@@ -24,7 +24,9 @@ export default function ScreenListItem(props: ScreenListItemProps) {
     }}>
       <Text className="screen-name" block={true} size={500} weight="semibold">{screenName}</Text>
       <Text className="screen-description" block={true} size={300}>{displayLabel}, {primaryText}{resolutionText}, {scaleFactorText}</Text>
-      <Image className="screen-thumbnail" shape="rounded" src={props.screenSpec.thumbnailDataUri} />
+      <div className="screen-thumbnail-wrapper">
+        <Image className="screen-thumbnail" shape="square" src={props.screenSpec.thumbnailDataUri} />
+      </div>
     </div>
   );
 }
