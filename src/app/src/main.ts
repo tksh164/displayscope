@@ -5,7 +5,7 @@ import { IsRunInDevelopmentEnv } from "./main/utils";
 import { getInitialAppWindowSize } from "./main/appWindowSize";
 import { initializeIpcListeners } from "./main/ipcListeners";
 import { setAppMenu } from "./main/appMenu";
-import { getAppSettings } from "./main/appSettings";
+import { getAppSetting } from "./main/appSetting";
 import { registerShortcutKeyToReturnMouseCursorToAppWindow, unregisterShortcutKeyToReturnMouseCursorToAppWindow, unregisterNavigateToInteractiveScreenShortcutKeys } from "./main/appGlobalShortcutKeys";
 import { installReactDevTools } from "./main/devTools";
 
@@ -49,7 +49,7 @@ const createWindow = async (): Promise<BrowserWindow> => {
 
 // Register a global shortcut key.
 const registerGlobalShortcutKey = async (mainWindow: BrowserWindow) => {
-  const appSettings = await getAppSettings(mainWindow);
+  const appSettings = await getAppSetting(mainWindow);
   console.log("App settings:", appSettings);
   const shortcutKey = appSettings.shortcutKeyToReturnMouseCursorToAppWindow;
   registerShortcutKeyToReturnMouseCursorToAppWindow(shortcutKey, mainWindow);

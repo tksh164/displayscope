@@ -4,7 +4,7 @@ import { getAllScreenSpecs } from "./screenSpec";
 import { ScreenSpec } from "./types/screenSpec.d";
 import { setMouseCursorPosition } from "./mouseCursorPosition";
 import { getCurrentAlwaysOnTopSetting, setAlwaysOnTop, setAlwaysOnTopMenuItemCheck } from "./alwaysOnTop";
-import { getAppSettings } from "./appSettings";
+import { getAppSetting } from "./appSetting";
 import { registerNavigateToInteractiveScreenShortcutKeys, unregisterNavigateToInteractiveScreenShortcutKeys } from "./appGlobalShortcutKeys";
 
 export function initializeIpcListeners(mainWindow: BrowserWindow): void {
@@ -42,7 +42,7 @@ export function initializeIpcListeners(mainWindow: BrowserWindow): void {
   //
 
   ipcMain.handle(IPC_CHANNELS.GET_MOUSE_CURSOR_RETURN_SHORTCUT_KEY, async (event: IpcMainInvokeEvent): Promise<string> => {
-    return (await getAppSettings(mainWindow)).shortcutKeyToReturnMouseCursorToAppWindow.replaceAll(" ", "");
+    return (await getAppSetting(mainWindow)).shortcutKeyToReturnMouseCursorToAppWindow.replaceAll(" ", "");
   });
 
   //

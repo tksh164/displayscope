@@ -1,35 +1,35 @@
 import { app, dialog, BrowserWindow } from "electron";
 import fs  from "fs";
 import path from "path";
-import { AppSettings } from "./types/appSettings.d";
-import { APP_SETTINGS_SCHEMA_VERSION, ERROR_CODE_NAMES } from "./constants";
+import { AppSetting } from "./types/appSetting";
+import { APP_SETTING_FILE_NAME, APP_DEFAULT_SETTING_FILE_NAME, APP_SETTING_FILE_SCHEMA_VERSION, ERROR_CODE_NAMES } from "./constants";
 import { IsRunInDevelopmentEnv } from "./utils";
 
 // Retain the app settings.
-let appSettings: AppSettings | undefined = undefined;
+let appSettings: AppSetting | undefined = undefined;
 
-export async function getAppSettings(window: BrowserWindow): Promise<AppSettings> {
+export async function getAppSetting(window: BrowserWindow): Promise<AppSetting> {
   if (!(appSettings)) {
     // Load the app settings from the settings file if it is not loaded yet.
-    appSettings = await loadAppSettingsFromFile(window);
+    appSettings = await loadAppSettingFromFile(window);
     if (!(appSettings)) {
       // If couldn't load the app settings from the settings file, try load it again because the settings file may be created.
-      appSettings = await loadAppSettingsFromFile(window);
+      appSettings = await loadAppSettingFromFile(window);
     }
   }
   return appSettings;
 }
 
-async function loadAppSettingsFromFile(window: BrowserWindow): Promise<AppSettings> {
-  const appSettingsFilePath = getAppSettingsFilePath();
+async function loadAppSettingFromFile(window: BrowserWindow): Promise<AppSetting> {
+  const appSettingsFilePath = getAppSettingFilePath();
   try {
     const jsonText = fs.readFileSync(appSettingsFilePath, { encoding: "utf8", flag: "r" });
     const appSettingsJson = JSON.parse(jsonText);
 
     // Verify the schema version.
-    if (appSettingsJson.schemaVersion !== APP_SETTINGS_SCHEMA_VERSION) {
+    if (appSettingsJson.schemaVersion !== APP_SETTING_FILE_SCHEMA_VERSION) {
       const err = new Error(`The app settings file "${appSettingsFilePath}" has an invalid schema version.\n` +
-        `Expected: ${APP_SETTINGS_SCHEMA_VERSION}, Actual: ${appSettingsJson.schemaVersion}`);
+        `Expected: ${APP_SETTING_FILE_SCHEMA_VERSION}, Actual: ${appSettingsJson.schemaVersion}`);
       err.name = ERROR_CODE_NAMES.INVALID_APP_SETTINGS_SCHEMA_VERSION;
       throw err;
     }
@@ -39,17 +39,17 @@ async function loadAppSettingsFromFile(window: BrowserWindow): Promise<AppSettin
   catch (e) {
     if (e.code === 'ENOENT') {
       // If the app settings file does not exist, create a new app settings file by copy the default app settings file.
-      await createNewAppSettingsFile(window);
+      await createNewAppSettingFile(window);
       return undefined;
     }
     else {
       // The app settings file has an invalid schema version.
       if (e.name === ERROR_CODE_NAMES.INVALID_APP_SETTINGS_SCHEMA_VERSION) {
         // Rename the settings file to back up the current settings file.
-        const renamedFileName = renameAppSettingsFile(appSettingsFilePath);
+        const renamedFileName = renameAppSettingFile(appSettingsFilePath);
 
         // Create a new app settings file with default settings.
-        await createNewAppSettingsFile(window);
+        await createNewAppSettingFile(window);
 
         const message = e.message + `\n\nRenamed the current settings file to "${renamedFileName}" and created a new settings file with the default settings.`;
         await dialog.showMessageBox(window, {
@@ -85,7 +85,7 @@ async function loadAppSettingsFromFile(window: BrowserWindow): Promise<AppSettin
   }
 }
 
-function renameAppSettingsFile(appSettingsFilePath: string): string {
+function renameAppSettingFile(appSettingsFilePath: string): string {
   const options: Intl.DateTimeFormatOptions = {
     year: "numeric",
     month: "2-digit",
@@ -103,9 +103,9 @@ function renameAppSettingsFile(appSettingsFilePath: string): string {
   return renamedFileName;
 }
 
-async function createNewAppSettingsFile(window: BrowserWindow): Promise<void> {
-  const defaultAppSettingsFilePath = getDefaultAppSettingsFilePath();
-  const appSettingsFilePath = getAppSettingsFilePath();
+async function createNewAppSettingFile(window: BrowserWindow): Promise<void> {
+  const defaultAppSettingsFilePath = getDefaultAppSettingFilePath();
+  const appSettingsFilePath = getAppSettingFilePath();
   try {
     fs.copyFileSync(defaultAppSettingsFilePath, appSettingsFilePath, fs.constants.COPYFILE_EXCL);
   }
@@ -124,18 +124,16 @@ async function createNewAppSettingsFile(window: BrowserWindow): Promise<void> {
   }
 }
 
-function getAppSettingsFilePath(): string {
-  const APP_SETTINGS_FILE_NAME = "settings.json"
-  const appSettingsFilePath = path.join(app.getPath("userData"), APP_SETTINGS_FILE_NAME);
+function getAppSettingFilePath(): string {
+  const appSettingsFilePath = path.join(app.getPath("userData"), APP_SETTING_FILE_NAME);
   console.log("App settings file path:", appSettingsFilePath);
   return appSettingsFilePath;
 }
 
-function getDefaultAppSettingsFilePath(): string {
-  const DEFAULT_APP_SETTINGS_FILE_NAME = "default-settings.json"
+function getDefaultAppSettingFilePath(): string {
   const defaultAppSettingsFilePath = IsRunInDevelopmentEnv() ?
-    path.join(process.cwd(), 'src/assets', DEFAULT_APP_SETTINGS_FILE_NAME) :
-    path.join(path.dirname(app.getAppPath()), DEFAULT_APP_SETTINGS_FILE_NAME);
+    path.join(process.cwd(), 'src/assets', APP_DEFAULT_SETTING_FILE_NAME) :
+    path.join(path.dirname(app.getAppPath()), APP_DEFAULT_SETTING_FILE_NAME);
   console.log("Default app settings file path:", defaultAppSettingsFilePath);
   return defaultAppSettingsFilePath;
 }
