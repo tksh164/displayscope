@@ -9,7 +9,7 @@ export async function registerGlobalShortcutKey(shortcutKey: string, callback: (
       // The specified shortcut key already registered.
       const message = messageWhenFailed + "\n\n" + `The shortcut key "${shortcutKey}" is already registered by another application.`;
       dialog.showMessageBox(window, {
-        type: "error",
+        type: "warning",
         title: app.getName(),
         message: message,
       });
