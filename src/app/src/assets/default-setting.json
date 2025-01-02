@@ -1,0 +1,15 @@
+{
+    "schemaVersion": 2,
+    "shortcutKeys": {
+        "returnMouseCursorToAppWindow": "Shift + Esc",
+        "navigateToInteractiveScreen1": "Ctrl + Alt + F1",
+        "navigateToInteractiveScreen2": "Ctrl + Alt + F2",
+        "navigateToInteractiveScreen3": "Ctrl + Alt + F3",
+        "navigateToInteractiveScreen4": "Ctrl + Alt + F4",
+        "navigateToInteractiveScreen5": "Ctrl + Alt + F5",
+        "navigateToInteractiveScreen6": "Ctrl + Alt + F6",
+        "navigateToInteractiveScreen7": "Ctrl + Alt + F7",
+        "navigateToInteractiveScreen8": "Ctrl + Alt + F8",
+        "navigateToInteractiveScreen9": "Ctrl + Alt + F9"
+    }
+}

@@ -3,6 +3,7 @@ import os from "os";
 import { MENU_ITEM_IDS } from "./constants";
 import { getCurrentAlwaysOnTopSetting, setAlwaysOnTop, notifyAlwaysOnTopSettingChanged } from "./alwaysOnTop";
 import { IsRunInDevelopmentEnv } from "./utils";
+import { APP_ICON_PNG_FILE_NAME } from "./constants";
 
 export async function setAppMenu(window: BrowserWindow): Promise<void> {
   const menu = Menu.buildFromTemplate(getAppMenuTemplate(window));
@@ -92,10 +93,9 @@ function getAppMenuTemplate(window: BrowserWindow): MenuItemConstructorOptions[]
 
 async function getAppIconResourceFilePath(): Promise<string> {
   const path = await import("path").then((path) => path);
-  const APP_ICON_FILE_NAME = "appicon.png";
   const appIconResourceFilePath = IsRunInDevelopmentEnv() ?
-    path.join(process.cwd(), "src/assets", APP_ICON_FILE_NAME) :
-    path.join(process.resourcesPath, APP_ICON_FILE_NAME);
+    path.join(process.cwd(), "src/assets", APP_ICON_PNG_FILE_NAME) :
+    path.join(process.resourcesPath, APP_ICON_PNG_FILE_NAME);
   console.log("App icon resource file path:", appIconResourceFilePath);
   return appIconResourceFilePath;
 }

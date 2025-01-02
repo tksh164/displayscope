@@ -1,4 +1,6 @@
-export const APP_SETTINGS_SCHEMA_VERSION = 2;
+//
+// IPC channels.
+//
 
 export const IPC_CHANNELS = {
   // Screen spec
@@ -21,9 +23,34 @@ export const IPC_CHANNELS = {
   NAVIGATE_TO_INTERACTIVE_SCREEN_SHORTCUT_KEY_PRESSED: "navigate-to-interactive-screen-shortcut-key-pressed",
 };
 
+//
+// App menu.
+//
+
 export const MENU_ITEM_IDS = {
   WINDOW_ALWAYS_ON_TOP: "window-always-on-top",
 };
+
+//
+// App setting file.
+//
+
+export const APP_SETTING_FILE_NAME = "setting.json";
+export const APP_DEFAULT_SETTING_FILE_NAME = "default-setting.json";
+export const APP_SETTING_FILE_SCHEMA_VERSION = 2;
+export const APP_SETTING_KEY_SHORTCUT_KEY_RETURN_MOUSE_CURSOR_TO_APP_WINDOW = "returnMouseCursorToAppWindow";
+export const APP_SETTING_KEY_PREFIX_SHORTCUT_KEY_NAVIGATE_TO_INTERACTIVE_SCREEN = "navigateToInteractiveScreen";
+
+//
+// Asset resource file names.
+//
+
+export const SETMOUSECURSORPOS_EXECUTABLE_FILE_NAME = "setmousecursorpos.exe";
+export const APP_ICON_PNG_FILE_NAME = "appicon.png";
+
+//
+// Error codes.
+//
 
 export const ERROR_CODE_NAMES = {
   INVALID_APP_SETTINGS_SCHEMA_VERSION: "INVALID_APP_SETTINGS_SCHEMA_VERSION",
