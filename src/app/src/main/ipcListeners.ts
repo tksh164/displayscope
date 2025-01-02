@@ -1,7 +1,8 @@
 import { BrowserWindow, ipcMain, IpcMainEvent, IpcMainInvokeEvent } from "electron";
-import { IPC_CHANNELS, MENU_ITEM_IDS } from "./constants";
-import { getAllScreenSpecs } from "./screenSpec";
+import { IPC_CHANNELS, MENU_ITEM_IDS, APP_SETTING_KEY_SHORTCUT_KEY_RETURN_MOUSE_CURSOR_TO_APP_WINDOW } from "./constants";
 import { ScreenSpec } from "./types/screenSpec.d";
+import { AppShortcutKeysSettingKey } from "./types/appSetting.d";
+import { getAllScreenSpecs } from "./screenSpec";
 import { setMouseCursorPosition } from "./mouseCursorPosition";
 import { getCurrentAlwaysOnTopSetting, setAlwaysOnTop, setAlwaysOnTopMenuItemCheck } from "./alwaysOnTop";
 import { getAppSetting } from "./appSetting";
@@ -42,7 +43,9 @@ export function initializeIpcListeners(mainWindow: BrowserWindow): void {
   //
 
   ipcMain.handle(IPC_CHANNELS.GET_MOUSE_CURSOR_RETURN_SHORTCUT_KEY, async (event: IpcMainInvokeEvent): Promise<string> => {
-    return (await getAppSetting(mainWindow)).shortcutKeyToReturnMouseCursorToAppWindow.replaceAll(" ", "");
+    const appSettingShortcutKeys = (await getAppSetting(mainWindow)).shortcutKeys;
+    const shortcutKey = appSettingShortcutKeys[APP_SETTING_KEY_SHORTCUT_KEY_RETURN_MOUSE_CURSOR_TO_APP_WINDOW as AppShortcutKeysSettingKey];
+    return shortcutKey.replaceAll(" ", "");
   });
 
   //
