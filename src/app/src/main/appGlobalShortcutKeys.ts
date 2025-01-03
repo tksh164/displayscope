@@ -55,8 +55,8 @@ export async function registerNavigateToInteractiveScreenShortcutKeys(screenSpec
   const appSettingShortcutKeys = (await getAppSetting(window)).shortcutKeys;
   screenSpecs.map((screenSpec) => {
     // Register a shortcut key and a callback for navigate to interactive screen directly.
-    const shortcutKeySettingKey = APP_SETTING_KEY_PREFIX_SHORTCUT_KEY_NAVIGATE_TO_INTERACTIVE_SCREEN + (screenSpec.sequenceNumber + 1).toString();
-    const shortcutKey = appSettingShortcutKeys[shortcutKeySettingKey as AppShortcutKeysSettingKey];
+    const shortcutKeySettingItemName = APP_SETTING_KEY_PREFIX_SHORTCUT_KEY_NAVIGATE_TO_INTERACTIVE_SCREEN + (screenSpec.sequenceNumber + 1).toString();
+    const shortcutKey = appSettingShortcutKeys[shortcutKeySettingItemName as AppShortcutKeysSettingKey];
     const messageWhenFailed = `Couldn't register a shortcut key "${shortcutKey}" for navigate to specific interactive screen directly.`;
     registerGlobalShortcutKey(shortcutKey, () => {
       // Send the screen spec to be navigated to the renderer process.
