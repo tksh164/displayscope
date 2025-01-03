@@ -27,7 +27,7 @@
 .screen-label-wrapper {
   grid-row: 1 / 2;
   display: flex;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
   justify-content: start;
   align-items: center;
   overflow: visible;
@@ -41,6 +41,7 @@
 
 .screen-label-wrapper .shortcut {
   padding: 0.1rem 0.35rem 0.15rem 0.35rem;
+  margin-top: 0.2rem;
   background-color: var(--colorBrandBackground3Static);
   border: solid 1px rgb(255, 255, 255);
   border-radius: 4px;

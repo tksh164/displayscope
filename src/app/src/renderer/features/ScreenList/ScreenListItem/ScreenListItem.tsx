@@ -34,8 +34,8 @@ export default function ScreenListItem(props: ScreenListItemProps) {
       navigate("/interactive-screen");
     }}>
       <div className="screen-label-wrapper">
-        <Text className="label" block={false} size={800} weight="semibold">{displayLabel}</Text>
-        <Text className="shortcut" block={false} size={200}>{directNavigationShortcutKey}</Text>
+        <Text className="label" block={true} size={800} weight="semibold">{displayLabel}</Text>
+        <Text className="shortcut" block={true} size={200}>{directNavigationShortcutKey}</Text>
       </div>
       <div className="screen-details-wrapper">
         {
