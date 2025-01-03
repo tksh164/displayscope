@@ -24,23 +24,47 @@
   background-color: var(--colorNeutralBackground1Hover);
 }
 
-.screen-name {
-  display: block;
-  grid-row: 1 / 1;
-  grid-column: 1 / 1;
-  padding-bottom: 0.1rem;
+.screen-label-wrapper {
+  grid-row: 1 / 2;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: start;
+  align-items: center;
+  overflow: visible;
 }
 
-.screen-description {
-  display: block;
-  grid-row: 2 / 2;
-  grid-column: 1 / 1;
-  padding-bottom: 0.5rem;
+.screen-label-wrapper .label {
+  margin: 0 1.3rem 0 0;
+  line-height: 1.0em;
+  line-break: anywhere;
+}
+
+.screen-label-wrapper .shortcut {
+  padding: 0.1rem 0.35rem 0.15rem 0.35rem;
+  background-color: var(--colorBrandBackground3Static);
+  border: solid 1px rgb(255, 255, 255);
+  border-radius: 4px;
+}
+
+.screen-details-wrapper {
+  grid-row: 2 / 3;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: start;
+  align-items: center;
+  overflow: visible;
+  padding: 0.2rem 0 0.3rem 0;
+}
+
+.screen-details-wrapper .detail {
+  margin: 0.2rem 0.5rem 0.2rem 0;
+  padding: 0.1rem 0.35rem 0.15rem 0.35rem;
+  background-color: var(--colorBrandBackground4Static);
+  border-radius: 4px;
 }
 
 .screen-thumbnail-wrapper {
-  grid-row: 3 / 3;
-  grid-column: 1 / 1;
+  grid-row: 3 / 4;
   height: 100%;
   width: 100%;
   max-height: 40vh;

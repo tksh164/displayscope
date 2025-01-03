@@ -39,7 +39,7 @@
   padding: 0rem 0.35rem 0.15rem 0.35rem;
   font-weight: normal;
   text-shadow: none;
-  background-color: var(--colorBrandBackground);
+  background-color: var(--colorBrandBackground3Static);
   border: solid 1px rgb(255, 255, 255);
   border-radius: 4px;
 }
