@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
 import { Button, Text } from "@fluentui/react-components";
 import { ArrowLeftRegular } from "@fluentui/react-icons";
+import { APP_SETTING_KEY_SHORTCUT_KEY_RETURN_MOUSE_CURSOR_TO_APP_WINDOW } from "../../../../main/constants";
 import "./InteractiveScreenHeader.css";
 
 type InteractiveScreenHeaderProps = {
@@ -13,7 +14,7 @@ export default function InteractiveScreenHeader(props: InteractiveScreenHeaderPr
   const navigate = useNavigate();
 
   useEffect(() => {
-    window.exposedApi.mouseCursorReturnShortcutKey.get().then((shortcutKey) => {
+    window.exposedApi.appSetting.shortcutKey.get(APP_SETTING_KEY_SHORTCUT_KEY_RETURN_MOUSE_CURSOR_TO_APP_WINDOW).then((shortcutKey) => {
       setMouseCursorReturnShortcutKey(shortcutKey);
     });
   }, []);

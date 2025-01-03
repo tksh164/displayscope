@@ -42,9 +42,9 @@ export function initializeIpcListeners(mainWindow: BrowserWindow): void {
   // Mouse cursor return to the app window shortcut key
   //
 
-  ipcMain.handle(IPC_CHANNELS.GET_MOUSE_CURSOR_RETURN_SHORTCUT_KEY, async (event: IpcMainInvokeEvent): Promise<string> => {
+  ipcMain.handle(IPC_CHANNELS.GET_SHORTCUT_KEY_FROM_APP_SETTING, async (event: IpcMainInvokeEvent, settingItemName: string): Promise<string> => {
     const appSettingShortcutKeys = (await getAppSetting(mainWindow)).shortcutKeys;
-    const shortcutKey = appSettingShortcutKeys[APP_SETTING_KEY_SHORTCUT_KEY_RETURN_MOUSE_CURSOR_TO_APP_WINDOW as AppShortcutKeysSettingKey];
+    const shortcutKey = appSettingShortcutKeys[settingItemName as AppShortcutKeysSettingKey];
     return shortcutKey.replaceAll(" ", "");
   });
 
