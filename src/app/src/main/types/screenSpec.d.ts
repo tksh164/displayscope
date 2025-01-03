@@ -19,11 +19,8 @@ export type ScreenPoint = {
   readonly y: number;
 };
 
-export type DisplaySpecDictionary = {
-  readonly [key: string]: DisplaySpec;
-};
-
 export type DisplaySpec = {
+  readonly id: string;
   readonly bounds: DisplayBounds;
   readonly scaleFactor: number;
   readonly isPrimary: boolean;
