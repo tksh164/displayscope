@@ -14,7 +14,6 @@ type ScreenListItemProps = {
 export default function ScreenListItem(props: ScreenListItemProps) {
   const [directNavigationShortcutKey, setDirectNavigationShortcutKey] = useState<string>("");
   const navigate = useNavigate();
-  const screenName = props.screenSpec.name;
   const displayLabel = props.screenSpec.displaySpec.label;
   const isPrimary = props.screenSpec.displaySpec.isPrimary;
   const resolutionText = props.screenSpec.displaySpec.bounds.width + " x " + props.screenSpec.displaySpec.bounds.height;

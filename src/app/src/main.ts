@@ -5,7 +5,6 @@ import { IsRunInDevelopmentEnv } from "./main/utils";
 import { getInitialAppWindowSize } from "./main/appWindowSize";
 import { initializeIpcListeners } from "./main/ipcListeners";
 import { setAppMenu } from "./main/appMenu";
-import { getAppSetting } from "./main/appSetting";
 import { registerShortcutKeyToReturnMouseCursorToAppWindow, unregisterShortcutKeyToReturnMouseCursorToAppWindow, unregisterNavigateToInteractiveScreenShortcutKeys } from "./main/appGlobalShortcutKeys";
 import { installReactDevTools } from "./main/devTools";
 

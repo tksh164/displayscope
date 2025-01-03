@@ -1,5 +1,5 @@
 import { BrowserWindow, ipcMain, IpcMainEvent, IpcMainInvokeEvent } from "electron";
-import { IPC_CHANNELS, MENU_ITEM_IDS, APP_SETTING_KEY_SHORTCUT_KEY_RETURN_MOUSE_CURSOR_TO_APP_WINDOW } from "./constants";
+import { IPC_CHANNELS, MENU_ITEM_IDS } from "./constants";
 import { ScreenSpec } from "./types/screenSpec.d";
 import { AppShortcutKeysSettingKey } from "./types/appSetting.d";
 import { getAllScreenSpecs } from "./screenSpec";
