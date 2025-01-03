@@ -59,7 +59,7 @@
 .screen-details-wrapper .detail {
   margin: 0.2rem 0.5rem 0.2rem 0;
   padding: 0.1rem 0.35rem 0.15rem 0.35rem;
-  background-color: var(--colorBrandBackground4Static);
+  background-color: #494949;
   border-radius: 4px;
 }
 
