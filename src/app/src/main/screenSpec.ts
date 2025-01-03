@@ -1,32 +1,43 @@
 import { screen, desktopCapturer } from "electron";
-import { ScreenSpec, DisplaySpecDictionary } from "./types/screenSpec.d";
+import { DisplaySpec, ScreenSpec } from "./types/screenSpec.d";
 
 export async function getAllScreenSpecs(thumbnailWidth: number, thumbnailHeight: number): Promise<ScreenSpec[]> {
-  return getDisplaySpecDictionary()
-    .then(async (displaySpecDictionary) => {
-      return getScreenSpecs(displaySpecDictionary, thumbnailWidth, thumbnailHeight);
-    });
+  return getScreenSpecs(thumbnailWidth, thumbnailHeight);
 }
 
-async function getDisplaySpecDictionary(): Promise<DisplaySpecDictionary> {
+async function getDisplaySpecs(): Promise<DisplaySpec[]> {
   const primaryDisplayId = screen.getPrimaryDisplay().id;
   const allDisplays = screen.getAllDisplays();
 
-  const displaySpecDictionary: DisplaySpecDictionary = {};
+  // Enumerate all display specs.
+  const displaySpecs: DisplaySpec[] = [];
   for (const display of allDisplays) {
-    displaySpecDictionary[display.id.toString()] = {
+    displaySpecs.push({
+      id: display.id.toString(),
       bounds: display.bounds,
       scaleFactor: display.scaleFactor,
       isPrimary: display.id === primaryDisplayId,
       label: display.label,
-    };
+    });
   }
-  return displaySpecDictionary;
+
+  // Sort the display specs.
+  const result = displaySpecs.sort((a, b) => {
+      // The primary display should always be first.
+      if (a.isPrimary) {
+        return -1;
+      }
+      else if (b.isPrimary) {
+        return 1;
+      }
+      return a.label.localeCompare(b.label);
+  });
+
+  return result;
 }
 
-async function getScreenSpecs(displaySpecDictionary: DisplaySpecDictionary, thumbnailWidth: number, thumbnailHeight: number): Promise<ScreenSpec[]> {
-  return desktopCapturer
-    .getSources({
+async function getScreenSpecs(thumbnailWidth: number, thumbnailHeight: number): Promise<ScreenSpec[]> {
+  return await desktopCapturer.getSources({
       types: ["screen"],
       thumbnailSize: {
         width: thumbnailWidth,
@@ -35,10 +46,18 @@ async function getScreenSpecs(displaySpecDictionary: DisplaySpecDictionary, thum
       fetchWindowIcons: false
     })
     .then(async (sources) => {
+      // Create a dictionary for look up source by display ID.
+      const sourceDictionary: { [key: string]: Electron.DesktopCapturerSource } = {};
+      sources.map((source) => {
+        sourceDictionary[source.display_id] = source;
+      });
+
+      // Create a screen spec array.
       const screenSpecs: ScreenSpec[] = [];
-      sources.map((source, i) => {
-        // Find the display spec that matches the source.
-        const displaySpec = displaySpecDictionary[source.display_id];
+      const displaySpecs = await getDisplaySpecs();
+      displaySpecs.map((displaySpec, i) => {
+        // Find the source that matches the display ID.
+        const source = sourceDictionary[displaySpec.id];
         screenSpecs.push({
           id: source.id,
           name: source.name,
@@ -51,6 +70,7 @@ async function getScreenSpecs(displaySpecDictionary: DisplaySpecDictionary, thum
           sequenceNumber: i,
         });
       });
+
       return screenSpecs;
     });
 }
