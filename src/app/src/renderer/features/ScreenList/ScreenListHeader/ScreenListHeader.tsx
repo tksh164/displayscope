@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Button, Switch } from "@fluentui/react-components";
-import { ArrowSyncRegular } from "@fluentui/react-icons";
+import { ArrowSyncRegular, SettingsRegular, InfoRegular } from "@fluentui/react-icons";
 import "./ScreenListHeader.css";
 
 type ScreenListHeaderProps = {
@@ -45,8 +45,11 @@ export default function ScreenListHeader(props: ScreenListHeaderProps) {
 
   return (
     <div className="screen-list-header">
-      <Switch className="header-item" label="Always on top" labelPosition="before" onClick={onClickAlwaysOnTopSetting} checked={isAlwaysOnTop} />
-      <Button className="header-item" shape="circular" size="large" appearance="primary" icon={<ArrowSyncRegular />} onClick={updateScreenSpecs} />
+      <Button className="refresh" shape="circular" size="large" appearance="primary" icon={<ArrowSyncRegular />} onClick={updateScreenSpecs} />
+      <Switch className="always-on-top" label="Always on top" labelPosition="before" onClick={onClickAlwaysOnTopSetting} checked={isAlwaysOnTop} />
     </div>
   );
 }
+
+// <Button className="setting" shape="circular" size="large" appearance="primary" icon={<SettingsRegular />} onClick={updateScreenSpecs} />
+// <Button className="info" shape="circular" size="large" appearance="primary" icon={<InfoRegular />} onClick={updateScreenSpecs} />
