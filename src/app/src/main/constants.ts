@@ -14,8 +14,8 @@ export const IPC_CHANNELS = {
   SET_ALWAYS_ON_TOP_SETTING: "set-always-on-top-setting",
   ALWAYS_ON_TOP_SETTING_CHANGED: "always-on-top-setting-changed",
 
-  // Mouse cursor return to the app window shortcut key
-  GET_MOUSE_CURSOR_RETURN_SHORTCUT_KEY: "get-mouse-cursor-return-shortcut-key",
+  // App setting
+  GET_SHORTCUT_KEY_FROM_APP_SETTING: "get-shortcut-key-from-app-setting",
 
   // Navigate to interactive screen view shortcut keys
   REGISTER_NAVIGATE_TO_INTERACTIVE_SCREEN_SHORTCUT_KEYS: "register-navigate-to-interactive-screen-view-shortcut-key",

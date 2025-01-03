@@ -41,10 +41,12 @@ contextBridge.exposeInMainWorld("exposedApi", {
     },
   },
 
-  // Mouse cursor return to the app window shortcut key
-  mouseCursorReturnShortcutKey: {
-    get: async (): Promise<string> => {
-      return ipcRenderer.invoke(IPC_CHANNELS.GET_MOUSE_CURSOR_RETURN_SHORTCUT_KEY);
+  // App setting
+  appSetting: {
+    shortcutKey: {
+      get: async (settingItemName: string): Promise<string> => {
+        return ipcRenderer.invoke(IPC_CHANNELS.GET_SHORTCUT_KEY_FROM_APP_SETTING, settingItemName);
+      },
     },
   },
 

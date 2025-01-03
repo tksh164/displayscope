@@ -14,8 +14,10 @@ export type ExposedApi = {
     readonly removeChangedEventListener: (listener: (event: Electron.IpcRendererEvent, shouldAlwaysOnTop: boolean) => void) => Promise<void>;
   };
 
-  readonly mouseCursorReturnShortcutKey: {
-    readonly get(): Promise<string>;
+  readonly appSetting: {
+    readonly shortcutKey: {
+      readonly get(settingItemName: string): Promise<string>;
+    }
   };
 
   readonly navigateToInteractiveScreenShortcutKey: {
