@@ -18,6 +18,7 @@
   margin: 0 0 1vh 0;
   padding: 0.7rem 1.2rem 1.2rem 1.2rem;
   border-radius: 8px;
+  cursor: pointer;
 }
 
 .screen-list-item:hover {
