@@ -2,6 +2,7 @@
     "schemaVersion": 2,
     "shortcutKeys": {
         "returnMouseCursorToAppWindow": "Shift + Esc",
+        "navigateToScreenList": "Ctrl + Alt + Home",
         "navigateToInteractiveScreen1": "Ctrl + Alt + F1",
         "navigateToInteractiveScreen2": "Ctrl + Alt + F2",
         "navigateToInteractiveScreen3": "Ctrl + Alt + F3",
