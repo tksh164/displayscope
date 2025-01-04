@@ -9,13 +9,13 @@ export const IPC_CHANNELS = {
   // Mouse cursor position
   SET_MOUSE_CURSOR_POSITION: "set-mouse-cursor-position",
 
-  // Always on top setting
-  GET_ALWAYS_ON_TOP_SETTING: "get-always-on-top-setting",
-  SET_ALWAYS_ON_TOP_SETTING: "set-always-on-top-setting",
-  ALWAYS_ON_TOP_SETTING_CHANGED: "always-on-top-setting-changed",
+  // Always on top state
+  GET_ALWAYS_ON_TOP_STATE: "get-always-on-top-state",
+  SET_ALWAYS_ON_TOP_STATE: "set-always-on-top-state",
+  ALWAYS_ON_TOP_STATE_CHANGED: "always-on-top-state-changed",
 
-  // App setting
-  GET_SHORTCUT_KEY_FROM_APP_SETTING: "get-shortcut-key-from-app-setting",
+  // App settings
+  GET_SHORTCUT_KEY_SETTING: "get-shortcut-key-setting",
 
   // Navigate to interactive screen view shortcut keys
   REGISTER_NAVIGATE_TO_INTERACTIVE_SCREEN_SHORTCUT_KEYS: "register-navigate-to-interactive-screen-view-shortcut-key",
@@ -32,20 +32,25 @@ export const MENU_ITEM_IDS = {
 };
 
 //
-// App setting file.
+// App settings.
 //
 
-export const APP_SETTING_FILE_NAME = "setting.json";
-export const APP_DEFAULT_SETTING_FILE_NAME = "default-setting.json";
-export const APP_SETTING_FILE_SCHEMA_VERSION = 2;
-export const APP_SETTING_KEY_SHORTCUT_KEY_RETURN_MOUSE_CURSOR_TO_APP_WINDOW = "returnMouseCursorToAppWindow";
-export const APP_SETTING_KEY_PREFIX_SHORTCUT_KEY_NAVIGATE_TO_INTERACTIVE_SCREEN = "navigateToInteractiveScreen";
+// App settings file names
+export const APP_SETTINGS_FILE_NAME = "settings.json";
+export const APP_DEFAULT_SETTINGS_FILE_NAME = "default-settings.json";
+
+// Schema version
+export const APP_SETTINGS_FILE_SCHEMA_VERSION = 2;
+
+// Item names
+export const APP_SETTINGS_ITEM_NAME_SHORTCUT_KEY_RETURN_MOUSE_CURSOR_TO_APP_WINDOW = "returnMouseCursorToAppWindow";
+export const APP_SETTINGS_ITEM_NAME_PREFIX_SHORTCUT_KEY_NAVIGATE_TO_INTERACTIVE_SCREEN = "navigateToInteractiveScreen";
 
 //
 // Asset resource file names.
 //
 
-export const SETMOUSECURSORPOS_EXECUTABLE_FILE_NAME = "setmousecursorpos.exe";
+export const SET_MOUSE_CURSOR_POS_EXECUTABLE_FILE_NAME = "setmousecursorpos.exe";
 export const APP_ICON_PNG_FILE_NAME = "appicon.png";
 
 //
@@ -53,6 +58,6 @@ export const APP_ICON_PNG_FILE_NAME = "appicon.png";
 //
 
 export const ERROR_CODE_NAMES = {
-  INVALID_APP_SETTING_SCHEMA_VERSION: "INVALID_APP_SETTING_SCHEMA_VERSION",
+  INVALID_APP_SETTINGS_SCHEMA_VERSION: "INVALID_APP_SETTINGS_SCHEMA_VERSION",
   NO_SHORTCUT_KEY_SETTING: "NO_SHORTCUT_KEY_SETTING",
 };

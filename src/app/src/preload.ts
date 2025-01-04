@@ -20,32 +20,32 @@ contextBridge.exposeInMainWorld("exposedApi", {
     },
   },
 
-  // Always on top setting
-  alwaysOnTopSetting: {
+  // Always on top state
+  alwaysOnTopState: {
     get: async (): Promise<boolean> => {
-      return ipcRenderer.invoke(IPC_CHANNELS.GET_ALWAYS_ON_TOP_SETTING);
+      return ipcRenderer.invoke(IPC_CHANNELS.GET_ALWAYS_ON_TOP_STATE);
     },
 
-    set: async (shouldAlwaysOnTop: boolean): Promise<void> => {
-      ipcRenderer.send(IPC_CHANNELS.SET_ALWAYS_ON_TOP_SETTING, shouldAlwaysOnTop);
+    set: async (newAlwaysOnTopState: boolean): Promise<void> => {
+      ipcRenderer.send(IPC_CHANNELS.SET_ALWAYS_ON_TOP_STATE, newAlwaysOnTopState);
     },
 
-    addChangedEventListener: async (listener: (event: Electron.IpcRendererEvent, shouldAlwaysOnTop: boolean) => void): Promise<void> => {
-      ipcRenderer.on(IPC_CHANNELS.ALWAYS_ON_TOP_SETTING_CHANGED, listener);
-      //console.log("Add the always-on-top-setting-changed event listener.");
+    addChangedEventListener: async (listener: (event: Electron.IpcRendererEvent, newAlwaysOnTopState: boolean) => void): Promise<void> => {
+      ipcRenderer.on(IPC_CHANNELS.ALWAYS_ON_TOP_STATE_CHANGED, listener);
+      //console.log("Add the always-on-top-state-changed event listener.");
     },
 
-    removeChangedEventListener: async (listener: (event: Electron.IpcRendererEvent, shouldAlwaysOnTop: boolean) => void): Promise<void> => {
-      ipcRenderer.removeListener(IPC_CHANNELS.ALWAYS_ON_TOP_SETTING_CHANGED, listener);
-      //console.log("Remove the always-on-top-setting-changed event listener.");
+    removeChangedEventListener: async (listener: (event: Electron.IpcRendererEvent, newAlwaysOnTopState: boolean) => void): Promise<void> => {
+      ipcRenderer.removeListener(IPC_CHANNELS.ALWAYS_ON_TOP_STATE_CHANGED, listener);
+      //console.log("Remove the always-on-top-state-changed event listener.");
     },
   },
 
-  // App setting
-  appSetting: {
+  // App settings
+  appSettings: {
     shortcutKey: {
       get: async (settingItemName: string): Promise<string> => {
-        return ipcRenderer.invoke(IPC_CHANNELS.GET_SHORTCUT_KEY_FROM_APP_SETTING, settingItemName);
+        return ipcRenderer.invoke(IPC_CHANNELS.GET_SHORTCUT_KEY_SETTING, settingItemName);
       },
     },
   },

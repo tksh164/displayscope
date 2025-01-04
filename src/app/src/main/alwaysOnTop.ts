@@ -1,12 +1,12 @@
 import { app, BrowserWindow } from "electron";
 import { IPC_CHANNELS } from "./constants";
 
-export function getCurrentAlwaysOnTopSetting(window: BrowserWindow): boolean {
+export function getAlwaysOnTopState(window: BrowserWindow): boolean {
   return window.isAlwaysOnTop();
 }
 
-export function setAlwaysOnTop(window: BrowserWindow, shouldAlwaysOnTop: boolean): void {
-  window.setAlwaysOnTop(shouldAlwaysOnTop);
+export function setAlwaysOnTopState(window: BrowserWindow, newAlwaysOnTopState: boolean): void {
+  window.setAlwaysOnTop(newAlwaysOnTopState);
 }
 
 export function setAlwaysOnTopMenuItemCheck(menuItemId: string, isChecked: boolean): void {
@@ -14,6 +14,6 @@ export function setAlwaysOnTopMenuItemCheck(menuItemId: string, isChecked: boole
   if (menuItem) menuItem.checked = isChecked;
 }
 
-export function notifyAlwaysOnTopSettingChanged(window: BrowserWindow, newAlwaysOnTopSetting: boolean): void {
-  window.webContents.send(IPC_CHANNELS.ALWAYS_ON_TOP_SETTING_CHANGED, newAlwaysOnTopSetting);
+export function notifyAlwaysOnTopStateChanged(window: BrowserWindow, newAlwaysOnTopState: boolean): void {
+  window.webContents.send(IPC_CHANNELS.ALWAYS_ON_TOP_STATE_CHANGED, newAlwaysOnTopState);
 }

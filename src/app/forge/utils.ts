@@ -1,6 +1,6 @@
 import path from "path";
 import fs  from "fs";
-import { SETMOUSECURSORPOS_EXECUTABLE_FILE_NAME, APP_DEFAULT_SETTING_FILE_NAME, APP_ICON_PNG_FILE_NAME } from "../src/main/constants";
+import { SET_MOUSE_CURSOR_POS_EXECUTABLE_FILE_NAME, APP_DEFAULT_SETTINGS_FILE_NAME, APP_ICON_PNG_FILE_NAME } from "../src/main/constants";
 
 export function copyResourceFiles(outputPath: string) {
   // Copy files into the resources directory.
@@ -16,11 +16,11 @@ export function copyResourceFiles(outputPath: string) {
   const filesToCopy = [
     {
       sourceRelativePath: "../../../setmousecursorpos",
-      fileName: SETMOUSECURSORPOS_EXECUTABLE_FILE_NAME,
+      fileName: SET_MOUSE_CURSOR_POS_EXECUTABLE_FILE_NAME,
     },
     {
       sourceRelativePath: "../../src/assets",
-      fileName: APP_DEFAULT_SETTING_FILE_NAME,
+      fileName: APP_DEFAULT_SETTINGS_FILE_NAME,
     },
     {
       sourceRelativePath: "../../src/assets",
