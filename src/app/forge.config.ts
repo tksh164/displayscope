@@ -20,7 +20,6 @@ const config: ForgeConfig = {
           setupExe: `${packageJson.name}-setup-${packageJson.version}-${arch}.exe`,
           setupIcon: './src/assets/appicon.ico',
           iconUrl: 'https://raw.githubusercontent.com/tksh164/displayscope/master/src/app/src/assets/appicon.ico',
-          productName: 'aaaa',
         }
       }
     },
