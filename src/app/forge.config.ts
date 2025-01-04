@@ -17,7 +17,7 @@ const config: ForgeConfig = {
       platforms: ['win32'],
       config: (arch: string) => {
         return {
-          setupExe: `${packageJson.name}-${packageJson.version}-setup-${arch}.exe`,
+          setupExe: `${packageJson.name}-setup-${packageJson.version}-${arch}.exe`,
           setupIcon: './src/assets/appicon.ico',
           iconUrl: 'https://raw.githubusercontent.com/tksh164/displayscope/master/src/app/src/assets/appicon.ico',
         }
