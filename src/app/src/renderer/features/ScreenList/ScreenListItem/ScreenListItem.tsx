@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
 import { Text, Image } from "@fluentui/react-components";
 import { ScreenSpec } from "../../../../main/types/screenSpec.d";
-import { APP_SETTING_KEY_PREFIX_SHORTCUT_KEY_NAVIGATE_TO_INTERACTIVE_SCREEN } from "../../../../main/constants";
+import { APP_SETTINGS_ITEM_NAME_PREFIX_SHORTCUT_KEY_NAVIGATE_TO_INTERACTIVE_SCREEN } from "../../../../main/constants";
 
 import "./ScreenListItem.css";
 
@@ -21,8 +21,8 @@ export default function ScreenListItem(props: ScreenListItemProps) {
 
   // Shortcut key for direct navigation to the interactive screen.
   useEffect(() => {
-    const shortcutKeySettingItemName = APP_SETTING_KEY_PREFIX_SHORTCUT_KEY_NAVIGATE_TO_INTERACTIVE_SCREEN + (props.screenSpec.sequenceNumber + 1).toString();
-    window.exposedApi.appSetting.shortcutKey.get(shortcutKeySettingItemName).then((shortcutKey) => {
+    const settingItemName = APP_SETTINGS_ITEM_NAME_PREFIX_SHORTCUT_KEY_NAVIGATE_TO_INTERACTIVE_SCREEN + (props.screenSpec.sequenceNumber + 1).toString();
+    window.exposedApi.appSettings.shortcutKey.get(settingItemName).then((shortcutKey) => {
       setDirectNavigationShortcutKey(shortcutKey);
     });
   }, []);

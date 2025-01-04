@@ -1,10 +1,11 @@
-export type AppSetting = {
+export type AppSettings = {
   readonly schemaVersion: number;
-  readonly shortcutKeys: AppShortcutKeysSetting;
+  readonly shortcutKeys: ShortcutKeysInAppSettings;
 };
 
-export type AppShortcutKeysSetting = {
+export type ShortcutKeysInAppSettings = {
   readonly returnMouseCursorToAppWindow: string;
+  readonly navigateToScreenList: string;
   readonly navigateToInteractiveScreen1: string;
   readonly navigateToInteractiveScreen2: string;
   readonly navigateToInteractiveScreen3: string;
@@ -16,4 +17,4 @@ export type AppShortcutKeysSetting = {
   readonly navigateToInteractiveScreen9: string;
 };
 
-export type AppShortcutKeysSettingKey = keyof AppShortcutKeysSetting;
+export type ShortcutKeysInAppSettingsItemName = keyof ShortcutKeysInAppSettings;

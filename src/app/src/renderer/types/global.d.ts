@@ -7,14 +7,14 @@ export type ExposedApi = {
     readonly set: (posX: number, posY: number) => Promise<void>;
   };
 
-  readonly alwaysOnTopSetting: {
+  readonly alwaysOnTopState: {
     readonly get: () => Promise<boolean>;
-    readonly set: (shouldAlwaysOnTop: boolean) => Promise<void>;
-    readonly addChangedEventListener: (listener: (event: Electron.IpcRendererEvent, shouldAlwaysOnTop: boolean) => void) => Promise<void>;
-    readonly removeChangedEventListener: (listener: (event: Electron.IpcRendererEvent, shouldAlwaysOnTop: boolean) => void) => Promise<void>;
+    readonly set: (newAlwaysOnTopState: boolean) => Promise<void>;
+    readonly addChangedEventListener: (listener: (event: Electron.IpcRendererEvent, newAlwaysOnTopState: boolean) => void) => Promise<void>;
+    readonly removeChangedEventListener: (listener: (event: Electron.IpcRendererEvent, newAlwaysOnTopState: boolean) => void) => Promise<void>;
   };
 
-  readonly appSetting: {
+  readonly appSettings: {
     readonly shortcutKey: {
       readonly get(settingItemName: string): Promise<string>;
     }

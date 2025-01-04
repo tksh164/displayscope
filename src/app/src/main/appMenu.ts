@@ -1,7 +1,7 @@
 import { app, BrowserWindow, Menu, MenuItemConstructorOptions, dialog } from "electron";
 import os from "os";
 import { MENU_ITEM_IDS, APP_ICON_PNG_FILE_NAME } from "./constants";
-import { getCurrentAlwaysOnTopSetting, setAlwaysOnTop, notifyAlwaysOnTopSettingChanged } from "./alwaysOnTop";
+import { getAlwaysOnTopState, setAlwaysOnTopState, notifyAlwaysOnTopStateChanged } from "./alwaysOnTop";
 import { IsRunInDevelopmentEnv } from "./utils";
 
 export async function setAppMenu(window: BrowserWindow): Promise<void> {
@@ -42,9 +42,9 @@ function getAppMenuTemplate(window: BrowserWindow): MenuItemConstructorOptions[]
           type: "checkbox",
           checked: false,
           click: async () => {
-            const newAlwaysOnTopSetting = !getCurrentAlwaysOnTopSetting(window);
-            setAlwaysOnTop(window, newAlwaysOnTopSetting);
-            notifyAlwaysOnTopSettingChanged(window, newAlwaysOnTopSetting);
+            const newAlwaysOnTopState = !getAlwaysOnTopState(window);
+            setAlwaysOnTopState(window, newAlwaysOnTopState);
+            notifyAlwaysOnTopStateChanged(window, newAlwaysOnTopState);
           }
         },
         { type: "separator" },

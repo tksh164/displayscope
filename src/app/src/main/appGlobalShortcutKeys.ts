@@ -1,10 +1,10 @@
 import { BrowserWindow, screen } from "electron";
 import { ScreenSpec } from "./types/screenSpec.d";
-import { AppShortcutKeysSettingKey } from "./types/appSetting.d";
+import { ShortcutKeysInAppSettingsItemName } from "./types/appSettings.d";
 import { registerGlobalShortcutKey, unregisterGlobalShortcutKey } from "./globalShortcutKey";
 import { setMouseCursorPosition } from "./mouseCursorPosition";
-import { getAppSetting } from "./appSetting";
-import { IPC_CHANNELS, APP_SETTING_KEY_SHORTCUT_KEY_RETURN_MOUSE_CURSOR_TO_APP_WINDOW, APP_SETTING_KEY_PREFIX_SHORTCUT_KEY_NAVIGATE_TO_INTERACTIVE_SCREEN } from "./constants";
+import { getAppSettings } from "./appSettings";
+import { IPC_CHANNELS, APP_SETTINGS_ITEM_NAME_SHORTCUT_KEY_RETURN_MOUSE_CURSOR_TO_APP_WINDOW, APP_SETTINGS_ITEM_NAME_PREFIX_SHORTCUT_KEY_NAVIGATE_TO_INTERACTIVE_SCREEN } from "./constants";
 
 //
 // Mouse cursor return to the app window shortcut key
@@ -15,8 +15,8 @@ const returnMouseCursorToAppWindowShortcutKeyHolder: string[] = [];
 
 // Register a shortcut key to move the mouse cursor to on the app window from the screen.
 export async function registerShortcutKeyToReturnMouseCursorToAppWindow(window: BrowserWindow): Promise<void> {
-  const appSettingShortcutKeys = (await getAppSetting(window)).shortcutKeys;
-  const shortcutKey = appSettingShortcutKeys[APP_SETTING_KEY_SHORTCUT_KEY_RETURN_MOUSE_CURSOR_TO_APP_WINDOW as AppShortcutKeysSettingKey];
+  const shortcutKeysSetting = (await getAppSettings(window)).shortcutKeys;
+  const shortcutKey = shortcutKeysSetting[APP_SETTINGS_ITEM_NAME_SHORTCUT_KEY_RETURN_MOUSE_CURSOR_TO_APP_WINDOW as ShortcutKeysInAppSettingsItemName];
 
   // Retain the shortcut key for unregister.
   returnMouseCursorToAppWindowShortcutKeyHolder.push(shortcutKey);
@@ -52,11 +52,11 @@ function calcCenterPositionOfWindow(window: BrowserWindow): [number, number] {
 const navigateToInteractiveScreenShortcutKeyHolder: string[] = [];
 
 export async function registerNavigateToInteractiveScreenShortcutKeys(screenSpecs: ScreenSpec[], window: BrowserWindow): Promise<void> {
-  const appSettingShortcutKeys = (await getAppSetting(window)).shortcutKeys;
+  const shortcutKeysSetting = (await getAppSettings(window)).shortcutKeys;
   screenSpecs.map((screenSpec) => {
     // Register a shortcut key and a callback for navigate to interactive screen directly.
-    const shortcutKeySettingItemName = APP_SETTING_KEY_PREFIX_SHORTCUT_KEY_NAVIGATE_TO_INTERACTIVE_SCREEN + (screenSpec.sequenceNumber + 1).toString();
-    const shortcutKey = appSettingShortcutKeys[shortcutKeySettingItemName as AppShortcutKeysSettingKey];
+    const settingItemName = APP_SETTINGS_ITEM_NAME_PREFIX_SHORTCUT_KEY_NAVIGATE_TO_INTERACTIVE_SCREEN + (screenSpec.sequenceNumber + 1).toString();
+    const shortcutKey = shortcutKeysSetting[settingItemName as ShortcutKeysInAppSettingsItemName];
     const messageWhenFailed = `Couldn't register a shortcut key "${shortcutKey}" for navigate to specific interactive screen directly.`;
     registerGlobalShortcutKey(shortcutKey, () => {
       // Send the screen spec to be navigated to the renderer process.

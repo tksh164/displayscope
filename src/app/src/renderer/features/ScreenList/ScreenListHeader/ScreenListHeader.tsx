@@ -15,17 +15,17 @@ export default function ScreenListHeader(props: ScreenListHeaderProps) {
   // The always on top setting changed event listener for if it changed from the menu item.
   //
 
-  const alwaysOnTopSettingChanged = (event: Electron.IpcRendererEvent, shouldAlwaysOnTop: boolean) => {
-    setIsAlwaysOnTop(shouldAlwaysOnTop);
-    //console.log(`Always on top setting change to ${shouldAlwaysOnTop} from the menu item.`);
+  const alwaysOnTopStateChanged = (event: Electron.IpcRendererEvent, newAlwaysOnTopState: boolean) => {
+    setIsAlwaysOnTop(newAlwaysOnTopState);
+    //console.log(`Always on top setting change to ${newAlwaysOnTopState} from the menu item.`);
   };
   const addEventListeners = () => {
-    window.exposedApi.alwaysOnTopSetting.addChangedEventListener(alwaysOnTopSettingChanged);
-    //console.log("Add AlwaysOnTopSettingChanged event listener.");
+    window.exposedApi.alwaysOnTopState.addChangedEventListener(alwaysOnTopStateChanged);
+    //console.log("Add AlwaysOnTopStateChanged event listener.");
   };
   const removeEventListeners = () => {
-    window.exposedApi.alwaysOnTopSetting.removeChangedEventListener(alwaysOnTopSettingChanged);
-    //console.log("Remove AlwaysOnTopSettingChanged event listener.");
+    window.exposedApi.alwaysOnTopState.removeChangedEventListener(alwaysOnTopStateChanged);
+    //console.log("Remove AlwaysOnTopStateChanged event listener.");
   };
   useEffect(() => {
     addEventListeners();
@@ -36,17 +36,17 @@ export default function ScreenListHeader(props: ScreenListHeaderProps) {
   // Event handler for the always on top setting switch.
   //
 
-  const onClickAlwaysOnTopSetting = async (event: React.MouseEvent) => {
-    const newAlwaysOnTopSetting = !(await window.exposedApi.alwaysOnTopSetting.get());
-    window.exposedApi.alwaysOnTopSetting.set(newAlwaysOnTopSetting);
-    setIsAlwaysOnTop(newAlwaysOnTopSetting);
-    //console.log(`Always on top setting change to ${newAlwaysOnTopSetting} from UI.`);
+  const onClickAlwaysOnTop = async (event: React.MouseEvent) => {
+    const newAlwaysOnTopState = !(await window.exposedApi.alwaysOnTopState.get());
+    window.exposedApi.alwaysOnTopState.set(newAlwaysOnTopState);
+    setIsAlwaysOnTop(newAlwaysOnTopState);
+    //console.log(`Always on top setting change to ${newAlwaysOnTopState} from UI.`);
   }
 
   return (
     <div className="screen-list-header">
       <Button className="refresh" shape="circular" size="large" appearance="primary" icon={<ArrowSyncRegular />} onClick={updateScreenSpecs} />
-      <Switch className="always-on-top" label="Always on top" labelPosition="before" onClick={onClickAlwaysOnTopSetting} checked={isAlwaysOnTop} />
+      <Switch className="always-on-top" label="Always on top" labelPosition="before" onClick={onClickAlwaysOnTop} checked={isAlwaysOnTop} />
     </div>
   );
 }
