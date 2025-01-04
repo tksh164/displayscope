@@ -1,11 +1,11 @@
 import { BrowserWindow, ipcMain, IpcMainEvent, IpcMainInvokeEvent } from "electron";
 import { IPC_CHANNELS, MENU_ITEM_IDS } from "./constants";
 import { ScreenSpec } from "./types/screenSpec.d";
-import { ShortcutKeysInAppSettingsItemName } from "./types/appSetting.d";
+import { ShortcutKeysInAppSettingsItemName } from "./types/appSettings.d";
 import { getAllScreenSpecs } from "./screenSpec";
 import { setMouseCursorPosition } from "./mouseCursorPosition";
 import { getAlwaysOnTopState, setAlwaysOnTopState, setAlwaysOnTopMenuItemCheck } from "./alwaysOnTop";
-import { getAppSettings } from "./appSetting";
+import { getAppSettings } from "./appSettings";
 import { registerNavigateToInteractiveScreenShortcutKeys, unregisterNavigateToInteractiveScreenShortcutKeys } from "./appGlobalShortcutKeys";
 
 export function initializeIpcListeners(mainWindow: BrowserWindow): void {

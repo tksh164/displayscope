@@ -1,9 +1,9 @@
 import { BrowserWindow, screen } from "electron";
 import { ScreenSpec } from "./types/screenSpec.d";
-import { ShortcutKeysInAppSettingsItemName } from "./types/appSetting.d";
+import { ShortcutKeysInAppSettingsItemName } from "./types/appSettings.d";
 import { registerGlobalShortcutKey, unregisterGlobalShortcutKey } from "./globalShortcutKey";
 import { setMouseCursorPosition } from "./mouseCursorPosition";
-import { getAppSettings } from "./appSetting";
+import { getAppSettings } from "./appSettings";
 import { IPC_CHANNELS, APP_SETTINGS_ITEM_NAME_SHORTCUT_KEY_RETURN_MOUSE_CURSOR_TO_APP_WINDOW, APP_SETTINGS_ITEM_NAME_PREFIX_SHORTCUT_KEY_NAVIGATE_TO_INTERACTIVE_SCREEN } from "./constants";
 
 //

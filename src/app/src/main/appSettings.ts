@@ -1,7 +1,7 @@
 import { app, dialog, BrowserWindow } from "electron";
 import fs  from "fs";
 import path from "path";
-import { AppSettings } from "./types/appSetting.d";
+import { AppSettings } from "./types/appSettings.d";
 import { APP_SETTINGS_FILE_NAME, APP_DEFAULT_SETTINGS_FILE_NAME, APP_SETTINGS_FILE_SCHEMA_VERSION, ERROR_CODE_NAMES } from "./constants";
 import { IsRunInDevelopmentEnv } from "./utils";
 
