@@ -51,7 +51,6 @@ You can install [Displayscope](https://apps.microsoft.com/store/detail/displaysc
 
 - Windows 11 x64 or Windows 10 x64
 - [Node.js](https://nodejs.org/)
-- [yarn](https://yarnpkg.com/)
 - [Visual Studio](https://visualstudio.microsoft.com/)
 
 ### Build package
@@ -67,18 +66,30 @@ You can install [Displayscope](https://apps.microsoft.com/store/detail/displaysc
 
     ```
     cd src/app
-    yarn install
-    yarn electron:build
+    npm install
+    npm run make
     ```
 
 ## 📃 Notes　
 
-- Displayscope prevents the screen from going to sleep during the external display showing. If you want to go to sleep on your PC, move back to the selection screen of the screen.
+- Displayscope prevents the screen from going to sleep during the external display showing. If you want to go to sleep on your PC, move back to the screen list view.
 - Displayscope doesn't work correctly if you selected the *High-performance NVIDIA processor* as the **Preferred graphics processor** in the NVIDIA Control Panel. *Auto-select* and *Integrated graphics* are works well.
-- The app settings file located at `%AppData%\Displayscope\settings.json`. You can change the global shortcut key through the file. See [here](https://www.electronjs.org/docs/api/accelerator#available-modifiers) for the acceptable shortcut key combination.
+- The Displayscope's settings file located at `%AppData%\Displayscope\settings.json`. You can change the global shortcut keys through this file. See [here](https://www.electronjs.org/docs/api/accelerator#available-modifiers) for the acceptable shortcut key combination.
 
     ```json
-    "MouseCursorReturnShortcutKey": "Shift + Esc"
+    "shortcutKeys": {
+        "returnMouseCursorToAppWindow": "Shift + Esc",
+        "navigateToScreenList": "Ctrl + Alt + Home",  // Not works with v0.24.0. It will support in the future release.
+        "navigateToInteractiveScreen1": "Ctrl + Alt + F1",
+        "navigateToInteractiveScreen2": "Ctrl + Alt + F2",
+        "navigateToInteractiveScreen3": "Ctrl + Alt + F3",
+        "navigateToInteractiveScreen4": "Ctrl + Alt + F4",
+        "navigateToInteractiveScreen5": "Ctrl + Alt + F5",
+        "navigateToInteractiveScreen6": "Ctrl + Alt + F6",
+        "navigateToInteractiveScreen7": "Ctrl + Alt + F7",
+        "navigateToInteractiveScreen8": "Ctrl + Alt + F8",
+        "navigateToInteractiveScreen9": "Ctrl + Alt + F9"
+    }
     ```
 
 ## ⚖ License
