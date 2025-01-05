@@ -33,7 +33,7 @@ Displayscope provides view and control through the window to the screen. You can
 
 ### Install from GitHub (Recommended)
 
-1. Download [the setup package](https://github.com/tksh164/displayscope/releases/latest). Currently suppoeted only Windows.
+1. Download [the setup package](https://github.com/tksh164/displayscope/releases/latest). Currently supported only Windows.
     - Select "Keep" if you get warning when the download is completed.
     - After the download, unblock the download setup package file from the file's property or using Unblock-File cmdlet.
 2. Run the setup package to install.
