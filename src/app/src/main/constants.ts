@@ -50,6 +50,7 @@ export const APP_SETTINGS_ITEM_NAME_PREFIX_SHORTCUT_KEY_NAVIGATE_TO_INTERACTIVE_
 // Asset resource file names.
 //
 
+export const THIRD_PARTY_NOTICES_FILE_NAME = "ThirdPartyNotices.txt";
 export const SET_MOUSE_CURSOR_POS_EXECUTABLE_FILE_NAME = "setmousecursorpos.exe";
 export const APP_ICON_PNG_FILE_NAME = "appicon.png";
 
