@@ -2,13 +2,27 @@ import type { ForgeConfig } from '@electron-forge/shared-types';
 import { VitePlugin } from '@electron-forge/plugin-vite';
 import { FusesPlugin } from '@electron-forge/plugin-fuses';
 import { FuseV1Options, FuseVersion } from '@electron/fuses';
+import path from "path";
+import fs  from "fs";
 import packageJson from './package.json';
-import { copyResourceFiles } from './forge/utils';
+import { THIRD_PARTY_NOTICES_FILE_NAME, SET_MOUSE_CURSOR_POS_EXECUTABLE_FILE_NAME, APP_DEFAULT_SETTINGS_FILE_NAME, APP_ICON_PNG_FILE_NAME } from "./src/main/constants";
 
 const config: ForgeConfig = {
   packagerConfig: {
     asar: true,
+    extraResource: [
+      path.join('../setmousecursorpos', SET_MOUSE_CURSOR_POS_EXECUTABLE_FILE_NAME),
+      path.join('./src/assets', APP_DEFAULT_SETTINGS_FILE_NAME),
+      path.join('./src/assets', APP_ICON_PNG_FILE_NAME),
+    ],
     icon: './src/assets/appicon',
+    win32metadata: {
+      CompanyName: packageJson.author.name,
+      ProductName: packageJson.productName,
+      InternalName: packageJson.productName,
+      FileDescription: packageJson.description,
+    },
+    appCopyright: 'Copyright (C) 2020 ' + packageJson.author.name + '. All rights reserved.',
   },
   rebuildConfig: {},
   makers: [
@@ -20,6 +34,13 @@ const config: ForgeConfig = {
           setupExe: `${packageJson.name}-setup-${packageJson.version}-${arch}.exe`,
           setupIcon: './src/assets/appicon.ico',
           iconUrl: 'https://raw.githubusercontent.com/tksh164/displayscope/master/src/app/src/assets/appicon.ico',
+          productName: packageJson.productName,
+          additionalFiles: [
+            {
+              src: THIRD_PARTY_NOTICES_FILE_NAME,
+              target: 'lib/net45',
+            },
+          ],
         }
       }
     },
@@ -61,8 +82,20 @@ const config: ForgeConfig = {
     }),
   ],
   hooks: {
-    postPackage: async (forgeConfig, packageResult) => {
-      copyResourceFiles(packageResult.outputPaths[0]);
+    postPackage: async (config, packageResult) => {
+      // Copy files into the output directory.
+      const files = [
+        {
+          sourcePath: path.join('../..', THIRD_PARTY_NOTICES_FILE_NAME),
+          destination: path.join(packageResult.outputPaths[0], THIRD_PARTY_NOTICES_FILE_NAME),
+        }
+      ];
+      files.map((file) => {
+        console.log("Copy", 'ThirdPartyNotices.txt',);
+        console.log("- Source file path:", file.sourcePath);
+        console.log("- Destination file path:", file.destination);
+        fs.copyFileSync(file.sourcePath, file.destination, fs.constants.COPYFILE_EXCL);
+      });
     },
   },
 };
