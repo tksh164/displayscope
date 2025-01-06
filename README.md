@@ -41,9 +41,11 @@ Displayscope provides view and control through the window to the screen. You can
 
 If you don't need Displayscope anymore, you can uninstall it from **Apps & features** in the Settings or **Uninstall a program** in the Control Panel.
 
+<!--
 ### Install from Microsoft Store
 
 You can install [Displayscope](https://apps.microsoft.com/store/detail/displayscope/XP9LZC3BDC1CG2) from Microsoft Store.
+-->
 
 ## 🔨 Build from source
 
