@@ -32,6 +32,7 @@
   justify-content: start;
   align-items: center;
   overflow: visible;
+  margin-bottom: 0.2rem;
 }
 
 .screen-label-wrapper .label {
@@ -55,7 +56,7 @@
   justify-content: start;
   align-items: center;
   overflow: visible;
-  padding: 0.2rem 0 0.3rem 0;
+  padding: 0.2rem 0 0.4rem 0;
 }
 
 .screen-details-wrapper .detail {

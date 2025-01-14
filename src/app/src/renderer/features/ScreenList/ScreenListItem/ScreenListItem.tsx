@@ -14,6 +14,7 @@ type ScreenListItemProps = {
 export default function ScreenListItem(props: ScreenListItemProps) {
   const [directNavigationShortcutKey, setDirectNavigationShortcutKey] = useState<string>("");
   const navigate = useNavigate();
+  const screenName = props.screenSpec.name;
   const displayLabel = props.screenSpec.displaySpec.label;
   const isPrimary = props.screenSpec.displaySpec.isPrimary;
   const resolutionText = props.screenSpec.displaySpec.bounds.width + " x " + props.screenSpec.displaySpec.bounds.height;
@@ -34,7 +35,11 @@ export default function ScreenListItem(props: ScreenListItemProps) {
       navigate("/interactive-screen");
     }}>
       <div className="screen-label-wrapper">
-        <Text className="label" block={true} size={800} weight="semibold">{displayLabel}</Text>
+        <Text className="label" block={true} size={800} weight="semibold">
+          {
+            !!(displayLabel) ? displayLabel : screenName
+          }
+        </Text>
         <Text className="shortcut" block={true} size={200}>{directNavigationShortcutKey}</Text>
       </div>
       <div className="screen-details-wrapper">
