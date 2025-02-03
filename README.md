@@ -57,17 +57,33 @@ You can install [Displayscope](https://apps.microsoft.com/store/detail/displaysc
 
 ### Build package
 
-1. Building the C++ codes using Visual Studio's Developer PowerShell or Developer Command Prompt.
+1. Install prerequisites using WinGet.
+
+    ```powershell
+    winget install --id Microsoft.VisualStudio.2022.Community --override '--wait --quiet --add Microsoft.VisualStudio.Workload.NativeDesktop'
+    winget install --id OpenJS.NodeJS
+    winget install --id Microsoft.Git
+    ```
+
+2. Launch `Developer PowerShell for VS 2022` from Start menu.
+
+3. Clone the Displayscope repository.
+
+    ```Powershell
+    git clone https://github.com/tksh164/displayscope.git
+    ```
+
+4. Building the C++ codes.
 
     ```
-    cd src/setmousecursorpos
+    cd .\displayscope\src\setmousecursorpos
     nmake build
     ```
 
 2. Building the Displayscope installer package.
 
     ```
-    cd src/app
+    cd ../app
     npm install
     npm run make
     ```
