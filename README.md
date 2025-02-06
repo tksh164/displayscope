@@ -60,7 +60,7 @@ You can install [Displayscope](https://apps.microsoft.com/store/detail/displaysc
 1. Install prerequisites using WinGet.
 
     ```powershell
-    winget install --id Microsoft.VisualStudio.2022.Community --override '--wait --quiet --add Microsoft.VisualStudio.Workload.NativeDesktop'
+    winget install --id Microsoft.VisualStudio.2022.Community --override '--wait --quiet --add Microsoft.VisualStudio.Workload.NativeDesktop --includeRecommended'
     winget install --id OpenJS.NodeJS
     winget install --id Microsoft.Git
     ```
