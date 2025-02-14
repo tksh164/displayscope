@@ -49,13 +49,7 @@ You can install [Displayscope](https://apps.microsoft.com/store/detail/displaysc
 
 ## 🔨 Build from source
 
-### Build environment requirements
-
-- Windows 11 x64 or Windows 10 x64
-- [Node.js](https://nodejs.org/)
-- [Visual Studio](https://visualstudio.microsoft.com/)
-
-### Build package
+You can build Displayscope on Windows 11 24H2 x64 and later.
 
 1. Install prerequisites using WinGet.
 
