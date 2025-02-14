@@ -57,22 +57,38 @@ You can install [Displayscope](https://apps.microsoft.com/store/detail/displaysc
 
 ### Build package
 
-1. Building the C++ codes using Visual Studio's Developer PowerShell or Developer Command Prompt.
+1. Install prerequisites using WinGet.
+
+    ```powershell
+    winget install --id Microsoft.VisualStudio.2022.BuildTools --silent --override '--wait --quiet --add Microsoft.VisualStudio.Workload.VCTools --includeRecommended'
+    winget install --id OpenJS.NodeJS --silent
+    winget install --id Microsoft.Git --silent
+    ```
+
+2. Launch `Developer PowerShell for VS 2022` from Start menu.
+
+3. Clone the Displayscope repository.
+
+    ```Powershell
+    git clone https://github.com/tksh164/displayscope.git
+    ```
+
+4. Building the C++ codes.
 
     ```
-    cd src/setmousecursorpos
+    cd .\displayscope\src\setmousecursorpos
     nmake build
     ```
 
 2. Building the Displayscope installer package.
 
     ```
-    cd src/app
+    cd ../app
     npm install
     npm run make
     ```
 
-## 📃 Notes　
+## 📃 Notes
 
 - Displayscope prevents the screen from going to sleep during the external display showing. If you want to go to sleep on your PC, move back to the screen list view.
 - Displayscope doesn't work correctly if you selected the *High-performance NVIDIA processor* as the **Preferred graphics processor** in the NVIDIA Control Panel. *Auto-select* and *Integrated graphics* are works well.
