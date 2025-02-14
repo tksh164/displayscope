@@ -60,9 +60,9 @@ You can install [Displayscope](https://apps.microsoft.com/store/detail/displaysc
 1. Install prerequisites using WinGet.
 
     ```powershell
-    winget install --id Microsoft.VisualStudio.2022.Community --override '--wait --quiet --add Microsoft.VisualStudio.Workload.NativeDesktop --includeRecommended'
-    winget install --id OpenJS.NodeJS
-    winget install --id Microsoft.Git
+    winget install --id Microsoft.VisualStudio.2022.BuildTools --silent --override '--wait --quiet --add Microsoft.VisualStudio.Workload.VCTools --includeRecommended'
+    winget install --id OpenJS.NodeJS --silent
+    winget install --id Microsoft.Git --silent
     ```
 
 2. Launch `Developer PowerShell for VS 2022` from Start menu.
@@ -88,7 +88,7 @@ You can install [Displayscope](https://apps.microsoft.com/store/detail/displaysc
     npm run make
     ```
 
-## 📃 Notes　
+## 📃 Notes
 
 - Displayscope prevents the screen from going to sleep during the external display showing. If you want to go to sleep on your PC, move back to the screen list view.
 - Displayscope doesn't work correctly if you selected the *High-performance NVIDIA processor* as the **Preferred graphics processor** in the NVIDIA Control Panel. *Auto-select* and *Integrated graphics* are works well.
