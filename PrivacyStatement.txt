@@ -1,0 +1,27 @@
+Displayscope Privacy Statement
+
+Displayscope (hereinafter referred to as "the App") respects user privacy and is committed to protecting personal information.
+The App adheres to the following principles and does not collect, store, or share any personal information.
+
+1. Collection of Personal Information
+The App does not collect any personally identifiable information such as name, address, phone number, or email address.
+
+2. Collection of Telemetry and Usage Data
+The App does not collect telemetry data such as user activity, usage patterns, or device information except Microsoft Store collected data.
+
+3. Use of Information
+The App does not use any information obtained from users.
+
+4. Sharing Information with Third Parties
+The App does not share any user-related information with third parties.
+
+5. Consent to Privacy Statement
+By using the App, users are deemed to have agreed to this privacy statement.
+
+6. Changes to Privacy Statement
+The App may revise this privacy statement as necessary. Any updates will be published on the App repository.
+Repository: https://github.com/tksh164/displayscope
+
+7. Contact
+If you have any questions regarding this privacy statement, please contact us on the support page:
+Support page: https://github.com/tksh164/displayscope/issues
