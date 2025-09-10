@@ -37,7 +37,7 @@
     "eslint-plugin-import": "^2.25.0",
     "ts-node": "^10.0.0",
     "typescript": "~4.5.4",
-    "vite": "^6.3.4"
+    "vite": "^6.3.6"
   },
   "dependencies": {
     "@fluentui/react-components": "^9.56.4",
