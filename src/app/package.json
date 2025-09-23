@@ -27,23 +27,23 @@
     "@electron-forge/plugin-auto-unpack-natives": "^7.9.0",
     "@electron-forge/plugin-fuses": "^7.9.0",
     "@electron-forge/plugin-vite": "^7.9.0",
-    "@electron/fuses": "^1.8.0",
-    "@types/react": "^18.3.24",
-    "@types/react-dom": "^18.3.7",
-    "@typescript-eslint/eslint-plugin": "^8.44.1",
-    "@typescript-eslint/parser": "^8.44.1",
     "electron": "36.9.1",
+    "@electron/fuses": "^1.8.0",
+    "typescript": "~5.9.2",
     "eslint": "^9.36.0",
     "eslint-plugin-import": "^2.32.0",
-    "ts-node": "^10.9.2",
-    "typescript": "~5.9.2",
-    "vite": "^7.1.7"
+    "@typescript-eslint/eslint-plugin": "^8.44.1",
+    "@typescript-eslint/parser": "^8.44.1",
+    "vite": "^7.1.7",
+    "@types/react": "^18.3.24",
+    "@types/react-dom": "^18.3.7",
+    "ts-node": "^10.9.2"
   },
   "dependencies": {
-    "@fluentui/react-components": "^9.70.0",
     "electron-squirrel-startup": "^1.0.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "react-router": "^7.9.1"
+    "react-router": "^7.9.1",
+    "@fluentui/react-components": "^9.70.0"
   }
 }
