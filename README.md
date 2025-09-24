@@ -69,14 +69,20 @@ You can build Displayscope on Windows 11 24H2 x64 and later.
 
 4. Building the C++ codes.
 
-    ```
+    ```powershell
     cd .\displayscope\src\setmousecursorpos
     nmake build
     ```
 
-2. Building the Displayscope installer package.
+5. Set the execution policy to `RemoteSigned` in the session.
 
+    ```powershell
+    Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process
     ```
+
+6. Building the Displayscope installer package.
+
+    ```powershell
     cd ../app
     npm install
     npm run make
