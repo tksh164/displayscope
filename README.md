@@ -49,17 +49,17 @@ You can install [Displayscope](https://apps.microsoft.com/store/detail/displaysc
 
 ## 🔨 Build from source
 
-You can build Displayscope on Windows 11 24H2 x64 and later.
+You can build Displayscope on Windows 11 25H2 x64 and later.
 
 1. Install prerequisites using WinGet.
 
     ```powershell
-    winget install --id Microsoft.VisualStudio.2022.BuildTools --silent --override '--wait --quiet --add Microsoft.VisualStudio.Workload.VCTools --includeRecommended'
+    winget install --id Microsoft.VisualStudio.BuildTools --silent --override '--wait --quiet --add Microsoft.VisualStudio.Workload.VCTools --includeRecommended'
     winget install --id OpenJS.NodeJS --silent
     winget install --id Microsoft.Git --silent
     ```
 
-2. Launch `Developer PowerShell for VS 2022` from Start menu.
+2. Launch `Developer PowerShell for VS 18` from Start menu.
 
 3. Clone the Displayscope repository.
 
@@ -74,7 +74,7 @@ You can build Displayscope on Windows 11 24H2 x64 and later.
     nmake build
     ```
 
-5. Set the execution policy to `RemoteSigned` in the session.
+5. Set the execution policy to `RemoteSigned` for the session.
 
     ```powershell
     Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process
@@ -83,9 +83,15 @@ You can build Displayscope on Windows 11 24H2 x64 and later.
 6. Building the Displayscope installer package.
 
     ```powershell
-    cd ../app
+    cd ..\app
     npm install
     npm run make
+    ```
+
+7. You can find the Displayscope installer package under the x64 folder.
+
+    ```powershell
+    cd .\out\make\squirrel.windows\x64
     ```
 
 ## 📃 Notes
