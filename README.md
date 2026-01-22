@@ -54,17 +54,17 @@ You can build Displayscope on Windows 11 25H2 x64 and later.
 1. Install prerequisites using WinGet.
 
     ```powershell
-    winget install --id Microsoft.VisualStudio.BuildTools --silent --override '--wait --quiet --add Microsoft.VisualStudio.Workload.VCTools --includeRecommended'
-    winget install --id OpenJS.NodeJS --silent
-    winget install --id Microsoft.Git --silent
+    winget install --id Microsoft.VisualStudio.BuildTools --silent --override '--wait --quiet --add Microsoft.VisualStudio.Workload.VCTools --includeRecommended' --source winget
+    winget install --id OpenJS.NodeJS --silent --source winget
+    winget install --id Microsoft.Git --silent --source winget
     ```
 
-2. Launch `Developer PowerShell for VS 18` from Start menu.
+2. Launch `Developer PowerShell for VS` from Start menu.
 
 3. Clone the Displayscope repository.
 
     ```Powershell
-    git clone https://github.com/tksh164/displayscope.git
+    git clone -b main --single-branch https://github.com/tksh164/displayscope.git
     ```
 
 4. Building the C++ codes.
@@ -84,7 +84,7 @@ You can build Displayscope on Windows 11 25H2 x64 and later.
 
     ```powershell
     cd ..\app
-    npm install
+    npm ci
     npm run make
     ```
 
