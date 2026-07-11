@@ -27,7 +27,7 @@
     "@electron-forge/plugin-auto-unpack-natives": "^7.10.2",
     "@electron-forge/plugin-fuses": "^7.10.2",
     "@electron-forge/plugin-vite": "^7.10.2",
-    "electron": "36.9.5",
+    "electron": "42.6.0",
     "@electron/fuses": "^1.8.0",
     "typescript": "~5.9.3",
     "eslint": "^9.39.2",
