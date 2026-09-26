@@ -11,8 +11,8 @@
 
   <!-- After publish, copy the native binary to under the out folder as a .node file. -->
   <Target Name="PutNodeAddon" AfterTargets="Publish">
-    <Copy SourceFiles="$(NativeBinary)" DestinationFiles="$(MSBuildProjectDirectory)\out\$(TargetName).node" />
-    <Message Text="Copied Node.js native addon to $(MSBuildProjectDirectory)\out\$(TargetName).node" Importance="high" />
+    <Copy SourceFiles="$(NativeBinary)" DestinationFiles="$(MSBuildProjectDirectory)\..\out\$(TargetName).node" />
+    <Message Text="Copied Node.js native addon to $(MSBuildProjectDirectory)\..\out\$(TargetName).node" Importance="high" />
   </Target>
 
   <PropertyGroup>
