@@ -6,6 +6,7 @@
     <Nullable>enable</Nullable>
     <PublishAot>true</PublishAot>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+	<GenerateAssemblyInfo>true</GenerateAssemblyInfo>
   </PropertyGroup>
 
   <!-- After publish, copy the native binary to under the out folder as a .node file. -->
@@ -13,5 +14,19 @@
     <Copy SourceFiles="$(NativeBinary)" DestinationFiles="$(MSBuildProjectDirectory)\out\$(TargetName).node" />
 	<Message Text="Copied Node.js native addon to $(MSBuildProjectDirectory)\out\$(TargetName).node" Importance="high" />
   </Target>
+
+  <PropertyGroup>
+    <!-- AssemblyInfo -->
+    <Version>0.1.0</Version>
+    <VersionSuffix>$([System.DateTime]::UtcNow.ToString(MMdd))$([System.DateTime]::UtcNow.ToString(yy)[1])</VersionSuffix>
+    <Copyright>Copyright (c) 2026 Takeshi Katano. All rights reserved.</Copyright>
+	<NeutralLanguage>en-US</NeutralLanguage>
+    <Company></Company>
+    <Product>SetMouseCursorPosAddon</Product>
+    <AssemblyTitle>SetMouseCursorPosAddon for Displayscope.</AssemblyTitle>
+    <FileVersion>$(Version).$(VersionSuffix)</FileVersion>
+    <InformationalVersion>$(Version).$(VersionSuffix)</InformationalVersion>
+    <AssemblyVersion>$(Version).$(VersionSuffix)</AssemblyVersion>
+  </PropertyGroup>
 
 </Project>
