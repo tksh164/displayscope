@@ -12,12 +12,12 @@ namespace SetMouseCursorPosAddon
         {
             NodeApi.Initialize();
 
-            RegisterFunction(env, exports, "setMouseCursorPosition"u8, &SetMouseCursorPosition);
+            ExportFunction(env, exports, "setMouseCursorPosition"u8, &SetMouseCursorPosition);
 
             return exports;
         }
 
-        private static unsafe void RegisterFunction(nint env, nint exports, ReadOnlySpan<byte> name, delegate* unmanaged[Cdecl]<nint, nint, nint> callback)
+        private static unsafe void ExportFunction(nint env, nint exports, ReadOnlySpan<byte> name, delegate* unmanaged[Cdecl]<nint, nint, nint> callback)
         {
             NodeApi.CreateFunction(env, name, (nuint)name.Length, callback, 0, out nint func);
             NodeApi.SetNamedProperty(env, exports, name, func);
