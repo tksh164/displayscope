@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using SetMouseCursorPosAddon.Interop;
@@ -12,9 +13,17 @@ namespace SetMouseCursorPosAddon
         {
             NodeApi.Initialize();
 
+            ExportAddonVersion(env, exports);
             ExportFunction(env, exports, "setMouseCursorPosition"u8, &SetMouseCursorPosition);
 
             return exports;
+        }
+
+        private static void ExportAddonVersion(nint env, nint exports)
+        {
+            string versionString = typeof(Addon).Assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>()?.InformationalVersion ?? "Unknown";
+            nint version = NodeApiHelper.CreateString(env, versionString);
+            NodeApi.SetNamedProperty(env, exports, "version"u8, version);
         }
 
         private static unsafe void ExportFunction(nint env, nint exports, ReadOnlySpan<byte> name, delegate* unmanaged[Cdecl]<nint, nint, nint> callback)
