@@ -5,10 +5,10 @@ using SetMouseCursorPosAddon.Interop;
 
 namespace SetMouseCursorPosAddon
 {
-    public static unsafe class Addon
+    public static class Addon
     {
         [UnmanagedCallersOnly(EntryPoint = "napi_register_module_v1", CallConvs = [typeof(CallConvCdecl)])]
-        public static nint Init(nint env, nint exports)
+        public static unsafe nint Init(nint env, nint exports)
         {
             NodeApi.Initialize();
 
@@ -24,7 +24,7 @@ namespace SetMouseCursorPosAddon
         }
 
         [UnmanagedCallersOnly(CallConvs = [typeof(CallConvCdecl)])]
-        private static nint SetMouseCursorPosition(nint env, nint cbinfo)
+        private static unsafe nint SetMouseCursorPosition(nint env, nint cbinfo)
         {
             try
             {
