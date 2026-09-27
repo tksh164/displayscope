@@ -18,7 +18,7 @@
   <PropertyGroup>
     <!-- AssemblyInfo -->
     <Version>0.1.0</Version>
-    <VersionSuffix>$([System.DateTime]::UtcNow.ToString(MMdd))$([System.DateTime]::UtcNow.ToString(yy)[1])</VersionSuffix>
+    <VersionSuffix>$([System.DateTime]::UtcNow.ToString(ddMM))$([System.DateTime]::UtcNow.ToString(yy)[1])</VersionSuffix>
     <Copyright>Copyright (c) 2026 Takeshi Katano. All rights reserved.</Copyright>
     <NeutralLanguage>en-US</NeutralLanguage>
     <Company></Company>
