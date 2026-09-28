@@ -2,7 +2,7 @@ import { app, BrowserWindow, Menu, MenuItemConstructorOptions, dialog } from "el
 import os from "os";
 import { MENU_ITEM_IDS, APP_ICON_PNG_FILE_NAME } from "./constants";
 import { getAlwaysOnTopState, setAlwaysOnTopState, notifyAlwaysOnTopStateChanged } from "./alwaysOnTop";
-import { IsRunInDevelopmentEnv } from "./utils";
+import { isRunInDevelopmentEnv } from "./utils";
 
 export async function setAppMenu(window: BrowserWindow): Promise<void> {
   const menu = Menu.buildFromTemplate(getAppMenuTemplate(window));
@@ -92,9 +92,9 @@ function getAppMenuTemplate(window: BrowserWindow): MenuItemConstructorOptions[]
 
 async function getAppIconResourceFilePath(): Promise<string> {
   const path = await import("path").then((path) => path);
-  const appIconResourceFilePath = IsRunInDevelopmentEnv() ?
-    path.join(process.cwd(), "src/assets", APP_ICON_PNG_FILE_NAME) :
-    path.join(process.resourcesPath, APP_ICON_PNG_FILE_NAME);
+  const appIconResourceFilePath = isRunInDevelopmentEnv()
+    ? path.join(process.cwd(), "src/assets", APP_ICON_PNG_FILE_NAME)
+    : path.join(process.resourcesPath, APP_ICON_PNG_FILE_NAME);
   console.log("App icon resource file path:", appIconResourceFilePath);
   return appIconResourceFilePath;
 }

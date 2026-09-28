@@ -1,7 +1,7 @@
 import { app, BrowserWindow } from "electron";
 import path from "path";
 import started from "electron-squirrel-startup";
-import { IsRunInDevelopmentEnv } from "./main/utils";
+import { isRunInDevelopmentEnv } from "./main/utils";
 import { getInitialAppWindowSize } from "./main/appWindowSize";
 import { initializeIpcListeners } from "./main/ipcListeners";
 import { setAppMenu } from "./main/appMenu";
@@ -19,7 +19,7 @@ const createWindow = async (): Promise<BrowserWindow> => {
   const mainWindow = new BrowserWindow({
     width: windowWidth,
     height: windowHeight,
-    autoHideMenuBar: !(IsRunInDevelopmentEnv()),
+    autoHideMenuBar: !(isRunInDevelopmentEnv()),
     webPreferences: {
       preload: path.join(__dirname, "preload.js"),
     },
@@ -39,7 +39,7 @@ const createWindow = async (): Promise<BrowserWindow> => {
   }
 
   // Open the DevTools.
-  if (IsRunInDevelopmentEnv()) {
+  if (isRunInDevelopmentEnv()) {
     mainWindow.webContents.openDevTools();
   }
 
@@ -50,7 +50,7 @@ const createWindow = async (): Promise<BrowserWindow> => {
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.on("ready", async () => {
-  if (IsRunInDevelopmentEnv()) {
+  if (isRunInDevelopmentEnv()) {
     installReactDevTools();
   }
 
