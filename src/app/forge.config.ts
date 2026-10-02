@@ -5,7 +5,7 @@ import { FuseV1Options, FuseVersion } from '@electron/fuses';
 import path from "path";
 import fs  from "fs";
 import packageJson from './package.json' with { type: 'json' };
-import { THIRD_PARTY_NOTICES_FILE_NAME, SET_MOUSE_CURSOR_POS_EXECUTABLE_FILE_NAME, APP_DEFAULT_SETTINGS_FILE_NAME, APP_ICON_PNG_FILE_NAME } from './src/main/constants';
+import { THIRD_PARTY_NOTICES_FILE_NAME, SET_MOUSE_CURSOR_POS_ADDON_FILE_NAME, APP_DEFAULT_SETTINGS_FILE_NAME, APP_ICON_PNG_FILE_NAME } from './src/main/constants';
 
 const copyright = 'Copyright (C) 2020 ' + packageJson.author.name + '. All rights reserved.';
 
@@ -13,7 +13,7 @@ const config: ForgeConfig = {
   packagerConfig: {
     asar: true,
     extraResource: [
-      path.join('../setmousecursorpos', SET_MOUSE_CURSOR_POS_EXECUTABLE_FILE_NAME),
+      path.join('../setmousecursorpos-addon/out', SET_MOUSE_CURSOR_POS_ADDON_FILE_NAME),
       path.join('./src/assets', APP_DEFAULT_SETTINGS_FILE_NAME),
       path.join('./src/assets', APP_ICON_PNG_FILE_NAME),
     ],

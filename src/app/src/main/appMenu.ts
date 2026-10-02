@@ -2,14 +2,16 @@ import { app, BrowserWindow, Menu, MenuItemConstructorOptions, dialog } from "el
 import os from "os";
 import { MENU_ITEM_IDS, APP_ICON_PNG_FILE_NAME } from "./constants";
 import { getAlwaysOnTopState, setAlwaysOnTopState, notifyAlwaysOnTopStateChanged } from "./alwaysOnTop";
-import { IsRunInDevelopmentEnv } from "./utils";
+import { isRunInDevelopmentEnv } from "./utils";
+import { getAddonFilePath } from "./mouseCursorPosition";
+import { SetMouseCursorPosAddon } from "./types/setMouseCursorPosAddon.d";
 
 export async function setAppMenu(window: BrowserWindow): Promise<void> {
-  const menu = Menu.buildFromTemplate(getAppMenuTemplate(window));
+  const menu = Menu.buildFromTemplate(await getAppMenuTemplate(window));
   Menu.setApplicationMenu(menu);
 }
 
-function getAppMenuTemplate(window: BrowserWindow): MenuItemConstructorOptions[] {
+async function getAppMenuTemplate(window: BrowserWindow): Promise<MenuItemConstructorOptions[]> {
   const appName = app.getName();
   const appVersion = app.getVersion();
   return [
@@ -76,12 +78,7 @@ function getAppMenuTemplate(window: BrowserWindow): MenuItemConstructorOptions[]
               icon: await getAppIconResourceFilePath(),
               title: `About ${appName}`,
               message: appName,
-              detail: `${appName}: ${appVersion} \n` +
-                      `Electron: ${process.versions.electron}\n` +
-                      `Chrome: ${process.versions.chrome}\n` +
-                      `Node.js: ${process.version}\n` +
-                      `V8: ${process.versions.v8}\n` +
-                      `OS: ${os.type()} ${os.arch()} ${process.getSystemVersion()}`
+              detail: await getAboutDialogDetailText(appName, appVersion),
             });
           }
         }
@@ -92,9 +89,25 @@ function getAppMenuTemplate(window: BrowserWindow): MenuItemConstructorOptions[]
 
 async function getAppIconResourceFilePath(): Promise<string> {
   const path = await import("path").then((path) => path);
-  const appIconResourceFilePath = IsRunInDevelopmentEnv() ?
-    path.join(process.cwd(), "src/assets", APP_ICON_PNG_FILE_NAME) :
-    path.join(process.resourcesPath, APP_ICON_PNG_FILE_NAME);
+  const appIconResourceFilePath = isRunInDevelopmentEnv()
+    ? path.join(process.cwd(), "src/assets", APP_ICON_PNG_FILE_NAME)
+    : path.join(process.resourcesPath, APP_ICON_PNG_FILE_NAME);
   console.log("App icon resource file path:", appIconResourceFilePath);
   return appIconResourceFilePath;
+}
+
+async function getAboutDialogDetailText(appName: string, appVersion: string): Promise<string> {
+  return `${appName}: ${appVersion} \n` +
+          `Addon: ${await getMouseCursorPositionAddonVersion()}\n` +
+          `Electron: ${process.versions.electron}\n` +
+          `Chrome: ${process.versions.chrome}\n` +
+          `Node.js: ${process.version}\n` +
+          `V8: ${process.versions.v8}\n` +
+          `OS: ${os.type()} ${os.arch()} ${process.getSystemVersion()}`;
+}
+
+async function getMouseCursorPositionAddonVersion(): Promise<string> {
+  const addonFilePath = await getAddonFilePath();
+  const addon = require(addonFilePath) as SetMouseCursorPosAddon;
+  return addon.version;
 }

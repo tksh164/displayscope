@@ -3,7 +3,7 @@ import fs  from "fs";
 import path from "path";
 import { AppSettings } from "./types/appSettings.d";
 import { APP_SETTINGS_FILE_NAME, APP_DEFAULT_SETTINGS_FILE_NAME, APP_SETTINGS_FILE_SCHEMA_VERSION, ERROR_CODE_NAMES } from "./constants";
-import { IsRunInDevelopmentEnv } from "./utils";
+import { isRunInDevelopmentEnv } from "./utils";
 
 // Retain the app settings.
 let appSettingsCache: AppSettings | undefined = undefined;
@@ -140,7 +140,7 @@ function getAppSettingsFilePath(): string {
 }
 
 function getDefaultAppSettingsFilePath(): string {
-  const defaultAppSettingsFilePath = IsRunInDevelopmentEnv() ?
+  const defaultAppSettingsFilePath = isRunInDevelopmentEnv() ?
     path.join(process.cwd(), 'src/assets', APP_DEFAULT_SETTINGS_FILE_NAME) :
     path.join(path.dirname(app.getAppPath()), APP_DEFAULT_SETTINGS_FILE_NAME);
   console.log("Default app settings file path:", defaultAppSettingsFilePath);

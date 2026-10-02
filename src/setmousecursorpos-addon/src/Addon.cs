@@ -1,0 +1,80 @@
+﻿using System;
+using System.Reflection;
+using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
+using SetMouseCursorPosAddon.Interop;
+
+namespace SetMouseCursorPosAddon
+{
+    public static class Addon
+    {
+        [UnmanagedCallersOnly(EntryPoint = "napi_register_module_v1", CallConvs = [typeof(CallConvCdecl)])]
+        public static unsafe nint Init(nint env, nint exports)
+        {
+            NodeApi.Initialize();
+
+            ExportAddonVersion(env, exports);
+            ExportFunction(env, exports, "setMouseCursorPosition"u8, &SetMouseCursorPosition);
+
+            return exports;
+        }
+
+        private static void ExportAddonVersion(nint env, nint exports)
+        {
+            string versionString = typeof(Addon).Assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>()?.InformationalVersion ?? "Unknown";
+            nint version = NodeApiHelper.CreateString(env, versionString);
+            NodeApi.SetNamedProperty(env, exports, "version"u8, version);
+        }
+
+        private static unsafe void ExportFunction(nint env, nint exports, ReadOnlySpan<byte> name, delegate* unmanaged[Cdecl]<nint, nint, nint> callback)
+        {
+            NodeApi.CreateFunction(env, name, (nuint)name.Length, callback, 0, out nint func);
+            NodeApi.SetNamedProperty(env, exports, name, func);
+        }
+
+        [UnmanagedCallersOnly(CallConvs = [typeof(CallConvCdecl)])]
+        private static unsafe nint SetMouseCursorPosition(nint env, nint cbinfo)
+        {
+            try
+            {
+                const int requiredNumOfArgs = 2;
+                nuint argc = requiredNumOfArgs;
+                Span<nint> argv = stackalloc nint[requiredNumOfArgs];
+
+                Status status = NodeApi.GetCallbackInfo(env, cbinfo, ref argc, argv, null, null);
+                if (status != Status.Ok)
+                {
+                    throw new Exception($"Failed to GetCallbackInfo(). Status: {status}");
+                }
+
+                if (argc < requiredNumOfArgs)
+                {
+                    NodeApiHelper.ThrowError(env, $"Expected {requiredNumOfArgs} arguments that x and y as integers.");
+                    return nint.Zero;
+                }
+
+                status = NodeApi.GetValueInt32(env, argv[0], out int x);
+                if (status != Status.Ok)
+                {
+                    throw new Exception($"Failed to GetValueInt32() for x. Status: {status}");
+                }
+
+                status = NodeApi.GetValueInt32(env, argv[1], out int y);
+                if (status != Status.Ok)
+                {
+                    throw new Exception($"Failed to GetValueInt32() for y. Status: {status}");
+                }
+
+                NodeApiHelper.WriteConsoleLog(env, $"Setting mouse cursor position: x={x}, y={y}");
+                User32.SetCursorPos(x, y);
+
+                return nint.Zero;
+            }
+            catch (Exception ex)
+            {
+                NodeApiHelper.ThrowError(env, ex.Message);
+                return nint.Zero;
+            }
+        }
+    }
+}
