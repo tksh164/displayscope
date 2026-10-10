@@ -4,7 +4,7 @@ $ErrorActionPreference = 'Stop'
 'Publishing setmousecursorpos-addon...' | Write-Host -ForegroundColor Cyan
 '' | Write-Host
 
-Push-Location -LiteralPath (Join-Path -Path $PSScriptRoot -ChildPath 'setmousecursorpos-addon', 'src')
+Push-Location -LiteralPath ([IO.Path]::Combine($PSScriptRoot, 'setmousecursorpos-addon', 'src'))
 
 dotnet publish --runtime win-x64 --configuration Release --verbosity:detailed
 
