@@ -16,6 +16,7 @@ Pop-Location
 
 Push-Location -LiteralPath (Join-Path -Path $PSScriptRoot -ChildPath 'app')
 
+npm ci
 npm run make
 
 Pop-Location
