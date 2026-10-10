@@ -20,3 +20,9 @@ npm ci
 npm run make
 
 Pop-Location
+
+'' | Write-Host
+'Displayscope installer available:' | Write-Host -ForegroundColor Cyan
+'' | Write-Host
+
+Get-ChildItem -Filter '*.exe' -LiteralPath ([IO.Path]::Combine($PSScriptRoot, 'app', 'out', 'make', 'squirrel.windows', 'x64'))
