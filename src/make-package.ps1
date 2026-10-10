@@ -1,23 +1,28 @@
-#requires -Version 7
-
 $ErrorActionPreference = 'Stop'
 
 '' | Write-Host
 'Publishing setmousecursorpos-addon...' | Write-Host -ForegroundColor Cyan
 '' | Write-Host
 
-Push-Location -LiteralPath (Join-Path -Path $PSScriptRoot -ChildPath 'setmousecursorpos-addon', 'src')
+Push-Location -LiteralPath ([IO.Path]::Combine($PSScriptRoot, 'setmousecursorpos-addon', 'src'))
 
 dotnet publish --runtime win-x64 --configuration Release --verbosity:detailed
 
 Pop-Location
 
 '' | Write-Host
-'Making Displayscope package...' | Write-Host -ForegroundColor Cyan
+'Making Displayscope installer...' | Write-Host -ForegroundColor Cyan
 '' | Write-Host
 
 Push-Location -LiteralPath (Join-Path -Path $PSScriptRoot -ChildPath 'app')
 
+npm ci
 npm run make
 
 Pop-Location
+
+'' | Write-Host
+'Displayscope installer available:' | Write-Host -ForegroundColor Cyan
+'' | Write-Host
+
+Get-ChildItem -Filter '*.exe' -LiteralPath ([IO.Path]::Combine($PSScriptRoot, 'app', 'out', 'make', 'squirrel.windows', 'x64'))
