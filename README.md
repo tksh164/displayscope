@@ -49,17 +49,18 @@ You can install [Displayscope](https://apps.microsoft.com/store/detail/displaysc
 
 ## 🔨 Build from source
 
-You can build Displayscope on Windows 11 25H2 x64 and later.
+You can build Displayscope on the latest Windows 11 x64.
 
-1. Install prerequisites using WinGet.
+1. Install prerequisites.
 
     ```powershell
-    winget install --id Microsoft.VisualStudio.BuildTools --silent --override '--wait --quiet --add Microsoft.VisualStudio.Workload.VCTools --includeRecommended' --source winget
-    winget install --id OpenJS.NodeJS --silent --source winget
-    winget install --id Microsoft.Git --silent --source winget
+    winget install --id Microsoft.Git --exact --silent --source winget
+    winget install --id OpenJS.NodeJS.LTS --exact --silent --source winget
+    winget install --id Microsoft.DotNet.SDK.10 --exact --silent --source winget
+    winget install --id Microsoft.VisualStudio.BuildTools --exact --silent --override '--wait --quiet --add Microsoft.VisualStudio.Workload.VCTools --includeRecommended' --source winget
     ```
 
-2. Launch `Developer PowerShell for VS` from Start menu.
+2. Launch a new PowerShell.
 
 3. Clone the Displayscope repository.
 
@@ -67,31 +68,17 @@ You can build Displayscope on Windows 11 25H2 x64 and later.
     git clone -b main --single-branch https://github.com/tksh164/displayscope.git
     ```
 
-4. Building the C++ codes.
+4. Building the Displayscope installer package.
 
     ```powershell
-    cd .\displayscope\src\setmousecursorpos
-    nmake build
+    cd .\displayscope\src
+    .\make-package.ps1
     ```
 
-5. Set the execution policy to `RemoteSigned` for the session.
+5. You can find the Displayscope installer package under the x64 folder.
 
     ```powershell
-    Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process
-    ```
-
-6. Building the Displayscope installer package.
-
-    ```powershell
-    cd ..\app
-    npm ci
-    npm run make
-    ```
-
-7. You can find the Displayscope installer package under the x64 folder.
-
-    ```powershell
-    cd .\out\make\squirrel.windows\x64
+    cd .\app\out\make\squirrel.windows\x64
     ```
 
 ## 📃 Notes
