@@ -1,5 +1,3 @@
-#requires -Version 7
-
 $ErrorActionPreference = 'Stop'
 
 '' | Write-Host
