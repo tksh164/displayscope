@@ -51,7 +51,9 @@ You can install [Displayscope](https://apps.microsoft.com/store/detail/displaysc
 
 You can build Displayscope on the latest Windows 11 x64.
 
-1. Install prerequisites.
+1. Open a new PowerShell window.
+
+2. Install prerequisites.
 
     ```powershell
     winget install --id Microsoft.Git --exact --silent --source winget
@@ -60,22 +62,22 @@ You can build Displayscope on the latest Windows 11 x64.
     winget install --id Microsoft.VisualStudio.BuildTools --exact --silent --override '--wait --quiet --add Microsoft.VisualStudio.Workload.VCTools --includeRecommended' --source winget
     ```
 
-2. Launch a new PowerShell.
+3. OPen a new PowerShell window again.
 
-3. Clone the Displayscope repository.
+4. Clone the Displayscope repository.
 
     ```Powershell
     git clone -b main --single-branch https://github.com/tksh164/displayscope.git
     ```
 
-4. Building the Displayscope installer package.
+5. Building the Displayscope installer package.
 
     ```powershell
     cd .\displayscope\src
     .\make-package.ps1
     ```
 
-5. You can find the Displayscope installer package under the x64 folder.
+6. You can find the Displayscope installer package under the x64 folder.
 
     ```powershell
     cd .\app\out\make\squirrel.windows\x64
