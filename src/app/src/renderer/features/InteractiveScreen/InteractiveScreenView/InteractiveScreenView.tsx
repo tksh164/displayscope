@@ -64,6 +64,7 @@ export default function InteractiveScreenView() {
 
   const onClick = (event: React.MouseEvent) => {
     setMouseCursorPosition(window, event, currentScreenSpec);
+    onMouseLeave(event);
   };
 
   //
