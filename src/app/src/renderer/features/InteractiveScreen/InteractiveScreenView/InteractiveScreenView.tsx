@@ -64,6 +64,7 @@ export default function InteractiveScreenView() {
 
   const onClick = (event: React.MouseEvent) => {
     setMouseCursorPosition(window, event, currentScreenSpec);
+    onMouseLeave(event);
   };
 
   //
@@ -71,11 +72,11 @@ export default function InteractiveScreenView() {
   //
 
   const onMouseMove = (event: React.MouseEvent) => {
-    window.document.getElementById("interactive-screen-header").classList.remove("hide-header");
+    window.document.getElementById("interactive-screen-header")?.classList.remove("hide-header");
   };
 
   const onMouseLeave = (event: React.MouseEvent) => {
-    window.document.getElementById("interactive-screen-header").classList.add("hide-header");
+    window.document.getElementById("interactive-screen-header")?.classList.add("hide-header");
   };
 
   return (
